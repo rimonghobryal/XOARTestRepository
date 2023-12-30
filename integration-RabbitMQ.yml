@@ -1,0 +1,746 @@
+category: Utilities
+commonfields:
+  id: RabbitMQ
+  version: -1
+configuration:
+- additionalinfo: Reliability of the source providing the intelligence data.
+  defaultvalue: C - Fairly reliable
+  display: Source Reliability
+  name: integrationReliability
+  options:
+  - A+ - 3rd party enrichment
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: false
+  type: 15
+- defaultvalue: https://soar.monstersofhack.com
+  display: Server URL (e.g. https://soar.monstersofhack.com)
+  name: url
+  required: true
+  type: 0
+- display: Fetch incidents
+  name: isFetch
+  required: false
+  type: 8
+- display: Incident type
+  name: incidentType
+  required: false
+  type: 13
+- defaultvalue: "10"
+  display: Maximum number of incidents per fetch
+  name: max_fetch
+  required: false
+  type: 0
+- display: API Key
+  name: apikey
+  required: true
+  type: 4
+- additionalinfo: Set this to determine the HelloWorld score that will determine if
+    an IP is malicious (0-100)
+  defaultvalue: "65"
+  display: Score threshold for IP reputation command
+  name: threshold_ip
+  required: false
+  type: 0
+- additionalinfo: Set this to determine the HelloWorld score that will determine if
+    a domain is malicious (0-100)
+  defaultvalue: "65"
+  display: Score threshold for domain reputation command
+  name: threshold_domain
+  required: false
+  type: 0
+- defaultvalue: ACTIVE
+  display: Fetch alerts with status (ACTIVE, CLOSED)
+  name: alert_status
+  options:
+  - ACTIVE
+  - CLOSED
+  required: false
+  type: 15
+- additionalinfo: Comma-separated list of types of alerts to fetch. Types might change
+    over time. Some examples are 'Bug' and 'Vulnerability'
+  display: Fetch alerts with type
+  name: alert_type
+  required: false
+  type: 0
+- defaultvalue: Low
+  display: Minimum severity of alerts to fetch
+  name: min_severity
+  options:
+  - Low
+  - Medium
+  - High
+  - Critical
+  required: true
+  type: 15
+- defaultvalue: 3 days
+  display: First fetch time
+  name: first_fetch
+  required: false
+  type: 0
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+- defaultvalue: "1"
+  display: Incidents Fetch Interval
+  name: incidentFetchInterval
+  required: false
+  type: 19
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+description: This is the Hello World integration for getting started.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: Cortex XSOAR
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  ## Hello World
+  - This section explains how to configure the instance of HelloWorld in Cortex XSOAR.
+  - You can use the following API Key: `43ea9b2d-4998-43a6-ae91-aba62a26868c`
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/hello-world)
+display: RabbitMQ
+image: data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD//gAfQ29tcHJlc3NlZCBieSBqcGVnLXJlY29tcHJlc3P/2wCEABISEhITEhQWFhQcHhseHCkmIiImKT4sMCwwLD5eO0U7O0U7XlNlUk1SZVOWdmhodpatkYqRrdK8vNL/+/////8BEhISEhMSFBYWFBweGx4cKSYiIiYpPiwwLDAsPl47RTs7RTteU2VSTVJlU5Z2aGh2lq2RipGt0ry80v/7///////CABEIAqMEsAMBIgACEQEDEQH/xAAaAAEAAgMBAAAAAAAAAAAAAAAABQYCAwQB/9oACAEBAAAAALwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABjzvN20ecxs3AAYeD3L0AAA1+5gA1+5gB5gyyAAYGYAGBmAw0627eAACDh3nTasiKgDZbNgAY1bSPc9/bJ7gAA1VWQnwAwqnbYQA01XyfkgAPIHFJd4AaoTxNbwxjePEbe/uAAFcjjZbcyEhhbd4AY1PT1esdWvzbPSQAA1VGSsIAYVHusYAaaljYpMADyAxdE0AHBGE3vGqH1e9OzzRpd0oAAVyOebbbmQkMLbvADGp6rbt9Yc0VGe2fsAANVRkrCAGFR7rGAGuD8lewODf0A8gM8cZ7MAQmjfom955C6OmU2jjivJTuAAVyONltzISGFt3gBjU9Vu2h5BRHfZfQAGqoyVhADCo91jAAAjq5aOwHkBs38Up3AGuC2dHFN7yOjt8zkDjicp3MACuRxstuZCQwtu8AManqt20Gmp+23YAA1VGSsIAYVHusYAAETA2ftB5AbJKH6pgA4Izvx4pve8gcJnpAQmiT7wAK5HGy25kJDC27wAxqeq3bQY1PTbd4ADVUZKwgBhUe6xgAARMBaewHkBsmoLydzAQvPN8XDN73LD7pwA4orfNgAVyONltzISGFt3gBjU9Vu2gwqeq3bhhzc/mfV0DVUZKwubl87OgMKj3WNz8nnZ0A1+bTSjIOydZnm8gNk5FcUr2ga4LOdi+Kb3ozg7pQA1QXs9mACuRzzbbcyEhhbd4AY1PVbtoOOr7rXmRkJp8MpGe2NVRkp6CjPPMpKd2GFR7rBCRWLKQntornHbcsanq8eidlnkBsnOWH6pgDiiu+TiuKb3obmlO4A8gcJnpABXI49sXS8guET/a9HmW4xqeq27gwrfDLT5GV7OX78uWH5ZWf91VGRR8tJYQvDI2LJhUe7ZFykrhDx/dZMyt8Vuz8hseXgk9xIdjyA2TnkDjP5Ahuaa6Irim96C1TPSAIPTLdgAK5HAPPQAZWroY1PVbtp5ywfD0Wfc8qvLYJUaqtrtu3VUd+iwyRhWeOwyjCo7tE7KmNb4J2YK1x27MRMBaO0HkBsnEVxS3YGEFlO+xfDN7/IHCd2gCG5pPvABXI4AAAWnrY1PTL546eXQ7p7eYQKd2BBRFn7dVRxk7D6OGs9Nq9wqOuQsno46vvteStcduzETA2jsB5AbJxyRHXLhxRXdKIvhm9/kBjYMgBEckjIgArkcAAALT1salqDzZNyvoAETAWWQ1VHy0dgY1PTbd+FRwsveHlU57V1K1x27MRMDaOwHkBsnHkD5PZCH5ZroRfDN7/IDGc3ACI5JGRABXI4ADwHpaetjU9VhzeckXqkp/MAEVX7LIaqjstuQK1wWSQwqK27AV2MsUmrXHbsxEwNo7AeQGycInjl+sxgfZ71F8M3v8gcJ3aAIflkpAAFcjgAOyS9wh9YtPWxqWu27hprPPNzIDDVrwj4myyGqpdNpAgImflsKjutXoISFnJlWuO3ZiJgbR2A8gNk4ckR2SxyRHbKkXwze/yD1TXQAIXnle0AFcjgALZ0EPBelp62NT1W7aHBWt9ryGMdG8eHgsshqqPdZQIOGm5rCo9NoAhoOZnFa47dmImBtHYDyA2Th5Aez3qI5JjqIvhm96E0S3YAIHXM9IAK5HAA9t20jK76WnrY1PVbtoYVPVbOg013i3SPXnlwQ9lkNVR7bMBBw83M4VLotAENBzM4rXHbsxEwNo7AeQGycETxzPTjAp/wBIvhm96K4pCSAMIFO7AAVyOAAt24ioAWnrY1PVbtoK3HWKTeVrgkp7aIeCsshqqXTaQK/FWGUwqW60+ggoidl1a47dmImBtHYDyA2Tg5IjtleSI7JYRfDN73FFdMyAckRtnQAK5HAATEr7rgOP0tPWxqeq3bQREFKz7mqmy17Qr0XZZDCp+2zIPKvyWft8qWNtzBWOGyyCtcduzETA2jsB5AbJwYwPs9Fccv1iL4ZvewgU9mAh+WQkgAK5HAAPXgLT1sanqt20HHV+u0e8FZ77MGiq67LIeVjjtXUHPVMrbsVrgs/aGmqeWzcrXHbsxEwFp7AeQGycCI5JiJT2Qi+Gb3kTx9ksBzQ3s5tHg9eeq5HAAAC09bGp6rdtBrqS27OKr9FryNVd4VlkEPBSlg9PK/Fy0+RdekbH6eQURJWMrXHbsxFV+xSYPIDZOByRG3V1y4RfDN7zVCYyEj6OaJwkJINPP0aNm7ikFcjgAABaetjU9Vu2g8q3JaezXU9UnLOOK0dnFZZBrqumals9cPEbbTuMKtzzExnhEQ2y0dBWuO3Zjjq/VZNvjJ5AbJwMYHFLdgRfDN7xyxHmzp246OZvk/dePZ65erTqy86lejAAABaupjUtdt3AQETPyyKgPHrKcQFlkDirunbt04dFh6w5K7z7durVvsPaK3xW7MeVvgz34S8s8gNk4CI5Mp7IIvhm94aI3mABPbHL1adfnvU0cHgAADOT9eRmMpkBy8HX3HFF8+fXJdPNwyG8aYzj1bu2UzA1RfHq29spsCP1SnoYxkfpzme84cuwGnmz7Ac2nszA16MPADtya9mDFtAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//EABkBAQEAAwEAAAAAAAAAAAAAAAAFAQMEAv/aAAgBAhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAauH1QzxaOvpDHDh76NoDHJ2Bjk7Axw9nsAAAADkke72Y/LQpBiH351ctDsA8yLIeZFkPMiptePYAAAA5JHu9mPy0KQYh2/TTIuZB5kWQ8yLIBp4qYAAAA5JHu9mPy0KQYh2/TEO36xrxs9eZFnW2PMizrbDz6xz8dLPoAAABySPVv1I5+2kZ9Yh2/TnmWvMnZnRV2SN/jxtpYkdGrHunmPX5uDXu30AAAAHJIZYPRm56h1GjkpdPHqouPRRh9/fiR3dEPuoYk9nVHsZ0cVQAAAAckgAZu+4XS09ffkNHDTh3PTi00Ydv24+arGsZ0cVQAAAAckgHVR55mbvuJa9Yj93W8cunX6pxrZzcFaNay0TrEaxnRxVAAAABySAUaOmHm77h2/Ti0VNEvv36uSnGtnNw1Y1rLnn2I1jOjiqAAAADkkA29enlzd9w7fpqk25m3ucXPUi2fTg8UYtj24dVKPYzp4agAAAA5JAAzd9w7fpiHa4PFHRO31ZnqhrkVt01R1yam+NYzql185AAAAaZwAzUzMp5Jvb6l6t/bp7vM7Tnv6Xmdpz3dSdQzifz9FEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//EABoBAQADAQEBAAAAAAAAAAAAAAABAgUEAwb/2gAIAQMQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHroUzXb0cfMDQtFObyAT28IT28ITocNAQkEJERMgOvbp87G315uWE/QZsevZm8QFtrDCdvDCdvI8l6ERMhWLTESRYDr26fOxt9eblhO/g1e21gQC21hhO3hgHt35RELBVM1mSIsDr26fOxt9eblhO/g1T9BgVes+UTt4fo807eH6T5ExPR3ZURCLCESiwUuDr264Fdrp4Msis/QYFXRr4F9nzr0Y/lt83rbyyp2+b1t5ZTbxerR9fDnzYElZiUWCtgde2hKII+fr9BkOjsyubs9s12++Z9DnZzbzub6DgzW1wcm5iR79+SQRYrasosFZkOvbAEfPU+h5Hvx5oPfQyvoPn6u73y/ocCjt6sjcxI9+/JITWyE1lFgrMh17YOPM6daPnqfQYFZ287kX7Pb1plbmCdWhjbuCdGnibmJHv35JCazNZmsosFZkOvbBmZntvvnqb+DV3dGT76+d4evZlbmCdWhjbuCdOlibmJHv35JCYi1bKyiwVsDr2wePF79kfPU38Gr12cHW8OB3dORv4VWjfL38Ojv8AbK3MSPfvySEqylWZrMkRYHXtgCPnqfQYFU7+Do3zejT58jVpnem1jeOpGb6bWP4bmJHrr4kISqmVZmIkiZIPfUAEZFdfJg1OCut6+HB0Z9tP2jP5VtP2Z3K082Gn0c+ZCURYiRUFiJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//xAAyEAABAwEHAgUDBQEBAQEAAAABAAIDBAUQERIgMjMxcRMhMFFSFBVBIjRAQmEjUMBT/9oACAEBAAE/AP8A4ZVzmtGJKNZD8wvrIfmF9ZD8wmTMk2nSSB1Rq4QdwX1kHzC+sg+YTJ45Nrh6xkYOpXis+S8VnyXis914rPkvEZ7rMPf+KTgvFZ8ghI13Q+ofJeLH8kJGO6H1CvFj+S8WP5Jrg7ofX8RnyXiM9wvEZ8kCD6udnuvEZ8l4jPkgQR6BkY3qU6qiCNdH8XIV0fxKbUxO/KBB6fwrSmcHBgOilleyZmBOGKacWg6LSlcxgA/KJJ63xSPjcCConZmNPqO2lTyyCZ4DivFk+ZXiyfMrxZPmV4snzK8aX5lCpmH9ymWhO1R2m07lFPHIP0n+FNxO7J0j8x/UVZr3GQ4n1JNhUsj/ABX/AKj1VnPeZfN3qT8TuydJJmP6ivEk+RVnOJiGJ9Z3Qp7nZj5rM73KzO9yqKTEEE+pO/JG4ovcSTiszvcrM73KpuFmp72sGJKlrHEkNRe53U6WTSM6FQ1gd5PWOP8AAtPn0Q8rO6j2N7aLW6M76B1VPxN7eo7aeyqOZ6AQo5iAQF9DP7L6Kf2Ro5x/VOhkb1aVgfa6KV8RxaVSVolADt38Gfid2T9zlZnIfUk2FS8r+6s3l9So4n9k7c7vdZvD6zuhT95vpn5JB6lbJgA3RS8LNMsojbiVLM+U+ZuDXO6BNpJHBChd7o0T/wAJ9PIz8X01SQQ1yBBHr2nz6IeVndR7G9tFrdGd9A6qn4m+o7aeyqOZ6buCh429lgFgEWj2RY09QpKKGT+qqLPezzYiCDgQmuLHAgqjqBNGPf8AgT8TuyfucrM5D6kmwqXlf3Vm8vqStzsITrMkJPmvtcnuqSAwx5TpJCqK2OLyBxKp5DLGHHW7oU/eVCM0jQpG5XkIHAgqJ+eNp9OpfnlN0rMjW/6LqXhZoc4NBJU8xlf/AJdBTul8z0UcTIxgBoIBU1K1wJb1TmlpwN1JPj+l3r2nz6IeVndR7G9tFrdGd9A6qn4m+o7aeyqOZ6buCh426iMQq+ly/wDRouoJfDlw90PMevPxO7J+5yszkPqSbCpeV/dWby/xLQlfHH+lElxxJVDwt1u6FP3lU/K3uqxmDg66hfi3D0pXZGEonEkqFmaQKsGBAupeFmisl/oLoIjI9NaGgAa6qAPbmA8xcxxY4OUbg9gPrWnz6IeVndR7G9tFrdGd9A6qn4m+o7aeyqOZ6buCh42652B8bgntyvIURyyNKiOLGn15+J3ZP3OVmch9STYVLyv7qzeX+JanHdQ8DdbuhT95UHK3uqlmaLtdSPySj0q2TBob73UTPMuVdvF1LwsvccrSVI/O9zrqaLIwegRiFUR5JD7XUMn9T61p8+iHlZ3Uexui1ujO+gdVT8TfUdtPZVHM9N3BQ8bdbtpVSMJn3U/Ezt68/E7sn7nKzOQ+pJsKl5X91ZvL/EtTjuoeFut3Qp+8qDlb3Tm4sIUjcryE04OBUbszAfRqn5pDdTNyxhV28XUvCy+rfljugZnkAQ6D0axmLM3tdTvySBD1bT59EPKzuo9je2i1ujO+gdVT8Te3qO2nsqjmem7goeNut5waVOcZXlAYkKn4mdtLntb1KfWwM/KNpwr7pEm2lCUypif0cgQdE/E7sn7nKzOQ3EqSqij6uRtOEJtpwlR1MT+jkDpk2FS8r+6s3lvkqYo+rkbThCFpwqKrif8AlAg6nSsb1KE8ZO7QZ4x5Yrx4vkrRkY5nkbqOZjYWglfUR/JfURfJfURfJNe1/Q3u6FP3lQcre6CrWZXA3UT8zMvt6Erg1hKJxJKhZnkaEBgAFXbxdS8LL6536g26ibi4n0pm5o3BHqU04EKI4safVtPn0Q8rO6j2N0Wt0Z30BU/E31HbT2VRzPTdwUPG3XWSiOIonEkqnbnlYP8AUwYNAvJVVXtjxa3qpKiWQ+br8D7XBzm9Cqavew4POIUcjZGhzTfPxP7J+5yszkKe9rGkkqqr3PJbGi5zupvDnNOIKprQezBr1HI2Roc06JNhUvK/urO5U54Y3EqqtAnFsac5zjiSsDcHEdCVTV74yA84hRytkaC06CrRJE47KJzvEb5nqo9gud0Kmc7xpPM7lmd7lEk9TdiR+Vmd7lZne5WZ3uVZZJjN7uhT95UHK3uh0VWzPHdSPyyd/QrX4My3UTMSXXV28XUvA2+qdjLdQtwYT6TtpUgweRdSuxiHq2nz6GuyuBVPWxOYASvqofmF9XD8wjVw/MKuqBM8AdBppK2PIGuOBX1UPzC+qh+YX1cPzC+rh+YX1cPzC+rh+YX1UPzCbPE/o4aHbT2VRzPTdwUPG3U94YCSVW1JmfgOgus2AlxedFfU+E3KOpRJJJKZG6R2DQoLMb1kTaOFvRqNLCf6qWzYXdFPSyQdrrOqC1+Qm+fif2T9zlZpwe5V9UXuLGnyTWOeQAFT2bj5yJtJCwYBqloYZPwqmifD5jzF1FVOiflcf0prg4Ai+TYVLyv7qzuVWhVEu8NpTWlxwAxKp7NLvORMo4WDANUlFDIOiqaF8WJb5i6kqnQvAO1MeHgEaLS5x2UXI3uo9guPQqSzC57nZupX2o/JVNGYG443Q2eZWB2K+1H5L7UfkvtR+SpabwG4Y3u6FP3lQcre6HRObi0hSNyvcE12VwKY4OaCNdU/PJ2upmZIhdXbxdS8Dbj0Uxxkd3upOFvpFVAwlN1A4hjvVtPn1Yn3WJ91iffXifdYn3WJ91ifdYn3WJ91ifdNe9pBDiqZ5fE0m9209lUcz03cFDxt0EgflTVcUQPmqmsfMcB5C6CnfM4AKGIRMDRe44AqskMkzrrPpw1mY9dM0bZGEEKeIxSEKNxY9pULs0bTdPxO7J+9ygl8NrivN7vckqipBGwOcPPQ9ge0gqspzDIfY3WdPnZkPUXybCpeV/dU8gjxKJL3H8klUNJkaHP66HNDgQVXU3gvzDobrNqMRkOi0ucdlFyN7qPYNNqcd1Dwt1u6FP3lQcre6HS6sZg/NdRPxZhqkcGscU45nEqJueQBNGAAurt4upeBtztpUm93e6kOWJvp1fMbqE+R7+rafP8Ax6Lgbe7aeyqOZ6BwIKZaQa0DBfdB7I2p/idacx6AJ9XO/q4ouLjiSg1x6AlQUEkhBcMAoYGQtwA0PBLSE6zpSSU2zZMQo2ZGAarUjAIddQOzU7bp+J3ZP3uus6DO/MQgMBprohJETdRy+HME04gG6TYVNyv73UEHiSZj0CAAGmsiEkTkQQSFSyeHM0ppxaDfaXOOyi5G91HsGm1OO6h4W63dCn7yoOVvdDpdVszRm6jflkw99VY/BgAN1FHi4u9r67eLqXgbc7aU/e7vdRcY9Ot5jdQ/n1bT5/4wVFwNvdtPZVHM/XGWhwLhiFSyUp6AAoYYeXrWpx3Wb+2bdPxO7J+9yAxICo4hHC3U8YtIVQzJM8f6m+TgVTOzRNN0mwqXlf3uoI8kI1OGIIVUzJM4IeRBVG/PA032lzjsouRvdR7BptTjuoeFut3Qp+8qDlb3Q6XObmaVI3I8hMOV7SmHM0HTVvzSYXUrMsQvrt4upeFlztpT97u91PxN9Ot5jdQ/n1bT5/4wVFwNvdtPZVHM9N83BR0MDmAlq+3wfFfb6f4p1nQHoFLZnwKlgki3NQJCpK57HBrz5Jjg8Aj1bT47rN/bNun4ndk/e5QNzStCYMGga7RbhNdZzsYG3SbCpeV/dRtzPaP9UTcrGjXaTMJQbrNdjFhfaXOOyi5G91HsGm1OO6h4W63dCn7yoOVvdDpfWMyvze91I/NH20SHKwlOOLiVG0ue0BNGAAvrt4upeFlzuhUm93e6kIETSfTrOY3UA6+rafP61NRvm7IWXGvtcSfZbcP0qWJ0Ty06AqLgbe7aeyqOZ6buCh426ZYWytIIVTTmCTD8XWbPiMh9Eva3qUamEf3CNdCP7BfcIPcKtqmTNwbdZv7Zl0/E7sn7yqEY1LPQtQfrF1lnGMi6TYVLyv7qjGM7UOg12qOl1lnyN9pc47KLkb3UewabU47qHhbrd0KfvKg5W90Ol9WzNHj7XUb8H4aKx+WMC6iZi/Nort4upeFlxU3I66k4W+nU8puodju/q2nz+qOqpmBsTdFqRgtDtAVFwNvdtPZVHM9N3BQ8be2quhEkRN1LJ4czSmnFoOlzmtHmVNaUbDgFJaEr+idLK7q8ok++mzf2zbp+J3ZP3uVnc49C1eouso+T7pNhUvK/uqDnCGu1Nousvq6+0ucdlFyN7qPYNNqcd1Dwt1u6FP3lQcre6HS9zczSE8ZXEKN2V7T/AKmnFoPvfWPzSYXUjMsXfRXbxdS8LL6kYSm6iP8Az9I9CpjjIbqRuEY9W0+f1W9QoeNvbRaXFoCouBt7tp7Ko5npu4KHjbqe3M0hTsyTPH+odQqZ2eJuiaZsTSSVU1j5iQDgLo4JJTg1pUdmOO8oWZEF9vh9l9DD8Qq+njiZi0XWb+2bdNxP7J+9ys/9wPQtXqLrKHk+6TYVLyv7qh5whrtXaLrL6uvtLnHZRcje6j2DTanHdQ8LdbuhT95UHK3uh00VjMJM11K/NGB7XPIa0lPdmcSmNzPATBlaBort4upeFl9a3CQH/LqF24elIcGEpxxcUPMgKEYRtHq2nz+qOoUBxjb20Wm7CPDQFRcDb3bT2VRzPTdwUPG3XaLMsoN1mvxiAvJwCrpzLKR+BdR0finM7omRMjAAGm1D+kC6zf2zbpuJ3ZP3u7qhOFSz0LTdjIBdZjcIsbpNh7Kblf3VGcJ2odBrtR3mBdZbf0k32lzjsouRvdR7BptTjuoeFut3Qp+8qDlb3Q6aKtmaMn2uo34Py3Vb8seHvdRsxkx0128XUvCy+sZizG6lfllHpVb8sZHvdC3NIEBgPVtPn9ajrmtGR5TamFwxDl48fyUlXCwbgqup8d/+DQFRcDb3bT2VRzPTdwUPG3XajP0B11lvwe5t9U/JC4onEkqFniStb7lRMDGADVacmaQAXWb+2bc/zaVOMJn91TuyzMKacWjUeirXh85uoWZIG3HoVUDCeTuonZZGn/Uw4sB1178091nNwhBvtLnHZRcje6j2DTanHdQ8LdbuhT95UHK3uh00PaHNITxleQonZXtKacQCqx+L8vtdSMyx46a7eLqXhZfK3MxwRGBIQJBBUMjXNB9Grkzvw9rqKPq/1rT5/XzO9yszvkUST1OkKi4G3u2nsqjmem7goeNuuuZngcLqJ2WcIeYutDgN1ngGbVPKIoySVK8yPc66zf2zbj0Kr2ZJj/qBwIKpJBJE06qmTJE4p5zOLvcqJpe9oHuom5WNFxVoMyzLoQqGTPCNU7xHG5ykdne4qNpc9o9yoGBkbRfaXOOyi5G91HsGm1OO6h4W63dCn7yoOVvdDpprGZZLoJMYewT3F7yUxuZ4CYMGgaa7eLqXhZorIsrswF1JNldlPQoa6iYRsI/JuaMxAUTMjANJe0dSvEZh5FeIz3WZvusQbg4E4A32nz/xgqLgbe7aeyqOZ6buCh4265RmjcFI3K9wUTssjSojixpurml0BupZPDmYfximuDmgjRJKyMEuKrKszuwG2+zf2zb7ThxaHi6zqjI7ISgcRoJACr6rO7I26zYMXZzotKHMzMLqCo8N+UnyKBBGI0E4K0anMfDabrOgL5M56BC+0ucdlFyN7qPYNNpj/ldZsgdFhrd0KfvKg5W90OmmrjzR43MlLGOb73UbMZMfbVXbxdS8LNEsYkYQnsLHEG6nqsMGvQcHdDpmqWRj/VJIZHYm6kgO92p0DSccSpIg14AJQpmlTswDGgqmeSzA9QVI7KwqnDhJiT1F9p8/8YKi4G3u2nsqjmem7goeNusjEKsblnddRPzwtukbmYQpozHI5pupa50X6X9E2thcOqNbCPypbTaNimqJJj+ooAkgBSUxjhDj1N1m/tm3yxiRhaVPEYpCECQQQqSvGAa9NkY7oViPdPlYweblV1+ILWIknqoYXSvDQoIhEwNGiRge0hVMJhkI/CBIVJX4AMkTZWOHkViPdOlY0YkhVVodWMRJJxKiidI8NAVPCIWAAaLS5x2UXI3uo9g01sfiQuCPVUlQYH/4VHOyQAhwWI90XNH5QcD0N7uhT95UHK3uh00vbmY4e4ThlcRfRsyx4/k6q7eLqXhZpqKcSDEdQnNLTgRcyaRnRybWvHUL67/Ea4/gJ9VI/wDxEk+ZuhY1zsXHyQmiaMMV9ZEBgvrI19axMdnaDfNyNuq8PEZgm/8AOY+xCnOJa0e6aAJwP8vtNhEod/GHVUYIgbe/aVUcz03cFDxt9C1GYPDrrMf/AMy2+vo/EGdvUJwLSQRpYx7zg0KjoQz9b+qtPius39s3RV0rZ2+xU0D4Tg4XMmlj2uX1k/zT5HybnE3Q00kxGA8lTUrYG6qmmbO3/VPTyQnAjyuZNJHtcvrJ/mnyySbnXQwSTHABUtK2Fv8AqGi0ucdlFyN7qPaNLgCCFWUjonlw23MkfGcWuQrJ/knVU7ur1ZhJYb3bSn7yqflb3X41VceWTG5jczgExuVoGqu3i6m4WapadkvdS0r2dPMIgjqPUpxjGL5t7bqsASMU4IDH+yjPiy5/wAh+4F88DJm4OC+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sX2ti+1sTLNia4FABowF5GIKks1j3FyFmRgpjcrQPQqaYTjBfawqak8A6J6KObupLMkG0o0NSOkZTaCc9WkKOy/mVDTRwjyF1RTiduBX2tighEMYYNMsLJRg4KSy2nYU+zp29ASvoqnHiKZZ0zuvkorNY0gvTI2sAAHoSRMlaQ4KWzGnYn2dM3oCV9FU48RTLOmd1BCisxo3pkTIxgBqqKFsz8xTbMY1wKaMABqcxrhgQprNY7EtT7Omb0BK+iqf/AMihQ1B6sKoYHwswdeRiEaJpPVR0jWODsdc8DZV9C33UdI1jw7HXNTiU4r6Fvuo2ZGBushOhjf1CNHEei+gC+hb7r6FvuvoW+6+hb7r6FvuvoW+6+hb7r6FvuhQtTG5GgXvjDiDdIwPLT7J7A5haoYhE0gLw/wDpm/8ASw9fD/wcP/hyv//EADARAAEDAgUCBQQCAgMAAAAAAAEAAgMEERASMTNxITITFCBRUiIwQEFhgUKgI1By/9oACAECAQE/AP8ARllkEbC5edd7JlYS4AhDCep8N1gF513sqefxR63Vga4iy88PivPD4ptaw6hMmY/Q/ZJsCUyqzPy29RNgm1Qc/Jb1E2BKNb1tZMdnaHf9BWbWDO4cpugwq904UOrvUdCni8p5Qo2EDqvJR+6dRfEpzJIXKmnzix1+w7tPCg3xz6naFRb/APfqd1aQjTy37VCC2NoOIkaXWB/NrNrCPuHKboMKvdOFDq71HQp28eUztGM0YewphLJBygbgH1u7TwoN8c+p2hUW/wD39qckRuIVGSXu/NrNrBneOUNBhV7pwodXeo6FO3jymdoxOhTtw8pnaOMCQEZox/kF48XyCDmnQ4O7TwoN8c4GWMauCbLG7RwxdoVFv/3gZWN1cEJY3aOHozN98CQNSp3NMbuoVGQHlZ2+4Qc06H8us2sGGzgmyMLR9QWdnyCqXB0pIwo3ta43Kzs+QWdnyCzs+QWdnyGB0KdvHlM7RjUShjD7qFpfKEOgT3hjSSpJ5JXWBKbSSO6ko0bxoUHSQuUMokZdO7TwoN5T1DnHIxMpZH9XFSU8kfUKCpIOV6CdoVFv/wBqeodfIxMpZH9SbJ9NJH1Cp6lwOV6BBwkJ8c8pug4VTG94GVOgla0k6KNj3mzV5edU8MrH3d+XWbWNz7rMff0Zj7rMfdZj7oOdcdUw3Y3hHQp3SU8ptREGj6kaqL3T634hWlmcoIBEL/vCqa9wAaFTQFrruGNXGCzMqJxzEJ3aeFmLXkhUsP8Am7Ai6qY/DkuNCqWTOzhO0KLi15IVLFf/AJHY1MWR9xoVSyZmW9sJN88pug4wqNpyou8/m1m19sahR9jeEdE8XkI/lCjkI1XkpE6GSM3LVBUt0IAQN/VUbTlRbhTu0oC8lv5TG5WgY1rbsBVE76iE7Qoi8lv5UbcrGjGsbeO6ojZ5GEm+eU3QcYVG05UXefzaza9dNEJHG+gXl4viqinYGFzRa2A1Cj7G8I6I7x5Te0YEAixVRF4b+mipJMzLHF8jWalOrWDQI1rv01PqnvaQQqLcPCd2lRi8w59FVtFUm6E7Qpm8P/SGmNTtOVLujCTfPKboOMKjacqLvP5tZteuh1dhPtOwGoUfY3hHRO3jymdoxrG3YCqJ1nkYTy+Ey/7QzzvUdGwdy8CL4hTxsbE6zQqLcPCd2nhR7w59FVtFUgvKjoUzfHKGmNTtOVKLyjCTfPKboOMKjacqLvP5tZteuKV0ZuEK7+FLUukFtBgNQo+xvCOidvHlM7RjM3NG4KA5ZRhWn6wFRtGQnGskAblVFuHhHQp30THlMOZoONa/oGqib1JRT7smPKY4OaDjWvs0NVE05icJN88pug4wqNpyou8/m1m19sahR9jeEdE7ePKZ2jE9QU4ZJeCmHMwFVrTcOVLOGfS5eLH8gpapje3qUc8pLiqLcPGFZEQc4VLUADI5XB/akmYwXJT3OmkUMfhsAwrIjfMFSzgDI5Ag/tSSsjFyU9zpnqCPw2AYSb55TdBxhMLxuCp3+HJ1QcCLgq4/Lnj8RhavJyLyci8nIvJyLyci8nIvJyLyci8nIvJyIUkl00WaAjojSyGS6b0A9E9M90hLQoWuawAqRgkaQU+lkboLheFL8So6R7u5OhAiLWqmgfG+5wc0PFipKRwN2LJUN6WKFPM89VDTtj66nFzQ4WKlpHA3YslQ3pYoU8z9QVDTtj6nqcX0zzLm/V0NBjNSEm7Fknb0sVTtlz3cDb/TL//EADARAAEDAQYEBgICAwEAAAAAAAEAAgMEEBEgMTNxEiEyURMUMDRSckFhBSIVQqAj/9oACAEDAQE/AP8AhlhjMrw1eQb8lJQgNJa62npPFbxEryDPkqin8EjneDjbQlwB4l5A/Jf48/JOoZBkQU+GSPqb6IF5AT6PgjL+LEOZTqPhj4+LEBeQEKC8dSkZwPLe3oX+hfhvV6v9Gi1hY/odsjmbKPQFlfk3EMwmcoxsjXSAkXLz8nZMrx/s1MfHM3lcVVU3hnibl6Deobqf252xNzCl9sdsTTc4boVMPD1KZwdI4i0xvDeIjlgNgxHAbLlcrvRotYWP6HbI5myj0BZ/IZNxDMJukNk/qO9sEhjeCFIBJEf2ERcSMbeobqf252xNzCl9sdvSpwDKwFVwAjbgK/CGIYChgKBx0WsLH9DtkczZR6Asr8m4hmE3SGyf1He0ZhN0hsn9bt7ACUIJTkwo08o/0KLXNzBsZ1DdT+3O1jYZHZNKdDI3NptbmFN7c7WNikdk0p0Mrc2HBwu7GwAnIKna4TM5FVwJY24Lgf8AEotcMwbChiKFpQ9Wi1hY4XtITopA4/1K8N/xKpWlkTQbK5jnNaQF4b/iV4b/AIleG/4lcD/ibBmE3SGyf1He2mhMjx2CneI4iibyo2GRwaFFBHE28gbp9bE3kAm10Zzai2Kdv4KniMTy1M6hup/bnZU1M0N45E+siYbgL1HVRS8iqmlBHGwWNzCl9udlTUzQ3jen1kUfJovUdVFLyPIqopWuBcy2IDy45DJOzKpJGRudxplRC5wAIvUkjIxe9eap+4VTPC+O5psKCKGA4Ch6tFrC24K4dsFw7K4dlcOyLQQeQUgAe7dDMJukNk6lmLj/AFQo5uyjoPmVfDA38BVFQZnfoWUbmMcS8qrqA5gaw20UhbJw/gqvaOFrkzqG64Q5gBVZOdNuQsBIVLL4sfPMKri4JP0U3MINDowD2VZNd/5ttpJfEZccwqyPgkvGRsi9sPqjmbKbWYq/obgKCKGI2FDEUMVFrD0zkpdR+6GYTOUY2RrowcivPxdimTxSi4OVRSO5ua4nHTazFX6bd03qG6Jujv8A0nu4nuNtC66QhV7b2ApuYQN0YP6UjuJ7jbQuuluVe2+MGyL2w+qOZsptZir9NuAoYShgKGIoYqLWGOrmMTRdmV5mb5lU1S8vDXG8Gw5KXUfuhmE3SGyf1HewEg3hUs3ix88wqyPgkvGRtZG95ua0lMoXnqICFAz8uUdJExwcCq/Tbum9Q3Uugfrgo9ZqrRfCU3Mbp+gfrgpdZqq9E2Re2H1RzNlNrMVfptwFCwoWFDAUMYxUWsMf8hkyyn1mWHJS6j90Mwm6Q2T+o720L7pCO6r23xg2U8Jlfd+ETHTsUlbI7p5BGeX5lU8kjpmguKr9Nu6b1DdS6B+uCj1mqtN0JTcxun84D9cFIL5mqsN0Jsi9sPqjmbKbWYq/TbgKFhQxlD1aLWGOWJsrbivID5qGkZE6/M2HJS6j90Mwm6Q2T+o72wO4ZWFVDeOF1lABwEqveS8NtoYyX8f4Cr9MboZhM/vCP2E8cLiLaBl5L1Xu5NbZGQ+EbJ7eF7hbQMJcXKveA1rbIvbD6o5mym1mKv024ChgKHplDHRaw9M5KXUfuhmE3SGyf1He0G4gpp44twnjhe4Kgfyc1VdO6T+7c14UnwKio5HkcXIIeHCGsCr9Nu9lFKC3gKq6Yk8bQiCFFC+Q3AJjWwx7BTymWQmyhlBBYVV0xJ42hEEZgqOF8huAUbGwRqol8WQmyL2w+qOZsgdwysKqYzLFyRaQbiFcbChabBiNl6vV/owSCKQOK87CvOw9152HuvOw9152HuvOw9152HuvOw9152HuvOw90a2K4px4nE9yhmhVxCO5ON7icFPVRsjDXFTua6RxbkVHI6NwcFHWROHM3FePD8gpK2No/rzKbOTM17yqqojlYA3vY1xY4EFRVrCLnrjpncyWp1TBGORCnqXy8sha1xaQQoq1pFz1x0zuZIRqYIxyIU9U+XkOQtjqo2whpPO5HM2wVoADXrxKZ3MlqqXQ+Fcwi+woWlXejcrlcrlcrv8Ai2//2Q==
+name: RabbitMQ
+script:
+  commands:
+  - arguments:
+    - description: The name of whom you want to say hello to.
+      name: name
+    description: Hello command - prints hello to anyone.
+    name: helloworld-say-hello
+    outputs:
+    - contextPath: hello
+      description: Should be Hello **something** here.
+      type: String
+  - arguments:
+    - description: Filter by alert severity. Comma-separated value (Low,Medium,High,Critical)
+      name: severity
+    - auto: PREDEFINED
+      description: Filter by alert status.
+      name: status
+      predefined:
+      - ACTIVE
+      - CLOSED
+    - description: Filter by alert type
+      name: alert_type
+    - description: Maximum results to return.
+      name: max_results
+    - description: "Filter by start time. \nExamples:\n  \"3 days ago\"\n  \"1 month\"\n
+        \ \"2019-10-10T12:22:00\"\n  \"2019-10-10\""
+      name: start_time
+    description: Search HelloWorld Alerts.
+    name: helloworld-search-alerts
+    outputs:
+    - contextPath: HelloWorld.Alert.alert_id
+      description: Alert ID.
+      type: String
+    - contextPath: HelloWorld.Alert.alert_status
+      description: Alert status. Can be 'ACTIVE' or 'CLOSED'.
+      type: String
+    - contextPath: HelloWorld.Alert.alert_type
+      description: Alert type. For example 'Bug' or 'Vulnerability'.
+      type: String
+    - contextPath: HelloWorld.Alert.created
+      description: Alert created time. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: HelloWorld.Alert.name
+      description: Alert name.
+      type: String
+    - contextPath: HelloWorld.Alert.severity
+      description: Alert severity. Can be 'Low', 'Medium', 'High' or 'Critical'.
+      type: String
+  - arguments:
+    - description: Alert ID.
+      name: alert_id
+      required: true
+    description: Retrieve alert extra data by ID.
+    name: helloworld-get-alert
+    outputs:
+    - contextPath: HelloWorld.Alert.alert_id
+      description: Alert ID.
+      type: String
+    - contextPath: HelloWorld.Alert.created
+      description: Alert created time. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: HelloWorld.Alert.description
+      description: Alert description.
+      type: String
+    - contextPath: HelloWorld.Alert.device_id
+      description: ID of the device involved in the alert.
+      type: String
+    - contextPath: HelloWorld.Alert.device_ip
+      description: IP Address of the device involved in the alert.
+      type: String
+    - contextPath: HelloWorld.Alert.location
+      description: Location of the device involved in the alert.
+      type: String
+    - contextPath: HelloWorld.Alert.user
+      description: User involved in the alert.
+      type: String
+  - arguments:
+    - description: Alert ID to update.
+      name: alert_id
+      required: true
+    - auto: PREDEFINED
+      description: New status of the alert.
+      name: status
+      predefined:
+      - ACTIVE
+      - CLOSED
+      required: true
+    description: Update the status for an alert.
+    name: helloworld-update-alert-status
+    outputs:
+    - contextPath: HelloWorld.Alert.alert_id
+      description: Alert ID.
+      type: String
+    - contextPath: HelloWorld.Alert.updated
+      description: Alert update time. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: HelloWorld.Alert.alert_status
+      description: Alert status. Can be 'ACTIVE' or 'CLOSED'.
+      type: String
+  - arguments:
+    - default: true
+      description: List of IPs.
+      isArray: true
+      name: ip
+    - defaultValue: "65"
+      description: If the IP has reputation above the threshold then the IP defined
+        as malicious. If threshold not set, then threshold from instance configuration
+        is used.
+      name: threshold
+    description: Return IP information and reputation
+    name: ip
+    outputs:
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: HelloWorld.IP.asn
+      description: The autonomous system name for the IP address.
+      type: String
+    - contextPath: HelloWorld.IP.asn_cidr
+      description: The ASN CIDR.
+      type: String
+    - contextPath: HelloWorld.IP.asn_country_code
+      description: The ASN country code.
+      type: String
+    - contextPath: HelloWorld.IP.asn_date
+      description: The date on which the ASN was assigned.
+      type: Date
+    - contextPath: HelloWorld.IP.asn_description
+      description: The ASN description.
+      type: String
+    - contextPath: HelloWorld.IP.asn_registry
+      description: The registry the ASN belongs to.
+      type: String
+    - contextPath: HelloWorld.IP.entities
+      description: Entities associated to the IP.
+      type: String
+    - contextPath: HelloWorld.IP.ip
+      description: The actual IP address.
+      type: String
+    - contextPath: HelloWorld.IP.network.cidr
+      description: Network CIDR for the IP address.
+      type: String
+    - contextPath: HelloWorld.IP.network.country
+      description: The country of the IP address.
+      type: Unknown
+    - contextPath: HelloWorld.IP.network.end_address
+      description: The last IP address of the CIDR.
+      type: String
+    - contextPath: HelloWorld.IP.network.events.action
+      description: The action that happened on the event.
+      type: String
+    - contextPath: HelloWorld.IP.network.events.actor
+      description: The actor that performed the action on the event.
+      type: Unknown
+    - contextPath: HelloWorld.IP.network.events.timestamp
+      description: The timestamp when the event occurred.
+      type: String
+    - contextPath: HelloWorld.IP.network.handle
+      description: The handle of the network.
+      type: String
+    - contextPath: HelloWorld.IP.network.ip_version
+      description: The IP address version.
+      type: String
+    - contextPath: HelloWorld.IP.network.links
+      description: Links associated to the IP address.
+      type: String
+    - contextPath: HelloWorld.IP.network.name
+      description: The name of the network.
+      type: String
+    - contextPath: HelloWorld.IP.network.notices.description
+      description: The description of the notice.
+      type: String
+    - contextPath: HelloWorld.IP.network.notices.links
+      description: Links associated with the notice.
+      type: Unknown
+    - contextPath: HelloWorld.IP.network.notices.title
+      description: Title of the notice.
+      type: String
+    - contextPath: HelloWorld.IP.network.parent_handle
+      description: Handle of the parent network.
+      type: String
+    - contextPath: HelloWorld.IP.network.raw
+      description: Additional raw data for the network.
+      type: Unknown
+    - contextPath: HelloWorld.IP.network.remarks
+      description: Additional remarks for the network.
+      type: Unknown
+    - contextPath: HelloWorld.IP.network.start_address
+      description: The first IP address of the CIDR.
+      type: String
+    - contextPath: HelloWorld.IP.network.status
+      description: Status of the network.
+      type: String
+    - contextPath: HelloWorld.IP.network.type
+      description: The type of the network.
+      type: String
+    - contextPath: HelloWorld.IP.query
+      description: IP address that was queried.
+      type: String
+    - contextPath: HelloWorld.IP.raw
+      description: Additional raw data for the IP address.
+      type: Unknown
+    - contextPath: HelloWorld.IP.score
+      description: Reputation score from HelloWorld for this IP (0 to 100, where higher
+        is worse).
+      type: Number
+    - contextPath: IP.Address
+      description: IP address.
+      type: String
+    - contextPath: IP.Malicious.Vendor
+      description: The vendor reporting the IP address as malicious.
+      type: String
+    - contextPath: IP.Malicious.Description
+      description: A description explaining why the IP address was reported as malicious.
+      type: String
+    - contextPath: IP.ASN
+      description: The autonomous system name for the IP address.
+      type: String
+    - contextPath: IP.Relationships.EntityA
+      description: The source of the relationship.
+      type: string
+    - contextPath: IP.Relationships.EntityB
+      description: The destination of the relationship.
+      type: string
+    - contextPath: IP.Relationships.Relationship
+      description: The name of the relationship.
+      type: string
+    - contextPath: IP.Relationships.EntityAType
+      description: The type of the source of the relationship.
+      type: string
+    - contextPath: IP.Relationships.EntityBType
+      description: The type of the destination of the relationship.
+      type: string
+  - arguments:
+    - default: true
+      description: List of Domains.
+      isArray: true
+      name: domain
+    - defaultValue: "65"
+      description: If the domain has reputation above the threshold then the domain
+        defined as malicious. If threshold not set, then threshold from instance configuration
+        is used.
+      name: threshold
+    description: Returns Domain information and reputation.
+    name: domain
+    outputs:
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: Domain.Name
+      description: The domain name.
+      type: String
+    - contextPath: Domain.Malicious.Vendor
+      description: The vendor reporting the domain as malicious.
+      type: String
+    - contextPath: Domain.Malicious.Description
+      description: A description explaining why the domain was reported as malicious.
+      type: String
+    - contextPath: Domain.Registrant.Name
+      description: The name of the registrant.
+      type: String
+    - contextPath: Domain.Registrant.Country
+      description: The country of the registrant.
+      type: String
+    - contextPath: Domain.Organization
+      description: The organization of the domain.
+      type: String
+    - contextPath: Domain.CreationDate
+      description: The creation date of the domain. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.ExpirationDate
+      description: The expiration date of the domain. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.UpdatedDate
+      description: The date when the domain was last updated. Format is ISO8601 (i.e.
+        '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.NameServers
+      description: Name servers of the domain.
+      type: String
+    - contextPath: Domain.WHOIS.NameServers
+      description: A CSV string of name servers, for example 'ns1.bla.com, ns2.bla.com'.
+      type: String
+    - contextPath: Domain.WHOIS.CreationDate
+      description: The creation date of the domain. Format is ISO8601 (i.e. '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.WHOIS.UpdatedDate
+      description: The date when the domain was last updated. Format is ISO8601 (i.e.
+        '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.WHOIS.ExpirationDate
+      description: The expiration date of the domain.
+      type: Date
+    - contextPath: Domain.WHOIS.Registrar.Name
+      description: The name of the registrar, for example 'GoDaddy'
+      type: String
+    - contextPath: IP.ASN
+      description: The autonomous system name for the IP address.
+      type: String
+    - contextPath: HelloWorld.Domain.address
+      description: Domain admin address.
+      type: String
+    - contextPath: HelloWorld.Domain.city
+      description: Domain admin city.
+      type: String
+    - contextPath: HelloWorld.Domain.country
+      description: Domain admin country.
+      type: String
+    - contextPath: HelloWorld.Domain.creation_date
+      description: Domain creation date. Format is ISO8601.
+      type: Date
+    - contextPath: HelloWorld.Domain.dnssec
+      description: DNSSEC status.
+      type: String
+    - contextPath: HelloWorld.Domain.domain
+      description: The domain name.
+      type: String
+    - contextPath: HelloWorld.Domain.domain_name
+      description: Domain name options.
+      type: String
+    - contextPath: HelloWorld.Domain.emails
+      description: Contact emails.
+      type: String
+    - contextPath: HelloWorld.Domain.expiration_date
+      description: Expiration date. Format is ISO8601.
+      type: Date
+    - contextPath: HelloWorld.Domain.name
+      description: Domain admin name.
+      type: String
+    - contextPath: HelloWorld.Domain.name_servers
+      description: Name server.
+      type: String
+    - contextPath: HelloWorld.Domain.org
+      description: Domain organization.
+      type: String
+    - contextPath: HelloWorld.Domain.referral_url
+      description: Referral URL.
+      type: Unknown
+    - contextPath: HelloWorld.Domain.registrar
+      description: Domain registrar.
+      type: String
+    - contextPath: HelloWorld.Domain.score
+      description: Reputation score from HelloWorld for this domain (0 to 100, where
+        higher is worse).
+      type: Number
+    - contextPath: HelloWorld.Domain.state
+      description: Domain admin state.
+      type: String
+    - contextPath: HelloWorld.Domain.status
+      description: Domain status.
+      type: String
+    - contextPath: HelloWorld.Domain.updated_date
+      description: Updated date. Format is ISO8601.
+      type: Date
+    - contextPath: HelloWorld.Domain.whois_server
+      description: WHOIS server.
+      type: String
+    - contextPath: HelloWorld.Domain.zipcode
+      description: Domain admin zipcode.
+      type: Unknown
+  - arguments:
+    - description: Asset to start the scan against.
+      name: hostname
+      required: true
+    description: Start scan on an asset.
+    name: helloworld-scan-start
+    outputs:
+    - contextPath: HelloWorld.Scan.scan_id
+      description: Unique ID of the scan.
+      type: string
+    - contextPath: HelloWorld.Scan.status
+      description: Status of the scan ('RUNNING' or 'COMPLETE').
+      type: string
+    - contextPath: HelloWorld.Scan.hostname
+      description: The hostname the scan is run against.
+      type: string
+  - arguments:
+    - description: List of Scan IDs. helloworld-scan-start returns "scan_id".
+      isArray: true
+      name: scan_id
+      required: true
+    description: Retrieve scan status for one or more scan IDs.
+    name: helloworld-scan-status
+    outputs:
+    - contextPath: HelloWorld.Scan.scan_id
+      description: Unique ID of the scan.
+      type: string
+    - contextPath: HelloWorld.Scan.status
+      description: Status of the scan ('RUNNING' or 'COMPLETE').
+      type: string
+  - arguments:
+    - auto: PREDEFINED
+      defaultValue: file
+      description: Results format (file or JSON).
+      name: format
+      predefined:
+      - json
+      - file
+      required: true
+    - description: Unique ID of the scan.
+      name: scan_id
+      required: true
+    description: Retrieve scan status in Context or as a File (default) for a Scan.
+    name: helloworld-scan-results
+    outputs:
+    - contextPath: HelloWorld.Scan.entities.entity-id
+      description: Scanned entity ID.
+      type: String
+    - contextPath: HelloWorld.Scan.entities.ip_address
+      description: Scanned entity IP address.
+      type: String
+    - contextPath: HelloWorld.Scan.entities.type
+      description: Scanned entity type.
+      type: String
+    - contextPath: HelloWorld.Scan.entities.vulnerability_status
+      description: Scanned entity vulnerability status.
+      type: String
+    - contextPath: HelloWorld.Scan.entities.vulns
+      description: Scanned entity CVE.
+      type: String
+    - contextPath: HelloWorld.Scan.scan_id
+      description: Unique ID of the scan.
+      type: String
+    - contextPath: HelloWorld.Scan.status
+      description: Status of the scan ('RUNNING' or 'COMPLETE').
+      type: String
+    - contextPath: InfoFile.EntryID
+      description: The EntryID of the report file.
+      type: Unknown
+    - contextPath: InfoFile.Extension
+      description: The extension of the report file.
+      type: string
+    - contextPath: InfoFile.Name
+      description: The name of the report file.
+      type: string
+    - contextPath: InfoFile.Info
+      description: The info of the report file.
+      type: string
+    - contextPath: InfoFile.Size
+      description: The size of the report file.
+      type: number
+    - contextPath: InfoFile.Type
+      description: The type of the report file.
+      type: string
+    - contextPath: CVE.ID
+      description: The ID of the CVE.
+      type: string
+  dockerimage: demisto/python3:3.10.5.31928
+  isfetch: true
+  runonce: false
+  script: |+
+    import requests
+    import json
+    import base64
+    import urllib.parse
+    from datetime import datetime
+
+    requests.packages.urllib3.disable_warnings()
+
+    # defining the api-endpoint
+    API_ENDPOINT = "https://172.16.201.201:15671/api/queues/%2Frsa%2Fsystem/incidents.archer/get"
+    QUEUE = "incidents.archer"
+    virtual_host = '/rsa/system'
+    VHOST = urllib.parse.quote(virtual_host, safe='')
+    USERNAME = 'deploy_admin'
+    PASSWORD = 'Netwitness1!'
+    #API_DOCUMENTATION = "https://172.16.201.201:15671/api"
+    COUNT = 5
+    ACKMODE = "ack_requeue_true"
+    RABBIT_STATUS = ['ALERT_ADDED','INCIDENT_CREATED','INCIDENT_UPDATED']
+
+
+    class Client(BaseClient):
+        """
+        Client to use in the ServiceNow integration. Overrides BaseClient.
+        """
+
+        def __init__(self, server_url: str, username: str, password: str,
+                    queue: str, vhost: str, count: int, ackmode: str, rabbit_status: list):
+            """
+
+            Args:
+                server_url: SNOW server url
+                sc_server_url: SNOW Service Catalog url
+                cr_server_url: SNOW Change Management url
+                username: SNOW username
+                password: SNOW password
+                oauth_params: (optional) the parameters for the ServiceNowClient that should be used to create an
+                              access token when using OAuth2 authentication.
+                verify: whether to verify the request
+                fetch_time: first time fetch for fetch_incidents
+                sysparm_query: system query
+                sysparm_limit: system limit
+                timestamp_field: timestamp field for fetch_incidents
+                ticket_type: default ticket type
+                get_attachments: whether to get ticket attachments by default
+                incident_name: the ServiceNow ticket field to be set as the incident name
+                look_back: defines how much backwards (minutes) should we go back to try to fetch incidents.
+            """
+        def http_request(self):
+            headers = {'content-type': 'application/json'}
+            # data to be sent to api
+            pdata = {"count":COUNT,"ackmode": ACKMODE,"encoding":"auto"}
+            response = requests.post(url=API_ENDPOINT, auth=(USERNAME, PASSWORD), json=pdata, headers=headers, verify=False)
+            return response
+
+
+        def fetch_incidents(self):
+            incidents = []
+            headers = {'content-type': 'application/json'}
+            # data to be sent to api
+            pdata = {"count":COUNT,"ackmode": ACKMODE,"encoding":"auto"}
+
+            # sending post request and saving response as response object
+            r = requests.post(url=API_ENDPOINT, auth=(USERNAME, PASSWORD), json=pdata, headers=headers, verify=False)
+
+            # extracting response text
+            pastebin_url = r.json()
+            #print(pastebin_url)
+
+            # check if it is a INICDENT_UPDATED or INCIDENT_CREATED
+            for i in range(len(pastebin_url)):
+                #fetch only incident created or updated
+                if pastebin_url[i]['properties']['headers']['incidentChangeType'] in RABBIT_STATUS:
+                    if type(pastebin_url[i]['payload']) == str:
+                        pastebin_url[i]['payload'] = json.loads(pastebin_url[i]['payload'])
+                    NAME = pastebin_url[i]['payload']['incident']['name']
+                    incident = {
+                        'name': f'RabbitMQ - {NAME}',  # name is required field, must be set
+                        'occurred': datetime.utcfromtimestamp(pastebin_url[i]['properties']['headers']['timestamp']).strftime('%Y-%m-%dT%H:%M:%SZ'),  # must be string of a format ISO8601
+                        'rawJSON': json.dumps(pastebin_url[i])
+                        # the original event, this will allow mapping of the event in the mapping stage. Don't forget to `json.dumps`
+                    }
+                    incidents.append(incident)
+            #print(incidents)
+            return incidents
+
+
+    def test_module(client: Client, params) -> None:
+        if params.get('isFetch'):
+            client.fetch_incidents()
+
+        client.http_request()
+
+        return_results('ok')
+
+    """def get_remote_data_command(client, args):
+        parsed_args = GetRemoteDataArgs(args)
+        try:
+          new_incident_data: Dict = client.get_incident_data(parsed_args.remote_incident_id, parsed_args.last_update)
+          raw_entries: List[dict] = client.get_incident_entries(parsed_args.remote_incident_id, parsed_args.last_update)
+          parsed_entries = []
+          for entry in raw_entries:
+              parsed_entries.append({
+                  'Type': EntryType.NOTE,
+                  'Contents': entry.get('contents'),
+                  'ContentsFormat': EntryFormat.TEXT,
+                  'Tags': ['tag1', 'tag2'],  # a list of tags to add to the entry
+                  'Note': False  # boolean: True for Note, False otherwise
+              })
+
+          remote_incident_id = new_incident_data['incident_id']
+          new_incident_data['id'] = remote_incident_id
+          return GetRemoteDataResponse(new_incident_data, parsed_entries)
+        except Exception as e:
+          if "Rate limit exceeded" in str(e):  # modify this according to the vendor's spesific message
+              return_error("API rate limit")
+
+    def get_modified_remote_data_command(client, args):
+        remote_args = GetModifiedRemoteDataArgs(args)
+        last_update = remote_args.last_update
+        last_update_utc = dateparser.parse(last_update, settings={'TIMEZONE': 'UTC'})  # converts to a UTC timestamp
+
+        raw_incidents = client.get_incidents(gte_modification_time=last_update_utc, limit=100)
+        modified_incident_ids = list()
+        for raw_incident in raw_incidents:
+            incident_id = raw_incident.get('incident_id')
+            modified_incident_ids.append(incident_id)
+
+        return GetModifiedRemoteDataResponse(modified_incident_ids)
+    """
+    client = Client(server_url = API_ENDPOINT, username = USERNAME, password = PASSWORD,
+                    queue = QUEUE, vhost = VHOST, count = COUNT, ackmode = ACKMODE, rabbit_status = RABBIT_STATUS)
+
+
+    def main():
+        command = demisto.command()
+        #command = 'fetch-incidents'
+        if command == 'fetch-incidents':
+            incidents = client.fetch_incidents()
+            demisto.incidents(incidents)
+        """
+        elif command == 'get-remote-data':
+                    return_results(get_remote_data_command(client, demisto.args()))
+        elif demisto.command() == 'get-modified-remote-data':
+                    return_results(get_modified_remote_data_command(client, demisto.args()))
+                    """
+        elif command == 'test-module':
+            test_module(client, demisto.params())
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):
+        main()
+
+  subtype: python3
+  type: python
