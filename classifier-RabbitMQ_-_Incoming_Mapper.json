@@ -1,0 +1,161 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "",
+	"id": "c58241a0-c537-43de-8a6d-b520da1df253",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "",
+	"keyTypeMap": {},
+	"locked": false,
+	"logicalVersion": 9,
+	"mapping": {
+		"RabbitMQ": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {
+				"External Severity": {
+					"simple": "payload.incident.priority"
+				},
+				"Nw ID": {
+					"simple": "payload.incident.id"
+				},
+				"RSA Id": {
+					"simple": "payload.incident.id"
+				},
+				"payload": {
+					"complex": {
+						"filters": [],
+						"root": "payload",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				},
+				"payload2": {
+					"complex": {
+						"filters": [],
+						"root": "payload",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				}
+			}
+		},
+		"RabbitMQ - Alert Added": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {
+				"External Severity": {
+					"simple": "payload.incident.priority"
+				},
+				"Nw ID": {
+					"simple": "payload.incident.id"
+				},
+				"RSA Id": {
+					"simple": "payload.incident.id"
+				},
+				"payload2": {
+					"complex": {
+						"filters": [],
+						"root": "payload",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				},
+				"rabbitmqualerts": {
+					"complex": {
+						"accessor": "events",
+						"filters": [],
+						"root": "payload.alerts",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				}
+			}
+		},
+		"RabbitMQ - Update": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {
+				"External Severity": {
+					"simple": "payload.incident.priority"
+				},
+				"Nw ID": {
+					"simple": "payload.incident.id"
+				},
+				"RSA Id": {
+					"simple": "payload.incident.id"
+				},
+				"payload2": {
+					"complex": {
+						"filters": [],
+						"root": "payload",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				},
+				"rabbitmqhistory": {
+					"complex": {
+						"accessor": "history",
+						"filters": [],
+						"root": "payload.incident",
+						"transformers": [
+							{
+								"operator": "Stringify"
+							},
+							{
+								"operator": "ParseJSON"
+							}
+						]
+					}
+				}
+			}
+		}
+	},
+	"name": "RabbitMQ - Incoming Mapper",
+	"nameRaw": "RabbitMQ - Incoming Mapper",
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": false,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "mapping-incoming",
+	"unclassifiedCases": null,
+	"version": -1
+}
