@@ -1,0 +1,39 @@
+{
+	"autorun": true,
+	"cacheVersn": 0,
+	"closureScript": "",
+	"color": "#FF8411",
+	"days": 0,
+	"daysR": 0,
+	"default": false,
+	"definitionId": "",
+	"detached": false,
+	"disabled": false,
+	"extractSettings": {
+		"fieldCliNameToExtractSettings": {},
+		"mode": "All"
+	},
+	"fromServerVersion": "",
+	"hours": 0,
+	"hoursR": 0,
+	"id": "RabbitMQ",
+	"itemVersion": "",
+	"layout": "4e85b826-241f-4076-8421-66502ff0b6be",
+	"locked": false,
+	"name": "RabbitMQ",
+	"onChangeRepAlg": 1,
+	"packID": "",
+	"packName": "",
+	"playbookId": "838aea88-e5e7-43c0-8450-13df76c46e7d",
+	"preProcessingScript": "",
+	"propagationLabels": [
+		"all"
+	],
+	"readonly": false,
+	"reputationCalc": 0,
+	"system": false,
+	"toServerVersion": "",
+	"version": -1,
+	"weeks": 0,
+	"weeksR": 0
+}
