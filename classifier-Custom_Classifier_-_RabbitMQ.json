@@ -1,0 +1,38 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "",
+	"id": "58cd4399-b735-4d37-83ca-a4898598a597",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "",
+	"keyTypeMap": {
+		"ALERT_ADDED": "RabbitMQ - Alert Added",
+		"INCIDENT_CREATED": "RabbitMQ",
+		"INCIDENT_UPDATED": "RabbitMQ - Update"
+	},
+	"locked": false,
+	"logicalVersion": 1,
+	"mapping": null,
+	"name": "Custom Classifier - RabbitMQ",
+	"nameRaw": "Custom Classifier - RabbitMQ",
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": false,
+	"toServerVersion": "",
+	"transformer": {
+		"simple": "properties.headers.incidentChangeType"
+	},
+	"type": "classification",
+	"unclassifiedCases": null,
+	"version": -1
+}
