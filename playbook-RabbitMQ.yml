@@ -1,0 +1,203 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 838aea88-e5e7-43c0-8450-13df76c46e7d
+inputs: []
+name: RabbitMQ
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 12e1136f-5317-46b1-8e73-7e429daece5a
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 12e1136f-5317-46b1-8e73-7e429daece5a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.linkedIncidents
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "2"
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7969f16d-68a4-4aad-8353-d3482e1f03a2
+      iscommand: false
+      name: Are there Linked Incident?
+      type: condition
+      version: -1
+    taskid: 7969f16d-68a4-4aad-8353-d3482e1f03a2
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 230
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      get_key:
+        simple: target
+      incident_id:
+        complex:
+          accessor: linkedIncidents
+          root: incident
+      set_key:
+        simple: HISTORY
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Gets a value from the specified incident's context.
+      id: 6873a839-cb55-4cf8-8b33-a843bf7e7a7f
+      iscommand: false
+      name: Get Updates - History
+      script: GetByIncidentId
+      type: regular
+      version: -1
+    taskid: 6873a839-cb55-4cf8-8b33-a843bf7e7a7f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 170,
+          "y": 410
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      get_key:
+        simple: rabbitmqualerts
+      incident_id:
+        complex:
+          accessor: linkedIncidents
+          root: incident
+      set_key:
+        simple: ALERTS
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Gets a value from the specified incident's context.
+      id: 62ed430d-75ef-4a11-8b28-92be6f798ea5
+      iscommand: false
+      name: Get Updates - Alerts
+      script: GetByIncidentId
+      type: regular
+      version: -1
+    taskid: 62ed430d-75ef-4a11-8b28-92be6f798ea5
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -330,
+          "y": 410
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 2d8fae02-94e2-4e9c-8835-159eacf84531
+      iscommand: false
+      name: fail
+      type: regular
+      version: -1
+    taskid: 2d8fae02-94e2-4e9c-8835-159eacf84531
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 790,
+          "y": 410
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 455,
+        "width": 1500,
+        "x": -330,
+        "y": 50
+      }
+    }
+  }
