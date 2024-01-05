@@ -1,0 +1,111 @@
+args:
+- auto: PREDEFINED
+  defaultValue: "0"
+  name: phase
+  predefined:
+  - "0"
+  - "1"
+  required: true
+commonfields:
+  id: dada5725-eb08-4281-8251-88f16b7ff152
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: dev/timemachine:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: TimeMachine
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |2-
+
+
+  import paramiko
+  import time
+
+  def main():
+      try:
+          # Replace these values with your SSH server details
+          args = demisto.args()
+          num = args.get('phase', '')
+
+          hostname = '172.16.201.10'
+          port = 22
+          username = 'root'
+          password = 'Sebora.458!11'
+
+          # Create an SSH client
+          ssh = paramiko.SSHClient()
+
+          # Automatically add the server's host key
+          ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+          try:
+              if num == str(0):
+              # Connect to the SSH server
+                  ssh.connect(hostname, port, username, password)
+
+                  #remote_command = 'date --date yesterday'
+                  #stdin, stdout, stderr = ssh.exec_command(remote_command)
+                  #demisto.info(stdout)
+                  remote_command = "date -s '20 DEC 2023 15:00:00'"
+                  stdin, stdout, stderr = ssh.exec_command(remote_command)
+                  demisto.info("giorno settato")
+                  time.sleep(10)
+                  remote_command = 'systemctl stop ntpd'
+                  stdin, stdout, stderr = ssh.exec_command(remote_command)
+                  demisto.info("service stopped")
+                  time.sleep(10)
+                  error_output = stderr.read().decode('utf-8')
+                  if error_output:
+                      demisto.info("Error executing command: " + error_output)
+                  else:
+                      demisto.info("all good")
+              elif num == str(1):
+                  # Connect to the SSH server
+                  ssh.connect(hostname, port, username, password)
+                  remote_command = 'ntpd -gq'
+                  stdin, stdout, stderr = ssh.exec_command(remote_command)
+                  time.sleep(10)
+                  demisto.info("forced time alignment")
+                  remote_command = 'systemctl start ntpd'
+                  stdin, stdout, stderr = ssh.exec_command(remote_command)
+                  time.sleep(10)
+                  demisto.info("service restarted correctly")
+                  # Check for any errors
+                  error_output = stderr.read().decode('utf-8')
+                  if error_output:
+                      demisto.info("Error executing command: " + error_output)
+                  else:
+                      demisto.info("all good")
+                      # Perform SSH operations here, e.g., execute commands, transfer files, etc.
+          finally:
+              # Close the SSH connection when done
+              ssh.close()
+              return_results("ok")
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
