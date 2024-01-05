@@ -1,0 +1,82 @@
+args:
+- description: blob field in context data - Either this or EntryID has to be filled
+  name: ImageBase64
+  required: true
+commonfields:
+  id: 3d5bcb2d-0bbd-4152-8080-ec8c3d3fec4d
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: qrreader:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: imageExtracted_FromNetwitness_toStrippedBase64
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  from PIL import Image
+  from wand.image import Image
+
+  ''' STANDALONE FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy function:
+
+  # TODO: ADD HERE THE FUNCTIONS TO INTERACT WITH YOUR PRODUCT API
+
+
+  ''' COMMAND FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy command function
+  # TODO: ADD additional command functions that translate XSOAR inputs/outputs
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          # TODO: replace the invoked command function with yours
+          args = demisto.args()
+          base64png = args.get('ImageBase64', '')
+          base64png_stripped = base64png.strip()
+          demisto.executeCommand("setList", {"listName":"image","listData": base64png_stripped})
+          return_results("Image base64 saved in list ready to be passed in file")
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
