@@ -1,0 +1,92 @@
+args:
+- description: blob field in context data - Either this or EntryID has to be filled
+  isArray: true
+  name: ImageBase64
+  required: true
+commonfields:
+  id: 293f4634-7a39-44de-84c4-a86f682e95cd
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: qrreader:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: Attempting_Array_of_imagesExtracted_FromNetwitness_toStrippedBase64
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  from PIL import Image
+
+  ''' STANDALONE FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy function:
+
+  # TODO: ADD HERE THE FUNCTIONS TO INTERACT WITH YOUR PRODUCT API
+
+
+  ''' COMMAND FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy command function
+  # TODO: ADD additional command functions that translate XSOAR inputs/outputs
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          # TODO: replace the invoked command function with yours
+          args = demisto.args()
+          base64png = args.get('ImageBase64', '')
+          #demisto.info("ARGS => " + str(base64png[1]))
+          stringa = "{'id':'image"+str(14)+"'}"
+          demisto.info("listssssss")
+          demisto.executeCommand("core-api-post", {"/lists/delete":stringa})
+          #demisto.executeCommand("demisto-api-post", {"/lists/delete":stringa})
+          demisto.info(stringa)
+          #demisto.info(a)
+          #for i in range(len(base64png)):
+          #    base64png_stripped = base64png[i].strip()
+          #    demisto.executeCommand("createList", {"listName":"image"+str(i),"listData": base64png_stripped})
+          #    return_results("in for cycling")
+  #        return_results("Image base64 saved in list ready to be passed in file")
+          return_results("ok")
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
