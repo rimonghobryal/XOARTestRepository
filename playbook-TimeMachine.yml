@@ -1,0 +1,190 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: a2e51a77-1f88-4e89-8d8e-c5f9b7d223a3
+inputs: []
+name: TimeMachine
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 9aab8db8-2bba-456f-8b0f-47c8e01304c6
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 9aab8db8-2bba-456f-8b0f-47c8e01304c6
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      phase:
+        simple: "0"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7321d48d-0d2c-494a-894a-4e61c3756a84
+      iscommand: false
+      name: phase 0
+      script: dada5725-eb08-4281-8251-88f16b7ff152
+      type: regular
+      version: -1
+    taskid: 7321d48d-0d2c-494a-894a-4e61c3756a84
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 230
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 413e4321-b2c2-4fe9-83c8-806ae3faa77f
+      iscommand: false
+      name: done
+      type: title
+      version: -1
+    taskid: 413e4321-b2c2-4fe9-83c8-806ae3faa77f
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 750
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ip:
+        simple: 8.8.8.8
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check IP reputation (when information is available, returns a JSON
+        with details). Uses all configured Threat Intelligence feeds.
+      id: 9c192c8a-a84a-44fa-87b5-213bf623a5af
+      iscommand: true
+      name: ip
+      script: '|||ip'
+      type: regular
+      version: -1
+    taskid: 9c192c8a-a84a-44fa-87b5-213bf623a5af
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 400
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      phase:
+        simple: "1"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 9e6608d0-9b58-49b3-8974-455ba2ae27bf
+      iscommand: false
+      name: phase 1
+      script: dada5725-eb08-4281-8251-88f16b7ff152
+      type: regular
+      version: -1
+    taskid: 9e6608d0-9b58-49b3-8974-455ba2ae27bf
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 585
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 765,
+        "width": 380,
+        "x": 450,
+        "y": 50
+      }
+    }
+  }
