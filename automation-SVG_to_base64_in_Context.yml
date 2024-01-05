@@ -1,0 +1,103 @@
+args:
+- description: the file EntryID that we need to check (QR - not QR) - - Either this
+    or ImageBase64 has to be filled
+  name: EntryID
+- auto: PREDEFINED
+  defaultValue: "0"
+  description: Is SVG File (1 == è SVG 0 == non SVG)
+  name: isSVG
+  predefined:
+  - "0"
+  - "1"
+commonfields:
+  id: 2dac4e90-daaa-440a-82e5-b5bcaac96727
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: dev/qrreader:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SVG_to_base64_in_Context
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  from PIL import Image
+  from wand.image import Image
+
+  ''' STANDALONE FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy function:
+  # TODO: ADD HERE THE FUNCTIONS TO INTERACT WITH YOUR PRODUCT API
+
+
+  ''' COMMAND FUNCTION '''
+
+
+  # TODO: REMOVE the following dummy command function
+  # TODO: ADD additional command functions that translate XSOAR inputs/outputs
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          performed = 0
+          args = demisto.args()
+          entryid = args.get('EntryID', '')
+          svg_png_dest = args.get('isSVG', '')
+          demisto.info(svg_png_dest)
+          if svg_png_dest == str(1) and entryid:
+              demisto.info(svg_png_dest)
+              file_path = execute_command('getFilePath', {'id': entryid})['path']
+              with open(file_path, 'rb') as f:
+                  svg_data = f.read()
+              #    Image(blob=f.encode(), format='svg', width=200, height=200, background='white') as img:
+              #        png_data = img.make_blob(format='png')
+                  img = Image(blob=svg_data, format='svg')
+                  png_data = img.make_blob(format='png')
+                  mm = b64_encode(png_data)
+                  #demisto.info(base64.b64encode(img))
+                  if mm:
+                      performed = 1
+                      #demisto.executeCommand("setList", {"listName":"image","listData": mm})
+                      demisto.setContext("b64", mm)
+                      return_results("okka")
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
