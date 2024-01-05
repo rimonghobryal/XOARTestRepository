@@ -1,0 +1,597 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: a350e9b5-42b7-4c2a-825c-d3fda8fa7a94
+inputs: []
+name: test_netwitness_packet_contains_image
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 827f97e1-fb09-4968-8ec6-763c414014e9
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 827f97e1-fb09-4968-8ec6-763c414014e9
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 65
+        }
+      }
+  "1":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.rawType
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "3"
+      "yes":
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4db9d2b6-7c9a-4fa9-8579-d8c3e882a8c0
+      iscommand: false
+      name: Is netwitness incident
+      type: condition
+      version: -1
+    taskid: 4db9d2b6-7c9a-4fa9-8579-d8c3e882a8c0
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 50
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e26b1d88-dea1-4a58-8b33-e72939046cbf
+      iscommand: false
+      name: Netwitness Packet
+      type: title
+      version: -1
+    taskid: e26b1d88-dea1-4a58-8b33-e72939046cbf
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 240
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f82940c3-c619-4ec0-8453-0c9aaff808f4
+      iscommand: false
+      name: Don't care
+      type: regular
+      version: -1
+    taskid: f82940c3-c619-4ec0-8453-0c9aaff808f4
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 225
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      id:
+        simple: ${incident.rsaid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSANetWitnessv115
+      description: Gets data from a remote incident. This method does not update the
+        current incident, and should be used for debugging purposes only.
+      id: 1c645785-6d2d-4b47-849a-c868090cfe03
+      iscommand: true
+      name: get-remote-data
+      script: RSANetWitnessv115|||get-remote-data
+      type: regular
+      version: -1
+    taskid: 1c645785-6d2d-4b47-849a-c868090cfe03
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 50
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      id:
+        simple: ${incident.rsaid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSANetWitnessv115
+      description: Retrieves a single incident by ID or multiple incidents by the
+        date and time they were created using the start time ('since') or end time
+        ('until'). You can limit the results using the limit argument or the page
+        size argument. If no arguments are entered the last 50 results are returned.
+      id: 95dae613-ef2b-40e6-8cf3-911864ea603a
+      iscommand: true
+      name: Get Incident fields
+      script: RSANetWitnessv115|||rsa-nw-list-incidents
+      type: regular
+      version: -1
+    taskid: 95dae613-ef2b-40e6-8cf3-911864ea603a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 400
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      id:
+        simple: ${incident.rsaid}
+      limit:
+        simple: "200"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Retrieves all the alerts that are associated with an incident based
+        on the incident ID. you can limit the results using the limit argument or
+        the page size argument.
+      id: 97074ea0-e4ef-49c6-8ae2-b0eb34767120
+      iscommand: true
+      name: list-alerts
+      script: '|||rsa-nw-incident-list-alerts'
+      type: regular
+      version: -1
+    taskid: 97074ea0-e4ef-49c6-8ae2-b0eb34767120
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 200
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      sessions:
+        simple: "16776"
+      using:
+        simple: Packet Decoder
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs
+      description: Stream packets back based on the input parameters provided
+      id: 431d4e09-a2fd-438b-8020-8257aacb8224
+      iscommand: true
+      name: pacchetti di sessione che non so cosa siano
+      script: RSA NetWitness Packets and Logs|||netwitness-packets
+      type: regular
+      version: -1
+    taskid: 431d4e09-a2fd-438b-8020-8257aacb8224
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 650
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      concentratorPort:
+        simple: "50105"
+      renderType:
+        simple: files
+      session:
+        simple: "5047"
+      useSSL:
+        simple: "true"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs_copy
+      description: Returns the packet content for a session
+      id: 3572e971-9462-417d-811e-4961a8a4b601
+      iscommand: true
+      name: Correct Extract File from Incident (modified integration)
+      script: RSA NetWitness Packets and Logs_copy|||nw-sdk-content
+      type: regular
+      version: -1
+    taskid: 3572e971-9462-417d-811e-4961a8a4b601
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 520
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      session:
+        simple: "6297"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs_DownloadJSONdata
+      description: download json data if filetype is image/png (need to add other
+        extensions)
+      id: 7b1f8a3a-dac3-405f-8e34-e28ae1e41053
+      iscommand: true
+      name: Extract PNG blobs (base64 encoded still)
+      script: RSA NetWitness Packets and Logs_DownloadJSONdata|||nw-sdk-downloadjson-image
+      type: regular
+      version: -1
+    taskid: 7b1f8a3a-dac3-405f-8e34-e28ae1e41053
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 360
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      ImageBase64:
+        simple: ${Image.[4].blob}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      id: fb560d5c-98ff-4e73-8522-e37cee5903ca
+      iscommand: false
+      name: Base64image_to_list
+      script: 3d5bcb2d-0bbd-4152-8080-ec8c3d3fec4d
+      type: regular
+      version: -1
+    taskid: fb560d5c-98ff-4e73-8522-e37cee5903ca
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 520
+        }
+      }
+  "12":
+    continueonerrortype: ""
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      EntryID:
+        simple: 548@445
+      isSVG:
+        simple: 560@445
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 41d4387e-75bf-4746-8e57-11477138c789
+      iscommand: false
+      name: From EntryID to QR (if present)
+      script: 684361db-d22e-435e-8bcf-e601adeba0cf
+      type: regular
+      version: -1
+    taskid: 41d4387e-75bf-4746-8e57-11477138c789
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1440
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      listname:
+        simple: image
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Converts Base64 file in a list to a binary file and upload to warroom
+      id: 879b4db5-57d5-4eb7-8311-6bbe4f847c33
+      iscommand: false
+      name: From list to imagefile (EntryID Definition)
+      script: Base64ListToFile
+      type: regular
+      version: -1
+    taskid: 879b4db5-57d5-4eb7-8311-6bbe4f847c33
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 650
+        }
+      }
+  "14":
+    continueonerrortype: ""
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ea0a341d-c9de-43db-80cd-36d52c8d7975
+      iscommand: false
+      name: Aggiungi conditional per vedere se file ext is svg o qualcosa che necessita
+      type: regular
+      version: -1
+    taskid: ea0a341d-c9de-43db-80cd-36d52c8d7975
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 810
+        }
+      }
+  "15":
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "16"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      EntryID:
+        simple: 548@445
+      isSVG:
+        simple: "1"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0881b3c4-4339-48b7-8672-6f68df6b417b
+      iscommand: false
+      name: svg to base64 in context
+      script: 2dac4e90-daaa-440a-82e5-b5bcaac96727
+      type: regular
+      version: -1
+    taskid: 0881b3c4-4339-48b7-8672-6f68df6b417b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 960
+        }
+      }
+  "16":
+    continueonerrortype: ""
+    id: "16"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "17"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      listData:
+        simple: ${b64}
+      listName:
+        simple: image
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.list.set
+      id: f0a716fa-f0b8-4be1-89d6-ccf9d78cb92d
+      iscommand: true
+      name: set base64 in list to create file
+      script: Builtin|||setList
+      type: regular
+      version: -1
+    taskid: f0a716fa-f0b8-4be1-89d6-ccf9d78cb92d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1120
+        }
+      }
+  "17":
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      filename:
+        simple: image.png
+      listname:
+        simple: image
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Converts Base64 file in a list to a binary file and upload to warroom
+      id: 0cd06fd3-37b0-42e0-8cb0-fa5cea957db0
+      iscommand: false
+      name: List to file (to analyze the QR in)
+      script: Base64ListToFile
+      type: regular
+      version: -1
+    taskid: 0cd06fd3-37b0-42e0-8cb0-fa5cea957db0
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 1260
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "1_3_#default#": 0.62
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1485,
+        "width": 1670,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
