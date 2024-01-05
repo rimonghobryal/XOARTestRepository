@@ -1,0 +1,112 @@
+args:
+- description: the file EntryID that we need to check (QR - not QR) - - Either this
+    or ImageBase64 has to be filled
+  name: EntryID
+commonfields:
+  id: 684361db-d22e-435e-8bcf-e601adeba0cf
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: qrreader:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: Base64image_to_FilePNG
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  import json
+  from pyzbar.pyzbar import decode
+  from PIL import Image
+
+
+  import base64
+  ''' STANDALONE FUNCTION '''
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+
+          args = demisto.args()
+          entryid = args.get('EntryID', '')
+          if entryid:
+              file_path = execute_command('getFilePath', {'id': entryid})['path']
+
+              decodedQR = decode(Image.open(file_path))
+              if decodedQR:
+                  output = {
+                      'isImageMalicious': {
+                          'isQR': decodedQR[0].data.decode('ascii')
+                      }
+                  }
+                  results = CommandResults(
+                      outputs_key_field='isImageMalicious',
+                      outputs=output,
+                      readable_output=output,
+                      raw_response=output
+                  )
+                  #demisto.setContext('isImageMalicious.isQR', 'not a QR')
+                  return_results(results)
+                  #demisto.setContext('isImageMalicious.isQR', decodedQR[0].data.decode('ascii'))
+                  #return_results('it is a QR!')
+              else:
+                  output = {
+                      'isImageMalicious': {
+                          'isQR': 'not a QR'
+                      }
+                  }
+                  results = CommandResults(
+                      outputs_key_field='isImageMalicious',
+                      outputs=output,
+                      readable_output=output,
+                      raw_response=output
+                      )
+                  #demisto.setContext('isImageMalicious.isQR', 'not a QR')
+                  return_results(results)
+              #return_results('Dont know what happened')
+          #se non funziona qui c'erano le tre righe & ImageBase64 definito negli argomenti del comando
+          """
+          base64png = args.get('ImageBase64', '')
+          base64png_stripped = base64png.strip()
+          demisto.executeCommand("setList", {"listName":"image","listData": base64png_stripped})
+          #return_results("ok")
+          """
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
