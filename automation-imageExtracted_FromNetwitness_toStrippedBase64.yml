@@ -16,7 +16,7 @@ contentitemexportablefields:
     propagationLabels:
     - all
     toServerVersion: ""
-dockerimage: qrreader:latest
+dockerimage: demisto/python3:3.10.13.83255
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -36,8 +36,6 @@ script: |+
 
   from typing import Dict, Any
   import traceback
-  from PIL import Image
-  from wand.image import Image
 
   ''' STANDALONE FUNCTION '''
 
