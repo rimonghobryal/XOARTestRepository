@@ -1,0 +1,28 @@
+{
+	"allRead": true,
+	"allReadWrite": true,
+	"cacheVersn": 0,
+	"data": "iVBORw0KGgoAAAANSUhEUgAAAMYAAADGAQAAAACh4MLwAAABA0lEQVR4nO2WSw7EIAiGSTyAR/Lq\r\nHMkDmDDAb1uncZYTWEga2/JteCPJDxl0yCF/IWTShh6VpdtPSUP0Lb1BXXqDJgtxhen8VA+yEVW4\r\n4TkJvpORmW09SbZ1EEfQJUh42fRPJLnGiQVyN3dCSbfRovYqHJWR9iRkhlBbRNh45ZKG+MCzB6Q8\r\nlRhPyMxkhNNN5jwEanSwyqiSh/gnk9WgLg0aTwfHE6vE3q5ilMXqeGIL1jPsm/a7S6LJHUh4QKs/\r\n0QRiveJxpcWfcIJthkoEzENeeaaaieAifF0BbMwkI3PNVi/MZMSH35yCJQ/xbN9jZo1oOEGX4Dpc\r\n3vM6mGzlkEP+QD45MD/MfJkBHwAAAABJRU5ErkJggg==",
+	"definitionId": "",
+	"description": "",
+	"detached": false,
+	"fromServerVersion": "",
+	"id": "image",
+	"itemVersion": "",
+	"locked": false,
+	"name": "image",
+	"nameLocked": false,
+	"packID": "",
+	"packName": "",
+	"previousAllRead": true,
+	"previousAllReadWrite": true,
+	"propagationLabels": [
+		"all"
+	],
+	"system": false,
+	"tags": null,
+	"toServerVersion": "",
+	"truncated": false,
+	"type": "plain_text",
+	"version": -1
+}
