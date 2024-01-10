@@ -93,6 +93,7 @@ script: |2-
           finally:
               # Close the SSH connection when done
               ssh.close()
+              demisto.executeCommand("closeInvestigation", {})
               return_results("ok")
 
       except Exception as ex:
