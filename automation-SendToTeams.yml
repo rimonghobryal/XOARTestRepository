@@ -1,0 +1,104 @@
+args:
+- name: file
+commonfields:
+  id: f2f49abd-e982-4a44-8234-721332e84af4
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: request/s:latest
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: SendToTeams
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  import requests
+  import base64
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+
+          webhook_url = "https://outlook.office.com/webhookb2/61e95d0a-6839-4440-a3f7-384dcd3851d2@c7b20731-4938-4baa-a635-f0619de487d4/IncomingWebhook/b147a36e844d4c109a7f064bf17fef9e/971b0052-c40b-485a-b756-775f47f8c3e0"
+
+
+          message = {
+              "type": "message",
+              "attachments": [
+                  {
+                      "contentType": "application/vnd.microsoft.card.adaptive",
+                      "content": {
+                          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                          "type": "AdaptiveCard",
+                          "version": "1.2",
+                          "body": [
+              {
+                "type": "TextBlock",
+                "text": "A message from XSOAR"
+              }
+            ],
+          "actions": [
+              {
+                  "type": "Action.OpenUrl",
+                  "title": "Download audio",
+                  "url":  "https://172.16.201.10/entry/download/14%40c69a4ec4-e697-4428-8b68-8f12fc94e40a"
+              }
+          ]
+                      }
+                  }
+              ]
+          }
+
+
+
+
+          response = requests.post(webhook_url, json=message)
+          """
+          if response.status_code == 200:
+              print("Message sent successfully")
+          else:
+              print(f"Failed to send message. Status code: {response.status_code}, Response: {response.text}")
+          """
+
+          # TODO: replace the invoked command function with yours
+          return_results("Message Sent Successfully")
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
