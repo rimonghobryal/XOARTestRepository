@@ -1,3 +1,6 @@
+args:
+- name: IoC
+  required: true
 commonfields:
   id: c39dac8d-c7e3-4476-8dbc-5866011480f7
   version: -1
@@ -39,15 +42,24 @@ script: |+
 
   def main():
       try:
-          text = "hello world"
-          language = "en"
+          text="è appena scattato il seguente incidente, Catastrofe informatica. Valori di ai-o-si. \n"
+          args=demisto.args()
+          ioc=args.get('IoC','')
+          for x in ioc:
+              text=text+str(x)+" "+str(ioc[x])+" \n"
+
+          text=text+"Siete invitati ad effettuare i dovuti controlli. \nSaluti,\nIl vostro amato so-ar."
+
+          language = "it"
           # Generate gTTS object
           tts = gTTS(text=text, lang=language, slow=False)
           # Save audio to an in-memory file (BytesIO)
           audio_file = io.BytesIO()
           tts.write_to_fp(audio_file)
           audio_data = audio_file.getvalue()
-          return_results(fileResult("test.mp3", audio_data))
+          #return_results(fileResult("test.mp3", audio_data))
+          result=fileResult("test.mp3", audio_data)
+          return_results(result)
       except Exception as ex:
           demisto.error(traceback.format_exc())  # print the traceback
           return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
