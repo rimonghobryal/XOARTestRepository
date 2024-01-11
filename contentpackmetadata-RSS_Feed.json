@@ -1,0 +1,142 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"indicatorfield",
+		"playbook"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": [
+			{
+				"description": "",
+				"name": "RSS Feed Raw Content",
+				"type": "longText"
+			}
+		],
+		"integration": [
+			{
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [
+					{
+						"description": "Gets the reports from the RSS feed.",
+						"name": "rss-get-indicators"
+					}
+				],
+				"description": "RSS Feed reader can ingest new items as report indicators.",
+				"id": "RSS Feed",
+				"name": "RSS Feed"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": [
+			{
+				"description": "Extract and enrich indicators",
+				"name": "Extract and Create Relationships"
+			},
+			{
+				"description": "The playbook:\n1. Extracts indicators from Threat intel reports.\n2. Creates relationships between the extracted indicators and the report.\n3. Runs enrich indicators command on the extracted indicators. \n\nCortex XSOAR recommends that you configure a job to execute this playbook. \n\n1. Configure a job that will run the *RSS Create Indicators From Report* playbook. \n      1. Select the *Triggered by delta in feed* option.\n      2. Select the feed on which to run the job.\n   \n\n2. Configure input to the *RSS Create Indicators From Report* playbook:\n   \n    - From the context data input: Tag name - the indicator will be tagged with this value when the playbook finishes processing and all the indicators are extracted and relationships created.\n   \n    - From the indicators: Create a query to include only new report indicators that were not processed yet. Recommended query: \"type:Report -tags:{Tag name configured from the context data input} -tags:in_process\". \n   The playbook tags all indicators with the \"in_process\" tag when it starts running, and removes the tag when the playbook ends.\n   If you want the playbook to run on a specific instance (a specific feed), add the following filter to the query: *sourceInstances:\"{the selected instance}\"*.\n\nNote that if you selected the *Triggered by delta in feed* option when configuring the Job, the “Run only on new and modified indicators” playbook option is automatically selected.\n",
+				"name": "RSS Create Indicators From Report"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.8",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.33",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.12.23",
+			"name": "Common Scripts"
+		},
+		"CommonTypes": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.3.87",
+			"name": "Common Types"
+		}
+	},
+	"deprecated": false,
+	"description": "RSS Feed reader, imports new articles as Report indicator.  All rss fields (e.g. author, published, tags) are available.",
+	"disabledMonthly": false,
+	"downloads": 758,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.2.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "FeedRSS",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/FeedRSS/RSSFeed_image.png",
+			"name": "RSS Feed"
+		}
+	],
+	"itemVersion": "1.0.8",
+	"keywords": [],
+	"legacy": true,
+	"name": "RSS Feed",
+	"packID": "FeedRSS",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "RSS (Really Simple Syndication) is a web feed that allows users and applications to access updates to websites in a standardized, computer-readable format.\nThe RSS feed keeps you up to date with new articles the site publishes.\n\nThe Feed RSS pack contains the **RSS integration** that creates a report indicator for each new article the configured RSS publishes. \nThe **RSS Create Indicators From Report** playbook enables extracting and creating indicators from the article content and creating relationships between them. \n\n \n\n\n",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.2.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"TIM",
+		"Generic Feed",
+		"Threat Intelligence Management",
+		"Getting Started"
+	],
+	"toServerVersion": "",
+	"updated": "2023-09-14T09:47:31Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6319909",
+	"videos": []
+}
