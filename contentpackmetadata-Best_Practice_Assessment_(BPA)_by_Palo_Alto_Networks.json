@@ -1,0 +1,164 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"incidenttype",
+		"playbook",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "Panorama Best Practice Assessment",
+				"playbook": "Comprehensive PAN-OS Best Practice Assessment",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Gets the documentation of all BPA checks.",
+						"name": "pan-os-get-documentation"
+					},
+					{
+						"description": "Submits a job to the BPA job queue. PAN-OS devices with large configuration files may take a few minutes for the job to be submitted.",
+						"name": "pan-os-bpa-submit-job"
+					},
+					{
+						"description": "Returns the results of the BPA job.",
+						"name": "pan-os-bpa-get-job-results"
+					}
+				],
+				"description": "Palo Alto Networks Best Practice Assessment (BPA) analyzes NGFW and Panorama configurations and compares them to the best practices.",
+				"id": "BPA",
+				"name": "Palo Alto Networks BPA"
+			}
+		],
+		"layoutscontainer": [
+			{
+				"description": "",
+				"name": "Panorama Best Practice Assessment Incident"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "This playbook runs the Palo Alto Best Practice Assessment checks for a PAN-OS instance.",
+				"name": "Run Panorama Best Practice Assessment"
+			},
+			{
+				"description": "Comprehensive version for PAN-OS Best Practice Assessment Report which fetches the BPA report zipped file, unzips it, rasterises the PDF, and visualizes the data in the custom Best Practice Assessment incident layout.\nYou have the option to email the report via the playbook inputs.\n",
+				"name": "Comprehensive PAN-OS Best Practice Assessment"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.2.22",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.33",
+			"name": "Base"
+		},
+		"CommonPlaybooks": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.4.3",
+			"name": "Common Playbooks"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.12.23",
+			"name": "Common Scripts"
+		},
+		"rasterize": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.2.26",
+			"name": "Rasterize"
+		}
+	},
+	"deprecated": false,
+	"description": "Palo Alto Networks Best Practice Assessment (BPA) analyzes NGFW and Panorama configurations and compares them to the best practices.",
+	"disabledMonthly": false,
+	"downloads": 3808,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "BPA",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/BPA/BPA_image.png",
+			"name": "Palo Alto Networks BPA"
+		},
+		{
+			"imagePath": "content/packs/rasterize/Rasterize_image.png",
+			"name": "Rasterize"
+		}
+	],
+	"itemVersion": "1.2.22",
+	"keywords": [],
+	"legacy": true,
+	"name": "Best Practice Assessment (BPA) by Palo Alto Networks",
+	"packID": "BPA",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-09-14T09:39:42Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6319909",
+	"videos": []
+}
