@@ -1,0 +1,446 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.9.0
+    itemVersion: 2.0.19
+    packID: CrowdStrikeFalconSandbox
+    packName: CrowdStrike Falcon Sandbox
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Detonates a File using CrowdStrike Falcon sandbox.
+id: Detonate file - CrowdStrike Falcon Sandbox v2
+inputs:
+- description: The file object of the file to detonate.
+  key: File
+  playbookInputQuery: null
+  required: false
+  value:
+    complex:
+      root: File
+- description: The environment ID where the file should be submitted. To retrieve
+    all available IDs, please execute the crowdstrike-get-environments command.
+  key: EnvironmentID
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "100"
+name: Detonate file - CrowdStrike Falcon Sandbox v2
+outputs:
+- contextPath: File.SHA256
+  description: The SHA256 hash of the file.
+  type: string
+- contextPath: File.Malicious
+  description: The file malicious description.
+  type: unknown
+- contextPath: File.Type
+  description: The file type, for example "PE".
+  type: string
+- contextPath: File.Size
+  description: The file size.
+  type: number
+- contextPath: File.MD5
+  description: The MD5 hash of the file.
+  type: string
+- contextPath: File.Name
+  description: The file name.
+  type: string
+- contextPath: File.SHA1
+  description: The SHA1 hash of the file.
+  type: string
+- contextPath: File
+  description: The file object.
+  type: unknown
+- contextPath: File.Malicious.Vendor
+  description: The vendor that decided the file was malicious.
+  type: string
+- contextPath: DBotScore
+  description: The DBotScore object.
+  type: unknown
+- contextPath: DBotScore.Indicator
+  description: The tested indicator.
+  type: string
+- contextPath: DBotScore.Type
+  description: The indicator type.
+  type: string
+- contextPath: DBotScore.Vendor
+  description: The vendor used to calculate the score.
+  type: string
+- contextPath: DBotScore.Score
+  description: The actual score.
+  type: number
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 29dcbc1e-0bb0-45f1-82ed-eb65b6ce039d
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 29dcbc1e-0bb0-45f1-82ed-eb65b6ce039d
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 60
+        }
+      }
+  "5":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: brand
+                filters:
+                - - ignorecase: true
+                    left:
+                      iscontext: true
+                      value:
+                        simple: modules.brand
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: CrowdStrike Falcon Sandbox V2
+                - - ignorecase: true
+                    left:
+                      iscontext: true
+                      value:
+                        simple: modules.state
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: active
+                root: modules
+          operator: isExists
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      "yes":
+      - "14"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Verify that there is a valid instance of CrowdStrike enabled.
+      id: 553ea426-6542-4c8f-8799-341b1784d528
+      iscommand: false
+      name: Is CrowdStrike Falcon Sandbox V2 enabled?
+      type: condition
+      version: -1
+    taskid: 553ea426-6542-4c8f-8799-341b1784d528
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Done
+      id: e6a670a6-eff4-4b16-883b-f08e7d7e7bd3
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: e6a670a6-eff4-4b16-883b-f08e7d7e7bd3
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1240
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      JobID:
+        complex:
+          accessor: job_id
+          root: CrowdStrike.Submit
+      file:
+        complex:
+          root: File.SHA256
+      polling:
+        simple: "true"
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Retrieve summary information for an MD5, SHA1, or SHA256 and view
+        all reports generated for any environment ID.
+      id: 97fec2dc-7fc7-49c6-80e4-e8a96e9adc4a
+      iscommand: true
+      name: Initiate sandbox scan
+      script: '|||cs-falcon-sandbox-scan'
+      type: regular
+      version: -1
+    taskid: 97fec2dc-7fc7-49c6-80e4-e8a96e9adc4a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 1065
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "15"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: File
+      value:
+        complex:
+          root: inputs.File
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Sets the file object into context.
+      id: 8377ba6f-c57d-4cd1-8a1f-5989f89978ac
+      iscommand: false
+      name: Set file to context
+      script: Set
+      type: regular
+      version: -1
+    taskid: 8377ba6f-c57d-4cd1-8a1f-5989f89978ac
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 290,
+          "y": 570
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      entryId:
+        complex:
+          root: File.EntryID
+      environmentID:
+        complex:
+          root: inputs.EnvironmentID
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Submits a file from the investigation to the analysis server.
+      id: 772fa274-bfa4-4feb-8d0f-41591b65fb01
+      iscommand: true
+      name: Upload the sample to Falcon
+      script: '|||cs-falcon-sandbox-submit-sample'
+      type: regular
+      version: -1
+    taskid: 772fa274-bfa4-4feb-8d0f-41591b65fb01
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 900
+        }
+      }
+  "14":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.File
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      "yes":
+      - "11"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Asserts there's a file to detonate.
+      id: a15cdef0-f6bd-48e3-8198-3f7c20e668fe
+      iscommand: false
+      name: Is there a file to detonate?
+      type: condition
+      version: -1
+    taskid: a15cdef0-f6bd-48e3-8198-3f7c20e668fe
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 290,
+          "y": 380
+        }
+      }
+  "15":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                filters:
+                - - ignorecase: true
+                    left:
+                      iscontext: true
+                      value:
+                        simple: File.Type
+                    operator: match
+                    right:
+                      value:
+                        simple: .*(?:PE32|EXE|DLL|JAR|JS|PDF|DOC|DOCX|RTF|XLS|PPT|PPTX|XML|ZIP|VBN|SEP|XZ|GZ|BZ2|TAR|MHTML|SWF|LNK|URL|MSI|JTD|JTT|JTDC|JTTC|HWP|HWT|HWPX|BAT|HTA|PS1|VBS|WSF|JSE|VBE|CHM)\b
+                  - ignorecase: true
+                    left:
+                      iscontext: true
+                      value:
+                        simple: File.Info
+                    operator: match
+                    right:
+                      value:
+                        simple: .*(?:PE32|EXE|DLL|JAR|JS|PDF|DOC|DOCX|RTF|XLS|PPT|PPTX|XML|ZIP|VBN|SEP|XZ|GZ|BZ2|TAR|MHTML|SWF|LNK|URL|MSI|JTD|JTT|JTDC|JTTC|HWP|HWT|HWPX|BAT|HTA|PS1|VBS|WSF|JSE|VBE|CHM)\b
+                  - ignorecase: true
+                    left:
+                      iscontext: true
+                      value:
+                        simple: File.Extension
+                    operator: match
+                    right:
+                      value:
+                        simple: .*(?:PE32|EXE|DLL|JAR|JS|PDF|DOC|DOCX|RTF|XLS|PPT|PPTX|XML|ZIP|VBN|SEP|XZ|GZ|BZ2|TAR|MHTML|SWF|LNK|URL|MSI|JTD|JTT|JTDC|JTTC|HWP|HWT|HWPX|BAT|HTA|PS1|VBS|WSF|JSE|VBE|CHM)\b
+                root: File
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "15"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      "yes":
+      - "13"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Asserts the file type is supported.
+      id: a0565f2c-c720-4196-84d2-21e057c23637
+      iscommand: false
+      name: Is the file type supported?
+      type: condition
+      version: -1
+    taskid: a0565f2c-c720-4196-84d2-21e057c23637
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 290,
+          "y": 730
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "14_6_#default#": 0.13,
+      "15_6_#default#": 0.25,
+      "5_6_#default#": 0.12
+    },
+    "paper": {
+      "dimensions": {
+        "height": 1245,
+        "width": 820,
+        "x": 50,
+        "y": 60
+      }
+    }
+  }
