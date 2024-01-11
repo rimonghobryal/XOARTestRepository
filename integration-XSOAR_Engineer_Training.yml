@@ -1,0 +1,506 @@
+category: Utilities
+commonfields:
+  id: XSOAR Engineer Training
+  version: -1
+configuration:
+- display: Fetch incidents
+  name: isFetch
+  required: false
+  type: 8
+- display: Incident type
+  name: incidentType
+  required: false
+  type: 13
+- defaultvalue: "5"
+  display: Incidents Fetch Interval
+  name: incidentFetchInterval
+  required: false
+  type: 19
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.9.0
+    itemVersion: 1.0.1
+    packID: XSOAR_Engineer_Training
+    packName: XSOAR Engineer Training
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: |-
+  The XSOAR Engineer Training (XET) integration provides sample data to fetch events into Cortex XSOAR, and commands to build playbooks around.
+
+  Use for training purposes only.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: Mike Beauchamp
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/xsoar-engineer-training)
+display: XSOAR Engineer Training (Community Contribution)
+image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAyCAYAAACXpx/YAAAACXBIWXMAAAsSAAALEgHS3X78AAAD6klEQVR4nO2cS24bMQyGyaL75AbJCeo5QIH6BnVPkOkN3BPER8gN4tzA3XQbB+gBHHTbRbzq1kH3ZaGA4ygUNaPxxBOA4AcIqPWgHv9QosZOkYjAscs719Y2LrBxXGDjuMDGcYGN4wIbxwU2jgtsHBfYOC6wcVxg47jAxnGBjeMCG+f9W04PEacAENIDES2TCs7wNR77+2BEPAeABQBcRNl3RDRNKjuDGdWDEbEGgCsAOEkKnaPQW2BErHhbPY2ydwCwJqJN0uCluNdJQf/+Q79VUiAgonWS+WyjEuMvIRwjDwPs7OL14eMpJrGfm2+YGyLOAeAPAPwloh9Jb1HlogQAQaAwAGpJD5otfiC0dksuW/LnYH+u2SiwpaVg91SxsVbqdqXFQDtr0bYW5cFJKlEniLsR9eZc9hsA/gHAL22d9ja0TKWT4olkbMgHYxNPhs9kWZ4Ic4DAT7YUG28ucMm8owd/7xBR2UdOH7R1alLJFh06+STybnhyQbhz3kJmAHCmbDG1yH8MdbXtKGICACsWs4tvvDDNw1ixdzR9TsJ2KLbsJY8/5jL6951Snt3ymS3bzZHMl4gWHHQ2Aed+3ogoA9EbIqqjtj8z/SSdZBMvVvwEPQnaUn+m5MmnUPME+SQ3aarUlR5cUifpU2nTq77iwYmH9jj+5BrJneFg210ePBOf6zbPI6JVkpl64VVSI8+swHM0kgBGqfPanLPXSTrv+MEzOWCbcFa8Y94rOhTTK4pui0xbeLFtE9EuXzWhM1oODwwixjYrcQ175G3v2JyJbb7hrmPrbpjyUSOPs2nPNXtBL4FDyD6ksyMxaTE7eIFGRIthTnjHqw8dRte7aLkw86RGN9u4BgcVpWTv1RH37CVbkf+d44USG69BeBuHSuoMFDveEVxw+UF0CbxkL2i4DOcMX77jAZ6GQSCidtbJbb3PYEu21jkvYsViN3wecnaNBSLOhLhhvb+Idb8+WGQt8hIRnryQxxH1Wl7EC9vLC70WRa8y48lG0XxN2rX1lUuvEEUfcg+uxHj3LzuUMuIgNxlHW2otFCLJztSUaS9fdOyEMFLgdY8XHdPSRWtLYwusjDN5GBXnKJpLn2tS4+VLRFxxhzMlUt3yZHNRdmh3G30ObW8RsYkwm3M5bLFXHdeKHZ+58ed4rBt+zxtfxxYF23VsUztqNPqc77LuQuQtZbzA6w7iWAtHZF0aOI72dWFHIOFfFx6J0X7RwV75VQQPjhWB4Vnkit9lOyPwpn/h7z/ZOT7+XzgYx39VaRwX2DgusHFcYOO4wMZxgY3jAhvHBTaOC2wcF9g4LrBxXGDjuMDGcYEtAwD/AbjPSozwVJX9AAAAAElFTkSuQmCC
+name: XSOAR Engineer Training
+script:
+  commands:
+  - arguments: []
+    description: Fetches events from the XSOAR Engineer Training (XET) integration.
+    name: xet-get-events
+  - arguments:
+    - description: The Distinguished Name of the user in which to return information.
+      name: dn
+    - description: Queries users by the samAccountName attribute.
+      name: username
+    - default: true
+      description: Queries by the user's email address.
+      name: email
+    description: Retrieves detailed information about a user account. The user can
+      be specified by username, email address, or as an Active Directory Distinguished
+      Name (DN).
+    name: xet-ad-get-user
+    outputs:
+    - contextPath: ActiveDirectory.Users.dn
+      description: The Distinguished Name of the user.
+    - contextPath: ActiveDirectory.Users.displayName
+      description: The display name of the user.
+    - contextPath: ActiveDirectory.Users.name
+      description: The common name of the user.
+    - contextPath: ActiveDirectory.Users.sAMAccountName
+      description: The sAMAccountName of the user.
+    - contextPath: ActiveDirectory.Users.userAccountControl
+      description: The account control flag of the user.
+    - contextPath: ActiveDirectory.Users.mail
+      description: The email address of the user.
+    - contextPath: ActiveDirectory.Users.manager
+      description: The manager of the user.
+    - contextPath: ActiveDirectory.Users.memberOf
+      description: Groups for which the user is a member.
+    - contextPath: Account.DisplayName
+      description: The display name of the user.
+    - contextPath: Account.Groups
+      description: Groups for which the user is a member.
+    - contextPath: Account.Manager
+      description: The manager of the user.
+    - contextPath: Account.ID
+      description: The Distinguished Name of the user.
+    - contextPath: Account.Username
+      description: The samAccountName of the user.
+    - contextPath: Account.Email
+      description: The email address of the user.
+  - arguments:
+    - description: The username (samAccountName) of the user to modify.
+      name: username
+      required: true
+    description: Expires the password of an Active Directory user.
+    name: xet-ad-expire-password
+  - arguments:
+    - description: The username of the account to disable (sAMAccountName).
+      name: username
+      required: true
+    - description: The password to set for the user.
+      name: password
+      required: true
+    description: Sets a new password for an Active Directory user.
+    name: xet-ad-set-new-password
+  - arguments:
+    - description: The query to execute against the SIEM.
+      name: query
+      required: true
+    - auto: PREDEFINED
+      description: Type of result to return for this SIEM integration.
+      name: result_type
+      predefined:
+      - email
+      - hosts
+    description: Searches the simulated SIEM for events.
+    name: xet-siem-search
+    outputs:
+    - contextPath: SIEM.Result
+      description: The results of the SIEM search. The results are a JSON array, in
+        which each item is a SIEM event.
+  - arguments:
+    - description: Who to send the fake email to.
+      name: to
+      required: true
+    - description: The body of the fake email that we are not actually sending.
+      name: body
+      required: true
+    description: Send an email. (Doesn't actually send an email.)
+    name: xet-send-mail
+  dockerimage: demisto/python3:3.10.13.75921
+  isfetch: true
+  runonce: false
+  script: |
+    register_module_line('XSOAR Engineer Training', 'start', __line__())
+    ### pack version: 1.0.1
+
+
+
+
+    from datetime import datetime, timedelta
+    from random import randrange, choice, randint
+    from copy import deepcopy
+    import json
+
+
+    ''' SAMPLE EVENTS '''
+
+    SAMPLE_EVENT = {
+        "type": "url allowed",
+        "eventID": "007",
+        "urlCategory": "MALWARE",
+        "sourceIP": "10.8.8.8",
+                    "occurred": "2023-01-01T00:00:01.000Z",
+                    "sourceUser": "james.bond@xsoar.local",
+                    "url": "https://xsoar.pan.dev/login.zip",
+                    "userAgent": "Mozilla/5.0(WindowsNT6.1;WOW64;rv:27.0)Gecko/20100101Firefox/27.0"
+    }
+
+    TYPES = ["url allowed", "url blocked"]
+    CATEGORIES = ["PHISH", "MALWARE", "SPAM"]
+
+    DATE_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+    ''' ACTIVE DIRECTORY QUERY V2 INTEGRATION '''
+
+    USERS = [
+        {
+            "email": "james.bond@xsoar.local",
+            "displayname": "James Bond",
+            "samaccountname": "XSOAR007",
+            "dn": "CN=James Bond,CN=Users,DC=xsoar,DC=local",
+            "group": "CN=Agents,CN=Users,DC=xsoar,DC=local",
+            "manager": "CN=M,CN=Users,DC=xsoar,DC=local"
+        },
+        {
+            "email": "eve.moneypenny@xsoar.local",
+            "displayname": "Eve Moneypenny",
+            "samaccountname": "XSOAR002",
+            "dn": "CN=Eve Moneypenny,CN=Users,DC=xsoar,DC=local",
+            "group": "CN=Administration,CN=Users,DC=xsoar,DC=local",
+            "manager": "CN=M,CN=Users,DC=xsoar,DC=local"
+        },
+        {
+            "email": "m@xsoar.local",
+            "displayname": "M",
+            "samaccountname": "XSOAR001",
+            "dn": "CN=M,CN=Users,DC=xsoar,DC=local",
+            "group": "CN=Managers,CN=Users,DC=xsoar,DC=local",
+            "manager": "CN=James Bond,CN=Users,DC=xsoar,DC=local"
+        },
+        {
+            "email": "q@xsoar.local",
+            "displayname": "Q",
+            "samaccountname": "XSOAR003",
+            "dn": "CN=Q,CN=Users,DC=xsoar,DC=local",
+            "group": "CN=Gadgets,CN=Users,DC=xsoar,DC=local",
+            "manager": "CN=James Bond,CN=Users,DC=xsoar,DC=local"
+        }
+    ]
+
+
+    """ Helper functions """
+
+
+    def get_now():
+        """
+        A wrapper function of datetime.now
+        helps handle tests
+
+        Returns:
+            datetime: time right now
+        """
+        return datetime.now()
+
+
+    def mock_data(total):
+        """
+        Changes mocks the data to randomize the alerts a bit.
+        """
+        now = get_now()
+        data = []
+        count = 0
+
+        users = [x['email'] for x in USERS]
+        while count < total:
+            item = deepcopy(SAMPLE_EVENT)
+            item['occurred'] = (now - timedelta(minutes=randrange(6, 60))).strftime('%Y-%m-%dT%H:%M:%SZ')
+            item['eventID'] = str(randrange(100, 10000))
+            item['type'] = choice(TYPES)
+            if item['type'] == 'url blocked':
+                item['urlCategory'] = choice(CATEGORIES)
+            else:
+                item['urlCategory'] = choice(CATEGORIES)
+            item['sourceUser'] = choice(users)
+            item['sourceIP'] = f"10.8.8.{randrange(2,250)}"
+
+            if item["urlCategory"] == "MALWARE":
+                item["url"] = f"https://xsoar.pan.dev/{randrange(1,88)}/download.zip"
+            if item["urlCategory"] == "PHISH":
+                item["url"] = f"https://xsoar.pan.dev/{randrange(1,88)}/login.php"
+            if item["urlCategory"] == "SPAM":
+                item["url"] = f"https://xsoar.pan.dev/{randrange(1,88)}/getnewbike"
+
+            data.append(item)
+            count += 1
+        return data
+
+
+    def lookup_ad_user(lookup, attribute):
+        """
+        Returns the user details from the USERS global var
+        """
+        found_user = False
+        for u in USERS:
+            if u[attribute] == lookup:
+                found_user = True
+                user: Dict | None = u
+                break
+
+        if not found_user:
+            user = None
+        return user
+
+
+    def create_ad_user_output(user):
+        """
+        returns the user object for using the USER_TEMPLATE
+        """
+        user_template = {
+            "attributes": {
+                "displayName": [
+                    f"{user['displayname']}"
+                ],
+                "mail": [
+                    f"{user['email']}"
+                ],
+                "manager": [
+                    f"{user['manager']}"
+                ],
+                "memberOf": [
+                    f"{user['group']}"
+                ],
+                "name": [
+                    f"{user['displayname']}"
+                ],
+                "sAMAccountName": [
+                    f"{user['samaccountname']}"
+                ],
+                "userAccountControl": [
+                    512
+                ],
+                "dn": f"{user['dn']}"
+            },
+            "account": {
+                "DisplayName": [
+                    f"{user['displayname']}"
+                ],
+                "Email": [
+                    f"{user['email']}"
+                ],
+                "Manager": [
+                    f"{user['manager']}"
+                ],
+                "Groups": [
+                    f"{user['group']}"
+                ],
+                "Type": "AD",
+                "Username": [
+                    f"{user['samaccountname']}"
+                ],
+                "ID": f"{user['dn']}"
+            }
+        }
+
+        return user_template
+
+
+    """ Command functions """
+
+
+    def get_events_command(args):
+        """
+        returns the events, in this case the mock data
+        """
+        args.get("eventTypes")
+        total = randrange(10, 20)
+        events = mock_data(total)
+        readable = tableToMarkdown("Training Events", events)
+        results = CommandResults(readable_output=readable, ignore_auto_extract=True)
+        return results
+
+
+    def simple_response_command(command):
+        """
+        returns a text response for the Active Directory and send mail Commands
+        """
+        command_map = {
+            'xet-ad-expire-password': 'Expired password successfully',  # guardrails-disable-line
+            'xet-ad-set-new-password': 'User password successfully set',    # guardrails-disable-line
+            'xet-send-mail': 'XSOAR Engineer Training: fake email notification not sent'
+        }
+        return CommandResults(readable_output=command_map[command], ignore_auto_extract=True)
+
+
+    def ad_get_user_command(args):
+        """
+        Returns the user details from our simulated AD if the user is found
+        """
+
+        # error handing if one of username, email or dn is not passed to the command
+        if not args.get('username') and not args.get('email') and not args.get('dn'):
+            return_error("Need either a username, email, or dn")
+
+        # lookup the user
+        if args.get('email'):
+            username = args.get('email')
+            user = lookup_ad_user(username, 'email')
+        if args.get('username'):
+            username = args.get('username')
+            user = lookup_ad_user(username, 'samaccountname')
+        if args.get('dn'):
+            username = args.get('dn')
+            user = lookup_ad_user(username, 'dn')
+
+        # create the user response
+        if user:
+            user_output = create_ad_user_output(user)
+
+            # return results like AD query would.
+            demisto_entry = {
+                'ContentsFormat': formats['json'],
+                'Type': entryTypes['note'],
+                'Contents': user_output,
+                'ReadableContentsFormat': formats['markdown'],
+                'HumanReadable': tableToMarkdown("Active Directory - Get Users", user_output.get('attributes')),
+                'EntryContext': {
+                    'ActiveDirectory.Users(obj.dn == val.dn)': user_output.get('attributes'),
+                    'Account(obj.ID == val.ID)': user_output.get('account')
+                }
+            }
+
+            return demisto_entry
+        else:
+            return "No user found"
+
+
+    def siem_search_command(args):
+        """
+        Returns the results from the siem-search command
+        """
+        query = args.get('query')
+        result_type = args.get('result_type')
+        number = randint(1, 10)
+
+        # return results for demo of siem search in example playbook.
+        if result_type == "email" or query.startswith("email"):
+            result = [
+                {
+                    "Username": "XSOAR007",
+                    "Email": "james.bond@xsoar.local"
+                },
+                {
+                    "Username": "XSOAR001",
+                    "Email": "m@xsoar.local"
+                }
+            ]
+        # return some data if the number is right.
+        elif number >= 7 or result_type == "hosts" or query.startswith("username"):
+            result = [
+                {
+                    "Host": "crossiscoming01",
+                    "Online": "Yes"
+                },
+                {
+                    "Host": "crossiscoming02",
+                    "Online": "No"
+                }
+            ]
+        # return some data if the number is right.
+        elif query.startswith("ip"):
+            result = [
+                {
+                    "Host": "crossiscoming01",
+                    "Online": "Yes"
+                }
+            ]
+        else:
+            result = []
+
+        results = CommandResults(
+            readable_output=tableToMarkdown(f"SIEM Search results for query: {query}", result),
+            outputs_prefix="SIEM.Result",
+            outputs=result)
+
+        return results
+
+
+    def fetch_incidents(limit):
+        """
+        fetch Incidents
+        """
+        incidents = []
+
+        count = randrange(10, limit)
+        events = mock_data(count)
+
+        for event in events:
+            if event.get("type") == "url allowed":
+                event_type = "URL Allowed"
+            else:
+                event_type = "URL Blocked"
+            event_user = event.get("sourceUser", "")
+            incident = {
+                "name": f"Alert - {event_type}- {event_user}",
+                "rawJSON": json.dumps(event),
+                "occurred": event["occurred"]
+            }
+            incidents.append(incident)
+
+        # return our list of Incidents
+        return incidents[:limit]
+
+
+    ''' COMMANDS MANAGER / SWITCH PANEL '''
+
+
+    def main():
+        """
+        main function to run things
+        """
+        fetch_limit = 20
+
+        command = demisto.command()
+        LOG(f'Command being called is {command}')
+
+        try:
+            commands = {
+                'xet-get-events': get_events_command,
+                'xet-ad-expire-password': simple_response_command,
+                'xet-ad-set-new-password': simple_response_command,
+                'xet-send-mail': simple_response_command
+            }
+            if command == 'test-module':
+                demisto.results('ok')
+            elif demisto.command() == 'fetch-incidents':
+                demisto.incidents(fetch_incidents(limit=fetch_limit))
+            elif demisto.command() == 'xet-get-events':
+                return_results(get_events_command(demisto.args()))
+            elif demisto.command() == 'xet-ad-get-user':
+                demisto.results(ad_get_user_command(demisto.args()))
+            elif demisto.command() == 'xet-siem-search':
+                return_results(siem_search_command(demisto.args()))
+            elif command in commands:
+                return_results(commands[command](command))
+
+        except Exception as e:
+            return_error(str(e))
+
+
+    if __name__ in ['__main__', 'builtin', 'builtins']:
+        main()
+
+    register_module_line('XSOAR Engineer Training', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
