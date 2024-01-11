@@ -1,0 +1,149 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "6.0.0",
+	"id": "GitHub Mapper",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "1.1.8",
+	"keyTypeMap": null,
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": {
+		"DevSecOps New Git PR": {
+			"dontMapEventToLabels": true,
+			"internalMapping": {
+				"DevSecOps Commit ID": {
+					"simple": "head.sha"
+				},
+				"DevSecOps Git Pusher Name": {
+					"simple": "user.login"
+				},
+				"DevSecOps Head Commit ID": {
+					"simple": "head.sha"
+				},
+				"DevSecOps PR Assignee": {
+					"simple": "assignee"
+				},
+				"DevSecOps PR Assignees": {
+					"simple": "assignees"
+				},
+				"DevSecOps PR Base Label": {
+					"simple": "base.label"
+				},
+				"DevSecOps PR Base Size": {
+					"simple": "head.repo.size"
+				},
+				"DevSecOps PR Body": {
+					"simple": "body"
+				},
+				"DevSecOps PR Branch": {
+					"simple": "head.ref"
+				},
+				"DevSecOps PR Comments": {
+					"simple": "_links.comments"
+				},
+				"DevSecOps PR Commits": {
+					"simple": "_links.commits"
+				},
+				"DevSecOps PR Created At": {
+					"simple": "created_at"
+				},
+				"DevSecOps PR Head Commit": {
+					"simple": "head.sha"
+				},
+				"DevSecOps PR Head Open Issues": {
+					"simple": "_links.issue"
+				},
+				"DevSecOps PR ID": {
+					"simple": "id"
+				},
+				"DevSecOps PR Number": {
+					"simple": "number"
+				},
+				"DevSecOps PR Pushed At": {
+					"simple": "head.repo.pushed_at"
+				},
+				"DevSecOps PR State": {
+					"simple": "state"
+				},
+				"DevSecOps PR Title": {
+					"simple": "title"
+				},
+				"DevSecOps PR Updated At": {
+					"simple": "updated_at"
+				},
+				"DevSecOps Repository ID": {
+					"simple": "head.repo.id"
+				},
+				"DevSecOps Repository Name": {
+					"simple": "head.repo.name"
+				},
+				"DevSecOps Repository Organization": {
+					"complex": {
+						"accessor": "repo.full_name",
+						"filters": [],
+						"root": "head",
+						"transformers": [
+							{
+								"args": {
+									"to": {
+										"isContext": false,
+										"value": {
+											"simple": "/"
+										}
+									}
+								},
+								"operator": "substringTo"
+							}
+						]
+					}
+				},
+				"DevSecOps Repository URL": {
+					"simple": "base.repo.html_url"
+				},
+				"name": {
+					"complex": {
+						"filters": [],
+						"root": "number",
+						"transformers": [
+							{
+								"args": {
+									"prefix": {
+										"isContext": false,
+										"value": {
+											"simple": "DevSecOps - New PR Opened : "
+										}
+									},
+									"suffix": {
+										"isContext": false
+									}
+								},
+								"operator": "concat"
+							}
+						]
+					}
+				}
+			}
+		}
+	},
+	"name": "GitHub Mapper",
+	"nameRaw": "GitHub Mapper",
+	"packID": "DevSecOps",
+	"packName": "DevSecOps",
+	"packPropagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": true,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "mapping-incoming",
+	"unclassifiedCases": null,
+	"version": -1
+}
