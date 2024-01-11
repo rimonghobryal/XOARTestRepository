@@ -1,0 +1,108 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "6.0.0",
+	"id": "RSA NetWitness v11.5 - incoming mapper",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "3.2.1",
+	"keyTypeMap": null,
+	"locked": false,
+	"logicalVersion": 1,
+	"mapping": {
+		"NetWitness Incident": {
+			"dontMapEventToLabels": true,
+			"internalMapping": {
+				"Assigned User": {
+					"simple": "assignee"
+				},
+				"Description": {
+					"simple": "summary"
+				},
+				"Destination IP": {
+					"simple": "alertMeta.DestinationIp.[]"
+				},
+				"First Seen": {
+					"simple": "firstAlertTime"
+				},
+				"Incident Link": {
+					"simple": "incident_url"
+				},
+				"Last Modified By": {
+					"simple": "lastUpdatedBy"
+				},
+				"Last Modified On": {
+					"simple": "lastUpdated"
+				},
+				"RSA Alert Count": {
+					"simple": "alertCount"
+				},
+				"RSA Alerts": {
+					"simple": "alerts"
+				},
+				"RSA Event Count": {
+					"simple": "eventCount"
+				},
+				"RSA Id": {
+					"simple": "id"
+				},
+				"RSA Rule Id": {
+					"simple": "ruleId"
+				},
+				"Risk Score": {
+					"simple": "riskScore"
+				},
+				"Source Category": {
+					"simple": "categories.[].name"
+				},
+				"Source Created By": {
+					"simple": "createdBy"
+				},
+				"Source IP": {
+					"simple": "alertMeta.SourceIp.[]"
+				},
+				"Source Status": {
+					"simple": "status"
+				},
+				"dbotMirrorDirection": {
+					"simple": "mirror_direction"
+				},
+				"dbotMirrorId": {
+					"simple": "id"
+				},
+				"dbotMirrorInstance": {
+					"simple": "mirror_instance"
+				},
+				"occurred": {
+					"simple": "created"
+				},
+				"severity": {
+					"simple": "priority"
+				}
+			}
+		},
+		"dbot_classification_incident_type_all": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {}
+		}
+	},
+	"name": "RSA NetWitness v11.5 - incoming mapper",
+	"nameRaw": "RSA NetWitness v11.5 - incoming mapper",
+	"packID": "RSANetWitness_v11_1",
+	"packName": "RSA NetWitness",
+	"packPropagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": true,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "mapping-incoming",
+	"unclassifiedCases": null,
+	"version": -1
+}
