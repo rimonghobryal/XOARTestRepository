@@ -1,0 +1,192 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.8
+    packID: DevSecOps
+    packName: DevSecOps
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Prisma Task Analysis Playbook
+id: DevSecOps - Prisma - Analysis -SubPB
+inputs:
+- description: Prisma Cloud Check Run Summary
+  key: Prisma_Cloud_Check_Run_Summary
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: Prisma Cloud Check Run Title
+  key: Prisma_Cloud_Check_Run_Title
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: DevSecOps - Prisma - Analysis -SubPB
+outputs: []
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ae16fec6-8cc4-4ae6-8b07-8ac811e4f0c2
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: ae16fec6-8cc4-4ae6-8b07-8ac811e4f0c2
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      type:
+        simple: IaC Vulnerability
+      value:
+        complex:
+          root: inputs.Prisma_Cloud_Check_Run_Summary
+          transformers:
+          - args:
+              from:
+                value:
+                  simple: '------------ | ------------- | ------------ | -------------'
+            operator: substringFrom
+          - args:
+              to:
+                value:
+                  simple: '|'
+            operator: substringTo
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.new.indicator
+      id: a59a88d8-8e47-483d-8b48-a43f43a904de
+      iscommand: true
+      name: Create IaC Alerts
+      script: Builtin|||createNewIndicator
+      type: regular
+      version: -1
+    taskid: a59a88d8-8e47-483d-8b48-a43f43a904de
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 370
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.close.inv
+      id: 64f0586c-08c6-4f20-80ee-49c3bb594c12
+      iscommand: false
+      name: Playbook End
+      type: title
+      version: -1
+    taskid: 64f0586c-08c6-4f20-80ee-49c3bb594c12
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 545
+        }
+      }
+  "6":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.Prisma_Cloud_Check_Run_Title
+          operator: startWith
+          right:
+            value:
+              simple: Vulnerabilities Found
+      label: "yes"
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "5"
+      "yes":
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 83ec245b-dad6-40aa-8dde-2d6c2143279a
+      iscommand: false
+      name: IaC Vulns Found?
+      type: condition
+      version: -1
+    taskid: 83ec245b-dad6-40aa-8dde-2d6c2143279a
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 195
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 560,
+        "width": 492.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
