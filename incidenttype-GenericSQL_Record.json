@@ -1,0 +1,39 @@
+{
+	"autorun": false,
+	"cacheVersn": 0,
+	"closureScript": "",
+	"color": "#F8E7A5",
+	"days": 0,
+	"daysR": 0,
+	"default": false,
+	"definitionId": "",
+	"detached": false,
+	"disabled": false,
+	"extractSettings": {
+		"fieldCliNameToExtractSettings": {},
+		"mode": "Specific"
+	},
+	"fromServerVersion": "6.5.0",
+	"hours": 0,
+	"hoursR": 0,
+	"id": "GenericSQL Record",
+	"itemVersion": "1.1.5",
+	"layout": "",
+	"locked": false,
+	"name": "GenericSQL Record",
+	"onChangeRepAlg": 0,
+	"packID": "GenericSQL",
+	"packName": "GenericSQL",
+	"packPropagationLabels": [
+		"all"
+	],
+	"preProcessingScript": "",
+	"propagationLabels": [],
+	"readonly": false,
+	"reputationCalc": 0,
+	"system": true,
+	"toServerVersion": "",
+	"version": -1,
+	"weeks": 0,
+	"weeksR": 0
+}
