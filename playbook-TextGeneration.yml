@@ -1,0 +1,126 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 3a036e68-3e27-440b-8f88-0941068416eb
+inputs: []
+name: TextGeneration
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: eb4ced75-82de-43f3-8665-49a6258a44e2
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: eb4ced75-82de-43f3-8665-49a6258a44e2
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      IoC:
+        simple: ${VirusTotal.IP.attributes.last_analysis_stats}
+      TextToConvert:
+        simple: ${mainKey.text}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0fedc9ef-0ee0-4ed6-8ce0-43538de584f0
+      iscommand: false
+      name: Text to Speech
+      script: c39dac8d-c7e3-4476-8dbc-5866011480f7
+      type: regular
+      version: -1
+    taskid: 0fedc9ef-0ee0-4ed6-8ce0-43538de584f0
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 270
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      file:
+        simple: ${File}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d9270bd6-f61b-4e9e-83b1-359cc0986a02
+      iscommand: false
+      name: Send To Teams
+      script: f2f49abd-e982-4a44-8234-721332e84af4
+      type: regular
+      version: -1
+    taskid: d9270bd6-f61b-4e9e-83b1-359cc0986a02
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 450
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 495,
+        "width": 380,
+        "x": 450,
+        "y": 50
+      }
+    }
+  }
