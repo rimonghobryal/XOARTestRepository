@@ -1,0 +1,1090 @@
+{
+	"author": "Ayman Mahmoud",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"IT Services"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration",
+		"incidentfield",
+		"incidenttype",
+		"indicatorfield",
+		"reputation",
+		"playbook",
+		"classifier",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": [
+			{
+				"description": "Github Classifier",
+				"id": "Github_Classifier_v1",
+				"name": "Github Classifier"
+			},
+			{
+				"description": "",
+				"id": "GitHub Mapper",
+				"name": "GitHub Mapper"
+			}
+		],
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Analysis ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Assignees",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Git Issue Details",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Before Commit ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Git Pusher Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Head Commit",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project Status",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Project ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps IaC Vulnerability Severity",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project Config",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Closed At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit Committer",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Created At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Repository URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps CodeQL Alerts",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Action",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps IaC Vulnerability Description",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Mergeable State",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Commits",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project Grade",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Number",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps IaC Vulnerability",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Updated At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Pushed At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Title",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task PR ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Started At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit Message",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task App Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Base Label",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Watchers",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit Commiter",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task PR Number",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Installation ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Body",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Output Title",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Language",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Status",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Analysis Project ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit Modified Files",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Output Summary",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Head Commit",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Repository Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit Tree ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Comments",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit Author",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Changed Files",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Analysis Status",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Deletions",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Repository ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Completed At",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task App ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Head ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Size",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Action",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit Author",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project Language",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Id",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Developer Email",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit TimeStamp",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps IaC Vulnerable Files",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit Message",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Assignee",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR State",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Conclusion",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Analysis ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Base Size",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Git Issue Number",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps App Task Owner Login",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Head Open Issues",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Branch",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Organization Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Head Commit TimeStamp",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Analysis Logs URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Developer Name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit Tree ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps After Commit ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Repository Organization",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Project ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps LGTM Analysis Results URL",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps PR Additions",
+				"type": "shortText"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "DevSecOps New Git PR",
+				"playbook": "DevSecOps - Fetch PR - Triage",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": [
+			{
+				"description": "",
+				"name": "DevSecOps SAST Precision",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps SAST Category",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Message",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Commit ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps SAST Severity",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "DevSecOps Rule ID",
+				"type": "shortText"
+			}
+		],
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Provide a summary of results for the projects in the query job",
+						"name": "lgtm-get-query-job-results-overview"
+					},
+					{
+						"description": "Add a project to LGTM",
+						"name": "lgtm-add-project"
+					},
+					{
+						"description": "Get project by URL identifier",
+						"name": "lgtm-get-project-by-url-identifier"
+					},
+					{
+						"description": "Get configuration for a project identified by numeric identifier",
+						"name": "lgtm-get-project-config"
+					},
+					{
+						"description": "Get project by numeric identifier",
+						"name": "lgtm-get-project"
+					},
+					{
+						"description": "Get results of code review",
+						"name": "lgtm-get-code-review"
+					},
+					{
+						"description": "Run a CodeQL query on one or more projects",
+						"name": "lgtm-create-query-job"
+					},
+					{
+						"description": "Run code review for a patch",
+						"name": "lgtm-request-review"
+					},
+					{
+						"description": "Get detailed alert information",
+						"name": "lgtm-get-alerts"
+					},
+					{
+						"description": "Run analysis of a specific commit",
+						"name": "lgtm-request-analysis"
+					},
+					{
+						"description": "Get the status of a query job",
+						"name": "lgtm-get-query-job"
+					},
+					{
+						"description": "Get analysis summary",
+						"name": "lgtm-get-analysis"
+					},
+					{
+						"description": "Version information",
+						"name": "lgtm-get-version"
+					},
+					{
+						"description": "List projects",
+						"name": "lgtm-get-projects"
+					},
+					{
+						"description": "Get analysis summary for a specific commit",
+						"name": "lgtm-get-analysis-for-commit"
+					},
+					{
+						"description": "Fetch the results of a query job for a specific project",
+						"name": "lgtm-get-query-job-results-for-project"
+					}
+				],
+				"description": "An Integration with LGTM API",
+				"id": "LGTM",
+				"name": "LGTM (Community Contribution)"
+			},
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Approves an access request for the given user.",
+						"name": "gitlab-projects-approve-access"
+					},
+					{
+						"description": "Gets an artifact from a given artifact path, corresponding to a given job ID.",
+						"name": "gitlab-artifact-get"
+					},
+					{
+						"description": "Creates a new branch in the repository.",
+						"name": "gitlab-projects-create-repository-branch"
+					},
+					{
+						"description": "Gets job details.",
+						"name": "gitlab-jobs-list"
+					},
+					{
+						"description": "Retrieves the version information for the GitLab instance, and responds 200 OK for authenticated users.",
+						"name": "gitlab-get-version"
+					},
+					{
+						"description": "Get the list of projects of a given group.",
+						"name": "gitlab-group-projects-list"
+					},
+					{
+						"description": "Create an issue",
+						"name": "gitlab-issue-create"
+					},
+					{
+						"description": "Gets a list of repository branches from a project, sorted by name alphabetically.",
+						"name": "gitlab-projects-get-repository-branches"
+					},
+					{
+						"description": "Requests the authenticated user access to a group or project.",
+						"name": "gitlab-projects-request-access"
+					},
+					{
+						"description": "List all merge requests",
+						"name": "gitlab-merge-requests-list"
+					},
+					{
+						"description": "Gets the details of the pipeline schedules.",
+						"name": "gitlab-pipelines-schedules-list"
+					},
+					{
+						"description": "Denies an access request for the given user.",
+						"name": "gitlab-projects-deny-access"
+					},
+					{
+						"description": "Gets a list of all visible projects across GitLab for the authenticated user. When accessed without authentication, only public projects with simple fields are returned.",
+						"name": "gitlab-get-projects"
+					},
+					{
+						"description": "Gets the details of the pipelines.",
+						"name": "gitlab-pipelines-list"
+					},
+					{
+						"description": "Edit an issue",
+						"name": "gitlab-issue-edit"
+					},
+					{
+						"description": "Deletes all branches that are merged into the project’s default branch.",
+						"name": "gitlab-projects-delete-repository-merged-branches"
+					},
+					{
+						"description": "Gets a list of the access requests viewable by the authenticated user.",
+						"name": "gitlab-projects-get-access-requests"
+					},
+					{
+						"description": "Deletes a branch from the repository.",
+						"name": "gitlab-projects-delete-repository-branch"
+					},
+					{
+						"description": "Trigger a pipeline in gitlab.",
+						"name": "gitlab-trigger-pipeline"
+					},
+					{
+						"description": "Get raw file",
+						"name": "gitlab-raw-file-get"
+					},
+					{
+						"description": "Get a Merge Request",
+						"name": "gitlab-merge-request-get"
+					},
+					{
+						"description": "List all issues",
+						"name": "gitlab-issues-list"
+					}
+				],
+				"description": "Deprecated. Use GitLab v2 in GitLab Pack instead.",
+				"id": "GitLab",
+				"name": "GitLab (Deprecated) (Community Contribution)"
+			},
+			{
+				"category": "IT Services",
+				"commands": [
+					{
+						"description": "Delete unused networks",
+						"name": "docker-network-prune"
+					},
+					{
+						"description": "Create a container",
+						"name": "docker-container-create"
+					},
+					{
+						"description": "Get the unlock key",
+						"name": "docker-swarm-unlockkey"
+					},
+					{
+						"description": "Get system information",
+						"name": "docker-system-info"
+					},
+					{
+						"description": "List volumes",
+						"name": "docker-volume-list"
+					},
+					{
+						"description": "Create a volume",
+						"name": "docker-volume-create"
+					},
+					{
+						"description": "List nodes",
+						"name": "docker-node-list"
+					},
+					{
+						"description": "Get container stats based on resource usage",
+						"name": "docker-container-stats"
+					},
+					{
+						"description": "Initialize a new swarm",
+						"name": "docker-swarm-init"
+					},
+					{
+						"description": "List configs",
+						"name": "docker-config-list"
+					},
+					{
+						"description": "Create a secret",
+						"name": "docker-secret-create"
+					},
+					{
+						"description": "Tag an image so that it becomes part of a repository.",
+						"name": "docker-image-tag"
+					},
+					{
+						"description": "Get changes on a container’s filesystem",
+						"name": "docker-container-changes"
+					},
+					{
+						"description": "Get version",
+						"name": "docker-system-version"
+					},
+					{
+						"description": "Push an image to a registry. If you wish to push an image on to a private registry, that image must already have a tag which references the registry. For example, registry.example.com/myimage:latest. The push is cancelled if the HTTP connection is closed.",
+						"name": "docker-image-push"
+					},
+					{
+						"description": "Delete builder cache",
+						"name": "docker-build-prune"
+					},
+					{
+						"description": "List secrets",
+						"name": "docker-secret-list"
+					},
+					{
+						"description": "Search images",
+						"name": "docker-image-search"
+					},
+					{
+						"description": "List processes running inside a container",
+						"name": "docker-container-top"
+					},
+					{
+						"description": "Inspect a config",
+						"name": "docker-config-inspect"
+					},
+					{
+						"description": "Inspect swarm",
+						"name": "docker-swarm-inspect"
+					},
+					{
+						"description": "Inspect a volume",
+						"name": "docker-volume-inspect"
+					},
+					{
+						"description": "Remove an image, along with any untagged parent images that were referenced by that image. Images can't be removed if they have descendant images, are being used by a running container or are being used by a build.",
+						"name": "docker-image-delete"
+					},
+					{
+						"description": "Inspect a node",
+						"name": "docker-node-inspect"
+					},
+					{
+						"description": "List containers",
+						"name": "docker-container-list"
+					},
+					{
+						"description": "Unlock a locked manager",
+						"name": "docker-swarm-unlock"
+					},
+					{
+						"description": "Create a config",
+						"name": "docker-config-create"
+					},
+					{
+						"description": "Join an existing swarm",
+						"name": "docker-swarm-join"
+					},
+					{
+						"description": "Leave a swarm",
+						"name": "docker-swarm-leave"
+					},
+					{
+						"description": "List Images",
+						"name": "docker-image-list"
+					},
+					{
+						"description": "Remove a container",
+						"name": "docker-container-delete"
+					},
+					{
+						"description": "List networks",
+						"name": "docker-network-list"
+					},
+					{
+						"description": "Inspect a secret",
+						"name": "docker-secret-inspect"
+					},
+					{
+						"description": "Inspect an image",
+						"name": "docker-image-inspect"
+					},
+					{
+						"description": "Get data usage information",
+						"name": "docker-system-data-usage"
+					},
+					{
+						"description": "Delete unused images",
+						"name": "docker-image-prune"
+					},
+					{
+						"description": "Delete unused volumes",
+						"name": "docker-volume-prune"
+					},
+					{
+						"description": "Inspect a container",
+						"name": "docker-container-inspect"
+					},
+					{
+						"description": "Create an image by either pulling it from a registry or importing it.",
+						"name": "docker-image-create"
+					},
+					{
+						"description": "Create a network",
+						"name": "docker-network-create"
+					},
+					{
+						"description": "Get the history of an image",
+						"name": "docker-image-history"
+					},
+					{
+						"description": "List tasks",
+						"name": "docker-task-list"
+					}
+				],
+				"description": "The Engine API is an HTTP API served by Docker Engine. It is the API the Docker client uses to communicate with the Engine, so everything the Docker client can do can be done with the API.",
+				"id": "Docker Engine API",
+				"name": "Docker Engine API (Community Contribution)"
+			},
+			{
+				"category": "Database",
+				"commands": [
+					{
+						"description": "List All MinIO Buckets.",
+						"name": "minio-list-buckets"
+					},
+					{
+						"description": "Uploads data from a stream to an object in a bucket.",
+						"name": "minio-put-object"
+					},
+					{
+						"description": "Uploads data from a file to an object in a bucket.",
+						"name": "minio-fput-object"
+					},
+					{
+						"description": "Create a new bucket.",
+						"name": "minio-make-bucket"
+					},
+					{
+						"description": "Set tags configuration to an object.",
+						"name": "minio-set-tag"
+					},
+					{
+						"description": "Get tags configuration of an object.",
+						"name": "minio-get-tags"
+					},
+					{
+						"description": "Remove an existing bucket.",
+						"name": "minio-remove-bucket"
+					},
+					{
+						"description": "Gets data from offset to length of an object.",
+						"name": "minio-get-object"
+					},
+					{
+						"description": "Lists object information of a bucket.",
+						"name": "minio-list-objects"
+					},
+					{
+						"description": "Remove an object.",
+						"name": "minio-remove-object"
+					},
+					{
+						"description": "Get object information and metadata of an object.",
+						"name": "minio-stat-object"
+					},
+					{
+						"description": "Create an object by server-side copying data from another object.",
+						"name": "minio-copy-object"
+					}
+				],
+				"description": "An Integration with MinIO Object Storage.",
+				"id": "MinIO",
+				"name": "MinIO (Community Contribution)"
+			}
+		],
+		"layoutscontainer": [
+			{
+				"description": "",
+				"name": "New Git PR"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "A PR Triage Playbook",
+				"name": "DevSecOps - Fetch PR - Triage V2"
+			},
+			{
+				"description": "A CodeQL Code Analysis Playbook",
+				"name": "DevSecOps - LGTM - Analysis - SubPB"
+			},
+			{
+				"description": "A CodeQL Code Analysis Playbook",
+				"name": "DevSecOps - LGTM - Analysis - SubPB v2"
+			},
+			{
+				"description": "Prisma Task Analysis Playbook",
+				"name": "DevSecOps - Prisma - Analysis -SubPB"
+			},
+			{
+				"description": "A CodeQL Code Analysis Playbook",
+				"name": "DevSecOps - Fetch PR - Triage"
+			}
+		],
+		"report": null,
+		"reputation": [
+			{
+				"details": "DevSecOps SAST Alert",
+				"enhancementScriptNames": null,
+				"reputationScriptName": ""
+			},
+			{
+				"details": "DevSecOps IaC Scan Alert",
+				"enhancementScriptNames": null,
+				"reputationScriptName": ""
+			},
+			{
+				"details": "DevSecOps Git Commit",
+				"enhancementScriptNames": null,
+				"reputationScriptName": ""
+			}
+		],
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.8",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.5",
+			"name": "Base"
+		},
+		"CommonPlaybooks": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.4.42",
+			"name": "Common Playbooks"
+		},
+		"GitHub": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "2.0.27",
+			"name": "GitHub"
+		},
+		"Slack": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "3.3.0",
+			"name": "Slack"
+		}
+	},
+	"deprecated": false,
+	"description": "DevSecOps CI/CD Orchestration Integration Pack.",
+	"disabledMonthly": false,
+	"downloads": 1500,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "DevSecOps",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/DevSecOps/DockerEngineAPI_image.png",
+			"name": "Docker Engine API"
+		},
+		{
+			"imagePath": "content/packs/DevSecOps/GitLab_image.png",
+			"name": "GitLab (Deprecated)"
+		},
+		{
+			"imagePath": "content/packs/DevSecOps/LGTM_image.png",
+			"name": "LGTM"
+		},
+		{
+			"imagePath": "content/packs/DevSecOps/MinIO_image.png",
+			"name": "MinIO"
+		},
+		{
+			"imagePath": "content/packs/Slack/SlackIAM_image.png",
+			"name": "Slack IAM"
+		},
+		{
+			"imagePath": "content/packs/Slack/SlackV2_image.png",
+			"name": "Slack v2 (Deprecated)"
+		},
+		{
+			"imagePath": "content/packs/Slack/SlackV3_image.png",
+			"name": "Slack v3"
+		},
+		{
+			"imagePath": "content/packs/GitHub/GitHub_image.png",
+			"name": "GitHub"
+		},
+		{
+			"imagePath": "content/packs/GitHub/GitHubIAM_image.png",
+			"name": "GitHub IAM"
+		}
+	],
+	"itemVersion": "1.1.8",
+	"keywords": [],
+	"legacy": true,
+	"name": "DevSecOps",
+	"packID": "DevSecOps",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "DevSecOps content pack contains multiple integrations and playbooks to help shifting security as left as the planning stage of a continues integration pipeline and make DevSecOps orchestration to be within reach.\n\n![](https://storage.googleapis.com/marketplace-dist/content/packs/DevSecOps/readme_images/Inspiration.png)\n\nWhile CI/CD orchestration tools such as Jenkins, CircleCI and others were primarily built by and to developers, SOAR is better positioned to bridge this orchestration gap between DevOps and SecOps for the following reasons:\n![](https://storage.googleapis.com/marketplace-dist/content/packs/DevSecOps/readme_images/Playbooks.png)\n* CI/CD orchestration pipelines are arguably easy to read and troubleshoot by developers , SOAR provides the same orchestration workflow in two different formats that are readable by both Developers and Security Analysts.\n![](https://storage.googleapis.com/marketplace-dist/content/packs/DevSecOps/readme_images/SOAR%20Features.png)\n* SOAR provides way more to a DevSecOps Eco-System than CI/CD Orchestrator does:\n    * Collaboration between teams members in the Eco-System.\n    * Cases management.\n    * Central reporting and long list of out of box integrations with security tools.\n\nWith SOAR integrations, playbooks, fields, XSOAR can be turned into a DevSecOps Orchestrator that taps in a DevSecOps Eco-System and solve for a spectrum of use cases in different stages of CI/CD piplines.\n\n![](https://storage.googleapis.com/marketplace-dist/content/packs/DevSecOps/readme_images/DevOps%20Services.png)\n\nFrom threat-modeling in the **Planning** stage to IaC security in **Dev**, static code analysis in **Build**, post deployment scans in **Deploy** and **Monitoring**/Responding to incidents once the code is running in production.\n\n![](https://storage.googleapis.com/marketplace-dist/content/packs/DevSecOps/readme_images/Architecture.png)\n\nThis content pack will be updated with more integrations with different software factory tools:\n\n- IDE's \n- Code Repo Providers\n- CI/CD Orchestrators\n- Code Compilers/Builders/Packagers\n- Workload Orchestration Platforms\n- Configuration Automation Tools\n- Threat Modelers\n- SAST/DAST/IAST Tools\n- Vulnerability Scanners\n- Networks Security Tools\n- Asset Management Tools\n- Log Management Tools\n- Ticketing Systems\n\n\nThis version of the pack has four integrations :\n* LGTM, a SAST cloud service built on CodeQL\n* GitLab, a source code management platform\n* Docker Engine, an open source containerization platform\n* MinIO, a high-performance object storage suite\n\nA new incident type along with new fields:\n* DevSecOps New Git PR\n\nA new playbook:\n* A PR triage Playbook that parse and record the PR details once fetched by the Github integration.\n",
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-12-19T20:22:38Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "7209615",
+	"videos": []
+}
