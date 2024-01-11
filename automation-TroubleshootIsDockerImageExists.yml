@@ -1,0 +1,92 @@
+args:
+- default: true
+  description: The Docker image to check.
+  name: docker_image
+  required: true
+comment: Gets a Docker image and checks if it exists on the machine running Cortex
+  XSOAR.
+commonfields:
+  id: TroubleshootIsDockerImageExists
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 2.0.14
+    packID: Troubleshoot
+    packName: Troubleshoot
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - core-api-get
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: TroubleshootIsDockerImageExists
+outputs:
+- contextPath: TroubleshootIsDockerImageExists.docker_image
+  description: The Docker image name.
+  type: String
+- contextPath: TroubleshootIsDockerImageExists.exists
+  description: Whether the Docker image exists.
+  type: Boolean
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TroubleshootIsDockerImageExists', 'start', __line__())
+  ### pack version: 2.0.14
+  """Validates that the docker image exists.
+  """
+
+
+
+  ''' STANDALONE FUNCTION '''
+
+
+  def get_installed_docker_images():
+      res = demisto.executeCommand(
+          'core-api-get',
+          {'uri': 'settings/docker-images'}
+      )
+      if is_error(res):
+          raise DemistoException(get_error(res))
+      return res[0]['Contents']['response']['images']
+
+
+  def main():
+      docker_image: str = demisto.args().get('docker_image')
+      if docker_image.count(':') != 1:
+          raise DemistoException(f'Got a docker image with more than one \':\'. {docker_image=}')  # type: ignore
+      repository, tag = docker_image.split(':')
+      installed_dockers_images = get_installed_docker_images()
+      # Docker exists
+      if any(item['repository'] == repository and item['tag'] == tag for item in installed_dockers_images):
+          human_readable = f'Docker image {docker_image} exists!'
+          exists = True
+      else:
+          human_readable = f'Could not find docker image {docker_image}'
+          exists = False
+      context = {
+          'TroubleshootIsDockerImageExists(obj.docker_image === val.docker_image)': {
+              'docker_image': docker_image,
+              'exists': exists
+          }
+      }
+      return_outputs(human_readable, context)
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('TroubleshootIsDockerImageExists', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- troubleshoot
+type: python
