@@ -1,0 +1,41 @@
+comment: Populates the InstanceName field with active instances.
+commonfields:
+  id: TroubleshootInstanceField
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 2.0.14
+    packID: Troubleshoot
+    packName: Troubleshoot
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.12.63474
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: TroubleshootInstanceField
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TroubleshootInstanceField', 'start', __line__())
+  ### pack version: 2.0.14
+
+
+  commands = demisto.getAllSupportedCommands()
+
+  options = list(commands.keys())
+  demisto.results({"hidden": False, "options": options})
+
+  register_module_line('TroubleshootInstanceField', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- field-display
+type: python
