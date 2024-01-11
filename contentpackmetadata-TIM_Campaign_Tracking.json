@@ -1,0 +1,153 @@
+{
+	"author": "Shawn Murphy \u0026 Nicholas Ericksen",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"incidentfield",
+		"incidenttype",
+		"playbook",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "Detected in network?",
+				"name": "TIM Campaign Threat Detected",
+				"type": "boolean"
+			},
+			{
+				"description": "WHAT the adversary is trying to accomplish",
+				"name": "TIM Campaign Threat Goals",
+				"type": "shortText"
+			},
+			{
+				"description": "WHY the adversary is trying to achieve their goals",
+				"name": "TIM Campaign Threat Motivation",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "TIM Campaign Threat Alias",
+				"type": "tagsSelect"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "TIM - Campaign",
+				"playbook": "TIM - Intel Tracking",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": [
+			{
+				"description": "",
+				"name": "TIM - Campaign"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "Track threat actors and campaigns by uploading threat intelligence in the form of briefs and IOCs. Add notes and find IOCs in related incidents.",
+				"name": "TIM - Intel Tracking"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.1",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.33",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.12.23",
+			"name": "Common Scripts"
+		},
+		"CommonTypes": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.3.87",
+			"name": "Common Types"
+		},
+		"Malware": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.4.9",
+			"name": "Malware Core"
+		}
+	},
+	"deprecated": false,
+	"description": "This pack allows you to upload threat intelligence briefs to track IOCs related to specified threat actor campaigns. Using this pack you will be able to check what the adversary is trying to accomplish, why are they trying to accomplish this, and so on",
+	"disabledMonthly": false,
+	"downloads": 292,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "TIMCampaignTracking",
+	"installMessage": "",
+	"integrations": [],
+	"itemVersion": "1.0.1",
+	"keywords": [],
+	"legacy": true,
+	"name": "TIM Campaign Tracking",
+	"packID": "TIMCampaignTracking",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [
+		"TIM",
+		"Use Case"
+	],
+	"toServerVersion": "",
+	"updated": "2023-09-14T09:46:04Z",
+	"useCases": [
+		"Threat Intelligence Management"
+	],
+	"version": -1,
+	"versionInfo": "6319909",
+	"videos": []
+}
