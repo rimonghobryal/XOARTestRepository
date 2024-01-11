@@ -20,7 +20,7 @@ name: Compose_text_for_tts
 pswd: ""
 runas: DBotWeakRole
 runonce: false
-script: ""
+script: 'def main():'
 scripttarget: 0
 subtype: python3
 tags: []
