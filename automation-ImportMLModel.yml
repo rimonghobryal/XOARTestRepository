@@ -1,0 +1,98 @@
+args:
+- description: "ID of the entry that contains the ML model to import.\t"
+  name: entryID
+  required: true
+- defaultValue: phishing_model
+  description: The model name in which the ML model will be saved.
+  name: modelName
+- auto: PREDEFINED
+  defaultValue: mlModel
+  description: The method for storing the imported model.
+  name: modelStoreType
+  predefined:
+  - mlModel
+  - list
+comment: 'Imports a file that contains an ML model. '
+commonfields:
+  id: ImportMLModel
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.4.9
+    packID: ML
+    packName: Machine Learning
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.83255
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: ImportMLModel
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('ImportMLModel', 'start', __line__())
+  ### pack version: 1.4.9
+
+
+
+  # import json
+
+  # Python template - reading arguments, calling a command, handling errors and returning results
+
+
+  def read_file_content(input_entry_or_string):
+      res = demisto.getFilePath(input_entry_or_string)
+      if not res:
+          return_error("Entry {} not found".format(input_entry_or_string))
+      file_path = res['path']
+      with open(file_path, 'r') as f:
+          file_content = f.read()
+      return file_content
+
+
+  def main():
+      entry_id = demisto.args()['entryID']
+      model_name = demisto.args()['modelName']
+      storing_method = demisto.args()['modelStoreType']
+      encoded_file_content = read_file_content(entry_id)
+      file_content = json.loads(encoded_file_content)
+      args = {'modelData': file_content['modelData'],
+              'modelName': model_name,
+              'modelLabels': file_content['model']['labels'],
+              'modelOverride': True}
+      if storing_method == 'mlModel':
+          res = demisto.executeCommand('createMLModel', args)
+          if is_error(res):
+              return_error(get_error(res))
+          confusion_matrix = file_content['model']['evaluation']['confusionMatrix']
+          res = demisto.executeCommand('evaluateMLModel',
+                                       {'modelConfusionMatrix': confusion_matrix,  # disable-secrets-detection
+                                        'modelName': model_name})
+      elif storing_method == 'list':
+          res = demisto.executeCommand("createList", {"listName": model_name, "listData": file_content['modelData']})
+      else:
+          return_error('Unsupported *modelStoreType* value received ({}).'
+                       ' *modelStoreType* should be "mlModel" or "list"'.format(storing_method))
+
+      if is_error(res):
+          return_error(get_error(res))
+      demisto.results("done")
+
+
+  if __name__ in ['__main__', '__builtin__', 'builtins']:
+      main()
+
+  register_module_line('ImportMLModel', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- ml
+type: python
