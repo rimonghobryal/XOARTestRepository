@@ -1,0 +1,170 @@
+args:
+- description: The command to run.
+  name: command
+  required: true
+- description: The arguments of the command.
+  name: arguments
+- description: The instance name.
+  name: instance_name
+  required: true
+comment: Executes a command in Cortex XSOAR in debug mode and pulls logs from the
+  command execution.
+commonfields:
+  id: TroubleshootExecuteCommand
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 2.0.14
+    packID: Troubleshoot
+    packName: Troubleshoot
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.12.63474
+engineinfo: {}
+mainengineinfo: {}
+name: TroubleshootExecuteCommand
+outputs:
+- contextPath: TroubleshootExecuteCommand.command
+  description: The command executed.
+  type: String
+- contextPath: TroubleshootExecuteCommand.instance_name
+  description: On which instance of the integration the command executed.
+  type: String
+- contextPath: TroubleshootExecuteCommand.Error
+  description: The errors from the command.
+  type: String
+- contextPath: File.Name
+  description: The full file name (including file extension).
+  type: String
+- contextPath: File.EntryID
+  description: The ID for locating the file in the War Room.
+  type: String
+- contextPath: File.Size
+  description: The size of the file in bytes.
+  type: Number
+- contextPath: File.MD5
+  description: The MD5 hash of the file.
+  type: String
+- contextPath: File.SHA1
+  description: The SHA1 hash of the file.
+  type: String
+- contextPath: File.SHA256
+  description: The SHA1 hash of the file.
+  type: String
+- contextPath: File.SHA512
+  description: The SHA512 hash of the file.
+  type: String
+- contextPath: File.SSDeep
+  description: The ssdeep hash of the file (same as displayed in file entries).
+  type: String
+- contextPath: File.Extension
+  description: 'The file extension, for example: ''xls''.'
+  type: String
+- contextPath: File.Type
+  description: The file type, as determined by libmagic (same as displayed in the
+    file entries).
+  type: String
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TroubleshootExecuteCommand', 'start', __line__())
+  ### pack version: 2.0.14
+  """
+  Command execute:
+      Executes command with debug-mode
+  """
+
+
+
+  def _execute_command(command: str, arguments: dict):
+      return demisto.executeCommand(command, arguments)
+
+
+  def get_errors(response: Union[list, dict]) -> List[str]:
+      errors = list()
+      if is_error(response):
+          if isinstance(response, dict):
+              errors.append(response['Contents'])
+
+          for entry in response:
+              is_error_entry = type(entry) == dict and entry['Type'] == entryTypes['error']
+              if is_error_entry:
+                  errors.append(entry['Contents'])
+      return errors
+
+
+  def get_log_file(response: Union[list, dict]):
+      logs: List[dict]
+      if isinstance(response, list):
+          logs = [
+              {
+                  'File': entry['File'],
+                  'FileID': entry['FileID']
+              } for entry in response if entry.get('File', '').endswith('.log')
+          ]
+      elif response.get('File', '').endswith('.log'):
+          logs = [
+              {
+                  'File': response['File'],
+                  'FileID': response['FileID']
+              }
+          ]
+      else:
+          raise DemistoException('Could not find the log file')
+      return logs
+
+
+  def main():
+      args = demisto.args()
+      command = args.get('command')
+      arguments = args.get('arguments')
+      if not arguments:
+          arguments = {}
+      elif isinstance(arguments, str) and arguments:
+          arguments = json.loads(arguments)
+
+      if isinstance(arguments, str):
+          arguments = json.loads(arguments)
+      instance_name = args.get('instance_name')
+      arguments['using'] = instance_name
+      arguments['debug-mode'] = True
+      response = _execute_command(command, arguments)
+      errors = get_errors(response)
+      log_files = get_log_file(response)
+      for log_file in log_files:
+          with open(demisto.getFilePath(log_file['FileID'])['path']) as stream:
+              demisto.results(fileResult(log_file['File'], stream.read()))
+      if errors:
+          human_readable = tableToMarkdown(
+              f'Errors found for command {command}:\n',
+              errors,
+              ['Errors']
+          )
+      else:
+          human_readable = f'No errors for command {command}!'
+      context = {
+          'TroubleshootExecuteCommand(obj.command === val.command && obj.instance_name === val.instance_name)': {
+              'command': command,
+              'instance_name': instance_name,
+              'Error': errors
+          }
+      }
+      return_outputs(human_readable, context)
+
+
+  if __name__ in ("__main__", "builtin", "builtins"):
+      main()
+
+  register_module_line('TroubleshootExecuteCommand', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- troubleshoot
+type: python
