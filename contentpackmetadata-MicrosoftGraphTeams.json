@@ -1,0 +1,142 @@
+{
+	"author": "Joachim Bockland",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Messaging And Conferencing"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Messaging and Conferencing",
+				"commands": [
+					{
+						"description": "Add a conversationMember to a chat.",
+						"name": "msgraph-teams-add-member"
+					},
+					{
+						"description": "Tests connectivity to Microsoft Graph Teams.",
+						"name": "msgraph-teams-test"
+					},
+					{
+						"description": "Generate the login url used for Authorization code flow.",
+						"name": "msgraph-teams-generate-login-url"
+					},
+					{
+						"description": "Update the properties of a chat object.",
+						"name": "msgraph-teams-update-chat"
+					},
+					{
+						"description": "Create a new chat.",
+						"name": "msgraph-teams-create-chat"
+					},
+					{
+						"description": "Run this command if for some reason you need to rerun the authentication process.",
+						"name": "msgraph-teams-auth-reset"
+					},
+					{
+						"description": "Retrieve the list of chats that the user is part of.",
+						"name": "msgraph-teams-list-chats"
+					},
+					{
+						"description": "List all conversation members in a chat.",
+						"name": "msgraph-teams-list-members"
+					},
+					{
+						"description": "Retrieve a single chat (without its messages).",
+						"name": "msgraph-teams-get-chat"
+					},
+					{
+						"description": "Send a new message in a chat.",
+						"name": "msgraph-teams-send-message"
+					},
+					{
+						"description": "Retrieve the list of messages in a chat.",
+						"name": "msgraph-teams-list-messages"
+					}
+				],
+				"description": "Microsoft Graph lets your app get authorized access to a user's Teams app in a personal or organization account.",
+				"id": "MicrosoftGraphTeams",
+				"name": "O365 Teams (Using Graph API) (Community Contribution)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.0",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.1",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "O365 Teams (Using Graph API) gives you authorized access to a user’s Teams enabling you to facilitate communication through teams as that user, or read conversations and/or messages of that user.",
+	"disabledMonthly": false,
+	"downloads": 282,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "MicrosoftGraphTeams",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/MicrosoftGraphTeams/MicrosoftGraphTeams_image.png",
+			"name": "O365 Teams (Using Graph API)"
+		}
+	],
+	"itemVersion": "1.1.0",
+	"keywords": [],
+	"legacy": true,
+	"name": "MicrosoftGraphTeams",
+	"packID": "MicrosoftGraphTeams",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-12-10T20:24:56Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "7122577",
+	"videos": []
+}
