@@ -1,0 +1,184 @@
+args:
+- description: Additional text by which to query incidents.
+  name: query
+- defaultValue: Phishing
+  description: A comma-separated list of incident types by which to filter.
+  name: incidentTypes
+- description: 'The start date by which to filter incidents. Date format will be the
+    same as in the incidents query page (valid strings exaple: "3 days ago", ""2019-01-01T00:00:00
+    +0200")'
+  name: fromDate
+- description: 'The end date by which to filter incidents. Date format will be the
+    same as in the incidents query page (valid strings exaple: "3 days ago", ""2019-01-01T00:00:00
+    +0200")'
+  name: toDate
+- defaultValue: "3000"
+  description: The maximum number of incidents to fetch.
+  name: limit
+- description: The field name with the label. Supports a comma-separated list, the
+    first non-empty value will be taken.
+  name: tagField
+  required: true
+- description: If non-empty, hash every word with this seed.
+  name: hashSeed
+- defaultValue: '*'
+  description: 'A comma-separated list of email tags values and mapping. The script
+    considers only the tags specified in this field. You can map a label to another
+    value by using this format: LABEL:MAPPED_LABEL. For example, for 4 values in email
+    tag: malicious, credentials harvesting, inner communitcation, external legit email,
+    unclassified. While training, we want to ignore "unclassified" tag, and refer
+    to "credentials harvesting" as "malicious" too. Also, we want to merge "inner
+    communitcation" and "external legit email" to one tag called "non-malicious".
+    The input will be: malicious, credentials harvesting:malicious, inner communitcation:non-malicious,
+    external legit email:non-malicious'
+  name: phishingLabels
+- description: The model name to store in the system.
+  name: modelName
+  required: true
+- defaultValue: emailsubject
+  description: Incident field name with the email subject.
+  name: emailsubject
+- defaultValue: emailbody
+  description: Incident field name with the email body (text).
+  name: emailbody
+- defaultValue: emailbodyhtml
+  description: Incident field name with the email body (html).
+  name: emailbodyhtml
+- defaultValue: dbotprediction,dbotpredictionprobability
+  description: A comma-separated list of fields in the object to poplulate.
+  name: populateFields
+comment: Apply a trained ML model on multiple incidents at once, to compare incidents
+  how the incidents were labeled by analysts, to the predictions of the model. This
+  script is aimed to help evaluate a trained model using past incidents.
+commonfields:
+  id: DBotPredictIncidentsBatch
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.4.9
+    packID: ML
+    packName: Machine Learning
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/ml:1.0.0.45981
+engineinfo: {}
+mainengineinfo: {}
+name: DBotPredictIncidentsBatch
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('DBotPredictIncidentsBatch', 'start', __line__())
+  ### pack version: 1.4.9
+
+
+
+  import copy
+  import pandas as pd
+
+  ALL_LABELS = "*"
+
+
+  def get_phishing_map_labels(comma_values):
+      if comma_values == ALL_LABELS:
+          return comma_values
+      values = [x.strip() for x in comma_values.split(",")]
+      labels_dict = {}
+      for v in values:
+          v = v.strip()
+          if ":" in v:
+              splited = v.rsplit(":", maxsplit=1)
+              labels_dict[splited[0].strip()] = splited[1].strip()
+          else:
+              labels_dict[v] = v
+      return {k: v for k, v in labels_dict.items()}
+
+
+  def build_query_in_respect_to_phishing_labels(args):
+      mapping = args.get('phishingLabels', ALL_LABELS)
+      query = args.get('query', None)
+      if mapping == ALL_LABELS:
+          return args
+      mapping_dict = get_phishing_map_labels(mapping)
+      tag_field = args['tagField']
+      tags_union = ' '.join(['"{}"'.format(label) for label in mapping_dict])
+      mapping_query = '{}:({})'.format(tag_field, tags_union)
+      if 'query' not in args:
+          args['query'] = mapping_query
+      else:
+          args['query'] = '({}) and ({})'.format(query, mapping_query)
+      return args
+
+
+  def main():
+      d_args = dict(demisto.args())
+
+      get_incidents_by_query_args = copy.deepcopy(d_args)
+      get_incidents_by_query_args['NonEmptyFields'] = d_args['tagField']
+      subject_field_name = d_args.get('emailsubject').strip()  # type: ignore
+      body_field_name = d_args.get('emailbody').strip()  # type: ignore
+      html_field_name = d_args.get('emailbodyhtml').strip()  # type: ignore
+      tag_field_name = d_args.get('tagField').strip()  # type: ignore
+      additional_populate_fields = d_args.get('populateFields')
+      populate_fields = [subject_field_name, body_field_name, html_field_name, tag_field_name, 'id']
+      get_incidents_by_query_args['populateFields'] = ','.join([x.strip() for x in populate_fields if x is not None])
+      if additional_populate_fields is not None and additional_populate_fields.strip() != '':
+          get_incidents_by_query_args['populateFields'] = ','.join([get_incidents_by_query_args['populateFields'],
+                                                                   additional_populate_fields.strip()])
+      non_empty_fields = [subject_field_name, tag_field_name]
+      get_incidents_by_query_args['NonEmptyFields'] = ','.join([x.strip() for x in non_empty_fields if x is not None])
+      get_incidents_by_query_args = build_query_in_respect_to_phishing_labels(get_incidents_by_query_args)
+      res = demisto.executeCommand("GetIncidentsByQuery", get_incidents_by_query_args)
+      if is_error(res):
+          return_error(get_error(res))
+      incidents = json.loads(res[-1]['Contents'])
+
+      email_subject_list = [i.get(subject_field_name, '') for i in incidents]
+      email_body_list = [i.get(body_field_name, '') for i in incidents]
+      email_html_list = [i.get(html_field_name, '') for i in incidents]
+
+      model_name = d_args.get('modelName')
+
+      args = {'emailSubject': email_subject_list,
+              'emailBody': email_body_list,
+              'emailBodyHTML': email_html_list,
+              'modelName': model_name}
+      res = demisto.executeCommand("DBotPredictPhishingWords", args)
+      if is_error(res):
+          return_error(get_error(res))
+
+      incidents_df = pd.DataFrame(incidents)
+      predictions_df = pd.DataFrame(res[-1]['Contents'])
+      df = pd.concat([incidents_df, predictions_df], axis=1)
+      df.rename(columns={"Label": "Prediction"}, inplace=True)
+      file_name = 'predictions.csv'
+      file_columns = ['id', tag_field_name, 'Prediction',
+                      'Probability',
+                      'Error']
+      if additional_populate_fields is not None and additional_populate_fields.strip() != '':
+          file_columns += [x.strip() for x in additional_populate_fields.split(',') if x.strip() != '']
+      file_columns = [c for c in file_columns if c in df.columns]
+      filtered_df = df[file_columns]
+      csv_data = filtered_df.to_csv()
+      entry = fileResult(file_name, csv_data)
+      entry['Contents'] = filtered_df.to_json(orient='records')
+      entry['HumanReadable'] = 'File contains predictions of {} incidents'.format(len(incidents))
+      return entry
+
+
+  if __name__ in ['__main__', '__builtin__', 'builtins']:
+      demisto.results(main())
+
+  register_module_line('DBotPredictIncidentsBatch', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- phishing
+- ml
+type: python
