@@ -1,0 +1,393 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.2.0
+    itemVersion: 1.0.8
+    packID: FeedRSS
+    packName: RSS Feed
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: "The playbook:\n1. Extracts indicators from Threat intel reports.\n2.
+  Creates relationships between the extracted indicators and the report.\n3. Runs
+  enrich indicators command on the extracted indicators. \n\nCortex XSOAR recommends
+  that you configure a job to execute this playbook. \n\n1. Configure a job that will
+  run the *RSS Create Indicators From Report* playbook. \n      1. Select the *Triggered
+  by delta in feed* option.\n      2. Select the feed on which to run the job.\n   \n\n2.
+  Configure input to the *RSS Create Indicators From Report* playbook:\n   \n    -
+  From the context data input: Tag name - the indicator will be tagged with this value
+  when the playbook finishes processing and all the indicators are extracted and relationships
+  created.\n   \n    - From the indicators: Create a query to include only new report
+  indicators that were not processed yet. Recommended query: \"type:Report -tags:{Tag
+  name configured from the context data input} -tags:in_process\". \n   The playbook
+  tags all indicators with the \"in_process\" tag when it starts running, and removes
+  the tag when the playbook ends.\n   If you want the playbook to run on a specific
+  instance (a specific feed), add the following filter to the query: *sourceInstances:\"{the
+  selected instance}\"*.\n\nNote that if you selected the *Triggered by delta in feed*
+  option when configuring the Job, the “Run only on new and modified indicators” playbook
+  option is automatically selected.\n"
+id: RSS Create Indicators From Report
+inputs:
+- description: |-
+    Filter all Report indicators which haven't been processed. Please make sure to add "-tags:in_process " to the query in order to filter out the reports that are in process and "-tags:{tag_name_given_as_input}" to filter out all processed reports .
+    For example, if the tag input is "processed" the query should be: "type:Report -tags:processed -tags:in_process"
+  key: ""
+  playbookInputQuery:
+    daterange:
+      fromdate: "0001-01-01T00:00:00Z"
+      fromdatelicenseval: "0001-01-01T00:00:00Z"
+      period:
+        by: ""
+        byfrom: ""
+        byto: ""
+        field: ""
+        fromvalue: null
+        tovalue: null
+      todate: "0001-01-01T00:00:00Z"
+    query: ""
+    queryEntity: indicators
+    results: null
+    runFromLastJobTime: true
+  required: false
+  value: {}
+- description: The tag which will be added to each processed report.
+  key: tag
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: RSS Create Indicators From Report
+outputs: []
+quiet: true
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f6d8ee66-a39e-46fa-8f70-6f686014c91a
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: f6d8ee66-a39e-46fa-8f70-6f686014c91a
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": -130
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      forEach: true
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      indicator_value:
+        complex:
+          accessor: value
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: playbookQuery.indicator_type
+              operator: isEqualString
+              right:
+                value:
+                  simple: Report
+          root: playbookQuery
+      raw_content:
+        complex:
+          accessor: CustomFields.rssfeedrawcontent
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: playbookQuery.indicator_type
+              operator: isEqualString
+              right:
+                value:
+                  simple: Report
+          root: playbookQuery
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Extract and enrich indicators
+      id: 69e5ebe7-b993-4633-8855-406ca88d43fe
+      iscommand: false
+      name: Extract and Create Relationships
+      playbookId: Extract and Create Relationships
+      type: playbook
+      version: -1
+    taskid: 69e5ebe7-b993-4633-8855-406ca88d43fe
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 370
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      field:
+        simple: tags
+      fieldValue:
+        simple: ${inputs.tag}
+      indicatorsValues:
+        complex:
+          accessor: value
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: playbookQuery.indicator_type
+              operator: isEqualString
+              right:
+                value:
+                  simple: Report
+          root: playbookQuery
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.add.values.to.indicator.multi.select.field
+      id: 6e8f8f7c-380e-4092-827b-84083111a243
+      iscommand: true
+      name: Tag report as "processed"
+      script: Builtin|||appendIndicatorField
+      type: regular
+      version: -1
+    taskid: 6e8f8f7c-380e-4092-827b-84083111a243
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 545
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      field:
+        simple: tags
+      fieldValue:
+        simple: in_process
+      indicatorsValues:
+        complex:
+          accessor: value
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: playbookQuery.indicator_type
+              operator: isEqualString
+              right:
+                value:
+                  simple: Report
+          root: playbookQuery
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.add.values.to.indicator.multi.select.field
+      id: 946382a7-5ef7-40d6-8735-4d492e4f11f6
+      iscommand: true
+      name: Tag reports "in process"
+      script: Builtin|||appendIndicatorField
+      type: regular
+      version: -1
+    taskid: 946382a7-5ef7-40d6-8735-4d492e4f11f6
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      field:
+        simple: tags
+      fieldValue:
+        simple: in_process
+      indicatorsValues:
+        complex:
+          accessor: value
+          filters:
+          - - left:
+                iscontext: true
+                value:
+                  simple: playbookQuery.indicator_type
+              operator: isEqualString
+              right:
+                value:
+                  simple: Report
+          root: playbookQuery
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.remove.values.to.indicator.multi.select.field
+      id: 484315bb-bcfb-4838-8783-ef5304b62760
+      iscommand: true
+      name: Remove tag "in process"
+      script: Builtin|||removeIndicatorField
+      type: regular
+      version: -1
+    taskid: 484315bb-bcfb-4838-8783-ef5304b62760
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: fc4676ba-8352-42e5-8adb-2d1a4358d225
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: fc4676ba-8352-42e5-8adb-2d1a4358d225
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 915
+        }
+      }
+  "7":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: playbookQuery.indicator_type
+          operator: containsGeneral
+          right:
+            value:
+              simple: Report
+      label: "yes"
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      "yes":
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check if there is indicators from Report type
+      id: 9389b85f-a08b-4b82-8833-e5bad240f456
+      iscommand: false
+      name: Is Report Type
+      type: condition
+      version: -1
+    taskid: 9389b85f-a08b-4b82-8833-e5bad240f456
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 30
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1110,
+        "width": 380,
+        "x": 50,
+        "y": -130
+      }
+    }
+  }
