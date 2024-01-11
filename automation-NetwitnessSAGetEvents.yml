@@ -1,0 +1,129 @@
+args:
+- auto: PREDEFINED
+  description: Filter of time range in which events occured.
+  name: timeRangeType
+  predefined:
+  - LAST_5_MINUTES
+  - LAST_10_MINUTES
+  - LAST_15_MINUTES
+  - LAST_30_MINUTES
+  - LAST_HOUR
+  - LAST_3_HOURS
+  - LAST_6_HOURS
+  - LAST_12_HOURS
+  - LAST_24_HOURS
+  - LAST_2_DAYS
+  - LAST_5_DAYS
+  - EARLY_MORNING
+  - MORNING
+  - AFTERNOON
+  - EVENING
+  - TODAY
+  - YESTERDAY
+  - THIS_WEEK
+  - LAST_WEEK
+  - ALL_DATA
+  - CUSTOM
+  required: true
+- description: '[number] Id of the device where the events stored/occurred. In order
+    to get list of available devices/components run command nw-get-components.'
+  name: deviceId
+  required: true
+- description: '[optional].'
+  name: collectionName
+- description: '[optional].'
+  name: predicateIds
+- description: '[optional datetime] If timeRangeType defined as CUSTOM, set this argument.'
+  name: startDate
+- description: '[optional datetime] If timeRangeType defined as CUSTOM, set this argument.'
+  name: endDate
+- description: '[optional datetime] Last collection time.'
+  name: lastCollectionTime
+- description: mID1.
+  name: mid1
+- description: mID2.
+  name: mid2
+- description: '[optional guid] Investigation id token.'
+  name: investigationToken
+- description: '[optional number] Default set to 1. The page number.'
+  name: page
+- description: '[optional number] Default set to 0. The starting index of event in
+    page.'
+  name: start
+- description: '[optional number] Default set to 25. Limits the number of events per
+    page.'
+  name: limit
+comment: Returns all the RSA NetWitness SA events in the defined time range.
+commonfields:
+  id: NetwitnessSAGetEvents
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.0.12
+    packID: RsaNetwitnessSecurityAnalytics
+    packName: RSA NetWitness Security Analytics
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - netwitness-im-get-events
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: NetwitnessSAGetEvents
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('NetwitnessSAGetEvents', 'start', __line__())
+  ### pack version: 1.0.12
+
+
+
+
+  def netwitness_im_get_events():
+      resp = demisto.executeCommand("netwitness-im-get-events", demisto.args())
+
+      if isError(resp[0]):
+          result = resp
+      else:
+          data = demisto.get(resp[0], "Contents.events")
+          if data:
+              data = data if isinstance(data, list) else [data]
+              formatTimeColumns(data, ['time'])
+              for row in data:
+                  newMeta = {}
+                  for var in row['meta']:
+                      newMeta['meta.' + var['name']] = var['value']
+                  row['meta'] = newMeta
+                  raiseTable(row, 'meta')
+              data = [{k: formatCell(row[k]) for k in row} for row in data]
+              result = {"ContentsFormat": formats["table"], "Type": entryTypes["note"], "Contents": data}
+          else:
+              result = "No results."
+      return_results(result)
+
+
+  def main():  # pragma: no cover
+      try:
+          netwitness_im_get_events()
+      except Exception as e:
+          err_msg = f'Encountered an error while running the script: [{e}]'
+          return_error(err_msg, error=e)
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('NetwitnessSAGetEvents', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- RSA NetWitness Security Analytics
+type: python
