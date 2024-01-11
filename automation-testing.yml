@@ -1,0 +1,68 @@
+commonfields:
+  id: aa1e70fd-ecb9-4d84-8310-225b0c513b48
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: testing
+outputs:
+- contextPath: test.a
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+
+
+
+  # TODO: ADD HERE THE FUNCTIONS TO INTERACT WITH YOUR PRODUCT API
+
+
+  ''' COMMAND FUNCTION '''
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          # TODO: replace the invoked command function with yours
+          a = "ABC"
+          results = CommandResults(outputs_prefix="test.a",outputs=a)
+          return_results(results)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
