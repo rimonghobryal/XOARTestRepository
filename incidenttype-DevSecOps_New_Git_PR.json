@@ -1,0 +1,40 @@
+{
+	"autorun": true,
+	"cacheVersn": 0,
+	"closureScript": "",
+	"color": "#03b0ff",
+	"days": 0,
+	"daysR": 0,
+	"default": false,
+	"definitionId": "",
+	"detached": false,
+	"disabled": false,
+	"extractSettings": {
+		"fieldCliNameToExtractSettings": {},
+		"mode": "All"
+	},
+	"fromServerVersion": "6.0.0",
+	"hours": 0,
+	"hoursR": 0,
+	"id": "DevSecOps New Git PR",
+	"itemVersion": "1.1.8",
+	"layout": "New Git PR",
+	"locked": false,
+	"name": "DevSecOps New Git PR",
+	"onChangeRepAlg": 1,
+	"packID": "DevSecOps",
+	"packName": "DevSecOps",
+	"packPropagationLabels": [
+		"all"
+	],
+	"playbookId": "DevSecOps - Fetch PR - Triage",
+	"preProcessingScript": "",
+	"propagationLabels": [],
+	"readonly": false,
+	"reputationCalc": 0,
+	"system": true,
+	"toServerVersion": "",
+	"version": -1,
+	"weeks": 0,
+	"weeksR": 0
+}
