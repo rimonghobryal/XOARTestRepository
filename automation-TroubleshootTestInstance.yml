@@ -1,0 +1,154 @@
+args:
+- description: Instance parameters. Can be acquired from the GetInstanceParameter
+    command.
+  name: parameters
+  required: true
+- description: Keys to check the negative result of the Test button.
+  name: keys
+comment: Click the "Test" button and return if the test failed.
+commonfields:
+  id: TroubleshootTestInstance
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 2.0.14
+    packID: Troubleshoot
+    packName: Troubleshoot
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - core-api-put
+  - core-api-post
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: TroubleshootTestInstance
+outputs:
+- contextPath: TroubleshootTestInstance.instance_name
+  description: Name of the instance.
+  type: String
+- contextPath: TroubleshootTestInstance.Errors
+  description: Errors after changing all the wanted keys.
+  type: String
+- contextPath: TroubleshootTestInstance.changed_keys
+  description: Keys that changed in the test.
+  type: String
+- contextPath: TroubleshootTestInstance.succeed
+  description: Whether the test passed.
+  type: Boolean
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TroubleshootTestInstance', 'start', __line__())
+  ### pack version: 2.0.14
+  """
+  Gets an instance configuration and a parameter to modify, to check if is works.
+  """
+  from collections.abc import Iterable
+
+
+
+
+  def get_errors(response: Union[list, dict]) -> List[str]:
+      errors = ''
+      if is_error(response):
+          errors = get_error(response)
+      return errors.splitlines()
+
+
+  def change_keys(instance: dict, keys: Iterable) -> dict:
+      for key in keys:
+          new_value = not instance['configvalues'][key]
+          instance['configvalues'][key] = new_value
+          for i, item in enumerate(instance['data']):
+              if item['name'] == key:
+                  instance['data'][i]['value'] = new_value
+                  break
+          else:
+              return_error(f'Could not find the {key} parameter')
+      return instance
+
+
+  def save_configuration(arguments: dict) -> List[str]:
+      res = demisto.executeCommand(
+          'core-api-put',
+          {
+              'uri': 'settings/integration',
+              'body': arguments
+          })
+      return get_errors(res)
+
+
+  def execute_test_module(arguments: dict) -> List[str]:
+      res = demisto.executeCommand(
+          'core-api-post',
+          {
+              'uri': '/settings/integration/test',
+              'body': arguments
+          }
+      )
+      errors = get_errors(res)
+      if errors:
+          return errors
+      contents = res[0]['Contents']['response']
+      if contents['success'] is False:
+          errors.append(contents.get('message', 'Command failed but no message provided'))
+      return errors
+
+
+  def main():
+      args = demisto.args()
+      instance = args.get('parameters')
+      if not instance:
+          instance = {}
+      elif isinstance(instance, str) and instance:
+          instance = json.dumps(instance)
+      instance_name = instance['name']
+      keys_in_instance = argToList(args.get('keys'))
+      instance = change_keys(instance, keys_in_instance)
+      try:
+          errors = execute_test_module(instance)
+          context = {
+              'TroubleshootTestInstance(obj.instance_name === val.instance_name and val.changed_keys === obj.changed_keys)': {
+                  'instance_name': instance_name,
+                  'Errors': errors,
+                  'changed_keys': keys_in_instance,
+                  'succeed': not bool(errors)
+              }
+          }
+          if errors:
+              err_str = "\n".join(errors)
+              human_readable = f'Found errors in instance {instance_name} after changing the next keys: ' \
+                               f'{", ".join(keys_in_instance)}\n' \
+                               f'Errors:\n{err_str}'
+              return_error(human_readable, outputs=context)
+          else:
+              human_readable = f'Found no errors for instance {instance_name}'
+              return_outputs(human_readable, context)
+      finally:
+          # Revert changed instance if changed
+          if keys_in_instance:
+              instance = change_keys(instance, keys_in_instance)
+              if save_configuration(instance):
+                  return_error(
+                      f'Could not revert instance to original configuration. Changed keys: {", ".join(keys_in_instance)}'
+                  )
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('TroubleshootTestInstance', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- troubleshoot
+type: python
