@@ -1,0 +1,253 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Analytics \u0026 SIEM"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"automation"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "List NetWitness SA incidents. Filtering and sorting the list is also supported (see optional arguments).",
+				"name": "NetwitnessSAListIncidents",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			},
+			{
+				"description": "Create an incident inside NetWitness SA from a set of NetWitness events.",
+				"name": "NetwitnessSACreateIncident",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			},
+			{
+				"description": "Get a list of components in the NetWitness architecture.",
+				"name": "NetwitnessSAGetComponents",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			},
+			{
+				"description": "Returns the available NetWitness SA users to be assigned to incidents.",
+				"name": "NetwitnessSAGetAvailableAssignees",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			},
+			{
+				"description": "Returns all the RSA NetWitness SA events in the defined time range.",
+				"name": "NetwitnessSAGetEvents",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			},
+			{
+				"description": "This command will add new events to an existing NetWitness SA incident.",
+				"name": "NetwitnessSAAddEventsToIncident",
+				"tags": [
+					"RSA NetWitness Security Analytics"
+				]
+			}
+		],
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Analytics \u0026 SIEM",
+				"commands": [
+					{
+						"description": "Updates incident",
+						"name": "nw-update-incident"
+					},
+					{
+						"description": "Returns all the components in the system",
+						"name": "netwitness-im-get-components"
+					},
+					{
+						"description": "This command will add new events to existing incident",
+						"name": "netwitness-im-add-events-to-incident"
+					},
+					{
+						"description": "Returns two entries. One is event details json and the second is",
+						"name": "netwitness-im-get-event-details"
+					},
+					{
+						"description": "Returns the original events which this alert contains",
+						"name": "netwitness-im-get-alert-original"
+					},
+					{
+						"description": "Fetches incidents by filter",
+						"name": "netwitness-im-list-incidents"
+					},
+					{
+						"description": "Return all the alerts filtered by filter.",
+						"name": "netwitness-im-get-alerts"
+					},
+					{
+						"description": "Return single alert by id",
+						"name": "nw-get-alert-details"
+					},
+					{
+						"description": "Updates incident",
+						"name": "netwitness-im-update-incident"
+					},
+					{
+						"description": "Simulates fetching incidents. Returns array of incidents from NetWitness.",
+						"name": "fetch-incidents"
+					},
+					{
+						"description": "Returns the original events which this alert contains",
+						"name": "nw-get-alert-original"
+					},
+					{
+						"description": "Return all the alerts filtered by filter.",
+						"name": "nw-get-alerts"
+					},
+					{
+						"description": "Returns incident json by id",
+						"name": "netwitness-im-get-incident-details"
+					},
+					{
+						"description": "Returns all the components in the system",
+						"name": "nw-get-components"
+					},
+					{
+						"description": "Returns all the events in defined time range",
+						"name": "nw-get-events"
+					},
+					{
+						"description": "Fetches incidents by filter",
+						"name": "nw-list-incidents"
+					},
+					{
+						"description": "This command will add new events to existing incident",
+						"name": "nw-add-events-to-incident"
+					},
+					{
+						"description": "Logins to the system and returns valid sessionId",
+						"name": "netwitness-im-login"
+					},
+					{
+						"description": "Returns two entries. One is event details json and the second is event/session content",
+						"name": "nw-get-event-details"
+					},
+					{
+						"description": "Returns incident json by id",
+						"name": "nw-get-incident-details"
+					},
+					{
+						"description": "Logins to the system and returns valid sessionId",
+						"name": "nw-login"
+					},
+					{
+						"description": "Return single alert by id",
+						"name": "netwitness-im-get-alert-details"
+					},
+					{
+						"description": "Creating new incident",
+						"name": "nw-create-incident"
+					},
+					{
+						"description": "Returns the available users to be assigned to incidents",
+						"name": "nw-get-available-assignees"
+					},
+					{
+						"description": "Creating new incident",
+						"name": "netwitness-im-create-incident"
+					},
+					{
+						"description": "Returns the available users to be assigned to incidents",
+						"name": "netwitness-im-get-available-assignees"
+					},
+					{
+						"description": "Returns all the events in defined time range",
+						"name": "netwitness-im-get-events"
+					}
+				],
+				"description": "RSA Security Analytics, compatible with prior to v11. A distributed and modular system that enables highly flexible deployment architectures that scale with the needs of the organization. Security Analytics allows administrators to collect two types of data from the network infrastructure, packet data and log data.",
+				"id": "RSA NetWitness Security Analytics",
+				"name": "RSA NetWitness Security Analytics"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.12",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.16",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "RSA Security Analytics, compatible with prior to v11. A distributed and modular system that enables highly flexible deployment architectures that scale with the needs of the organization. Security Analytics allows administrators to collect two types of data from the network infrastructure, packet data and log data.",
+	"disabledMonthly": false,
+	"downloads": 2159,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "RsaNetwitnessSecurityAnalytics",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/RsaNetwitnessSecurityAnalytics/RSANetWitnessSecurityAnalytics_image.png",
+			"name": "RSA NetWitness Security Analytics"
+		}
+	],
+	"itemVersion": "1.0.12",
+	"keywords": [],
+	"legacy": true,
+	"name": "RSA NetWitness Security Analytics",
+	"packID": "RsaNetwitnessSecurityAnalytics",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-01-09T20:22:40Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "752611",
+	"videos": []
+}
