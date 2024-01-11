@@ -1,0 +1,609 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.8
+    packID: DevSecOps
+    packName: DevSecOps
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: A CodeQL Code Analysis Playbook
+id: DevSecOps - Fetch PR - Triage
+inputs:
+- description: ""
+  key: Run Code Analysis
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "false"
+name: DevSecOps - Fetch PR - Triage
+outputs: []
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "26"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: c17323cc-8578-4e3d-8e94-7a9e35346b80
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: c17323cc-8578-4e3d-8e94-7a9e35346b80
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 390,
+          "y": 40
+        }
+      }
+  "26":
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "31"
+      - "30"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      pull_number:
+        simple: ${incident.prnumber}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Get a pull request
+      id: aaeb3249-e840-4f68-818a-e90b585d079b
+      iscommand: true
+      name: Get PR Details
+      script: '|||GitHub-get-pull-request'
+      type: regular
+      version: -1
+    taskid: aaeb3249-e840-4f68-818a-e90b585d079b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 390,
+          "y": 350
+        }
+      }
+  "27":
+    continueonerrortype: ""
+    id: "27"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "28"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      commit_sha:
+        simple: ${GitHub.PR.Head.SHA}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Get a commit
+      id: 72ca98ee-558a-4087-804c-430dfa3fb11e
+      iscommand: true
+      name: Get Head Commit
+      script: '|||GitHub-get-commit'
+      type: regular
+      version: -1
+    taskid: 72ca98ee-558a-4087-804c-430dfa3fb11e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+  "28":
+    continueonerrortype: ""
+    id: "28"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "29"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      commitid:
+        simple: ${incident.prheadcommit}
+      commitmessage:
+        simple: ${GitHub.Commit.Message}
+      committreeid:
+        simple: ${GitHub.Commit.TreeSHA}
+      headcommitauthor:
+        simple: ${GitHub.Commit.Author.Name}
+      headcommittimestamp:
+        simple: ${GitHub.Commit.Committer.Date}
+      headcommittreeid:
+        simple: ${GitHub.Commit.TreeSHA}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 70012bd9-7ead-42a2-838d-ce1f74e5c20f
+      iscommand: true
+      name: Record Head Commit Details
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 70012bd9-7ead-42a2-838d-ce1f74e5c20f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 935
+        }
+      }
+  "29":
+    continueonerrortype: ""
+    id: "29"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "41"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      type:
+        simple: Git Commit
+      value:
+        simple: ${incident.commitid}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.new.indicator
+      id: c5df7903-1221-4331-83d9-17f693953865
+      iscommand: true
+      name: Create a Commit Tracking Record
+      script: Builtin|||createNewIndicator
+      type: regular
+      version: -1
+    taskid: c5df7903-1221-4331-83d9-17f693953865
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1110
+        }
+      }
+  "30":
+    continueonerrortype: ""
+    id: "30"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "27"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      commitmessage:
+        simple: ${GitHub.Commit.Message}
+      committreeid:
+        simple: ${GitHub.Commit.TreeSHA}
+      pradditions:
+        simple: ${GitHub.PR.Additions}
+      prchangedfiles:
+        simple: ${GitHub.PR.ChangedFiles}
+      prdeletions:
+        simple: ${GitHub.PR.Deletions}
+      prmergeablestate:
+        simple: ${GitHub.PR.Mergeable}
+      prsize:
+        simple: ${GitHub.PR.Head.Repo.Size}
+      prwatchers:
+        simple: ${GitHub.PR.Head.Repo.WatchersCount}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: cd36810a-c956-41d3-8783-4ea734f694c4
+      iscommand: true
+      name: Parse PR Details
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: cd36810a-c956-41d3-8783-4ea734f694c4
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 545
+        }
+      }
+  "31":
+    continueonerrortype: ""
+    id: "31"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "32"
+      - "36"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      commit_id:
+        complex:
+          accessor: headcommitid
+          root: incident
+      owner:
+        complex:
+          accessor: repositoryorganization
+          root: incident
+      repository:
+        complex:
+          accessor: repositoryname
+          root: incident
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Get a check run details
+      id: 00e1aa04-9fef-4cf2-82eb-4eeedaff67d9
+      iscommand: true
+      name: Get PR Check Runs
+      script: '|||Github-get-check-run'
+      type: regular
+      version: -1
+    taskid: 00e1aa04-9fef-4cf2-82eb-4eeedaff67d9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 545
+        }
+      }
+  "32":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: GitHub.CheckRuns.CheckRunAppName
+          operator: isEqualString
+          right:
+            value:
+              simple: LGTM.com
+      label: LGTM
+    continueonerrortype: ""
+    id: "32"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      LGTM:
+      - "37"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: LGTM Check Run Exists
+      id: 1092355d-a88d-4e4f-87f3-a3162652bcbd
+      iscommand: false
+      name: LGTM Check Run Exists ?
+      type: condition
+      version: -1
+    taskid: 1092355d-a88d-4e4f-87f3-a3162652bcbd
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 720
+        }
+      }
+  "36":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: GitHub.CheckRuns.CheckRunAppName
+          operator: isEqualString
+          right:
+            value:
+              simple: Prisma Cloud
+      label: Prisma Cloud
+    continueonerrortype: ""
+    id: "36"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      Prisma Cloud:
+      - "38"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prisma Cloud Check Run Exists
+      id: 58ffa99d-9a34-4558-83bb-4263c6d76f5a
+      iscommand: false
+      name: Prisma Cloud Check Run Exists?
+      type: condition
+      version: -1
+    taskid: 58ffa99d-9a34-4558-83bb-4263c6d76f5a
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 720
+        }
+      }
+  "37":
+    continueonerrortype: ""
+    id: "37"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "39"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      LGTM Task ID:
+        complex:
+          accessor: CheckRuns(val.CheckRunAppName=="LGTM.com").CheckExternalID}
+          root: ${GitHub
+      Organization:
+        complex:
+          accessor: repositoryorganization
+          root: incident
+      Platform:
+        simple: g
+      Repository:
+        complex:
+          accessor: repositoryname
+          root: incident
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: A CodeQL Code Analysis Playbook
+      id: 4f8c8055-6953-4043-8b53-cf35cc51b119
+      iscommand: false
+      name: DevSecOps - LGTM - Analysis - SubPB
+      playbookId: DevSecOps - LGTM - Analysis - SubPB
+      type: playbook
+      version: -1
+    taskid: 4f8c8055-6953-4043-8b53-cf35cc51b119
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 935
+        }
+      }
+  "38":
+    continueonerrortype: ""
+    id: "38"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "39"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Prisma_Cloud_Check_Run_Summary:
+        complex:
+          accessor: CheckRuns(val.CheckRunAppName=="Prisma Cloud").CheckRunOutPut.summary
+          root: GitHub
+      Prisma_Cloud_Check_Run_Title:
+        complex:
+          accessor: CheckRuns(val.CheckRunAppName=="Prisma Cloud").CheckRunOutPut.title
+          root: GitHub
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prisma Task Analysis Playbook
+      id: 44405001-df18-49d3-8aec-e73d49f6752d
+      iscommand: false
+      name: DevSecOps - Prisma - Analysis -SubPB
+      playbookId: DevSecOps - Prisma - Analysis -SubPB
+      type: playbook
+      version: -1
+    taskid: 44405001-df18-49d3-8aec-e73d49f6752d
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 935
+        }
+      }
+  "39":
+    continueonerrortype: ""
+    id: "39"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "40"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Ids:
+        simple: ${GitHub.PR.Number}
+      Interval:
+        simple: "1"
+      PollingCommandArgName:
+        simple: pull_number
+      PollingCommandName:
+        simple: GitHub-get-pull-request
+      Timeout:
+        simple: "108000"
+      dt:
+        simple: GitHub.PR(val.State!=="closed").Number
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 4bae7bdc-cf63-4f3f-8e0c-36618e76ec10
+      iscommand: false
+      name: GenericPolling
+      playbookId: GenericPolling
+      type: playbook
+      version: -1
+    taskid: 4bae7bdc-cf63-4f3f-8e0c-36618e76ec10
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 1110
+        }
+      }
+  "40":
+    continueonerrortype: ""
+    id: "40"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "41"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      prclosedat:
+        simple: ${GitHub.PR.ClosedAt}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 9c1b9db2-ebba-4fed-833d-e9d434d57abb
+      iscommand: true
+      name: Update the PR Closure Date
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 9c1b9db2-ebba-4fed-833d-e9d434d57abb
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 1270
+        }
+      }
+  "41":
+    continueonerrortype: ""
+    id: "41"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 41e272ec-486b-4da0-80f9-9408fd4a3924
+      iscommand: false
+      name: Playbook End
+      type: title
+      version: -1
+    taskid: 41e272ec-486b-4da0-80f9-9408fd4a3924
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 390,
+          "y": 1520
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1545,
+        "width": 1240,
+        "x": 50,
+        "y": 40
+      }
+    }
+  }
