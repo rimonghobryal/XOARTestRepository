@@ -46,47 +46,55 @@ script: |+
 
           webhook_url = "https://outlook.office.com/webhookb2/61e95d0a-6839-4440-a3f7-384dcd3851d2@c7b20731-4938-4baa-a635-f0619de487d4/IncomingWebhook/b147a36e844d4c109a7f064bf17fef9e/971b0052-c40b-485a-b756-775f47f8c3e0"
 
+          args=demisto.args()
+          file=args.get('file','')
 
-          message = {
-              "type": "message",
-              "attachments": [
+          demisto.info(file.get("Name"))
+          if(file.get("Name")=='test.mp3'):
+
+
+              message = {
+                  "type": "message",
+                  "attachments": [
+                      {
+                          "contentType": "application/vnd.microsoft.card.adaptive",
+                          "content": {
+                              "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                              "type": "AdaptiveCard",
+                              "version": "1.2",
+                              "body": [
                   {
-                      "contentType": "application/vnd.microsoft.card.adaptive",
-                      "content": {
-                          "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                          "type": "AdaptiveCard",
-                          "version": "1.2",
-                          "body": [
-              {
-                "type": "TextBlock",
-                "text": "A message from XSOAR"
-              }
-            ],
-          "actions": [
-              {
-                  "type": "Action.OpenUrl",
-                  "title": "Download audio",
-                  "url":  "https://172.16.201.10/entry/download/14%40c69a4ec4-e697-4428-8b68-8f12fc94e40a"
-              }
-          ]
-                      }
+                    "type": "TextBlock",
+                    "text": "A message from XSOAR"
+                  }
+                ],
+              "actions": [
+                  {
+                      "type": "Action.OpenUrl",
+                      "title": "Download audio",
+                      "url":  "https://172.16.201.10/entry/download/"+str(file.get("EntryID"))
                   }
               ]
-          }
+                          }
+                      }
+                  ]
+              }
 
 
 
 
-          response = requests.post(webhook_url, json=message)
-          """
-          if response.status_code == 200:
-              print("Message sent successfully")
-          else:
-              print(f"Failed to send message. Status code: {response.status_code}, Response: {response.text}")
-          """
+              response = requests.post(webhook_url, json=message)
+              """
+              if response.status_code == 200:
+                  print("Message sent successfully")
+              else:
+                  print(f"Failed to send message. Status code: {response.status_code}, Response: {response.text}")
+              """
 
           # TODO: replace the invoked command function with yours
-          return_results("Message Sent Successfully")
+              return_results("Message Sent Successfully")
+          else:
+              return_results("No Message Sent")
       except Exception as ex:
           demisto.error(traceback.format_exc())  # print the traceback
           return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
