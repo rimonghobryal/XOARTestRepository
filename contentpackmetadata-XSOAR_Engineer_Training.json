@@ -1,0 +1,125 @@
+{
+	"author": "Mike Beauchamp",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Fetches events from the XSOAR Engineer Training (XET) integration.",
+						"name": "xet-get-events"
+					},
+					{
+						"description": "Retrieves detailed information about a user account. The user can be specified by username, email address, or as an Active Directory Distinguished Name (DN).",
+						"name": "xet-ad-get-user"
+					},
+					{
+						"description": "Expires the password of an Active Directory user.",
+						"name": "xet-ad-expire-password"
+					},
+					{
+						"description": "Sets a new password for an Active Directory user.",
+						"name": "xet-ad-set-new-password"
+					},
+					{
+						"description": "Searches the simulated SIEM for events.",
+						"name": "xet-siem-search"
+					},
+					{
+						"description": "Send an email. (Doesn't actually send an email.)",
+						"name": "xet-send-mail"
+					}
+				],
+				"description": "The XSOAR Engineer Training (XET) integration provides sample data to fetch events into Cortex XSOAR, and commands to build playbooks around.\n\nUse for training purposes only.",
+				"id": "XSOAR Engineer Training",
+				"name": "XSOAR Engineer Training (Community Contribution)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.1",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.45",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "XSOAR Engineer Training (XET) Pack, this pack contains content utilized to train you on how to be an XSOAR Engineer.",
+	"disabledMonthly": false,
+	"downloads": 47,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.9.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "XSOAR_Engineer_Training",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/XSOAR_Engineer_Training/XSOAREngineerTraining_image.png",
+			"name": "XSOAR Engineer Training"
+		}
+	],
+	"itemVersion": "1.0.1",
+	"keywords": [],
+	"legacy": true,
+	"name": "XSOAR Engineer Training",
+	"packID": "XSOAR_Engineer_Training",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "# XSOAR Engineer Training \n\nThis pack contains content used to train you on how to be a Cortex XSOAR Engineer as part of the XSOAR Engineer Training Series from Cortex Customer Success.\n\n## XSOAR 8 Engineer Training Series\n\nYou can find the XSOAR Engineer Training series for Cortex XSOAR 8 on the Palo Alto Networks Live Community here: \n\n[Cortex XSOAR 8 Engineer Training](https://live.paloaltonetworks.com/t5/cortex-xsoar-how-to-videos/cortex-8-engineering-training-series/ta-p/562155)\n\n## XSOAR 6.x Engineer Training Series\n\nYou can find the XSOAR Engineer Training series for Cortex XSOAR 6.x on the Palo Alto Networks Live Community here:\n\n[Cortex XSOAR 6 Engineer Training](https://live.paloaltonetworks.com/t5/cortex-xsoar-how-to-videos/cortex-xsoar-how-to-customer-success-engineering-training-video/ta-p/484604)\n",
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.9.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [
+		"Trending"
+	],
+	"toServerVersion": "",
+	"updated": "2023-11-16T10:26:52Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6906425",
+	"videos": []
+}
