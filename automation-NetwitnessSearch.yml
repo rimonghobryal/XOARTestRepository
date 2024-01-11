@@ -1,0 +1,58 @@
+args:
+- description: <uint64> The session id to search
+  name: session
+  required: true
+- description: <uint32, {range:1 to 1677721}> The max number of entries to return
+  name: size
+  required: true
+- description: <string> The search string to use
+  name: search
+  required: true
+comment: Deprecated. No available replacement. Searches for matches in session/packet
+  content
+commonfields:
+  id: NetwitnessSearch
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.0.6
+    packID: RsaNetWitnessPacketsAndLogs
+    packName: RSA NetWitness Packets and Logs
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - nw-sdk-search
+deprecated: true
+dockerimage: demisto/python:2.7.18.24398
+engineinfo: {}
+mainengineinfo: {}
+name: NetwitnessSearch
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |2
+
+  resp = demisto.executeCommand("nw-sdk-search", demisto.args())
+
+  if isError(resp[0]):
+      demisto.results(resp)
+  else:
+      data = demisto.get(resp[0], "Contents.results.fields")
+      if data:
+          data = data if isinstance(data, list) else [data]
+          data = [{k: formatCell(row[k]) for k in row} for row in data]
+          demisto.results({"ContentsFormat": formats["table"], "Type": entryTypes["note"], "Contents": data} )
+      else:
+          demisto.results("No results.")
+scripttarget: 0
+subtype: python2
+system: true
+tags:
+- RSA NetWitness Packets & Logs
+type: python
