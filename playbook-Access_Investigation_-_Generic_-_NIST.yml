@@ -1,0 +1,1786 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.0.9
+    packID: NIST
+    packName: NIST
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: |-
+  This playbook investigates an access incident by gathering user and IP information, and handling the incident based on the stages in "Handling an incident - Computer Security Incident Handling Guide" by NIST.
+  https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf
+
+  Used Sub-playbooks:
+  - IP Enrichment - Generic v2
+  - Account Enrichment - Generic v2.1
+  - Block IP - Generic v3
+  - NIST - Lessons Learned
+id: Access Investigation - Generic - NIST
+inputs:
+- description: The source IP address from which the incident originated.
+  key: SrcIP
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The target IP address that was accessed.
+  key: DstIP
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The email address of the account that was used to access the DstIP.
+  key: Username
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: Email addresses to notify about the incident.
+  key: NotifyEmail
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The Remediation SLA for the 'Containment, Eradication, and Recovery'
+    stage (in minutes).
+  key: RemediationSLA
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: Access Investigation - Generic - NIST
+outputs:
+- contextPath: IP
+  description: The IP objects
+  type: unknown
+- contextPath: Endpoint
+  description: The Endpoint's object
+  type: unknown
+- contextPath: Endpoint.Hostname
+  description: The hostname to enrich
+  type: string
+- contextPath: Endpoint.OS
+  description: Endpoint OS
+  type: string
+- contextPath: Endpoint.IP
+  description: List of endpoint IP addresses
+- contextPath: Endpoint.MAC
+  description: List of endpoint MAC addresses
+- contextPath: Endpoint.Domain
+  description: Endpoint domain name
+  type: string
+- contextPath: Account
+  description: The account object.
+  type: unknown
+- contextPath: Account.DisplayName
+  description: The user display name.
+- contextPath: Account.Groups
+  description: Groups for which the user is a member.
+- contextPath: Account.Manager
+  description: The user manager.
+- contextPath: Account.ID
+  description: The user distinguished name.
+- contextPath: Account.Username
+  description: The user sAMAccountName.
+- contextPath: Account.Email
+  description: The user email address.
+- contextPath: ActiveDirectory.Users.userAccountControl
+  description: The user account control flag.
+- contextPath: ActiveDirectory.Users.sAMAccountName
+  description: The user sAMAccountName.
+- contextPath: ActiveDirectory.Users.name
+  description: The user common name.
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "29"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 9191bc70-1a40-4150-83d9-66731d89243f
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 9191bc70-1a40-4150-83d9-66731d89243f
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 50
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "46"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d70d46ad-a9d4-4d8b-8937-5c2922ed2b37
+      iscommand: false
+      name: Incident Documentation
+      type: title
+      version: -1
+    taskid: d70d46ad-a9d4-4d8b-8937-5c2922ed2b37
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1505
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "10"
+      - "9"
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 343205d4-9062-4954-8d57-ac3ab134d5f6
+      iscommand: false
+      name: Enrich indicators
+      type: title
+      version: -1
+    taskid: 343205d4-9062-4954-8d57-ac3ab134d5f6
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 515
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "76"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: faf6fad5-f040-47b2-8802-73c06b1ef6d2
+      iscommand: false
+      name: Enrich source IP
+      type: title
+      version: -1
+    taskid: faf6fad5-f040-47b2-8802-73c06b1ef6d2
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1247.5,
+          "y": 1170
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "75"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f4690b1b-98cd-4309-82be-53e760d502ee
+      iscommand: false
+      name: Enrich destination IP
+      type: title
+      version: -1
+    taskid: f4690b1b-98cd-4309-82be-53e760d502ee
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 1170
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "60"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f68c6b42-4b24-426c-81e0-417984626f2a
+      iscommand: false
+      name: Enrich source user
+      type: title
+      version: -1
+    taskid: f68c6b42-4b24-426c-81e0-417984626f2a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 660
+        }
+      }
+  "12":
+    continueonerrortype: ""
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7a5f3223-0418-418a-8872-ca221ab74c5a
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: 7a5f3223-0418-418a-8872-ca221ab74c5a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 5725
+        }
+      }
+  "17":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: Manager
+                root: Account
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "17"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "80"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Verify that the manager ID (DN) of the source user account was
+        returned in context.
+      id: 10c28bdf-caae-47d7-8c1b-c5a7198b2349
+      iscommand: false
+      name: Was the manager's ID returned?
+      type: condition
+      version: -1
+    taskid: 10c28bdf-caae-47d7-8c1b-c5a7198b2349
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 980
+        }
+      }
+  "19":
+    continueonerrortype: ""
+    id: "19"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      dn:
+        complex:
+          accessor: Manager
+          root: Account
+          transformers:
+          - operator: uniq
+      extend-context:
+        simple: ManagerEmailAddress=mail
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Retrieves detailed information about a user account. The user can
+        be specified by name, email address, or as an Active Directory Distinguished
+        Name (DN). If no filter is specified, all users are returned.
+      id: 6ba49d12-a2e7-40bb-85d2-2a7849adc774
+      iscommand: true
+      name: Get manager's info
+      script: '|||ad-get-user'
+      type: regular
+      version: -1
+    taskid: 6ba49d12-a2e7-40bb-85d2-2a7849adc774
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1330
+        }
+      }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "31"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: e0dc594d-6a63-47e7-85d1-cadb733f3544
+      iscommand: false
+      name: User confirmed account activity
+      type: title
+      version: -1
+    taskid: e0dc594d-6a63-47e7-85d1-cadb733f3544
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1135,
+          "y": 5055
+        }
+      }
+  "23":
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "32"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d78f9aeb-aaab-47c1-8359-4518d529c00a
+      iscommand: false
+      name: User denied account activity
+      type: title
+      version: -1
+    taskid: d78f9aeb-aaab-47c1-8359-4518d529c00a
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2785
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "25"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      severity:
+        simple: low
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: Set the incident severity to low.
+      id: 7201e19f-4202-41ec-8b24-246679d7621f
+      iscommand: true
+      name: Set severity to low
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 7201e19f-4202-41ec-8b24-246679d7621f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1135,
+          "y": 5375
+        }
+      }
+  "25":
+    continueonerrortype: ""
+    id: "25"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      closeReason:
+        simple: 'User is the source of the suspicious activity '
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: Close the investigation.
+      id: eb5afea3-4cbc-4ec6-82f5-d9b80ac4ed1b
+      iscommand: true
+      name: Close Investigation
+      script: Builtin|||closeInvestigation
+      type: regular
+      version: -1
+    taskid: eb5afea3-4cbc-4ec6-82f5-d9b80ac4ed1b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 5550
+        }
+      }
+  "26":
+    continueonerrortype: ""
+    id: "26"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "47"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      severity:
+        simple: high
+      sla:
+        complex:
+          root: inputs.RemediationSLA
+      slaField:
+        simple: remediationsla
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: Set the incident severity to high.
+      id: 2d55cd5b-a693-4aad-8ccc-9a647f782104
+      iscommand: true
+      name: Set severity to high and set the Remediation SLA
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 2d55cd5b-a693-4aad-8ccc-9a647f782104
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3075
+        }
+      }
+  "29":
+    continueonerrortype: ""
+    id: "29"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "62"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 477acbb2-350c-4c0c-8b33-de228ea03249
+      iscommand: false
+      name: Incident Analysis
+      type: title
+      version: -1
+    taskid: 477acbb2-350c-4c0c-8b33-de228ea03249
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 195
+        }
+      }
+  "30":
+    continueonerrortype: ""
+    id: "30"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "48"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 5215967b-bdce-4a83-82b1-ed391aa2dd86
+      iscommand: false
+      name: Interact with the user
+      type: title
+      version: -1
+    taskid: 5215967b-bdce-4a83-82b1-ed391aa2dd86
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 2465
+        }
+      }
+  "31":
+    continueonerrortype: ""
+    id: "31"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "24"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 11ee480a-1b47-4b6a-8c62-c1ad5adfe0c7
+      iscommand: false
+      name: Incident Prioritization
+      type: title
+      version: -1
+    taskid: 11ee480a-1b47-4b6a-8c62-c1ad5adfe0c7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 1135,
+          "y": 5215
+        }
+      }
+  "32":
+    continueonerrortype: ""
+    id: "32"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "26"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7616d6ae-e77f-4f95-881b-e6e52bc46a35
+      iscommand: false
+      name: Incident Prioritization
+      type: title
+      version: -1
+    taskid: 7616d6ae-e77f-4f95-881b-e6e52bc46a35
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2930
+        }
+      }
+  "33":
+    continueonerrortype: ""
+    id: "33"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "41"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      username:
+        complex:
+          root: inputs.Username
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Active Directory Query v2
+      description: Expires the password of an Active Directory user.
+      id: c6fb56b8-d0a1-496c-8728-807582fc4a85
+      iscommand: true
+      name: Active Directory - Expire password
+      script: Active Directory Query v2|||ad-expire-password
+      type: regular
+      version: -1
+    taskid: c6fb56b8-d0a1-496c-8728-807582fc4a85
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 807.5,
+          "y": 4065
+        }
+      }
+  "36":
+    continueonerrortype: ""
+    id: "36"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "No":
+      - "39"
+      "yes":
+      - "79"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check whether the remediation process for this playbook should
+        be automatic.
+      id: 9bb8fbde-b9d6-4a94-8727-3e46abd8994b
+      iscommand: false
+      name: Would you like to perform auto-remediation?
+      type: condition
+      version: -1
+    taskid: 9bb8fbde-b9d6-4a94-8727-3e46abd8994b
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3715
+        }
+      }
+  "37":
+    continueonerrortype: ""
+    id: "37"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "41"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      username:
+        complex:
+          root: inputs.Username
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Disables an Active Directory user account.
+      id: a0af696d-55a0-4d5b-822d-27db6211760e
+      iscommand: true
+      name: Active Directory - Disable account
+      script: '|||ad-disable-account'
+      type: regular
+      version: -1
+    taskid: a0af696d-55a0-4d5b-822d-27db6211760e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 377.5,
+          "y": 4065
+        }
+      }
+  "39":
+    continueonerrortype: ""
+    id: "39"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "50"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Please block the attacker's host-associated IP addresses and disable
+        the associated Active Directory accounts manually.
+      id: 9453fc48-9a0d-403b-83ca-5351d5e8acaf
+      iscommand: false
+      name: Perform manual remediation
+      type: regular
+      version: -1
+    taskid: 9453fc48-9a0d-403b-83ca-5351d5e8acaf
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 4385
+        }
+      }
+  "41":
+    continueonerrortype: ""
+    id: "41"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "81"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: aca722fd-9357-4183-8a5a-3daa566babaf
+      iscommand: false
+      name: Identifying the Attacking Hosts
+      type: title
+      version: -1
+    taskid: aca722fd-9357-4183-8a5a-3daa566babaf
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 592.5,
+          "y": 4240
+        }
+      }
+  "42":
+    continueonerrortype: ""
+    id: "42"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "36"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 9c3a21ab-41ab-4d3c-8114-d6fd2e905ef4
+      iscommand: false
+      name: Choosing a Containment Strategy
+      type: title
+      version: -1
+    taskid: 9c3a21ab-41ab-4d3c-8114-d6fd2e905ef4
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3570
+        }
+      }
+  "43":
+    continueonerrortype: ""
+    id: "43"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "44"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      attachIDs:
+        complex:
+          accessor: FileID
+          root: Report
+      attachNames:
+        complex:
+          accessor: Name
+          root: Report
+      body:
+        simple: An unexpected access attempt was detected in your organization. See
+          details in the attached investigation report.
+      subject:
+        simple: Unexpected access attempt in your organization
+      to:
+        complex:
+          root: inputs.NotifyEmail
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Send an email
+      id: 4678e9b4-7b06-4e3f-8c8f-b4a7c08a092a
+      iscommand: true
+      name: Send mail - Notify about the incident
+      script: '|||send-mail'
+      type: regular
+      version: -1
+    taskid: 4678e9b4-7b06-4e3f-8c8f-b4a7c08a092a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 2145
+        }
+      }
+  "44":
+    continueonerrortype: ""
+    id: "44"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "30"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 699bdae6-323c-4fb2-81a7-9d8d91c7efd4
+      iscommand: false
+      name: Evidence Gathering and Handling
+      type: title
+      version: -1
+    taskid: 699bdae6-323c-4fb2-81a7-9d8d91c7efd4
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 2320
+        }
+      }
+  "46":
+    continueonerrortype: ""
+    id: "46"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "49"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        A script to generate investigation summary report in an automated way.
+        Can be used in post-processing flow as well.
+      id: bc73a944-16c3-46b9-834e-80c48e16c816
+      iscommand: false
+      name: Generate Investigation Summary Report
+      script: GenerateInvestigationSummaryReport
+      type: regular
+      version: -1
+    taskid: bc73a944-16c3-46b9-834e-80c48e16c816
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1650
+        }
+      }
+  "47":
+    continueonerrortype: ""
+    id: "47"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "66"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 417cd61b-7fe6-41e0-8f49-9b5961db0c6d
+      iscommand: false
+      name: Containment, Eradication, and Recovery
+      type: title
+      version: -1
+    taskid: 417cd61b-7fe6-41e0-8f49-9b5961db0c6d
+    timertriggers:
+    - action: start
+      fieldname: remediationsla
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3250
+        }
+      }
+  "48":
+    continueonerrortype: ""
+    id: "48"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    message:
+      bcc: null
+      body:
+        simple: "Hi ${incident.srcuser},\n\nWe identified unexpected activity on your
+          account. \n\nStarting on ${incident.occurred}, there were suspicious log-in
+          attempts from the ${incident.src} IP address.\n\nPlease confirm whether
+          or not you recognize this activity.\nReply \"Yes\" to confirm this activity.
+          \nReply \"No\" otherwise.\n\nRegards,\nYour friendly security team."
+      cc: null
+      format: ""
+      methods:
+      - email
+      replyOptions:
+      - "Yes"
+      - "No"
+      subject:
+        simple: Unexpected account activity - Action required
+      timings:
+        completeafterreplies: 1
+        completeaftersla: false
+        completeafterv2: true
+        retriescount: 2
+        retriesinterval: 360
+      to:
+        complex:
+          accessor: Users.mail
+          root: ActiveDirectory
+    nexttasks:
+      "No":
+      - "23"
+      "Yes":
+      - "22"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Ask the user to confirm or disprove the activity via email. The
+        replay is received and processed directly into the investigation.
+      id: 7978d794-955d-48b7-84a2-b2d80899eaad
+      iscommand: false
+      name: Request user to confirm account activity
+      type: condition
+      version: -1
+    taskid: 7978d794-955d-48b7-84a2-b2d80899eaad
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 2610
+        }
+      }
+  "49":
+    continueonerrortype: ""
+    id: "49"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "77"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 10afd283-a97c-4543-82b6-01bed19015ab
+      iscommand: false
+      name: Incident Notification
+      type: title
+      version: -1
+    taskid: 10afd283-a97c-4543-82b6-01bed19015ab
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1825
+        }
+      }
+  "50":
+    continueonerrortype: ""
+    id: "50"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "73"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7fff0fec-281a-4eea-81d2-ed0f3b9514a1
+      iscommand: false
+      name: Post-Incident Activity
+      type: title
+      version: -1
+    taskid: 7fff0fec-281a-4eea-81d2-ed0f3b9514a1
+    timertriggers:
+    - action: stop
+      fieldname: remediationsla
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 4560
+        }
+      }
+  "55":
+    continueonerrortype: ""
+    id: "55"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "25"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        A script to generate investigation summary report in an automated way.
+        Can be used in post-processing flow as well.
+      id: 53160e58-7ce3-4948-84fc-d1ec560c8905
+      iscommand: false
+      name: Generate Investigation Summary Report
+      script: GenerateInvestigationSummaryReport
+      type: regular
+      version: -1
+    taskid: 53160e58-7ce3-4948-84fc-d1ec560c8905
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 5375
+        }
+      }
+  "60":
+    continueonerrortype: ""
+    id: "60"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 0
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "17"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Username:
+        complex:
+          root: inputs.Username
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 384eecbf-1793-41aa-83d2-a5bc54dbc043
+      iscommand: false
+      name: Account Enrichment - Generic v2.1
+      playbookId: Account Enrichment - Generic v2.1
+      type: playbook
+      version: -1
+    taskid: 384eecbf-1793-41aa-83d2-a5bc54dbc043
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 805
+        }
+      }
+  "62":
+    continueonerrortype: ""
+    id: "62"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      niststage:
+        simple: Incident Analysis
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: 635639c1-b84f-4009-8a21-43d2e286af0c
+      iscommand: true
+      name: Set NIST stage to "Incident Analysis"
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: 635639c1-b84f-4009-8a21-43d2e286af0c
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 340
+        }
+      }
+  "66":
+    continueonerrortype: ""
+    id: "66"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "42"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      niststage:
+        simple: Containment, Eradication, and Recovery
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: e86f4327-ee7a-41c3-8b6f-e70c8749f03f
+      iscommand: true
+      name: Set NIST stage to "Containment, Eradication, and Recovery"
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: e86f4327-ee7a-41c3-8b6f-e70c8749f03f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 3395
+        }
+      }
+  "70":
+    continueonerrortype: ""
+    id: "70"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 0
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "72"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      DataCollection:
+        simple: "True"
+      Email:
+        complex:
+          root: inputs.NotifyEmail
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 50cd8017-135a-4f6f-8ebb-bea385934879
+      iscommand: false
+      name: NIST - Lessons Learned
+      playbookId: NIST - Lessons Learned2
+      type: playbook
+      version: -1
+    taskid: 50cd8017-135a-4f6f-8ebb-bea385934879
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 4880
+        }
+      }
+  "71":
+    continueonerrortype: ""
+    id: "71"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "55"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Manually update TI Platform with indicators found in the investigation.
+      id: 45c9e0a8-dfc0-43b3-8d2d-203acf0d6f61
+      iscommand: false
+      name: Manual - Update TI Platform with indicators found in the investigation
+      type: regular
+      version: -1
+    taskid: 45c9e0a8-dfc0-43b3-8d2d-203acf0d6f61
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 5200
+        }
+      }
+  "72":
+    continueonerrortype: ""
+    id: "72"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "71"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 3e8c4739-56fd-430e-8cf9-353fb4bcbba8
+      iscommand: false
+      name: Using Collected Incident Data
+      type: title
+      version: -1
+    taskid: 3e8c4739-56fd-430e-8cf9-353fb4bcbba8
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 5055
+        }
+      }
+  "73":
+    continueonerrortype: ""
+    id: "73"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "70"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      niststage:
+        simple: Post-Incident Activity
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.set.incident
+      id: d70b8011-770e-4433-8632-de93d0064113
+      iscommand: true
+      name: Set NIST stage to "Post-Incident Activity"
+      script: Builtin|||setIncident
+      type: regular
+      version: -1
+    taskid: d70b8011-770e-4433-8632-de93d0064113
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 4705
+        }
+      }
+  "75":
+    continueonerrortype: ""
+    id: "75"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 0
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      IP:
+        complex:
+          root: inputs.DstIP
+      ResolveIP:
+        simple: "True"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0b6df0c2-d26f-4b7a-85d3-996435d53162
+      iscommand: false
+      name: IP Enrichment - Generic v2
+      playbookId: IP Enrichment - Generic v2
+      type: playbook
+      version: -1
+    taskid: 0b6df0c2-d26f-4b7a-85d3-996435d53162
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 817.5,
+          "y": 1330
+        }
+      }
+  "76":
+    continueonerrortype: ""
+    id: "76"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 0
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      IP:
+        complex:
+          root: inputs.SrcIP
+      ResolveIP:
+        simple: "True"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 248e1c1c-9bc4-4497-8bf0-ad7c38fe3573
+      iscommand: false
+      name: IP Enrichment - Generic v2
+      playbookId: IP Enrichment - Generic v2
+      type: playbook
+      version: -1
+    taskid: 248e1c1c-9bc4-4497-8bf0-ad7c38fe3573
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 1247.5,
+          "y": 1330
+        }
+      }
+  "77":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.NotifyEmail
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "77"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "78"
+      "yes":
+      - "43"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Verify that an email address was retrieved for notification purposes.
+      id: d339873f-d3e1-448c-8eb9-11b73225cfe6
+      iscommand: false
+      name: Notify by Email?
+      type: condition
+      version: -1
+    taskid: d339873f-d3e1-448c-8eb9-11b73225cfe6
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 387.5,
+          "y": 1970
+        }
+      }
+  "78":
+    continueonerrortype: ""
+    id: "78"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "44"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: 'Notify about the incident manually. '
+      id: c77bb21e-4852-4c6f-80f7-17558a0daae2
+      iscommand: false
+      name: Manual Notification
+      type: regular
+      version: -1
+    taskid: c77bb21e-4852-4c6f-80f7-17558a0daae2
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 2145
+        }
+      }
+  "79":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: brand
+                filters:
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.brand
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: Active Directory Query v2
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.state
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: active
+                root: modules
+          operator: isExists
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
+    id: "79"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      "yes":
+      - "37"
+      - "33"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Checks whether the Active Directory Query v2 integration is enabled.
+      id: d2e25a89-04a2-4b1d-8f9d-3726c358fa4d
+      iscommand: false
+      name: Is Active Directory enabled?
+      type: condition
+      version: -1
+    taskid: d2e25a89-04a2-4b1d-8f9d-3726c358fa4d
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 592.5,
+          "y": 3890
+        }
+      }
+  "80":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: brand
+                filters:
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.brand
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: Active Directory Query v2
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.state
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: active
+                root: modules
+          operator: isExists
+          right:
+            value: {}
+      label: "yes"
+    continueonerrortype: ""
+    id: "80"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "19"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |
+        Checks whether the Active Directory Query v2 integration is enabled.
+      id: c31ff91a-2e74-45e1-8efb-ffdf333e8711
+      iscommand: false
+      name: Is Active Directory enabled?
+      type: condition
+      version: -1
+    taskid: c31ff91a-2e74-45e1-8efb-ffdf333e8711
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 275,
+          "y": 1155
+        }
+      }
+  "81":
+    continueonerrortype: ""
+    id: "81"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "50"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      AutoCommit:
+        simple: "No"
+      CustomBlockRule:
+        simple: "True"
+      IP:
+        complex:
+          root: inputs.SrcIP
+      InputEnrichment:
+        simple: "False"
+      RuleDirection:
+        simple: outbound
+      RuleName:
+        simple: XSOAR - Block IP playbook - ${incident.id}
+      UserVerification:
+        simple: "False"
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: "This playbook blocks malicious IP addresses using all integrations
+        that are enabled. The direction of the traffic that will be blocked is determined
+        by the XSOAR user (and set by default to outgoing)\nNote the following:\n-
+        \ some of those integrations require specific parameters to run, which are
+        based on the playbook inputs. Also, certain integrations use FW rules or appended
+        network objects.\n- Note that the appended network objects should be specified
+        in blocking rules inside the system later on. \n\n\nSupported integrations
+        for this playbook [Network security products such as FW/WAF/IPs/etc.]: \n\n*
+        Check Point Firewall\n* Palo Alto Networks PAN-OS\n* Zscaler\n* FortiGate\n*
+        Aria Packet Intelligence\n* Cisco Firepower \n* Cisco Secure Cloud Analytics\n*
+        Cisco ASA\n* Akamai WAF\n* F5 SilverLine\n* ThreatX\n* Signal Sciences WAF\n*
+        Sophos Firewall\n\n"
+      id: 4436bf1b-6cc6-4cdd-8ee8-bb01bff70179
+      iscommand: false
+      name: Block IP - Generic v3
+      playbookId: Block IP - Generic v3
+      type: playbook
+      version: -1
+    taskid: 4436bf1b-6cc6-4cdd-8ee8-bb01bff70179
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 592.5,
+          "y": 4385
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 5740,
+        "width": 1577.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
