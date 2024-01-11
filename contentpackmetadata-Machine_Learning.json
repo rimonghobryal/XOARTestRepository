@@ -1,0 +1,173 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"automation",
+		"playbook"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Evaluates an ML model in production.",
+				"name": "EvaluateMLModllAtProduction",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Hash fields from the incident list.\nSearch for incidents by arguments with an option to hash some of its fields.",
+				"name": "HashIncidentsFields",
+				"tags": [
+					"incidents",
+					"ml"
+				]
+			},
+			{
+				"description": "Exports an existing ML model to a file. ",
+				"name": "ExportMLModel",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "A helper script for the DBot Create Phishing Classifier V2 playbook. This script extends the query based on the phishingLabels argument.",
+				"name": "ExtendQueryBasedOnPhishingLabels",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Imports a file that contains an ML model. ",
+				"name": "ImportMLModel",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Deprecated. Use DBotPredictOutOfTheBoxV2 instead.",
+				"name": "DBotPredictOutOfTheBox",
+				"tags": [
+					"phishing",
+					"ml"
+				]
+			},
+			{
+				"description": "Predict phishing incidents using the out-of-the-box pre-trained model.",
+				"name": "DBotPredictOutOfTheBoxV2",
+				"tags": [
+					"phishing",
+					"ml"
+				]
+			},
+			{
+				"description": "Apply a trained ML model on multiple incidents at once, to compare incidents how the incidents were labeled by analysts, to the predictions of the model. This script is aimed to help evaluate a trained model using past incidents.",
+				"name": "DBotPredictIncidentsBatch",
+				"tags": [
+					"phishing",
+					"ml"
+				]
+			}
+		],
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": [
+			{
+				"description": "Train the phishing machine learning model. This playbook should be used as job, to run repeatedly, for example every week. ",
+				"name": "DBot Create Phishing Classifier V2 Job"
+			},
+			{
+				"description": "Create a phishing classifier using machine learning techniques, based on email content.",
+				"name": "DBot Create Phishing Classifier V2"
+			},
+			{
+				"description": "Create a phishing classifier using machine learning. The classifier is based on incidents files extracted from email content.",
+				"name": "DBot Create Phishing Classifier V2 From File"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.4.9",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.16",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.13.19",
+			"name": "Common Scripts"
+		}
+	},
+	"deprecated": false,
+	"description": "Help to manage machine learning models in Cortex XSOAR",
+	"disabledMonthly": false,
+	"downloads": 5269,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "ML",
+	"installMessage": "",
+	"integrations": [],
+	"itemVersion": "1.4.9",
+	"keywords": [
+		"ml",
+		"machine learning"
+	],
+	"legacy": true,
+	"name": "Machine Learning",
+	"packID": "ML",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "## Machine Learning",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-01-09T20:21:43Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "752611",
+	"videos": []
+}
