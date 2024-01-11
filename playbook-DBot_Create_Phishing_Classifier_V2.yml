@@ -1,0 +1,498 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.4.9
+    packID: ML
+    packName: Machine Learning
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Create a phishing classifier using machine learning techniques, based
+  on email content.
+id: DBot Create Phishing Classifier V2
+inputs:
+- description: The model name to store in the system.
+  key: modelName
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: phishing_model
+- description: A comma-separated list of incident fields names with the email body
+    or html body. You can also use "|" if you want to choose the first non-empty value
+    from a list of fields.
+  key: emailTextKey
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: emailbody|emailbodyhtml|details
+- description: A comma-separated list of incident fields names with the email subject.
+    You can also use "|" if you want to choose the first non-empty value from a list
+    of fields.
+  key: emailSubjectKey
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: emailsubject|name
+- description: The field name with the email tag. Supports a comma-separated list.
+    The first non-empty value will be taken.
+  key: emailTagKey
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: emailclassification
+- description: 'A comma-separated list of email tags values and mapping. The script
+    considers only the tags specified in this field. You can map the label to another
+    value by using this format: LABEL:MAPPED_LABEL. For example, for 4 values in an
+    email tag: malicious, credentials harvesting, inner communication, external legit
+    email, unclassified. While training, we want to ignore the "unclassified" tag,
+    and refer to "credentials harvesting" as "malicious" too. Also, we want to merge
+    "inner communication" and "external legit email" to a single tag called "non-malicious".
+    The input will be: malicious, credentials harvesting:malicious, inner communication:non-malicious,
+    external legit email:non-malicious.'
+  key: phishingLabels
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: '*'
+- description: The incidents query to fetch the training data for the model.
+  key: incidentsQuery
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The maximum number of incidents to fetch.
+  key: maxIncidentsToFetchOnTraining
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "3000"
+- description: If non-empty, hash every word with this seed.
+  key: hashSeed
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: The name of the Cortex XSOAR list that contains historical data training
+    samples for the model.
+  key: historicalDataFileListName
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: Whether to override the existing model if a model with the same name
+    exists. Default is "false".
+  key: overrideModel
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "true"
+- description: A common-separated list of incident types by which to filter.
+  key: incidentTypes
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: Phishing
+- description: Remove emails with similarity greater than this threshold, range 0-1,
+    where 1 is completely identical.
+  key: dedupThreshold
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "0.99"
+- description: Sample text of which the total number words that are less than or equal
+    to this number will be ignored.
+  key: removeShortTextThreshold
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "15"
+- description: The model target accuracy, between 0 and 1.
+  key: modelTargetAccuracy
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "0.8"
+- description: The output file format. Can be "json" or "pickle".
+  key: outputFormat
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: pickle
+name: DBot Create Phishing Classifier V2
+outputs:
+- contextPath: DBotPhishingClassifier.EvaluationScores.Precision.All
+  description: Average binary precision over all classes (0-1).
+  type: number
+- contextPath: DBotPhishingClassifier.EvaluationScores.TP.All
+  description: The number of instances of all classes that were predicted correctly.
+  type: number
+- contextPath: DBotPhishingClassifier.EvaluationScores.Coverage.All
+  description: The number of instances that were predicted at a probability greater
+    than the threshold.
+  type: number
+- contextPath: DBotPhishingClassifier.EvaluationScores.Total.All
+  description: The total number of instances.
+  type: number
+- contextPath: DBotPhishingClassifier.ModelName
+  description: The name of the model in Cortex XSOAR.
+  type: string
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "14"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f96785c7-7d04-4f99-8da3-929501848239
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: f96785c7-7d04-4f99-8da3-929501848239
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a9333d16-a1b0-4f04-8ce6-f13e0da7ebea
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: a9333d16-a1b0-4f04-8ce6-f13e0da7ebea
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1245
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "10"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      NonEmptyFields:
+        simple: ${inputs.emailTagKey}
+      incidentTypes:
+        simple: ${inputs.incidentTypes}
+      includeContext:
+        simple: "false"
+      limit:
+        simple: ${inputs.maxIncidentsToFetchOnTraining}
+      outputFormat:
+        simple: ${inputs.outputFormat}
+      populateFields:
+        simple: ${inputs.emailTextKey},${inputs.emailSubjectKey},${inputs.emailTagKey}
+      query:
+        simple: ${ExtendQueryBasedOnPhishingLabels.extendedQuery}
+      timeField:
+        simple: created
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Gets a list of incident objects and the associated incident outputs
+        that match the specified query and filters. The results are returned in a
+        structured data file.
+      id: 5e19ea89-ccf7-40c8-811b-f683ba5ac94a
+      iscommand: false
+      name: Get Incidents
+      script: GetIncidentsByQuery
+      type: regular
+      version: -1
+    taskid: 5e19ea89-ccf7-40c8-811b-f683ba5ac94a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 370
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      cleanHTML:
+        simple: "true"
+      dedupThreshold:
+        simple: ${inputs.dedupThreshold}
+      hashSeed:
+        simple: ${inputs.hashData}
+      input:
+        simple: ${lastCompletedTaskEntries}
+      inputType:
+        simple: ${GetIncidentsByQuery.FileFormat}
+      outputFormat:
+        simple: ${inputs.outputFormat}
+      preProcessType:
+        simple: nlp
+      removeShortTextThreshold:
+        simple: ${inputs.removeShortTextThreshold}
+      textFields:
+        simple: ${inputs.emailSubjectKey},${inputs.emailTextKey}
+      whitelistFields:
+        simple: ${inputs.emailTagKey}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Pre-process text data for the machine learning text classifier.
+        The pre-process normalizes the text:
+        - Remove HTML tags.
+        - Convert every word to it's root (goes -> go).
+        - Remove sample text of which the total number of words are less than or equal to a threshold.
+        - Remove emails with similarity greater than some threshold.
+      id: fc975c48-a318-4c51-86ab-f80d6957f6fc
+      iscommand: false
+      name: Pre-process file
+      script: DBotPreProcessTextData
+      type: regular
+      version: -1
+    taskid: fc975c48-a318-4c51-86ab-f80d6957f6fc
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 545
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      input:
+        simple: ${DBotPreProcessTextData.Filename},${inputs.historicalDataFileListName}
+      inputType:
+        complex:
+          accessor: FileFormat
+          root: DBotPreProcessTextData
+          transformers:
+          - args:
+              prefix: {}
+              suffix:
+                value:
+                  simple: _filename
+            operator: concat
+      modelName:
+        simple: ${inputs.modelName}
+      overrideExistingModel:
+        simple: ${inputs.overrideModel}
+      phishingLabels:
+        simple: ${inputs.phishingLabels}
+      tagField:
+        simple: ${inputs.emailTagKey}
+      targetAccuracy:
+        simple: ${inputs.modelTargetAccuracy}
+      textField:
+        simple: ${DBotPreProcessTextData.TextFieldProcessed}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Train the machine learning text classifier.
+      id: f42d000f-11f8-43a8-8c65-f7fba092c75a
+      iscommand: false
+      name: Train Model
+      script: DBotTrainTextClassifierV2
+      type: regular
+      version: -1
+    taskid: f42d000f-11f8-43a8-8c65-f7fba092c75a
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1070
+        }
+      }
+  "12":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.historicalDataFileListName
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "11"
+      "yes":
+      - "13"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Check if we have input with a historical data file - usually from
+        an external source, or data we used to have in Cortex XSOAR.
+      id: 0ee35628-0387-4595-84f8-17968fdabcdc
+      iscommand: false
+      name: Historical data exist?
+      type: condition
+      version: -1
+    taskid: 0ee35628-0387-4595-84f8-17968fdabcdc
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 720
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "11"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      isZipFile:
+        simple: "no"
+      listname:
+        simple: ${inputs.historicalDataFileListName}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Converts a Base64 file in a list to a binary file and upload to
+        the War Room.
+      id: 7174d475-f61d-440b-80c7-dfe59c635595
+      iscommand: false
+      name: Get Historical File
+      script: Base64ListToFile
+      type: regular
+      version: -1
+    taskid: 7174d475-f61d-440b-80c7-dfe59c635595
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 162.5,
+          "y": 895
+        }
+      }
+  "14":
+    continueonerrortype: ""
+    id: "14"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      phishingLabels:
+        simple: ${inputs.phishingLabels}
+      query:
+        simple: ${inputs.incidentsQuery}
+      tagField:
+        simple: ${inputs.emailTagKey}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: A helper script for DBot Create Phishing Classifier V2 playbook.
+        This script extends the query based on the phishingLabels argument.
+      id: c6f0a658-35a4-482b-817f-c28b0e060fa7
+      iscommand: false
+      name: Extend Query
+      script: ExtendQueryBasedOnPhishingLabels
+      type: regular
+      version: -1
+    taskid: c6f0a658-35a4-482b-817f-c28b0e060fa7
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1260,
+        "width": 492.5,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
