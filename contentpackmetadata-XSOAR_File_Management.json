@@ -1,0 +1,120 @@
+{
+	"author": "Pierre",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Copies a file from this incident to the specified incident. Usefull if you want to manipule file in the preprocessing.",
+						"name": "file-management-upload-file-to-incident"
+					},
+					{
+						"description": "Delete the file from the incident and from the XSOAR server.",
+						"name": "file-management-delete-file"
+					},
+					{
+						"description": "Check if entry ID exist.",
+						"name": "file-management-check-file"
+					},
+					{
+						"description": "Delete the attachment from the incident and from the XSOAR server.",
+						"name": "file-management-delete-attachment"
+					},
+					{
+						"description": "Rename a file. Warning: use this only if necessary, it's HEAVY to run, this will delete and recreate the file with another name.",
+						"name": "file-management-rename-file"
+					}
+				],
+				"description": "This integration uses the XSOAR API to perform basic but essentials actions on files.",
+				"id": "XSOAR File Management",
+				"name": "XSOAR File Management (Community Contribution)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.2",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.41",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "This pack let user manipulate file inside XSOAR more easily than with the builtin functions.",
+	"disabledMonthly": false,
+	"downloads": 57,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "XSOARFileManagement",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/XSOARFileManagement/XSOARFileManagement_image.png",
+			"name": "XSOAR File Management"
+		}
+	],
+	"itemVersion": "1.0.2",
+	"keywords": [
+		"File"
+	],
+	"legacy": true,
+	"name": "XSOAR File Management",
+	"packID": "XSOARFileManagement",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-11-03T10:24:32Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6785115",
+	"videos": []
+}
