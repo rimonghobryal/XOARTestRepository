@@ -1,0 +1,1728 @@
+category: Utilities
+commonfields:
+  id: GitLab
+  version: -1
+configuration:
+- defaultvalue: https://gitlab.com/api/v4
+  display: Server URL (e.g. https://gitlab.com/api/v4)
+  name: url
+  required: true
+  type: 0
+- display: API Key
+  name: api_key
+  required: true
+  type: 4
+- display: Trigger Token
+  name: trigger_token
+  required: false
+  type: 4
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.8
+    packID: DevSecOps
+    packName: DevSecOps
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+deprecated: true
+description: Deprecated. Use GitLab v2 in GitLab Pack instead.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: Ayman Mahmoud
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  ## Gitlab
+  From project planning and source code management to CI/CD and monitoring, GitLab is a complete DevOps platform, delivered as a single application.
+
+  ### Generate an API Access Key
+  1. Login to your Gitlab service account, go to **Account Settings**.
+  2. Click the **Access Tokens** tab to get access to the integration tokens
+  3. Generate a Token with selected Scopes and Permissions as needed.
+  4. Copy and paste the key.
+
+  ### URL
+  The Base URL of Gitlab API v4.0: https://gitlab.com/api/v4
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/git-lab)
+display: GitLab (Deprecated) (Community Contribution)
+image: data:image/png;base64,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
+name: GitLab
+script:
+  commands:
+  - arguments:
+    - description: Limits the results to projects stored on repository_storage. Available
+        for administrators only.
+      name: repository_storage
+    - description: Limits the results to projects with last_activity before a specified
+        time.
+      name: last_activity_before
+    - description: Limits by the minimal access level of the current user.
+      name: min_access_level
+    - description: Returns only limited fields for each project. This is a no operation
+        without authentication as only simple fields are returned.
+      name: simple
+    - description: Returns the projects sorted in ascending or descending order.
+      name: sort
+    - description: Limits by the projects that the current user is a member of.
+      name: membership
+    - description: Includes the ancestor namespaces when matching search criteria.
+      name: search_namespaces
+    - description: Limits by archived status.
+      name: archived
+    - description: Returns a list of projects that match the search criteria.
+      name: search
+    - description: Limits the results to projects with IDs that are less than the
+        specified ID.
+      name: id_before
+    - description: Limits the results to projects with last_activity after a specified
+        time.
+      name: last_activity_after
+    - description: Limits by the projects starred by the current user.
+      name: starred
+    - description: Limits the results to projects with IDs greater than the specified
+        ID.
+      name: id_after
+    - description: Limits by the projects explicitly owned by the current user.
+      name: owned
+    - description: Returns the projects ordered by id, name, path, created_at, updated_at,
+        or last_activity_at fields. Repository_size, storage_size, and wiki_size fields
+        are only allowed for administrators. The default is created_at.
+      name: order_by
+    - description: Includes the project statistics.
+      name: statistics
+    - description: Limits by visibility; public, internal, or private.
+      name: visibility
+    - description: Includes the custom attributes in the response (administrators
+        only).
+      name: with_custom_attributes
+    - description: Limits by the enabled issues feature.
+      name: with_issues_enabled
+    - description: Limits by the enabled merge requests feature.
+      name: with_merge_requests_enabled
+    - description: Limits by the projects that use the given programming language.
+      name: with_programming_language
+    deprecated: true
+    description: Gets a list of all visible projects across GitLab for the authenticated
+      user. When accessed without authentication, only public projects with simple
+      fields are returned.
+    name: gitlab-get-projects
+    outputs:
+    - contextPath: GitLab.Projects.web_url
+      description: Project Web URL.
+      type: Unknown
+    - contextPath: GitLab.Projects.name
+      description: Project Name.
+      type: Unknown
+    - contextPath: GitLab.Projects.path
+      description: Project Path.
+      type: Unknown
+    - contextPath: GitLab.Projects.created_at
+      description: Project Created At.
+      type: Unknown
+    - contextPath: GitLab.Projects.visibility
+      description: Project Visiblity.
+      type: Unknown
+    - contextPath: GitLab.Projects.id
+      description: Project ID.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    deprecated: true
+    description: Gets a list of the access requests viewable by the authenticated
+      user.
+    name: gitlab-projects-get-access-requests
+    outputs:
+    - contextPath: GitLab.AccessRequests.id
+      description: Access Request ID.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.username
+      description: Access Request User.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.requested_at
+      description: Access Request Create Time.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.state
+      description: Access Request State.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    deprecated: true
+    description: Requests the authenticated user access to a group or project.
+    name: gitlab-projects-request-access
+    outputs:
+    - contextPath: GitLab.AccessRequests.id
+      description: Access Request ID.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.username
+      description: Access Request User.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.requested_at
+      description: Access Request Create Time.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.state
+      description: Access Request State.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project owned by the authenticated
+        user.
+      name: id
+      required: true
+    - description: The user ID of the access requester.
+      name: user_id
+      required: true
+    - description: 'A valid access level (defaults: 30, developer access level).'
+      name: access_level
+    deprecated: true
+    description: Approves an access request for the given user.
+    name: gitlab-projects-approve-access
+    outputs:
+    - contextPath: GitLab.AccessRequests.id
+      description: Access Request ID.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.username
+      description: Access Request User.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.requested_at
+      description: Access Request Create Time.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.state
+      description: Access Request State.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    - description: The user ID of the access requester.
+      name: user_id
+      required: true
+    deprecated: true
+    description: Denies an access request for the given user.
+    name: gitlab-projects-deny-access
+    outputs:
+    - contextPath: GitLab.AccessRequests.id
+      description: Access Request ID.
+      type: Unknown
+    - contextPath: GitLab.AccessRequests.state
+      description: Access Request State.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    - description: Returns a list of branches containing the search string. You can
+        use ^term and term$ to find branches that begin and end with term, respectively.
+      name: search
+    deprecated: true
+    description: Gets a list of repository branches from a project, sorted by name
+      alphabetically.
+    name: gitlab-projects-get-repository-branches
+    outputs:
+    - contextPath: GitLab.Branches.name
+      description: Branch Name.
+      type: Unknown
+    - contextPath: GitLab.Branches.web_url
+      description: Branch Web URL.
+      type: Unknown
+    - contextPath: GitLab.Branches.commit.id
+      description: Branch Head Commit ID.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    - description: The name of the branch.
+      name: branch
+      required: true
+    - description: Branch name, or commit SHA to create a branch from.
+      name: ref
+      required: true
+    deprecated: true
+    description: Creates a new branch in the repository.
+    name: gitlab-projects-create-repository-branch
+    outputs:
+    - contextPath: GitLab.Branches.name
+      description: Branch Name.
+      type: Unknown
+    - contextPath: GitLab.Branches.web_url
+      description: Branch Web URL.
+      type: Unknown
+    - contextPath: GitLab.Branches.commit.id
+      description: Branch Head Commit ID.
+      type: Unknown
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    - description: The name of the branch.
+      name: branch
+      required: true
+    deprecated: true
+    description: Deletes a branch from the repository.
+    name: gitlab-projects-delete-repository-branch
+  - arguments:
+    - description: The ID or URL encoded path of the project that is owned by the
+        authenticated user.
+      name: id
+      required: true
+    deprecated: true
+    description: Deletes all branches that are merged into the project’s default branch.
+    name: gitlab-projects-delete-repository-merged-branches
+  - arguments: []
+    deprecated: true
+    description: Retrieves the version information for the GitLab instance, and responds
+      200 OK for authenticated users.
+    name: gitlab-get-version
+    outputs:
+    - contextPath: GitLab.version
+      description: GitLab Verion
+      type: String
+    - contextPath: GitLab.revision
+      description: GitLab Revision
+      type: String
+  - arguments:
+    - description: Project ID from which to retrieve pipeline schedules.
+      name: project_id
+      required: true
+    - description: ID of the specific pipeline schedule from which to retrieve its
+        details.
+      name: pipeline_schedule_id
+    deprecated: true
+    description: Gets the details of the pipeline schedules.
+    name: gitlab-pipelines-schedules-list
+    outputs:
+    - contextPath: GitLab.PipelineSchedule.id
+      description: Pipeline schedule ID.
+      type: Number
+    - contextPath: GitLab.PipelineSchedule.description
+      description: Pipeline schedule description.
+      type: String
+    - contextPath: GitLab.PipelineSchedule.ref
+      description: Pipeline schedule reference.
+      type: String
+    - contextPath: GitLab.PipelineSchedule.next_run_at
+      description: Pipeline schedule next run scheduled time.
+      type: Date
+    - contextPath: GitLab.PipelineSchedule.active
+      description: Whether pipeline schedule is active.
+      type: Boolean
+    - contextPath: GitLab.PipelineSchedule.created_at
+      description: When pipeline schedule was created.
+      type: Date
+    - contextPath: GitLab.PipelineSchedule.updated_at
+      description: When the pipeline schedule was last updated.
+      type: Date
+    - contextPath: GitLab.PipelineSchedule.last_pipeline.id
+      description: ID of the last pipeline that was run by the scheduled pipeline.
+        Relevant only when the pipeline schedule ID is given.
+      type: Number
+    - contextPath: GitLab.PipelineSchedule.last_pipeline.sha
+      description: SHA of the last pipeline that was run by the scheduled pipeline.
+        Relevant only when the pipeline schedule ID is given.
+      type: String
+    - contextPath: GitLab.PipelineSchedule.last_pipeline.ref
+      description: Reference of the last pipeline that was run by the scheduled pipeline.
+        Relevant only when the pipeline schedule ID is given.
+      type: String
+    - contextPath: GitLab.PipelineSchedule.last_pipeline.status
+      description: Status of the last pipeline that was run by the scheduled pipeline.
+        Relevant only when the pipeline schedule ID is given.
+      type: String
+  - arguments:
+    - description: Project ID from which to retrieve pipelines.
+      name: project_id
+      required: true
+    - description: ID of specific pipeline from which to retrieve its details.
+      name: pipeline_id
+    - description: Reference name of the pipelines, e.g., 'master'.
+      name: ref
+    - auto: PREDEFINED
+      description: Retrieves pipelines of which status matches the given status.
+      name: status
+      predefined:
+      - created
+      - waiting_for_resource
+      - preparing
+      - pending
+      - running
+      - success
+      - failed
+      - canceled
+      - skipped
+      - manual
+      - scheduled
+    deprecated: true
+    description: Gets the details of the pipelines.
+    name: gitlab-pipelines-list
+    outputs:
+    - contextPath: GitLab.Pipeline.id
+      description: Pipeline ID.
+      type: Number
+    - contextPath: GitLab.Pipeline.project_id
+      description: Project ID that the pipeline belongs to.
+      type: Number
+    - contextPath: GitLab.Pipeline.status
+      description: Status of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.ref
+      description: Reference of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.sha
+      description: SHA of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.created_at
+      description: Time when the pipeline was created.
+      type: Date
+    - contextPath: GitLab.Pipeline.updated_at
+      description: Time when the pipeline was last updated.
+      type: Date
+    - contextPath: GitLab.Pipeline.started_at
+      description: Time when the pipeline was started.
+      type: Date
+    - contextPath: GitLab.Pipeline.finished_at
+      description: Time when the pipeline was finished.
+      type: Date
+    - contextPath: GitLab.Pipeline.duration
+      description: Duration of the pipeline in seconds.
+      type: Number
+    - contextPath: GitLab.Pipeline.web_url
+      description: Web URL of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.name
+      description: Name of the user who triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.username
+      description: Username that triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.id
+      description: ID of the user who triggered the pipeline.
+      type: Number
+    - contextPath: GitLab.Pipeline.user.state
+      description: State of the user who triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.avatar_url
+      description: Avatar URL of the user who trigerred the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.web_url
+      description: Web URL of the user who triggered the pipeline.
+      type: String
+  - arguments:
+    - description: Project ID from which to retrieve jobs details.
+      name: project_id
+      required: true
+    - description: ID of the pipeline from which to retrieve its jobs.
+      name: pipeline_id
+      required: true
+    deprecated: true
+    description: Gets job details.
+    name: gitlab-jobs-list
+    outputs:
+    - contextPath: GitLab.Job.status
+      description: The status of the job.
+      type: String
+    - contextPath: GitLab.Job.created_at
+      description: Time the job was created.
+      type: Date
+    - contextPath: GitLab.Job.started_at
+      description: Time the job was started.
+      type: Date
+    - contextPath: GitLab.Job.finished_at
+      description: Time the job was finished.
+      type: Date
+    - contextPath: GitLab.Job.duration
+      description: Duration of the job in seconds.
+      type: Number
+    - contextPath: GitLab.Job.id
+      description: ID of the job.
+      type: Number
+    - contextPath: GitLab.Job.name
+      description: Name of the job.
+      type: String
+    - contextPath: GitLab.Job.pipeline.id
+      description: Pipeline the job belongs to.
+      type: Number
+    - contextPath: GitLab.Job.pipeline.project_id
+      description: Project ID the job belongs to.
+      type: Number
+    - contextPath: GitLab.Job.pipeline.ref
+      description: Reference of the pipeline the job belongs to.
+      type: String
+    - contextPath: GitLab.Job.pipeline.sha
+      description: SHA of the pipeline the job belongs to.
+      type: String
+    - contextPath: GitLab.Job.pipeline.status
+      description: Status of the pipeline the job belongs to.
+      type: String
+    - contextPath: GitLab.Job.ref
+      description: Reference name of the job.
+      type: String
+    - contextPath: GitLab.Job.stage
+      description: Stage of the job.
+      type: String
+    - contextPath: GitLab.Job.web_url
+      description: Web URL of the job.
+      type: String
+  - arguments:
+    - description: Project ID from which to retrieve an artifact.
+      name: project_id
+      required: true
+    - description: ID of a specific job from which to retrieve its artifact.
+      name: job_id
+      required: true
+    - description: Suffix to the path of an artifact from which to retrieve its data.
+      name: artifact_path_suffix
+      required: true
+    deprecated: true
+    description: Gets an artifact from a given artifact path, corresponding to a given
+      job ID.
+    name: gitlab-artifact-get
+    outputs:
+    - contextPath: GitLab.Artifact.job_id
+      description: Job ID from which the artifact was taken.
+      type: String
+    - contextPath: GitLab.Artifact.artifact_path_suffix
+      description: Suffix of the given artifact path.
+      type: String
+    - contextPath: GitLab.Artifact.artifact_data
+      description: Data of the artifact requested.
+      type: String
+  - arguments:
+    - defaultValue: master
+      description: The target branch of the Merge Request.
+      name: target_branch
+    - auto: PREDEFINED
+      defaultValue: opened
+      description: The state of the Merge Request.
+      name: state
+      predefined:
+      - opened
+      - closed
+      - locked
+      - merged
+    - description: Project ID from which to retrieve the Merge Requests.
+      name: project_id
+      required: true
+    deprecated: true
+    description: List all merge requests
+    name: gitlab-merge-requests-list
+    outputs:
+    - contextPath: GitLab.MergeRequest.id
+      description: The merge request ID.
+      type: Number
+    - contextPath: GitLab.MergeRequest.iid
+      description: The merge request IID.
+      type: Number
+    - contextPath: GitLab.MergeRequest.project_id
+      description: The project ID of the merge request.
+      type: Number
+    - contextPath: GitLab.MergeRequest.title
+      description: The merge request title.
+      type: String
+    - contextPath: GitLab.MergeRequest.description
+      description: The merge request description
+      type: String
+    - contextPath: GitLab.MergeRequest.state
+      description: The merge request state.
+      type: String
+    - contextPath: GitLab.MergeRequest.created_at
+      description: The time the merge request was created.
+      type: Date
+    - contextPath: GitLab.MergeRequest.updated_at
+      description: The time the merge request was updated.
+      type: Date
+    - contextPath: GitLab.MergeRequest.merged_at
+      description: The time the merge request was merged.
+      type: Date
+    - contextPath: GitLab.MergeRequest.closed_by
+      description: The user who closed the merge request.
+      type: String
+    - contextPath: GitLab.MergeRequest.closed_at
+      description: The time the merge request was closed.
+      type: Date
+    - contextPath: GitLab.MergeRequest.target_branch
+      description: The merge request target branch.
+      type: String
+    - contextPath: GitLab.MergeRequest.source_branch
+      description: The merge request source branch.
+      type: String
+    - contextPath: GitLab.MergeRequest.assignee
+      description: The merge request assignee.
+      type: String
+    - contextPath: GitLab.MergeRequest.sha
+      description: The merge request commit SHA.
+      type: String
+    - contextPath: GitLab.MergeRequest.merge_commit_sha
+      description: The merge request merge commit SHA.
+      type: String
+    - contextPath: GitLab.MergeRequest.squash_commit_sha
+      description: The merge request squash commit SHA.
+      type: String
+  - arguments:
+    - description: Project ID from which to retrieve the Merge Requests.
+      name: project_id
+      required: true
+    - description: Merge Request IID.
+      name: merge_request_iid
+      required: true
+    deprecated: true
+    description: Get a Merge Request
+    name: gitlab-merge-request-get
+    outputs:
+    - contextPath: GitLab.MergeRequest.id
+      description: The merge request ID.
+      type: Number
+    - contextPath: GitLab.MergeRequest.iid
+      description: The merge request IID.
+      type: Number
+    - contextPath: GitLab.MergeRequest.project_id
+      description: The project ID of the merge request.
+      type: Number
+    - contextPath: GitLab.MergeRequest.title
+      description: The merge request title.
+      type: String
+    - contextPath: GitLab.MergeRequest.description
+      description: The merge request description
+      type: String
+    - contextPath: GitLab.MergeRequest.state
+      description: The merge request state.
+      type: String
+    - contextPath: GitLab.MergeRequest.created_at
+      description: The time the merge request was created.
+      type: Date
+    - contextPath: GitLab.MergeRequest.updated_at
+      description: The time the merge request was updated.
+      type: Date
+    - contextPath: GitLab.MergeRequest.merged_at
+      description: The time the merge request was merged.
+      type: Date
+    - contextPath: GitLab.MergeRequest.closed_by
+      description: The user who closed the merge request.
+      type: String
+    - contextPath: GitLab.MergeRequest.closed_at
+      description: The time the merge request was closed.
+      type: Date
+    - contextPath: GitLab.MergeRequest.target_branch
+      description: The merge request target branch.
+      type: String
+    - contextPath: GitLab.MergeRequest.source_branch
+      description: The merge request source branch.
+      type: String
+    - contextPath: GitLab.MergeRequest.assignee
+      description: The merge request assignee.
+      type: String
+    - contextPath: GitLab.MergeRequest.sha
+      description: The merge request commit SHA.
+      type: String
+    - contextPath: GitLab.MergeRequest.merge_commit_sha
+      description: The merge request merge commit SHA.
+      type: String
+    - contextPath: GitLab.MergeRequest.squash_commit_sha
+      description: The merge request squash commit SHA.
+      type: String
+  - arguments:
+    - description: Comma seperated values of labels to search issues by.
+      name: labels
+    - auto: PREDEFINED
+      defaultValue: title,description
+      description: On what scope to perform the search on.
+      name: scope
+      predefined:
+      - title
+      - description
+      - title,description
+    - description: The search clause.
+      name: search
+    - auto: PREDEFINED
+      defaultValue: all
+      description: The state of the issue.
+      name: state
+      predefined:
+      - opened
+      - closed
+      - all
+    - description: Project ID from which to retrieve the Merge Requests.
+      name: project_id
+      required: true
+    - description: filter by assignee username
+      name: assignee_username
+    deprecated: true
+    description: List all issues
+    name: gitlab-issues-list
+    outputs:
+    - contextPath: GitLab.Issue.id
+      description: The issue ID.
+      type: Number
+    - contextPath: GitLab.Issue.iid
+      description: The issue IID.
+      type: Number
+    - contextPath: GitLab.Issue.project_id
+      description: The project ID of the issue.
+      type: Number
+    - contextPath: GitLab.Issue.title
+      description: The issue title.
+      type: String
+    - contextPath: GitLab.Issue.description
+      description: The issue description.
+      type: String
+    - contextPath: GitLab.Issue.state
+      description: The issue state.
+      type: String
+    - contextPath: GitLab.Issue.created_at
+      description: The time the issue was created.
+      type: Date
+    - contextPath: GitLab.Issue.updated_at
+      description: The time the issue was updated.
+      type: Date
+    - contextPath: GitLab.Issue.closed_at
+      description: The time the issue was closed.
+      type: Date
+    - contextPath: GitLab.Issue.closed_by
+      description: The user who closed the issue.
+      type: String
+    - contextPath: GitLab.Issue.labels
+      description: Comma seperated values of the issue's labels.
+      type: String
+    - contextPath: GitLab.Issue.merge_requests_count
+      description: merge requests count
+      type: Number
+    - contextPath: GitLab.Issue.has_tasks
+      description: Whether the issue has tasks or not.
+      type: Boolean
+    - contextPath: GitLab.Issue.task_status
+      description: The status of the issue's tasks.
+      type: String
+  - arguments:
+    - description: Comma separated values of labels to add to the issue.
+      name: labels
+    - description: The issue title.
+      name: title
+      required: true
+    - description: The issue description.
+      name: description
+      required: true
+    - description: Project ID of the created issue.
+      name: project_id
+      required: true
+    deprecated: true
+    description: Create an issue
+    name: gitlab-issue-create
+    outputs:
+    - contextPath: GitLab.Issue.id
+      description: The issue ID.
+      type: Number
+    - contextPath: GitLab.Issue.iid
+      description: The issue IID.
+      type: Number
+    - contextPath: GitLab.Issue.project_id
+      description: The project ID of the issue.
+      type: Number
+    - contextPath: GitLab.Issue.title
+      description: The issue title.
+      type: String
+    - contextPath: GitLab.Issue.description
+      description: The issue description.
+      type: String
+    - contextPath: GitLab.Issue.state
+      description: The issue state.
+      type: String
+    - contextPath: GitLab.Issue.created_at
+      description: The time the issue was created.
+      type: Date
+    - contextPath: GitLab.Issue.updated_at
+      description: The time the issue was updated.
+      type: Date
+    - contextPath: GitLab.Issue.closed_at
+      description: The time the issue was closed.
+      type: Date
+    - contextPath: GitLab.Issue.closed_by
+      description: The user who closed the issue.
+      type: String
+    - contextPath: GitLab.Issue.labels
+      description: Comma seperated values of the issue's labels.
+      type: String
+    - contextPath: GitLab.Issue.merge_requests_count
+      description: merge requests count
+      type: Number
+    - contextPath: GitLab.Issue.has_tasks
+      description: Whether the issue has tasks or not.
+      type: Boolean
+    - contextPath: GitLab.Issue.task_status
+      description: The status of the issue's tasks.
+      type: String
+  - arguments:
+    - description: The labels to add to the issue.
+      name: add_labels
+    - description: The labels to remove from the issue.
+      name: remove_labels
+    - description: The description of the issue.
+      name: description
+    - description: Project ID from which to retrieve the issue.
+      name: project_id
+      required: true
+    - description: Issue ID.
+      name: issue_id
+      required: true
+    deprecated: true
+    description: Edit an issue
+    name: gitlab-issue-edit
+    outputs:
+    - contextPath: GitLab.Issue.id
+      description: The issue ID.
+      type: Number
+    - contextPath: GitLab.Issue.iid
+      description: The issue IID.
+      type: Number
+    - contextPath: GitLab.Issue.project_id
+      description: The project ID of the issue.
+      type: Number
+    - contextPath: GitLab.Issue.title
+      description: The issue title.
+      type: String
+    - contextPath: GitLab.Issue.description
+      description: The issue description.
+      type: String
+    - contextPath: GitLab.Issue.state
+      description: The issue state.
+      type: String
+    - contextPath: GitLab.Issue.created_at
+      description: The time the issue was created.
+      type: Date
+    - contextPath: GitLab.Issue.updated_at
+      description: The time the issue was updated.
+      type: Date
+    - contextPath: GitLab.Issue.closed_at
+      description: The time the issue was closed.
+      type: Date
+    - contextPath: GitLab.Issue.closed_by
+      description: The user who closed the issue.
+      type: String
+    - contextPath: GitLab.Issue.labels
+      description: Comma seperated values of the issue's labels.
+      type: String
+    - contextPath: GitLab.Issue.merge_requests_count
+      description: Merge requests count
+      type: Number
+    - contextPath: GitLab.Issue.has_tasks
+      description: Whether the issue has tasks or not.
+      type: Boolean
+    - contextPath: GitLab.Issue.task_status
+      description: The status of the issue's tasks.
+      type: String
+  - arguments:
+    - description: Group ID from which to retrieve the projects.
+      name: group_id
+      required: true
+    deprecated: true
+    description: Get the list of projects of a given group.
+    name: gitlab-group-projects-list
+    outputs:
+    - contextPath: GitLab.Project.id
+      description: The project ID.
+      type: Number
+    - contextPath: GitLab.Project.name
+      description: The project name.
+      type: String
+    - contextPath: GitLab.Project.path_with_namespace
+      description: The project path with namespace.
+      type: String
+  - arguments:
+    - description: Project ID to get the file from.
+      name: project_id
+      required: true
+    - description: The file path.
+      name: file_path
+      required: true
+    - description: The branch to retrieve the file from, default is master
+      name: ref
+    - defaultValue: "false"
+      description: 'Whether to create a file entry in the War Room with the file contents.
+        Possible values are: "true" and "false". Default value is "false".'
+      name: create_file_from_content
+      predefined:
+      - "true"
+      - "false"
+    deprecated: true
+    description: Get raw file
+    name: gitlab-raw-file-get
+    outputs:
+    - contextPath: GitLab.File.ref
+      description: The branch the file's content was taken from.
+      type: String
+    - contextPath: GitLab.File.path
+      description: The file path.
+      type: String
+    - contextPath: GitLab.File.content
+      description: The file content.
+      type: String
+  - arguments:
+    - description: ref branch of the PR.
+      name: ref_branch
+      required: true
+    - description: 'json contains the requests variables as keys and values for example
+        {"BuildParam1": "ParamValue"}.'
+      name: trigger_variables
+    - description: Project ID.
+      name: project_id
+      required: true
+    deprecated: true
+    description: Trigger a pipeline in gitlab.
+    name: gitlab-trigger-pipeline
+    outputs:
+    - contextPath: GitLab.Pipeline.id
+      description: Pipeline ID.
+      type: Number
+    - contextPath: GitLab.Pipeline.project_id
+      description: Project ID that the pipeline belongs to.
+      type: Number
+    - contextPath: GitLab.Pipeline.status
+      description: Status of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.ref
+      description: Reference of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.sha
+      description: SHA of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.created_at
+      description: Time when the pipeline was created.
+      type: Date
+    - contextPath: GitLab.Pipeline.updated_at
+      description: Time when the pipeline was last updated.
+      type: Date
+    - contextPath: GitLab.Pipeline.started_at
+      description: Time when the pipeline was started.
+      type: Date
+    - contextPath: GitLab.Pipeline.finished_at
+      description: Time when the pipeline was finished.
+      type: Date
+    - contextPath: GitLab.Pipeline.duration
+      description: Duration of the pipeline in seconds.
+      type: Number
+    - contextPath: GitLab.Pipeline.web_url
+      description: Web URL of the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.name
+      description: Name of the user who triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.username
+      description: Username that triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.id
+      description: ID of the user who triggered the pipeline.
+      type: Number
+    - contextPath: GitLab.Pipeline.user.state
+      description: State of the user who triggered the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.avatar_url
+      description: Avatar URL of the user who trigerred the pipeline.
+      type: String
+    - contextPath: GitLab.Pipeline.user.web_url
+      description: Web URL of the user who triggered the pipeline.
+      type: String
+  dockerimage: demisto/python3:3.10.7.35188
+  runonce: false
+  script: |
+    register_module_line('GitLab', 'start', __line__())
+    ### pack version: 1.1.8
+
+    import urllib3
+
+
+    JOB_FIELDS_TO_EXTRACT = {'created_at', 'started_at', 'finished_at', 'duration', 'id', 'name', 'pipeline', 'ref',
+                             'stage', 'web_url', 'status'}
+    PIPELINE_SCHEDULE_FIELDS_TO_EXTRACT = {'id', 'description', 'ref', 'next_run_at', 'active', 'created_at', 'updated_at',
+                                           'last_pipeline'}
+    PIPELINE_FIELDS_TO_EXTRACT = {'id', 'project_id', 'status', 'ref', 'sha', 'created_at', 'updated_at', 'started_at',
+                                  'finished_at', 'duration', 'web_url', 'user'}
+
+
+    class Client(BaseClient):
+        def __init__(self, server_url, verify, proxy, headers, trigger_token=''):
+            super().__init__(base_url=server_url, verify=verify, proxy=proxy, headers=headers)
+            self.trigger_token = trigger_token
+
+        def get_projects_request(self, repository_storage, last_activity_before, min_access_level, simple, sort,
+                                 membership, search_namespaces, archived, search, id_before, last_activity_after, starred,
+                                 id_after, owned, order_by, statistics, visibility, with_custom_attributes,
+                                 with_issues_enabled, with_merge_requests_enabled, with_programming_language):
+            params = assign_params(repository_storage=repository_storage, last_activity_before=last_activity_before,
+                                   min_access_level=min_access_level, simple=simple, sort=sort, membership=membership,
+                                   search_namespaces=search_namespaces, archived=archived, search=search,
+                                   id_before=id_before, last_activity_after=last_activity_after,
+                                   starred=starred, id_after=id_after, owned=owned, order_by=order_by,
+                                   statistics=statistics, visibility=visibility,
+                                   with_custom_attributes=with_custom_attributes, with_issues_enabled=with_issues_enabled,
+                                   with_merge_requests_enabled=with_merge_requests_enabled,
+                                   with_programming_language=with_programming_language)
+            headers = self._headers
+            response = self._http_request('get', 'projects', params=params, headers=headers)
+            return response
+
+        def projects_get_access_requests_request(self, id_):
+            headers = self._headers
+            response = self._http_request('get', f'projects/{id_}/access_requests', headers=headers)
+            return response
+
+        def projects_request_access_request(self, id_):
+            headers = self._headers
+            response = self._http_request('post', f'projects/{id_}/access_requests', headers=headers)
+            return response
+
+        def projects_approve_access_request(self, id_, user_id, access_level):
+            params = assign_params(access_level=access_level)
+            headers = self._headers
+            response = self._http_request('put', f'projects/{id_}/access_requests/{user_id}/approve', params=params,
+                                          headers=headers)
+            return response
+
+        def projects_deny_access_request(self, id_, user_id):
+            headers = self._headers
+            self._http_request('delete', f'projects/{id_}/access_requests/{user_id}', headers=headers, resp_type='text')
+            response = {
+                'id': user_id,
+                'state': 'denied'
+            }
+            return response
+
+        def projects_get_repository_branches_request(self, id_, search):
+            params = assign_params(search=search)
+            headers = self._headers
+            response = self._http_request('get', f'projects/{id_}/repository/branches', params=params, headers=headers)
+            return response
+
+        def projects_create_repository_branch_request(self, id_, branch, ref):
+            params = assign_params(branch=branch, ref=ref)
+            headers = self._headers
+            response = self._http_request('post', f'projects/{id_}/repository/branches', params=params, headers=headers)
+            return response
+
+        def projects_delete_repository_branch_request(self, id_, branch):
+            headers = self._headers
+            self._http_request('delete', f'projects/{id_}/repository/branches/{branch}', headers=headers, resp_type='text')
+            response = {
+                'message': f'Branch \'{branch}\' is deleted.',
+            }
+            return response
+
+        def projects_delete_repository_merged_branches_request(self, id_):
+            headers = self._headers
+            response = self._http_request('delete', f'projects/{id_}/repository/merged_branches', headers=headers)
+            return response
+
+        def get_version_request(self):
+            headers = self._headers
+            response = self._http_request('get', 'version', headers=headers)
+            return response
+
+        def get_pipeline_schedules_request(self, project_id: str, pipeline_schedule_id: Optional[str]):
+            headers = self._headers
+            base_suffix = f'projects/{project_id}/pipeline_schedules'
+            final_suffix = f'{base_suffix}/{pipeline_schedule_id}' if pipeline_schedule_id else base_suffix
+            response = self._http_request('get', final_suffix, headers=headers)
+            return response
+
+        def get_pipeline_request(self, project_id: str, pipeline_id: Optional[str], ref: Optional[str],
+                                 status: Optional[str]):
+            headers = self._headers
+            base_suffix = f'projects/{project_id}/pipelines'
+            final_suffix = f'{base_suffix}/{pipeline_id}' if pipeline_id else base_suffix
+            response = self._http_request('get', final_suffix, headers=headers,
+                                          params=assign_params(ref=ref, status=status))
+            return response
+
+        def get_pipeline_job_request(self, project_id: str, pipeline_id: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/pipelines/{pipeline_id}/jobs'
+            response = self._http_request('get', suffix, headers=headers)
+            return response
+
+        def get_job_artifact_request(self, project_id: str, job_id: str, artifact_path_suffix: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/jobs/{job_id}/artifacts/{artifact_path_suffix}'
+            response = self._http_request('get', suffix, headers=headers, resp_type='text')
+            return response
+
+        def get_merge_requests_list_request(self, project_id: str, state: str, target_branch: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/merge_requests'
+            params = assign_params(
+                state=state,
+                target_branch=target_branch,
+                per_page=100
+            )
+            response = self._http_request('get', suffix, headers=headers, params=params)
+            return response
+
+        def get_merge_request_request(self, project_id: str, merge_request_iid: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/merge_requests/{merge_request_iid}'
+            response = self._http_request('get', suffix, headers=headers)
+            return response
+
+        def get_issues_list_request(self, project_id: str, labels: str, state: str, search: str, scope: str,
+                                    assignee_username: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/issues'
+            params = assign_params(
+                assignee_username=assignee_username,
+                state=state,
+                labels=labels,
+                search=search,
+                per_page=100
+            )
+            params['in'] = scope
+            response = self._http_request('get', suffix, headers=headers, params=params)
+            return response
+
+        def create_issue_request(self, project_id: str, labels: str, title: str, description: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/issues'
+            params = assign_params(
+                labels=labels,
+                title=title,
+                description=description
+            )
+            response = self._http_request('post', suffix, headers=headers, params=params)
+            return response
+
+        def edit_issue_request(self, project_id: str, issue_id: str, add_labels: str, description: str, remove_labels: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/issues/{issue_id}'
+            params = assign_params(
+                description=description,
+                add_labels=add_labels,
+                remove_labels=remove_labels
+            )
+            response = self._http_request('put', suffix, headers=headers, params=params)
+            return response
+
+        def group_projects_list_request(self, group_id: str):
+            headers = self._headers
+            suffix = f'groups/{group_id}/projects'
+            params = {'per_page': 100}
+            response = self._http_request('get', suffix, headers=headers, params=params)
+            return response
+
+        def get_raw_file_request(self, project_id: str, file_path: str, ref: str):
+            headers = self._headers
+            suffix = f'projects/{project_id}/repository/files/{file_path}/raw'
+            params = {'ref': ref}
+            response = self._http_request('get', suffix, headers=headers, params=params, resp_type='text')
+            response = response.strip("'").strip('"')
+            return response
+
+        def trigger_build(self, base_branch: str, variables: str, project_id: str):
+            headers = self._headers
+            variables = json.loads(variables)
+            data = {
+                'token': self.trigger_token,
+                'ref': base_branch,
+            }
+            for key, value in variables.items():
+                data[f'variables[{key}]'] = value
+
+            return self._http_request('post', url_suffix=f'projects/{project_id}/trigger/pipeline', data=data, headers=headers)
+
+
+    def get_projects_command(client, args):
+        repository_storage = str(args.get('repository_storage', ''))
+        last_activity_before = str(args.get('last_activity_before', ''))
+        min_access_level = str(args.get('min_access_level', ''))
+        simple = argToBoolean(args.get('simple', False))
+        sort = str(args.get('sort', ''))
+        membership = argToBoolean(args.get('membership', False))
+        search_namespaces = argToBoolean(args.get('search_namespaces', False))
+        archived = argToBoolean(args.get('archived', False))
+        search = str(args.get('search', ''))
+        id_before = str(args.get('id_before', ''))
+        last_activity_after = str(args.get('last_activity_after', ''))
+        starred = argToBoolean(args.get('starred', False))
+        id_after = str(args.get('id_after', ''))
+        owned = argToBoolean(args.get('owned', False))
+        order_by = str(args.get('order_by', ''))
+        statistics = argToBoolean(args.get('statistics', False))
+        visibility = str(args.get('visibility', ''))
+        with_custom_attributes = argToBoolean(args.get('with_custom_attributes', False))
+        with_issues_enabled = argToBoolean(args.get('with_issues_enabled', False))
+        with_merge_requests_enabled = argToBoolean(args.get('with_merge_requests_enabled', False))
+        with_programming_language = str(args.get('with_programming_language', ''))
+
+        response = client.get_projects_request(repository_storage, last_activity_before, min_access_level, simple, sort,
+                                               membership, search_namespaces, archived, search, id_before,
+                                               last_activity_after, starred, id_after, owned, order_by, statistics,
+                                               visibility, with_custom_attributes, with_issues_enabled,
+                                               with_merge_requests_enabled, with_programming_language)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.Projects',
+            outputs_key_field='',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def projects_get_access_requests_command(client, args):
+        id_ = args.get('id', None)
+        response = client.projects_get_access_requests_request(id_)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.AccessRequests',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response
+        )
+        return command_results
+
+
+    def projects_request_access_command(client, args):
+        id_ = args.get('id', None)
+        response = client.projects_request_access_request(id_)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.AccessRequests',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response
+        )
+        return command_results
+
+
+    def projects_approve_access_command(client, args):
+        id_ = args.get('id', None)
+        user_id = args.get('user_id', None)
+        access_level = args.get('access_level', None)
+        response = client.projects_approve_access_request(id_, user_id, access_level)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.AccessRequests',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response
+        )
+        return command_results
+
+
+    def projects_deny_access_command(client, args):
+        id_ = args.get('id', None)
+        user_id = args.get('user_id', None)
+        response = client.projects_deny_access_request(id_, user_id)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.AccessRequests',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response
+        )
+        return command_results
+
+
+    def projects_get_repository_branches_command(client, args):
+        id_ = args.get('id', None)
+        search = str(args.get('search', ''))
+
+        response = client.projects_get_repository_branches_request(id_, search)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.Branches',
+            outputs_key_field='web_url',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def projects_create_repository_branch_command(client, args):
+        id_ = args.get('id', None)
+        branch = str(args.get('branch', ''))
+        ref = str(args.get('ref', ''))
+
+        response = client.projects_create_repository_branch_request(id_, branch, ref)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.Branches',
+            outputs_key_field='web_url',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def projects_delete_repository_branch_command(client, args):
+        id_ = args.get('id', None)
+        branch = str(args.get('branch', ''))
+
+        response = client.projects_delete_repository_branch_request(id_, branch)
+        command_results = CommandResults(
+            outputs_prefix='GitLab.Branches',
+            outputs_key_field='web_url',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def projects_delete_repository_merged_branches_command(client, args):
+        id_ = args.get('id', None)
+
+        response = client.projects_delete_repository_merged_branches_request(id_)
+        command_results = CommandResults(
+            outputs_prefix='GitLab',
+            outputs_key_field='',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def get_version_command(client, args):
+        response = client.get_version_request()
+        command_results = CommandResults(
+            outputs_prefix='GitLab',
+            outputs_key_field='',
+            outputs=response,
+            raw_response=response
+        )
+
+        return command_results
+
+
+    def gitlab_pipelines_schedules_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns pipeline schedules corresponding to given arguments.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve pipeline schedules from.
+                - 'pipeline_schedule_id': ID of specific pipeline schedule to retrieve its details.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        pipeline_schedule_id = args.get('pipeline_schedule_id')
+        response = client.get_pipeline_schedules_request(project_id, pipeline_schedule_id)
+        response = response if isinstance(response, list) else [response]
+        outputs = [{k: v for k, v in output.items() if k in PIPELINE_SCHEDULE_FIELDS_TO_EXTRACT} for output in response]
+
+        return CommandResults(
+            outputs_prefix='GitLab.PipelineSchedule',
+            outputs_key_field='id',
+            outputs=outputs,
+            raw_response=response,
+            readable_output=tableToMarkdown('GitLab Pipeline Schedules', outputs, removeNull=True)
+        )
+
+
+    def gitlab_pipelines_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns pipelines corresponding to given arguments.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve pipeline schedules from.
+                - 'pipeline_id': ID of specific pipeline to retrieve its details.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        pipeline_id = args.get('pipeline_id')
+        ref = args.get('ref')
+        status = args.get('status')
+        response = client.get_pipeline_request(project_id, pipeline_id, ref, status)
+        response = response if isinstance(response, list) else [response]
+        outputs = [{k: v for k, v in output.items() if k in PIPELINE_FIELDS_TO_EXTRACT} for output in response]
+
+        return CommandResults(
+            outputs_prefix='GitLab.Pipeline',
+            outputs_key_field='id',
+            outputs=outputs,
+            raw_response=response,
+            readable_output=tableToMarkdown('GitLab Pipelines', outputs, removeNull=True)
+        )
+
+
+    def gitlab_jobs_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns pipeline jobs corresponding to given arguments.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve pipeline schedules from.
+                - 'pipeline_id': ID of specific pipeline to retrieve its jobs.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        pipeline_id = args.get('pipeline_id', '')
+        response = client.get_pipeline_job_request(project_id, pipeline_id)
+        response = response if isinstance(response, list) else [response]
+        outputs = [{k: v for k, v in output.items() if k in JOB_FIELDS_TO_EXTRACT} for output in response]
+
+        return CommandResults(
+            outputs_prefix='GitLab.Job',
+            outputs_key_field='id',
+            outputs=outputs,
+            raw_response=response,
+            readable_output=tableToMarkdown('GitLab Jobs', outputs, removeNull=True)
+        )
+
+
+    def gitlab_artifact_get_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns artifact corresponding to given artifact path suffix of the given job ID.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve pipeline schedules from.
+                - 'job_id': ID of specific job to retrieve artifact from.
+                - 'artifact_path_suffix': Suffix to artifact in the artifacts directory of the job.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        job_id = args.get('job_id', '')
+        artifact_path_suffix = args.get('artifact_path_suffix', '')
+        response = client.get_job_artifact_request(project_id, job_id, artifact_path_suffix)
+        outputs = {
+            'job_id': job_id,
+            'artifact_path_suffix': artifact_path_suffix,
+            'artifact_data': response
+        }
+        if len(response) <= 100:
+            human_readable = tableToMarkdown(f'Artifact {artifact_path_suffix} From Job {job_id}', outputs, removeNull=True)
+        else:
+            human_readable = f'## Data for artifact {artifact_path_suffix} From Job {job_id} Has Been Retrieved.'
+
+        return CommandResults(
+            outputs_prefix='GitLab.Artifact',
+            outputs_key_field=['job_id', 'artifact_path_suffix'],
+            readable_output=human_readable,
+            outputs=outputs,
+            raw_response=response
+        )
+
+
+    def gitlab_merge_requests_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns a list of merge requests.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve merge requests from.
+                - 'state': The state of the merge request.
+                - 'target_branch': The target branch of the merge request.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        state = args.get('state', '')
+        target_branch = args.get('target_branch', '')
+        response = client.get_merge_requests_list_request(project_id, state, target_branch)
+        human_readable = tableToMarkdown(f'Merge Request Lists to branch {target_branch} in state {state}', response)
+        return CommandResults(
+            outputs_prefix='GitLab.MergeRequest',
+            outputs_key_field=['iid', 'project_id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_get_merge_request_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns a merge request.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve merge requests from.
+                - 'merge_request_iid': The merge request IID.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        merge_request_iid = args.get('merge_request_iid', '')
+        response = client.get_merge_request_request(project_id, merge_request_iid)
+        human_readable = tableToMarkdown(f'Merge Request {merge_request_iid}', response)
+        return CommandResults(
+            outputs_prefix='GitLab.MergeRequest',
+            outputs_key_field=['iid', 'project_id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_issues_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns a list of issues.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve issues from.
+                - 'state': The state of the issue.
+                - 'labels': Retrieve only issues with the given labels.
+                - 'assignee_username': Retrieve issues by assignee username.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        labels = args.get('labels', '')
+        state = args.get('state', '')
+        assignee_username = args.get('assignee_username', '')
+        search = args.get('search', '')
+        scope = args.get('scope', '')
+        response = client.get_issues_list_request(project_id, labels, state, search, scope, assignee_username)
+        human_readable = tableToMarkdown('Issues Lists', response)
+        return CommandResults(
+            outputs_prefix='GitLab.Issue',
+            outputs_key_field=['iid', 'project_id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_create_issue_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Creates an issue.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve issues from.
+                - 'state': The state of the issue.
+                - 'labels': Retrieve only issues with the given labels.
+                - 'assignee_username': Retrieve issues by assignee username.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        labels = args.get('labels', '')
+        title = args.get('title', '')
+        description = args.get('description', '')
+        response = client.create_issue_request(project_id, labels, title, description)
+        human_readable = tableToMarkdown('Create Issue', response)
+        return CommandResults(
+            outputs_prefix='GitLab.Issue',
+            outputs_key_field=['iid', 'project_id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_edit_issue_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns a list of merge requests.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to retrieve the issue from.
+                - 'issue_id' (Required): The issue ID.
+                - 'add_labels': The labels to add to the issue.
+                - 'remove_labels': The labels to remove from the issue.
+                - 'description': The description of the issue.
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        issue_id = args.get('issue_id', '')
+        add_labels = args.get('add_labels', '')
+        remove_labels = args.get('remove_labels', '')
+        description = args.get('description', '')
+        response = client.edit_issue_request(project_id, issue_id, add_labels, description, remove_labels)
+        human_readable = tableToMarkdown(f'Edit Issue {issue_id}', response)
+        return CommandResults(
+            outputs_prefix='GitLab.Issue',
+            outputs_key_field=['iid', 'project_id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_group_projects_list_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        """
+        Returns a list of projects within a group.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'group_id' (Required): group ID to retrieve the projects from.
+
+        Returns:
+            (CommandResults).
+        """
+        group_id = args.get('group_id', '')
+        response = client.group_projects_list_request(group_id)
+        human_readable = tableToMarkdown('List Group Projects', response)
+        return CommandResults(
+            outputs_prefix='GitLab.Project',
+            outputs_key_field=['path_with_namespace', 'id'],
+            readable_output=human_readable,
+            outputs=response,
+            raw_response=response
+        )
+
+
+    def gitlab_get_raw_file_command(client: Client, args: Dict[str, Any]) -> Union[CommandResults, Dict]:
+        """
+        Returns the content of a given file.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'project_id' (Required): Project ID to get the file from.
+                - 'file_path' (Required): The file path.
+                - 'ref': The branch to retrieve the file from, default is master
+                - `create_file_from_content` (Optional): bool, create file from the content data or not
+
+        Returns:
+            (CommandResults).
+        """
+        project_id = args.get('project_id', '')
+        ref = args.get('ref', 'master')
+        file_path = args.get('file_path', '')
+        create_file_from_content = argToBoolean(args.get('create_file_from_content', False))
+        response = client.get_raw_file_request(project_id, file_path, ref)
+        outputs = {'path': file_path, 'content': response, 'ref': ref}
+        human_readable = tableToMarkdown(f'Raw file {file_path} on branch {ref}', outputs)
+        if create_file_from_content:
+            file_name = file_path.split('/')[-1]
+            return fileResult(filename=file_name, data=response, file_type=EntryType.ENTRY_INFO_FILE)
+
+        return CommandResults(
+            outputs_prefix='GitLab.File',
+            outputs_key_field=['path', 'ref'],
+            readable_output=human_readable,
+            outputs=outputs,
+            raw_response=response
+        )
+
+
+    def gitlab_trigger_build_command(client: Client, args: Dict[str, Any]) -> Union[CommandResults, Dict]:
+        """
+        Returns triggered pipeline for contribution build.
+        Args:
+            client (Client): Client to perform calls to GitLab services.
+            args (Dict[str, Any]): XSOAR arguments:
+                - 'base_branch': base branch of the pr.
+                - 'contrib_branch': the contributor's branch name.
+                - 'pr_number': the pull request number
+                - 'trigger_token': the gitlab trigger token.
+
+        Returns:
+            (CommandResults).
+        """
+        base_branch = args.get('ref_branch', '')
+        project_id = str(args.get('project_id', ''))
+        variables = args.get('trigger_variables', {})
+        if not client.trigger_token:
+            return_error("A trigger token is required in the integration instance configuration")
+
+        response = client.trigger_build(base_branch, variables, project_id)
+
+        output = {k: v for k, v in response.items() if k in PIPELINE_FIELDS_TO_EXTRACT}
+
+        return CommandResults(
+            outputs_prefix='GitLab.Pipeline',
+            outputs_key_field='id',
+            outputs=output,
+            raw_response=response,
+            readable_output=tableToMarkdown('Successfully triggered build. Pipeline details:', output, removeNull=True)
+        )
+
+
+    def test_module(client):
+        # Test functions here
+        response = client.get_version_request()
+        if response.get('version'):
+            demisto.results('ok')
+        else:
+            demisto.results('Test Failed:' + response)
+
+
+    def main():
+        params = demisto.params()
+        args = demisto.args()
+        url = params.get('url')
+        verify_certificate = not params.get('insecure', False)
+        proxy = params.get('proxy', False)
+        trigger_token = params.get('trigger_token', '')
+        headers = {}
+        headers['PRIVATE-TOKEN'] = f'{params["api_key"]}'
+
+        command = demisto.command()
+        LOG(f'Command being called is {command}')
+
+        try:
+            urllib3.disable_warnings()
+            client = Client(urljoin(url, ""), verify_certificate, proxy, headers=headers, trigger_token=trigger_token)
+            commands = {
+                'gitlab-get-projects': get_projects_command,
+                'gitlab-projects-get-access-requests': projects_get_access_requests_command,
+                'gitlab-projects-request-access': projects_request_access_command,
+                'gitlab-projects-approve-access': projects_approve_access_command,
+                'gitlab-projects-deny-access': projects_deny_access_command,
+                'gitlab-projects-get-repository-branches': projects_get_repository_branches_command,
+                'gitlab-projects-create-repository-branch': projects_create_repository_branch_command,
+                'gitlab-projects-delete-repository-branch': projects_delete_repository_branch_command,
+                'gitlab-projects-delete-repository-merged-branches': projects_delete_repository_merged_branches_command,
+                'gitlab-get-version': get_version_command,
+                'gitlab-pipelines-schedules-list': gitlab_pipelines_schedules_list_command,
+                'gitlab-pipelines-list': gitlab_pipelines_list_command,
+                'gitlab-jobs-list': gitlab_jobs_list_command,
+                'gitlab-artifact-get': gitlab_artifact_get_command,
+                'gitlab-merge-requests-list': gitlab_merge_requests_list_command,
+                'gitlab-merge-request-get': gitlab_get_merge_request_command,
+                'gitlab-issues-list': gitlab_issues_list_command,
+                'gitlab-issue-create': gitlab_create_issue_command,
+                'gitlab-issue-edit': gitlab_edit_issue_command,
+                'gitlab-group-projects-list': gitlab_group_projects_list_command,
+                'gitlab-raw-file-get': gitlab_get_raw_file_command,
+                'gitlab-trigger-pipeline': gitlab_trigger_build_command,
+            }
+
+            if command == 'test-module':
+                test_module(client)
+            else:
+                return_results(commands[command](client, args))
+
+        except Exception as e:
+            return_error(str(e))
+
+
+    if __name__ in ['__main__', 'builtin', 'builtins']:
+        main()
+
+    register_module_line('GitLab', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
