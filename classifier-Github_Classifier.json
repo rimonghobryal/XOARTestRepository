@@ -1,0 +1,85 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "Github Classifier",
+	"feed": false,
+	"fromServerVersion": "6.0.0",
+	"id": "Github_Classifier_v1",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "1.1.8",
+	"keyTypeMap": {
+		"closed": "DevSecOps New Git PR",
+		"open": "DevSecOps New Git PR"
+	},
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": null,
+	"name": "Github Classifier",
+	"nameRaw": "Github Classifier",
+	"packID": "DevSecOps",
+	"packName": "DevSecOps",
+	"packPropagationLabels": [
+		"all"
+	],
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": true,
+	"toServerVersion": "",
+	"transformer": {
+		"complex": {
+			"filters": [
+				[
+					{
+						"left": {
+							"isContext": true,
+							"value": {
+								"simple": "state"
+							}
+						},
+						"operator": "isEqualString",
+						"right": {
+							"isContext": false,
+							"value": {
+								"simple": "open"
+							}
+						}
+					}
+				],
+				[
+					{
+						"left": {
+							"isContext": true,
+							"value": {
+								"simple": "head.sha"
+							}
+						},
+						"operator": "isNotEmpty"
+					}
+				]
+			],
+			"root": ".",
+			"transformers": [
+				{
+					"args": {
+						"field": {
+							"isContext": false,
+							"value": {
+								"simple": "state"
+							}
+						}
+					},
+					"operator": "getField"
+				}
+			]
+		}
+	},
+	"type": "classification",
+	"unclassifiedCases": null,
+	"version": -1
+}
