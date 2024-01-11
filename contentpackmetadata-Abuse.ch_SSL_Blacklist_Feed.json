@@ -1,0 +1,111 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [
+					{
+						"description": "Gets the feed indicators.",
+						"name": "sslbl-get-indicators"
+					}
+				],
+				"description": "The SSL IP Blacklist contains all hosts (IP addresses) that SSLBL has seen in the past 30 days and identified as being associated with a malicious SSL certificate.",
+				"id": "abuse.ch SSL Blacklist Feed",
+				"name": "abuse.ch SSL Blacklist Feed"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.25",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.1",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "The SSL IP Blacklist contains all hosts (IP addresses) that SSLBL has seen in the past 30 days and\n  identified as being associated with a malicious SSL certificate.",
+	"disabledMonthly": false,
+	"downloads": 4919,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.5.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "Feedsslabusech",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/Feedsslabusech/abuse.chSSLBlacklistFeed_image.png",
+			"name": "abuse.ch SSL Blacklist Feed"
+		}
+	],
+	"itemVersion": "1.1.25",
+	"keywords": [],
+	"legacy": true,
+	"name": "Abuse.ch SSL Blacklist Feed",
+	"packID": "Feedsslabusech",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.5.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Free Feed",
+		"Getting Started",
+		"Threat Intelligence Management",
+		"TIM",
+		"Plug \u0026 Fetch"
+	],
+	"toServerVersion": "",
+	"updated": "2023-12-10T20:22:23Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "7122577",
+	"videos": []
+}
