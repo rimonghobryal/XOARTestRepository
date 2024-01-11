@@ -1,0 +1,3719 @@
+category: Analytics & SIEM
+commonfields:
+  id: RSANetWitnessv115
+  version: -1
+configuration:
+- display: Server URL (e.g https://192.168.0.1)
+  name: url
+  required: true
+  type: 0
+- display: User name
+  name: credentials
+  required: true
+  type: 9
+- additionalinfo: The service ID that is automatically used in every command where
+    service ID is required. Retrieve all service IDs with the rsa-nw-services-list
+    command. To overwrite with another service ID, use the command argument 'service_id'.
+  display: Service Id
+  name: service_id
+  required: false
+  type: 0
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- additionalinfo: The maximum number of incidents to fetch
+  defaultvalue: "50"
+  display: Fetch Limit
+  name: max_fetch
+  required: false
+  type: 0
+- additionalinfo: First fetch timestamp (<number> <time unit>, for example, 12 hours,
+    7 days)
+  defaultvalue: 1 days
+  display: Fetch Time
+  name: first_fetch
+  required: false
+  type: 0
+- defaultvalue: "false"
+  display: On 'Fetch incidents' import all alerts related to the incident
+  name: import_alerts
+  required: false
+  type: 8
+- additionalinfo: The maximum number of alerts to fetch for each incident. The maximum
+    allowed is 50.
+  defaultvalue: "50"
+  display: Alerts Limit
+  name: max_alerts
+  required: false
+  type: 0
+- defaultvalue: NetWitness Incident
+  display: Incident type
+  name: incidentType
+  required: false
+  type: 13
+- display: Fetch incidents
+  name: isFetch
+  required: false
+  type: 8
+- defaultvalue: "1"
+  display: Incidents Fetch Interval
+  name: incidentFetchInterval
+  required: false
+  type: 19
+- additionalinfo: 'Choose the direction to mirror the incident: Incoming (from RSA
+    to Cortex XSOAR), Outgoing (from Cortex XSOAR to RSA), or Incoming and Outgoing
+    (from/to Cortex XSOAR and RSA).'
+  display: Incident Mirroring Direction
+  name: mirror_direction
+  options:
+  - None
+  - Incoming
+  - Outgoing
+  - Incoming And Outgoing
+  required: false
+  type: 15
+- additionalinfo: Check to close the Cortex XSOAR incident when the corresponding
+    incident is closed in RSA NetWitness.
+  defaultvalue: "true"
+  display: Close Mirrored XSOAR Incident
+  name: close_incident
+  required: false
+  type: 8
+- additionalinfo: This parameter represents the number of days the integration will
+    mirror RSA incidents. The default value is 3 days, the maximum is 24 days.
+  defaultvalue: "3"
+  display: Mirroring Days Limit
+  name: max_mirror_time
+  required: false
+  type: 0
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.5.0
+    itemVersion: 3.2.1
+    packID: RSANetWitness_v11_1
+    packName: RSA NetWitness
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+defaultmapperin: RSA NetWitness v11.5 - incoming mapper
+description: The RSA NetWitness integration provides system log, network, and endpoint
+  visibility for real-time collection, detection, and automated response with the
+  Cortex XSOAR Enterprise platform. Using full session analysis, customers can extract
+  critical data and effectively run security operations automated playbooks.
+detaileddescription: |-
+  # Configure the Integration
+
+  ## Log in
+  To log in, use your RSA NetWitness server URL and the supplied username and password.
+
+  ## Default Service ID
+  You can use a default service ID for all commands that require this parameter.
+  To use a different service ID for a specific command, use the *service_id* argument to overwrite the default.
+
+  ## Permissions
+  To make requests through the NetWitness Platform API, users must have **integration-server.api.access** permission. This permission is granted automatically to users with the **Admin** or **DPOs - Data Privacy Officer** role.
+  You can either assign a user one of these roles, or create a new role with the API permission and assign the user the new role.
+
+  ### Assign a Role to a User
+  1. Log in as the admin user and go to Admin > Security.
+  2. In the **Users** tab, select a user and click the edit button.
+  3. In the **Roles** section:
+     1. Click the plus sign.
+     2. Select a role and click Add.
+  4. Click Save.
+
+  ### Create a New Role
+  1. Log in as the admin user and go to Admin > Security.
+  2. Click the **Roles** tab.
+  3. In the toolbar, click the plus sign to add a new role.
+  5. In the **Permissions** section click the arrows until you find the **Integration-Server** and choose the **integration-server.api.access** permission.
+
+  See [full RSA NetWitness documentation for user management and permissions](https://community.rsa.com/t5/netwitness-platform-online/system-security-and-user-management-guide-11-5/ta-p/572690).
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/rsa-net-witnessv115)
+display: RSANetWitness v11.5
+image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAqCAYAAAB4Ip8uAAAPyUlEQVR42s1ceXAk5XUf7bKH9mBvrTTzvdcjLavVSt3vfSPtQcJhwCEFCQ5gB2zK2A6uwqHK2E7IRYIT7IrtlJ2CUD7ADjF2OCpZF46LsrFJbEMIN3FYwIB3zbW7sMfM9Nff93XPSNqz88eMFjHbPZJWmrW66pVUKnX36/fr7x2/977O+OCt9cHrrP88aVGC1paBViuk0y3waZlTeGigFUa4vRrp4kDwdRroNgXeTgU0ooFHFNDeALy7DfJnAiGvtF1y6+GFpwslvGXK8doyv4FDA88vg7dgvPhAC7SQCyZzfuBM7v8yGuhFDbRTA+2Yjhjglw3wL0LkH0fAX9dZ7zqVG9iqcXBpKwwUdqyfbxx5pnH45gj4UQ1sA+A4RI4jlLFGihXUJACq/51jDRwHgo4ap/BWCPxT7dA/VJdvuazaMbT+VIHrOwODVZR3GqBvjxcLfFcI8q6ioEvSzi1DYW7g0LkB8kdNR89Zh9qXNV9MFvmoRY5nQqK6hMhxABRHDmsL8oHqitzVCtwZA7q6IndWlOu/L3LYGhgHHFDs10U1yPi/B8CxqetqgWPjeHEV+Vf7hXvnV5bnLq0CrWolwAHS90axcNxe46WKMrZATxwAb3nSuSUhe8pIN/rg3VZCvqHsDHY3f5uARvxxBpgpUUCxAY41UBzmh44alD8Lsu450zFMGby5Qc7788gZ2meRYzMOPDVFGa+rBoot1MCO84OlMvRvbZlrFgOFCrJKs1tdl4NFpCuTzt+f7cuVwfuLMnif9dH9dIBetukNFdCIOgkDTdaI6rjSFFeBigeE99GTMYxCPk0BfcECHzaTuLdukGASuoYOxWHnph8cmXfpopa556x7e4jcXA/k2Ah6oJh3T288f1+2t81kCxss0vkGvTOMQ20nDXAwBVENvycpboHjClKlmPOumrpb42tD4GNBE11NzcUdCpG1D7RXIe1QQC8poF8HQPtCYF1FOVJz6e/WVwPFFr1Id2weahW4u3sGNlaA39ATvGxBzZscLefdC1JzEKTJJYdNAK4q4BcU8HYF/PwEsl0jvRghv15BWbHAsQFOBhk5Dh3v7dElF8rJGuaw2IRG8F6DnOiOw9pbX4qAt2n0/jgQtKWI3KV7aHEpKxf6OTo9ADenBW0O0PtwAPRlBfRQhPxahPKwAY4ryLEC7xutjL1vr+O/Deu5wkTeJEKOA8Hbgp6hudO6aRLAAVDsC3rGF3KVD3KJD/L0ZhKAXKqRVvrg9SnkDyiHvhah3GuQU5SXsXIGHlDr5aTKKZPr+1wFBxPBjYDjAPnxItJ5Uy9VvN4A6ZoQ+X6D/Hwg3A2tAvfw/MU53b3pl3qS4S0Aji3SqMoPbm4JwAroCR+4bRrX3aKBHhnLqBuvHyIfU3l5/kTXiVbAgkC4z9kEj6BrRnh+V75fTMcGBrz5CrgnEG7LauKwo+dag4XE1Rs0WcVlwXe3CuCnFPKC6Vy7mO3PaqCndYLyFZSxAvrmRNcoYeGMANhP0rEC8pAPA5/JzPJDdw+tNE7hsTAlxChBqcBbhwO1dpOclQBnMplMWbhXRMiVIGH1BUAv6HxzRqYMdE6EbJN0rKLUZaD3zHaAQ6dwuQE6FiRl+sjKF96tEfKBJJBDh2K7dvD2WQuw6fKWakEvJ7lpJaioBDnN63TvvRWUYTLAbBR6F8xmcH3B8zXSQ1HD6vXrPEEE/GB5Td8SlXV/GCaEoQAoNvmhPdXlnRtmJcCZTCZTAvrPpBhqkHU5x7K5ft6mENkk6RghHymD99nZDLASfK4FPqIanr9WltEhm5WfyGQymVLOvSxCeSwRYKcQm46eL8xegLu9RIAtsg7Ao+bMD60IwHszNUYh7y4Db5qtAAfCuz9CeULsrTNW21UXr85kMpkDjrcgAH4ySojTBii2OLhjvzOYn3UAK3BP10CvBMkkyv5QkJh4FdB9lQQjqTpDFgK/qfOFq2cbuCV0t0QgbbL3kcd8QTe/+2Vwr0pz0xY49nPuDbMO4JKgqyLkanCie4594Kf3ijMnLOR9we+xyIfTCAKDFIfAIzbb/5AW3hUGaaVBOec3DXAR++8Ma9VCEmBvl3MD6xqwWKlRPhcmxOsa987/VwS3a9YAXBLcbYD/1ySWSRxbZ/BLk8rEczxHC75tuE6cpDUXQpRxWKMhd4Yobynm+i9SwgWDsv1Ug/vc8q7+g/nBt5IzYxmbzt7EEtF29X3SgEzkDgxSXAbvI7MCYCW8szXwY7aB6BjLHg1w9ZVV6E32egc6vZUGvPurKI+3BdNYIFtvIRrg2IJ8PUJ5b4junww7fedqIbtOBcCvrsl/oeoUUoDiqurqH0w67+jchY5xhnaYhFVcb4s+VXL6lrYM4DiPbaPOhrnvzpJ5btlxl/lIAwrogxboWyFS2WByAR+BjJWgW6dqtD2id1WAA3dEUOs/T9T7Dca4b6j1i0OUUQXk4ypPt2igy4Kcu6IV4EaOxKojX0kleATd3+z8vev472wK+REhxwrdy1u6ggPovy5AfjhA/olCfrAM9HON9GwF+bUIeVTXM7/E1YUcG6SnylnqPBnj7cP184zgjww7hefDOtCT6fsG73iOuN5ciEKgZ43wPufn3fxMAlwS7qdswssd1O59zHbTe5ud//p6t78i5C7dkHD5QHFYc9//bdE7rWUA7xXeWRFKY8b1WoNxvdd010mxRX65DCSna8Tvti/tUFnvkxb5uQj4SAXlhF0a9a6pjpquFZRxBLw7ALr5jXW9y6er1wHkDgv8lE1wsfX84OdhD03oYv0e7xs2pfNUQR71Bf1+S2Pw6x1bbx5xJtcZ0fWkygA97gPRTK4Wg7RYC+99yuG7A+A3h1FW6oZ8V6O/WczWWAPaAj1ZRP6taa1eR15hgJJjL9Ax5Uxu4MHv9rZUQJaCFC+oBD+wPzc4p3UAr9q8PET3Fxa4ecKDMq6g3KUEf7GcG2jprFMpz2ss0Ps10q1G0KNV5D1WvDOSM1FyFqGMQ6R9AXiXnBTnnNuw0AD9LI2WtOhtL3dvzE2aJMnxv9uUujgUHETrm7v6aWfRxqGLo5T6tG7Ut4q48Ys+uoOnnEHKegsDoM3VXnmtceiuYeSXQqdm6GCCcZkQaV+xi6fch7Vi4Hcs8NGgAZQAKNboxtGarX8zpWdw3HNC5ER8tKDYrit893DP+jktLZMClN9OSnRMbYR1z9vC7Z4NrNKBtbz+jeXy6jBPPzL1qcrUlVwbFvxJMcdT8jga5QOptGT3wK7Rxb+78SSIqAeT6EsNHOv8Jn944fItLQV4dNHyXu0UdtnUuk3+czHnLsjMkiPspmUB0vst0PYohf6sVwFHfcEfmOx1K2sLZ4YOVdIqBx/ojpPiE5AvSku2NMjYZjfe0nKiw/QMftokDMTp2vDYsbLov3jWNQHyMmcFP2hTx4o4tsB3Bl39k7PB2sJ3Qie5IVJB6fuCT2pkuOwUFissPBymxHWDvKfkyL6WAqzAW2MFPZJaGgh+VjnektkGcrljIG+BElmjEDnWTmF7nJm7ZsKMFwbcWnKWzKpppB9NR0/dccZVBuWxIKX0VA7/dcupynJn/+8lTW6MGUs57k2zsl+bc/8yiVAwyLFGWfTXrHUmBtj7ctLsWZ0fP6LAe990dIzbTlulncFnTXptvaskZLalAKvOjW0a+F8i5MSYFiIVyz3kzTaAX/a2/EGY804gaAxybATbHX0Dvc05d7cnRLkz6SWJkGMl6GmFA/Onq+eu3sL1UUJ9ffw+wH/a8mZDEdy8BT6BYhtzVSo/tG142Zo5swngXev6Lm2cVR5rzwVYKI20L2lKYxrh/pkGPqZT3LMvvD+aCT1/1S+dao5eNCm21UA7fcHLW95NUoKuryT0QOt7lEYqK7JXziaA/Vz/DY1bW8bF4F8emdfekfpC593OEPiZRrLn+Pkodxw+bf6amdK1lJOftykNnArKOEC6ruUA78sOLdJAD4eJoycca/CeUd2FKT/0C3Jovu6Ul/gTzHBN0WCrLfITaSWeQe/eMroL0zNc9yojOLWpEgr+qxlNCnOyL0LenQRwrYlCzxrRoG8r+sF+js62yJFpoAbH9unqvLwxyBemNGT+Wp+8oAJ0pIpyj0LvpgA9nhaHnaNFSsivWqBYJTJPFIerh65JNfaGDYu0oEeSaElbG4fdf2Qt9c14eQfeHRHIxJeqgnKklKWPtRxglXXnaOHd0riLbmwDmgEqqik0Heza/iVWeE+FKGNT39NbQX5TC+87AdCHSzmvZwqrdo4FutAC/aDmRpOH3IIeemF0wXnZ9GbAwMU2YQqytnop1uDdZsXAjH/pQOXIC5GDNHo4EPxfenxJ2rKJjuxAdwj8kkmMTzLWgrbFbXMmZQBf0E1jcb1x73EF5agF/rVB+WMDdIsPdH0AdLkv6LwSemeVwTsnQO+iAOjjSsh/9AU/GqH004YRNHAcOoOj0SqR2vV50XXb/BQK0QDHIbBfwv7zWlbaCe9fKymUqBF8cLjXvazlAGcymcy+fP8nKnBigX58b1K2/w8nXL2O+9tGSK1TOkHje9H1HfKHqyirFZQ2RDYRSlNFGVVRHoxQNt0rrOsdJY3yawcXr0gdBvSz688yjhwJUvcl8/cV0txWAeznva0a6FBaLB7uLmx7bMmyhS0HeHd+4yIN8iGbOAnJsUF+UaPXdGwmFBs/P4qFYTNumMBv0Sb1Sn7wiEF5h843H9Iznb33hI5MoSV5VKP3wZYycN1yXuDI76d5kKpTiB5fsvLcOgtz4icc1AyOzera3iITJHyuIEQ+5ouBppOV1ZXd7QrlhwzSQxWU0VgMbvY9jqkAO/aNjwry7srq7hvCTprTnLVitsBFlfA8Bin2c/z0qys3L820+LCr8xdplIca7Voem5wBeafFQlsmrH80ZbzUd8C/rIEWzogyOe+fhlHGlRM+OMLxCPLBfWLwwgnjjuMutIIviUThmxXkV83x3m0tUQoSPraSNqpjjn8ohuMICvs1eLf7gibcHWHysi1Avmck4Vki5PhwnuNdawqfOhX1e5xpW2xB/nTYkSfoUdfvqMnz2RkL/FULfPt4CYG/VQbvxrfBmzcjLIxbWGOA7wiB7zXA94yXEOV/qBxfO7W+K/UFwvtQiHRbCPxkAByM1Z4V5FoS1wBoBd8Z0DPI+0PkH4bo3nAw3z/putpHb5lF/opB/jfd8BwW+F4L9PV9a3lV5hQdO90tF1Rz3n2mwa4a+J4QaJsS9PGMDzyvUTTw/CJ4M5rilwTNV8DtpQbxgRfZLJ3UYLpBb24AcqXOueu0GLhAC+9jVtCNgaDvKeHuCZBGlCAbgPc/GujvDfA1Ct3zlUOogafsRkvgzrXI7T7yooTnaC8Lb37mFB9hl9tebtClCNxugNr9HC35f2N+TfS/OTQQAAAAAElFTkSuQmCC
+name: RSANetWitnessv115
+script:
+  commands:
+  - arguments:
+    - description: A timestamp in the format 2020-01-18T14:00:00.000Z. Retrieve incidents
+        created on and before this timestamp.
+      name: until
+    - description: A timestamp in the format 2020-01-18T14:00:00.000Z. Retrieve incidents
+        created on and after this timestamp.
+      name: since
+    - description: The maximum number of items to return in a single page. Cannot
+        be supplied with the limit argument.
+      name: page_size
+    - description: The requested page number, first page is 0. Cannot be supplied
+        with the limit argument.
+      name: page_number
+    - description: Maximum number of results to be returned. If not set, the first
+        50 results are returned. Cannot be supplied with page_size/page_number arguments.
+      name: limit
+    - description: Enter an incident ID to receive its full details. For example,
+        `INC-40`.
+      name: id
+    description: Retrieves a single incident by ID or multiple incidents by the date
+      and time they were created using the start time ('since') or end time ('until').
+      You can limit the results using the limit argument or the page size argument.
+      If no arguments are entered the last 50 results are returned.
+    name: rsa-nw-list-incidents
+    outputs:
+    - contextPath: RSANetWitness115.Incidents.id
+      description: The unique incident identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.title
+      description: The incident title.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.summary
+      description: The incident summary.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.priority
+      description: The incident priority. Can be Low, Medium, High, or Critical.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.riskScore
+      description: The incident risk score is calculated based on the associated alert's
+        risk score. Risk score ranges from 0 (no risk) to 100 (highest risk).
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.status
+      description: The current incident status.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.alertCount
+      description: The number of alerts associated with an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.averageAlertRiskScore
+      description: The average risk score of the alerts associated with the incident.
+        Risk score ranges from 0 (no risk) to 100 (highest risk).
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.sealed
+      description: Indicates if additional alerts can be associated with an incident.
+        A sealed incident cannot be associated with additional alerts.
+      type: Boolean
+    - contextPath: RSANetWitness115.Incidents.totalRemediationTaskCount
+      description: The number of total remediation tasks for an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.openRemediationTaskCount
+      description: The number of open remediation tasks for an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.created
+      description: The timestamp when the incident was created.
+      type: Date
+    - contextPath: RSANetWitness115.Incidents.lastUpdated
+      description: The timestamp when the incident was last updated.
+      type: Date
+    - contextPath: RSANetWitness115.Incidents.lastUpdatedBy
+      description: The NetWitness user identifier of the user who last updated the
+        incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.assignee
+      description: The NetWitness user identifier of the user currently working on
+        the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.sources
+      description: Unique set of sources for all the alerts in an incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.ruleId
+      description: The unique identifier of the rule that created the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.firstAlertTime
+      description: The timestamp of the earliest occurring Alert in this incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.id
+      description: The unique category identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.parent
+      description: The parent name of the category.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.name
+      description: The friendly name of the category.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.id
+      description: The unique journal entry identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.author
+      description: The author of this entry.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.notes
+      description: Notes and observations about the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.created
+      description: The timestamp of the journal entry created date.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.lastUpdated
+      description: The timestamp of the journal entry last updated date.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.milestone
+      description: Incident milestone classifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.createdBy
+      description: The NetWitness user ID or name of the rule that created the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.deletedAlertCount
+      description: The number of alerts that are deleted from the incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.eventCount
+      description: The number of events associated with incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.alertMeta.SourceIp
+      description: The unique source IP addresses.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.alertMeta.DestinationIp
+      description: The unique destination IP addresses.
+      type: String
+    - contextPath: RSANetWitness115.paging.Incidents.hasNext
+      description: Indicates if there is a page containing results after this page.
+      type: Boolean
+    - contextPath: RSANetWitness115.paging.Incidents.hasPrevious
+      description: Indicates if there is a page containing results before this page.
+      type: Boolean
+    - contextPath: RSANetWitness115.paging.Incidents.pageNumber
+      description: The requested page number.
+      type: Number
+    - contextPath: RSANetWitness115.paging.Incidents.pageSize
+      description: The requested number of items to return in a single page.
+      type: Number
+    - contextPath: RSANetWitness115.paging.Incidents.totalPages
+      description: The total number of pages available.
+      type: Number
+    - contextPath: RSANetWitness115.paging.Incidents.totalItems
+      description: The total number of items available.
+      type: Number
+  - arguments:
+    - description: The incident ID.
+      name: id
+      required: true
+    - auto: PREDEFINED
+      description: The new incident status. Can be New, Assigned, InProgress, RemediationRequested,
+        RemediationComplete, Closed, ClosedFalsePositive.
+      name: status
+      predefined:
+      - New
+      - Assigned
+      - InProgress
+      - RemediationRequested
+      - RemediationComplete
+      - Closed
+      - ClosedFalsePositive
+    - description: The NetWitness user identifier of the user currently working on
+        the incident. You can find the list of assignees in the RSA Net Witness interface.
+      name: assignee
+    description: Updates incident status and assignee.
+    name: rsa-nw-update-incident
+    outputs:
+    - contextPath: RSANetWitness115.Incidents.id
+      description: The unique incident identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.title
+      description: The incident title.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.summary
+      description: The incident summary.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.priority
+      description: The incident priority. Can be Low, Medium, High, or Critical.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.riskScore
+      description: The incident risk score is calculated based on the associated alert's
+        risk score. Risk score ranges from 0 (no risk) to 100 (highest risk).
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.status
+      description: The current incident status.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.alertCount
+      description: The number of alerts associated with an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.averageAlertRiskScore
+      description: The average risk score of the alerts associated with the incident.
+        Risk score ranges from 0 (no risk) to 100 (highest risk).
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.sealed
+      description: Indicates if additional alerts can be associated with an incident.
+        A sealed incident cannot be associated with additional alerts.
+      type: Boolean
+    - contextPath: RSANetWitness115.Incidents.totalRemediationTaskCount
+      description: The number of total remediation tasks for an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.openRemediationTaskCount
+      description: The number of open remediation tasks for an incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.created
+      description: The timestamp when the incident was created.
+      type: Date
+    - contextPath: RSANetWitness115.Incidents.lastUpdated
+      description: The timestamp when the incident was last updated.
+      type: Date
+    - contextPath: RSANetWitness115.Incidents.lastUpdatedBy
+      description: The NetWitness user identifier of the user who last updated the
+        incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.assignee
+      description: The NetWitness user identifier of the user currently working on
+        the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.sources
+      description: Unique set of sources for all the alerts in an incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.ruleId
+      description: The unique identifier of the rule that created the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.firstAlertTime
+      description: The timestamp of the earliest occurring Alert in this incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.id
+      description: The unique category identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.parent
+      description: The parent name of the category.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.categories.name
+      description: The friendly name of the category.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.id
+      description: The unique journal entry identifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.author
+      description: The author of this entry.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.notes
+      description: Notes and observations about the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.created
+      description: The timestamp of the journal entry created date.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.lastUpdated
+      description: The timestamp of the journal entry last updated date.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.journalEntries.milestone
+      description: Incident milestone classifier.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.createdBy
+      description: The NetWitness user ID or name of the rule that created the incident.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.deletedAlertCount
+      description: The number of alerts that are deleted from the incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.eventCount
+      description: The number of events associated with incident.
+      type: Number
+    - contextPath: RSANetWitness115.Incidents.alertMeta.SourceIp
+      description: The unique source IP addresses.
+      type: String
+    - contextPath: RSANetWitness115.Incidents.alertMeta.DestinationIp
+      description: The unique destination IP addresses.
+      type: String
+  - arguments:
+    - description: The unique incident identifier.
+      name: id
+      required: true
+    description: Remove a single incident using the incident's unique identifier.
+    name: rsa-nw-remove-incident
+  - arguments:
+    - description: The unique incident identifier.
+      name: id
+      required: true
+    - description: The NetWitness user ID of the user creating the journal entry.
+        Can be found in the RSA platform. If no author is provided the command lists
+        the user from the integration configuration as the author.
+      name: author
+    - description: Notes and observations about the incident.
+      name: notes
+      required: true
+    - auto: PREDEFINED
+      description: The incident milestone classifier. Can be Reconnaissance, Delivery,
+        Exploitation, Installation, CommandAndControl, ActionOnObjective, Containment,
+        Eradication, Closure.
+      name: milestone
+      predefined:
+      - Reconnaissance
+      - Delivery
+      - Exploitation
+      - Installation
+      - CommandAndControl
+      - ActionOnObjective
+      - Containment
+      - Eradication
+      - Closure
+    description: Add a journal entry to an existing incident.
+    name: rsa-nw-incident-add-journal-entry
+  - arguments:
+    - description: The unique incident identifier.
+      name: id
+      required: true
+    - description: The requested page number, first page is 0. Cannot be supplied
+        with the limit argument.
+      name: page_number
+    - description: The maximum number of items to return in a single page. Cannot
+        be supplied with the limit argument.
+      name: page_size
+    - description: The maximum number of results to be returned. If not set, the first
+        50 results are returned. cannot be supplied with page_size/page_number arguments.
+      name: limit
+    description: Retrieves all the alerts that are associated with an incident based
+      on the incident ID. you can limit the results using the limit argument or the
+      page size argument.
+    name: rsa-nw-incident-list-alerts
+    outputs:
+    - contextPath: RSANetWitness115.IncidentAlerts.id
+      description: The unique alert identifier.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.title
+      description: The title or name of the rule that created the alert.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.detail
+      description: The details of the alert. This can be the module name or meta that
+        the module included.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.created
+      description: The timestamp of the alert created date.
+      type: Date
+    - contextPath: RSANetWitness115.IncidentAlerts.source
+      description: The source of this alert. For example, Event Stream Analysis or
+        Malware Analysis.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.riskScore
+      description: The risk score of this alert, usually in the range 0 - 100.
+      type: Number
+    - contextPath: RSANetWitness115.IncidentAlerts.type
+      description: The type alert type. For example, Network or Log.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.device.ipAddress
+      description: The source IP address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.device.port
+      description: The source port.
+      type: Number
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.device.macAddress
+      description: The source ethernet MAC address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.device.dnsHostname
+      description: The source DNS resolved hostname.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.device.dnsDomain
+      description: The source top-level domain from the DNS resolved hostname.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.user.username
+      description: The source unique username.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.user.emailAddress
+      description: The source email address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.user.adUsername
+      description: The source Active Directory (AD) username.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.source.user.adDomain
+      description: The source Active Directory (AD) domain.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.device.ipAddress
+      description: The destination IP address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.device.port
+      description: The destination port.
+      type: Number
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.device.macAddress
+      description: The destination ethernet MAC address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.device.dnsHostname
+      description: The destination DNS resolved hostname.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.device.dnsDomain
+      description: The destination top-level domain from the DNS resolved hostname.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.user.username
+      description: The destination unique username.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.user.emailAddress
+      description: The destination email address.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.user.adUsername
+      description: The destination Active Directory (AD) username.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.destination.user.adDomain
+      description: An destination Active Directory (AD) domain.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.domain
+      description: The destination top-level domain or Windows domain.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.eventSource
+      description: The source of the event. This may be a fully-qualified hostname
+        with a port, or simple name.
+      type: String
+    - contextPath: RSANetWitness115.IncidentAlerts.events.eventSourceId
+      description: The unique identifier of the event on the source. For Network and
+        Log events, this is the Nextgen Session ID.
+      type: String
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.pageNumber
+      description: The requested page number.
+      type: Number
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.pageSize
+      description: The requested number of items to return in a single page.
+      type: Number
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.totalPages
+      description: The total number of pages available.
+      type: Number
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.totalItems
+      description: The total number of items available.
+      type: Number
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.hasNext
+      description: Indicates if there is a page containing results after this page.
+      type: Boolean
+    - contextPath: RSANetWitness115.paging.IncidentAlerts.hasPrevious
+      description: Indicates if there is a page containing results before this page.
+      type: Boolean
+  - arguments:
+    - description: The name of the service. For example, endpoint-server.
+      name: name
+    description: Retrieves a list of all services, or filter by name.
+    name: rsa-nw-services-list
+    outputs:
+    - contextPath: RSANetWitness115.ServicesList.id
+      description: The unique identifier of each service installed in the RSA NetWitness
+        suite.
+      type: String
+    - contextPath: RSANetWitness115.ServicesList.name
+      description: The name of the service. For example, endpoint- server.
+      type: String
+    - contextPath: RSANetWitness115.ServicesList.displayName
+      description: The display name of the service.
+      type: String
+    - contextPath: RSANetWitness115.ServicesList.host
+      description: The host details of the service.
+      type: String
+    - contextPath: RSANetWitness115.ServicesList.version
+      description: The version of the service.
+      type: String
+  - arguments:
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - description: The requested page number, first page is 0. Cannot be supplied
+        with the limit argument.
+      name: page_number
+    - description: The maximum number of items to return in a single page. Cannot
+        be supplied with the limit argument.
+      name: page_size
+    - description: The maximum number of results to be returned. If not set, the first
+        50 results are returned. Cannot be supplied with page_size/page_number arguments.
+      name: limit
+    - description: A comma-separated list of host agent IDs.
+      isArray: true
+      name: agent_id
+    - description: A comma-separated list of host names.
+      isArray: true
+      name: host_name
+    - description: The host risk score. Returns all results with risk score greater
+        than or equal to.
+      name: risk_score
+    - description: A comma-separated list of IPV4 in the network interface.
+      isArray: true
+      name: ip
+    - description: Custom filter in JSON format.
+      name: filter
+    description: Lists all host information from a specific endpoint server. Filter
+      the results using the supplied arguments (can be a list) or use the 'filter'
+      argument. You can limit the results using the limit argument or the page size
+      argument.
+    name: rsa-nw-hosts-list
+    outputs:
+    - contextPath: RSANetWitness115.HostsList.agentId
+      description: The host agent ID.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.hostName
+      description: The host name.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.riskScore
+      description: The host risk score.
+      type: Number
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.name
+      description: The name of the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.macAddress
+      description: The MAC Address of the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.ipv4
+      description: The list of IPV4 in the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.ipv6
+      description: The list of IPV6 in the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.networkIdv6
+      description: The list of network IDV6 in the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.gateway
+      description: The list of gateways in the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.dns
+      description: The list of DNS in the network interface.
+      type: String
+    - contextPath: RSANetWitness115.HostsList.networkInterfaces.promiscuous
+      description: Specifies if the network interface is in promiscuous mode.
+      type: Boolean
+    - contextPath: RSANetWitness115.HostsList.lastSeenTime
+      description: The agent last seen time.
+      type: Date
+    - contextPath: RSANetWitness115.paging.HostsList.pageNumber
+      description: The requested page number.
+      type: Number
+    - contextPath: RSANetWitness115.paging.HostsList.pageSize
+      description: The requested number of items to return in a single page.
+      type: Number
+    - contextPath: RSANetWitness115.paging.HostsList.totalPages
+      description: The total number of pages available.
+      type: Number
+    - contextPath: RSANetWitness115.paging.HostsList.totalItems
+      description: The total number of items available.
+      type: Number
+    - contextPath: RSANetWitness115.paging.HostsList.hasNext
+      description: Indicates if there is a page containing results after this page.
+      type: Boolean
+    - contextPath: RSANetWitness115.paging.HostsList.hasPrevious
+      description: Indicates if there is a page containing results before this page.
+      type: Boolean
+  - arguments:
+    - description: The endpoint ID.
+      isArray: true
+      name: id
+    - default: true
+      description: The endpoint IP.
+      isArray: true
+      name: ip
+    - description: The endpoint hostname.
+      isArray: true
+      name: hostname
+    description: Retrieves host information for a specific endpoint. To use this command,
+      service ID must be set in the integration configuration.
+    name: endpoint
+    outputs:
+    - contextPath: Endpoint.Hostname
+      description: The endpoint hostname.
+      type: String
+    - contextPath: Endpoint.Relationships.EntityA
+      description: The relationship source.
+      type: string
+    - contextPath: Endpoint.Relationships.EntityB
+      description: The relationship destination.
+      type: string
+    - contextPath: Endpoint.Relationships.Relationship
+      description: The relationship name.
+      type: string
+    - contextPath: Endpoint.Relationships.EntityAType
+      description: The relationship source type.
+      type: string
+    - contextPath: Endpoint.Relationships.EntityBType
+      description: The relationship destination type.
+      type: string
+    - contextPath: Endpoint.OS
+      description: The endpoint operation system.
+      type: String
+    - contextPath: Endpoint.IPAddress
+      description: The endpoint IP address.
+      type: String
+    - contextPath: Endpoint.ID
+      description: The endpoint ID.
+      type: String
+    - contextPath: Endpoint.Status
+      description: The endpoint status.
+      type: String
+    - contextPath: Endpoint.IsIsolated
+      description: The endpoint isolation status.
+      type: String
+    - contextPath: Endpoint.MACAddress
+      description: The endpoint MAC address.
+      type: String
+    - contextPath: Endpoint.Vendor
+      description: The integration name of the endpoint vendor.
+      type: String
+    - contextPath: Endpoint.Domain
+      description: The endpoint domain.
+      type: String
+    - contextPath: Endpoint.DHCPServer
+      description: The endpoint DHCP server.
+      type: String
+    - contextPath: Endpoint.OSVersion
+      description: The endpoint operation system version.
+      type: String
+    - contextPath: Endpoint.BIOSVersion
+      description: The endpoint BIOS version.
+      type: String
+    - contextPath: Endpoint.Model
+      description: The model of the machine or device.
+      type: String
+    - contextPath: Endpoint.Memory
+      description: The memory on this endpoint.
+      type: Int
+    - contextPath: Endpoint.Processors
+      description: The number of processors.
+      type: Int
+    - contextPath: Endpoint.Processor
+      description: The processor model.
+      type: String
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    description: Retrieve a list os snapshot IDs for a given host.
+    name: rsa-nw-snapshots-list-for-host
+    outputs:
+    - contextPath: RSANetWitness115.SnapshotsListForHost
+      description: The list of snapshot timestamps.
+      type: Date
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The start time of the scan snapshot. Can be retrieved using the
+        'rsa-nw-snapshots-list-for-host' command.
+      name: snapshot_timestamp
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - auto: PREDEFINED
+      description: A comma-separated list of categories to filter the results. For
+        example, PROCESSES,SERVICES.
+      isArray: true
+      name: categories
+      predefined:
+      - PROCESSES
+      - LOADED_LIBRARIES
+      - SERVICES
+      - AUTORUNS
+      - TASKS
+      - DRIVERS
+      - THREADS
+      - IMAGE_HOOKS
+      - KERNEL_HOOKS.
+    - defaultValue: "50"
+      description: The maximum number of results returned by the command.
+      name: limit
+    - description: The offset to receive results from. For example, offset=3 returns
+        results from the 3rd result onward.
+      name: offset
+    description: Provides snapshot details of the given host for the specified snapshot
+      time. It is recommended to use categories to filter the results since this command
+      returns a large amount of data.
+    name: rsa-nw-snapshot-details-get
+    outputs:
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.machineOsType
+      description: The operating system type (Windows, Mac, Linux).
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.hostName
+      description: The host name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.agentId
+      description: The host agent ID.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.agentVersion
+      description: The agent version.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.scanStartTime
+      description: The start time of the scan snapshot.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.directory
+      description: The file directory.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileName
+      description: The file name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.owner.username
+      description: The user name of the file owner.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.owner.groupname
+      description: The group name of the file owner.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.owner.uid
+      description: The UID of the user name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.owner.gid
+      description: The GID of the user name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.timeCreated
+      description: The timestamp when the file was created.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.timeModified
+      description: The timestamp when the file was modified.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.timeAccessed
+      description: The timestamp when the file was last accessed.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.attributes
+      description: The list of file attributes.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.accessMode
+      description: The file access mode.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.sameDirectoryFileCounts.nonExe
+      description: The number of non-exe files in the same directory as the file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.sameDirectoryFileCounts.exe
+      description: The number of exe files in the same directory as the file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.sameDirectoryFileCounts.subFolder
+      description: The number of sub-folders in the same directory as the file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.sameDirectoryFileCounts.exeSameCompany
+      description: The number of executables with the same company name in the same
+        directory as the file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.sameDirectoryFileCounts.hiddenFiles
+      description: The count of hidden files in the same directory as the file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileContext
+      description: The list of file context.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.directoryContext
+      description: The list of directory context.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.autorunContext
+      description: The list of autorun context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.networkContext
+      description: The list of network context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.kernelModeContext
+      description: The list of kernel mode context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.userModeContext
+      description: The list of user mode context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.processContext
+      description: The list of process context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.rpm.packageName
+      description: The RPM package name to which the file belongs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.rpm.category
+      description: The category to which the RPM package belongs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.parentPid
+      description: The parent process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.imageBase
+      description: The process image base address.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.createUtcTime
+      description: The process creation time.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.owner
+      description: The user name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.launchArguments
+      description: The process launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.threadCount
+      description: The number of threads running in the process.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.eprocess
+      description: The process identifier.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.sessionId
+      description: The process session ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.parentPath
+      description: The parent process directory.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.imageSize
+      description: The process image size.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.integrityLevel
+      description: The process integrity level.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.processes.context
+      description: The list of process context.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.dlls.createTime
+      description: The process creation timestamp.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.dlls.eprocess
+      description: The process identity.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.dlls.imageSize
+      description: The size of the DLL image in memory.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.processName
+      description: The process name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.processTime
+      description: The process creation timestamp.
+      type: Date
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.eprocess
+      description: The process identifier.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.ethread
+      description: The thread identifier.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.tid
+      description: The thread ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.teb
+      description: The address of the thread environment block.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.startAddress
+      description: The start address of the thread in memory.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.state
+      description: The thread state.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.threads.behaviorKey
+      description: The floating behavior resolution of the thread.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.drivers.imageBase
+      description: The driver image base address.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.drivers.imageSize
+      description: The driver image size.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.serviceName
+      description: The service name as identified by the system.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.displayName
+      description: The service display name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.description
+      description: The service description.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.account
+      description: The name of the user the service executes as.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.launchArguments
+      description: The launch arguments of the service.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.serviceMain
+      description: The service main.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.hostingPid
+      description: The service hosting process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.state
+      description: The service current state.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.win32ErrorCode
+      description: The last Windows 32 error code from registry.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.services.context
+      description: The list of service context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.name
+      description: The task name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.executeUser
+      description: The name of the user the task executes as.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.creatorUser
+      description: The name of the user who created the task.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.launchArguments
+      description: The launch arguments of the task.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.status
+      description: The task status.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.lastRunTime
+      description: The time the task was last run.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.nextRunTime
+      description: The next scheduled time of the task.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.tasks.triggerString
+      description: The textual trigger string of the task.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.autoruns.registryPath
+      description: The registry path where the autorun is located.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.autoruns.launchArguments
+      description: the autorun launch argument.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.process.pid
+      description: The PID of the process in which the hook was detected.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.process.fileName
+      description: The filename of the process in which the hook was detected.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.process.createUtcTime
+      description: The creation time of the process in which the hook was detected.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.hookLocation.section
+      description: The name of the image section that was modified by the hook.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.hookLocation.sectionBase
+      description: The base of the image section that was modified by the hook.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.hookLocation.symbol
+      description: The closest symbol name to the memory location that was modified.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.hookLocation.symbolOffset
+      description: The closest symbol +/- offset to the hook location when relevant.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.inlinePatch.originalBytes
+      description: The hexadecimal bytes which were replaced.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.inlinePatch.originalAsm
+      description: The array of decoded ASM instructions that were replaced.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.inlinePatch.currentBytes
+      description: The hexadecimal bytes that overwrote the original code.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.imageHooks.inlinePatch.currentAsm
+      description: The array of decoded ASM instructions that overwrote the original
+        code.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.kernelHooks.hookLocation.objectName
+      description: Name of the object that was hooked in kernel.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.windows.kernelHooks.hookLocation.objectFunction
+      description: The name of the object function that was hooked in the kernel.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.priority
+      description: The process priority.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.flags
+      description: The process flags.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.nice
+      description: The nice value of the process.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.openFilesCount
+      description: The number of open files by process at scan time.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.context
+      description: The process context.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.parentPid
+      description: The parent process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.imageBase
+      description: The process image base address.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.createUtcTime
+      description: The process UTC creation time.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.owner
+      description: The user name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.launchArguments
+      description: The process launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.processes.threadCount
+      description: The number of threads running in the process.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.dylibs.pid
+      description: The process ID in dylibs which is loaded.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.dylibs.processName
+      description: The process name in dylibs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.dylibs.imageBase
+      description: The process image base address in dylibs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.drivers.preLinked
+      description: True if the kext bundle is prelinked.
+      type: Boolean
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.drivers.numberOfReferences
+      description: The number of references.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.drivers.dependencies
+      description: The list of kexts (name) the driver is linked against.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.drivers.imageBase
+      description: The driver image base address.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.drivers.imageSize
+      description: The driver image size.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.name
+      description: The daemon label.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.sessionName
+      description: The name of the session in which the daemon runs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.user
+      description: The name of the user under which the daemon runs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.pid
+      description: The daemon PID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.onDemand
+      description: True if the daemon is configured to run on demand.
+      type: Boolean
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.lastExitCode
+      description: The daemon last exit code.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.timeout
+      description: The daemon timeout value.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.daemons.launchArguments
+      description: The daemon launch argument.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.daemons.daemons.config
+      description: The full path of the configuration file used to configure the daemon.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.name
+      description: The task name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.cronJob
+      description: True if the task is a cron job, else launchd.
+      type: Boolean
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.launchArguments
+      description: The task launch argument.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.user
+      description: The name of the user under which the task runs.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.triggerString
+      description: The task trigger string.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.tasks.configFile
+      description: The full path of the configuration file used to configure the task.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.autoruns.user
+      description: The name of the user under which the autorun is run.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.autoruns.name
+      description: The autorun label.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.mac.autoruns.detail
+      description: The autorun details.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.priority
+      description: The process priority.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.uid
+      description: The user UID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.environment
+      description: The process environment variables.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.nice
+      description: The process nice value.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.securityContext
+      description: The process security context.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.parentPid
+      description: The parent process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.imageBase
+      description: The process base address.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.createUtcTime
+      description: The process UTC creation time.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.owner
+      description: The user name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.launchArguments
+      description: The process launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.processes.threadCount
+      description: The number of threads running in the process.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.loadedLibraries.pid
+      description: The process ID in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.loadedLibraries.processName
+      description: The process name in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.loadedLibraries.imageBase
+      description: The process image base address in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.numberOfInstances
+      description: The number of instances loaded in memory.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.loadState
+      description: The driver load state.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.dependencies
+      description: The dependent driver names.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.author
+      description: The driver author name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.description
+      description: The driver description.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.sourceVersion
+      description: The driver source version.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.drivers.versionMagic
+      description: The driver version magic.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.initdHashSha256
+      description: The hash of the init-d script file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.initdPaths
+      description: The path of the init-d script file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.pid
+      description: The process ID of the init-d script file.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.description
+      description: The init-d script file description.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.status
+      description: The init-d script file status.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.initds.runLevels
+      description: The list of run levels in which the init-d script file is enabled.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.systemdHashSha256
+      description: The systemd script file hash value.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.systemdPaths
+      description: The systemd script file path value.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.name
+      description: The systemd script file name.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.description
+      description: The systemd script file description.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.state
+      description: The systemd script file state.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.launchArguments
+      description: The systemd script file launch argument.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.triggeredBy
+      description: The systemd script file triggered by list.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.systemds.triggerStrings
+      description: The systemd script file trigger strings.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.autoruns.label
+      description: The autorun label.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.autoruns.comments
+      description: The autorun comments.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.crons.user
+      description: The user account under which cron job was created.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.crons.triggerString
+      description: The trigger string that launches the cron job.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.linux.crons.launchArguments
+      description: The cron job launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.firstFileName
+      description: The first name of the file sent by the agent.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.reputationStatus
+      description: The reputation status of the file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.globalRiskScore
+      description: The global risk score.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.firstSeenTime
+      description: The time the file was first seen by the endpoint server.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.machineOsType
+      description: The operating system type (Windows, Mac, Linux).
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.signature
+      description: The file signatory information.
+      type: Object
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.signature.timeStamp
+      description: The signature timestamp.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.signature.thumbprint
+      description: The certificate thumbprint.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.signature.context
+      description: The certificate context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.signature.signer
+      description: The certificate signer information.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.size
+      description: The file size.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.checksumMd5
+      description: The file MD5.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.checksumSha1
+      description: The file SHA1.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.checksumSha256
+      description: The file SHA256.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe
+      description: The file PE information. This is applicable for Windows files.
+      type: Object
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.timeStamp
+      description: The PE file timestamp.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.imageSize
+      description: The PE file image size.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.numberOfExportedFunctions
+      description: The number of exported functions in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.numberOfNamesExported
+      description: The number of names exported in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.numberOfExecuteWriteSections
+      description: The number of execute write sections in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.context
+      description: The PE file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.resources
+      description: The PE file resources.
+      type: Object
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.resources.originalFileName
+      description: The original filename as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.resources.company
+      description: The company name as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.resources.description
+      description: The description of the file as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.resources.version
+      description: The version of the file as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.sectionNames
+      description: The list of section names in the PE file.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.pe.importedLibraries
+      description: The list of imported libraries in the PE file.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.elf
+      description: The ELF information of the file. This is applicable for Linux files.
+      type: Object
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.classType
+      description: The ELF file class type.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.data
+      description: The ELF file data.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.entryPoint
+      description: The ELF file entry point.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.context
+      description: The ELF file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.type
+      description: The ELF file type.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.sectionNames
+      description: The list of section names in the ELF file.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.elf.importedLibraries
+      description: The list of imported libraries in the ELF file.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.macho
+      description: The Macho file information. This is applicable for Mac files.
+      type: Object
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.uuid
+      description: The Macho file UUID.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.identifier
+      description: The Macho file identifier.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.minOsxVersion
+      description: The minimum OSx version for the Macho file.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.context
+      description: The Macho file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.flags
+      description: The Macho file flags.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.numberOfLoadCommands
+      description: The number of Macho file load commands.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.version
+      description: The Macho file version.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.sectionNames
+      description: The Macho file section names.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.macho.importedLibraries
+      description: The Macho file imported libraries list.
+      type: Unknown
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.entropy
+      description: The file entropy.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.format
+      description: The file format.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.fileStatus
+      description: The file status as assigned by the analyst. Can be Whitelist, Blacklist,
+        Neutral, or Graylist.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.fileProperties.remediationAction
+      description: The remediation action as assigned by the analyst. For example,
+        Blocked.
+      type: String
+    - contextPath: RSANetWitness115.SnapshotDetailsGet.localRiskScore
+      description: The file score based on alerts triggered in the given agent.
+      type: Number
+  - arguments:
+    - description: The service ID of the specific endpoint Server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - description: The requested page number, first page is number 0. Cannot be supplied
+        with the limit argument.
+      name: page_number
+    - description: The maximum number of items to return in a single page. Cannot
+        be supplied with the limit argument.
+      name: page_size
+    - description: The maximum number of results to be returned. If not set, the first
+        10 results are returned.  Cannot be supplied with page_size/page_number arguments.
+      name: limit
+    description: Lists all related file information from a specific endpoint server.
+      You can limit the results using the limit argument or the page size argument.
+    name: rsa-nw-files-list
+    outputs:
+    - contextPath: RSANetWitness115.FilesList.windows.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.autoruns.registryPath
+      description: The registry path where autorun is located.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.autoruns.launchArguments
+      description: The autorun launch argument.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.process.pid
+      description: The PID of the process the hook was detected in.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.process.fileName
+      description: The file name of the process the hook was detected in.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.process.createUtcTime
+      description: The creation time of the process the hook was detected in.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.hookLocation.section
+      description: The name of the image section modified by the hook.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.hookLocation.sectionBase
+      description: The image section base modified by the hook.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.hookLocation.symbol
+      description: The closest symbol name to the memory location that was modified.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.hookLocation.symbolOffset
+      description: The closest symbol +/- offset to the hook location when relevant.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.inlinePatch.originalBytes
+      description: The hexadecimal bytes that were replaced.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.inlinePatch.originalAsm
+      description: The array of decoded ASM instructions that were replaced.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.inlinePatch.currentBytes
+      description: The hexadecimal bytes that overwrote the original code.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.imageHooks.inlinePatch.currentAsm
+      description: The array of decoded ASM instructions that overwrote the original
+        code.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.windows.kernelHooks.hookLocation.objectName
+      description: The name of the object that was hooked in the kernel.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.windows.kernelHooks.hookLocation.objectFunction
+      description: The name of the object function that was hooked in the kernel.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.processes.priority
+      description: The process priority.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.flags
+      description: The process flags.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.nice
+      description: The process nice value.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.openFilesCount
+      description: The number of open files by the process at scan time.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.context
+      description: The process context.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.mac.processes.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.parentPid
+      description: The parent process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.imageBase
+      description: The process image base address.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.processes.createUtcTime
+      description: The process UTC creation time.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.processes.owner
+      description: The user name.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.processes.launchArguments
+      description: The process launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.processes.threadCount
+      description: The number of threads running in the process.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.dylibs.pid
+      description: The process ID in dylibs which is loaded.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.dylibs.processName
+      description: The process name in dylibs.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.dylibs.imageBase
+      description: The process image base address in dylibs.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.drivers.preLinked
+      description: True if the kext bundle is prelinked.
+      type: Boolean
+    - contextPath: RSANetWitness115.FilesList.mac.drivers.numberOfReferences
+      description: The number of references.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.drivers.dependencies
+      description: The list of kexts(name) the driver is linked against.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.mac.drivers.imageBase
+      description: The driver image base address.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.drivers.imageSize
+      description: The driver image size.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.name
+      description: The daemon label.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.sessionName
+      description: The name of the session in which daemon runs.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.user
+      description: The name of the user under which the daemon runs.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.pid
+      description: The daemon ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.onDemand
+      description: True if the daemon is configured to run on demand.
+      type: Boolean
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.lastExitCode
+      description: The daemon last exit code.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.timeout
+      description: The daemon timeout value.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.daemons.launchArguments
+      description: The daemon launch argument.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.daemons.daemons.config
+      description: The full path of the configuration file used to configure the daemon.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.name
+      description: The task name.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.cronJob
+      description: True if the task is a cron job, else launchd.
+      type: Boolean
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.launchArguments
+      description: The task launch argument.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.user
+      description: The name of the user under which this task will run.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.triggerString
+      description: The task trigger string.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.tasks.configFile
+      description: The full path of the configuration file used to configure the task.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.autoruns.user
+      description: The name of the user under which the autorun is run.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.autoruns.name
+      description: The autorun label.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.mac.autoruns.detail
+      description: The autorun details.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.priority
+      description: The process priority.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.uid
+      description: The user UID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.environment
+      description: The environment variables.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.nice
+      description: The process nice value.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.securityContext
+      description: The process security context.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.pid
+      description: The process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.parentPid
+      description: The parent process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.imageBase
+      description: The process base address.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.processes.createUtcTime
+      description: The process UTC creation time.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.owner
+      description: The user name.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.launchArguments
+      description: The process launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.processes.threadCount
+      description: The number of threads running in the process.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.loadedLibraries.pid
+      description: The process ID in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.loadedLibraries.processName
+      description: The process name in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.loadedLibraries.imageBase
+      description: The process image base address in the loaded library.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.numberOfInstances
+      description: The number of instances loaded in memory.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.loadState
+      description: The driver load state.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.dependencies
+      description: The dependent driver names.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.author
+      description: The driver author name.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.description
+      description: The driver description.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.sourceVersion
+      description: The driver source version.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.drivers.versionMagic
+      description: The driver version magic.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.initds.initdHashSha256
+      description: The init-d script file hash.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.initds.initdPaths
+      description: The init-d script file path.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.initds.pid
+      description: The init-d script file process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.initds.description
+      description: The init-d script file description.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.initds.status
+      description: The init-d script file status.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.initds.runLevels
+      description: The ist of run levels in which the init-d script file is enabled.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.systemdHashSha256
+      description: The systemd script file hash value.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.systemdPaths
+      description: The systemd script file path value.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.name
+      description: The systemd script file name.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.description
+      description: The systemd script file description.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.state
+      description: The systemd script file state.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.launchArguments
+      description: The systemd script file launch argument.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.pid
+      description: The systemd script file process ID.
+      type: Number
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.triggeredBy
+      description: The systemd script file triggered by list.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.linux.systemds.triggerStrings
+      description: The systemd script file trigger strings.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.linux.autoruns.type
+      description: The autorun type.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.autoruns.label
+      description: The autorun label.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.autoruns.comments
+      description: The autorun comments.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.crons.user
+      description: The user account under which cron job was created.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.crons.triggerString
+      description: The trigger string that launches the cron job.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.linux.crons.launchArguments
+      description: The cron job launch arguments.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.firstFileName
+      description: The first name of the file sent by the agent.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.reputationStatus
+      description: The file reputation status.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.globalRiskScore
+      description: The global risk score.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.firstSeenTime
+      description: The time the file was first seen by the endpoint server.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.fileProperties.machineOsType
+      description: The operating system type (Windows, Mac, Linux).
+      type: String
+    - contextPath: RSANetWitness115.FilesList.signature
+      description: The file signatory information.
+      type: Object
+    - contextPath: RSANetWitness115.FilesList.signature.timeStamp
+      description: The signature timestamp.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.signature.thumbprint
+      description: The certificate thumbprint.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.signature.context
+      description: The certificate context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.signature.signer
+      description: The certificate signer information.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.size
+      description: The file size.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.checksumMd5
+      description: The file MD5.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.checksumSha1
+      description: The file SHA1.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.checksumSha256
+      description: The file SHA256.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe
+      description: The file PE information. This is applicable for Windows files.
+      type: Object
+    - contextPath: RSANetWitness115.FilesList.pe.timeStamp
+      description: The PE file timestamp.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.imageSize
+      description: The PE file image size.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.numberOfExportedFunctions
+      description: The number of exported functions in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.numberOfNamesExported
+      description: The number of names exported in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.numberOfExecuteWriteSections
+      description: The number of execute write sections in the PE file.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.context
+      description: The PE file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.pe.resources
+      description: The PE file resources.
+      type: Object
+    - contextPath: RSANetWitness115.FilesList.pe.resources.originalFileName
+      description: The original filename as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.resources.company
+      description: The company name as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.resources.description
+      description: The file description as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.resources.version
+      description: The file version as per PE information.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.pe.sectionNames
+      description: The list of section names in the PE file.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.pe.importedLibraries
+      description: The list of imported libraries in the PE file.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.elf
+      description: The file ELF information. This is applicable for Linux files.
+      type: Object
+    - contextPath: RSANetWitness115.FilesList.elf.classType
+      description: The ELF file Class type.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.elf.data
+      description: The ELF file data.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.elf.entryPoint
+      description: The ELF file entry point.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.elf.context
+      description: The ELF file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.elf.type
+      description: The ELF file type.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.elf.sectionNames
+      description: The list of section names in the ELF file.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.elf.importedLibraries
+      description: The list of imported libraries in the ELF file.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.macho
+      description: The file Macho information. This is applicable for Mac files.
+      type: Object
+    - contextPath: RSANetWitness115.FilesList.macho.uuid
+      description: The Macho file UUID.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.identifier
+      description: The Macho file identifier.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.minOsxVersion
+      description: The minimum OSx version for the Macho file.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.context
+      description: The Macho file context information.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.macho.flags
+      description: The Macho file flags.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.numberOfLoadCommands
+      description: The number of load commands for the Macho file.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.version
+      description: The Macho file version.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.macho.sectionNames
+      description: The Macho file section names.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.macho.importedLibraries
+      description: The Macho file imported libraries list.
+      type: Unknown
+    - contextPath: RSANetWitness115.FilesList.entropy
+      description: The file entropy.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.format
+      description: The file format.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.fileStatus
+      description: The file status as assigned by the analyst. Can be Whitelist, Blacklist,
+        Neutral, or Graylist.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.remediationAction
+      description: The remediation action as assigned by the analyst. For example,
+        Blocked.
+      type: String
+    - contextPath: RSANetWitness115.FilesList.localRiskScore
+      description: The file score based on alerts triggered in the given agent.
+      type: Number
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - description: You can use cpuMax to specify the amount of CPU the agent can use
+        to run the scan. You can choose a value from 5 to 100. If you do not specify
+        a value, the agent uses the default 25% CPU for the scan.
+      name: cpu_max
+    description: Starts a scan for the host with the specified agent ID. Each scan
+      produces a snapshot, the full details can be seen using the 'rsa-nw-snapshot-details-get'
+      command.
+    name: rsa-nw-scan-request
+  - arguments:
+    - description: Unique identifier of the host.
+      name: agent_id
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    description: Stop a scan for the host with the specified agent ID.
+    name: rsa-nw-scan-stop-request
+  - arguments:
+    - description: Unique host identifier.
+      name: agent_id
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - auto: PREDEFINED
+      description: Filter alerts based on the category. Can be Critical, High, Medium,
+        or Low.
+      name: alert_category
+      predefined:
+      - Critical
+      - High
+      - Medium
+      - Low
+    description: Gets all alerts triggered for a given host.
+    name: rsa-nw-host-alerts-list
+    outputs:
+    - contextPath: RSANetWitness115.HostAlerts.id
+      description: The entity ID for which the score needs to be queried. Use agent
+        ID for hosts and checksum for files.
+      type: String
+    - contextPath: RSANetWitness115.HostAlerts.distinctAlertCount.critical
+      description: The number of critical alerts.
+      type: Number
+    - contextPath: RSANetWitness115.HostAlerts.distinctAlertCount.high
+      description: The number of high alerts.
+      type: Number
+    - contextPath: RSANetWitness115.HostAlerts.distinctAlertCount.medium
+      description: The number of medium alerts.
+      type: Number
+    - contextPath: RSANetWitness115.HostAlerts.distinctAlertCount.low
+      description: The number of low alerts.
+      type: Number
+    - contextPath: RSANetWitness115.HostAlerts.categorizedAlerts
+      description: The alert and event count for a file/host, categorized by severity.
+      type: String
+  - arguments:
+    - description: The file hash, either md5 or sha256.
+      name: check_sum
+      predefined:
+      - ""
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - auto: PREDEFINED
+      description: Filter alerts based on the category.  Can be Critical, High, Medium,
+        or Low.
+      name: alert_category
+      predefined:
+      - Critical
+      - High
+      - Medium
+      - Low
+    description: Gets all alerts triggered for a given file.
+    name: rsa-nw-file-alerts-list
+    outputs:
+    - contextPath: RSANetWitness115.FileAlerts.id
+      description: The entity ID for which score needs to be queried. Use agent ID
+        for hosts and checksum for files.
+      type: String
+    - contextPath: RSANetWitness115.FileAlerts.distinctAlertCount.critical
+      description: The number of critical alerts.
+      type: Number
+    - contextPath: RSANetWitness115.FileAlerts.distinctAlertCount.high
+      description: The number of high alerts.
+      type: Number
+    - contextPath: RSANetWitness115.FileAlerts.distinctAlertCount.medium
+      description: The number of medium alerts.
+      type: Number
+    - contextPath: RSANetWitness115.FileAlerts.distinctAlertCount.low
+      description: The number of low alerts.
+      type: Number
+    - contextPath: RSANetWitness115.FileAlerts.categorizedAlerts
+      description: The alert and event count for a file/host, categorized by severity.
+      type: String
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the specific endpoint server. View all service
+        IDs using the 'rsa-nw-services-list' command. If none is given, the service
+        ID configured in the integration configuration is used.
+      name: service_id
+    - description: The path where the files may be present. Either specify a single
+        file path or use a wild card. For example - "C:\Users\sample\*" . To see scanned
+        file paths, use the command 'rsa-nw-snapshot-details-get'.
+      name: path
+      required: true
+    - defaultValue: "10"
+      description: The maximum number of files returned by the host matching the wild
+        card path.
+      name: count_files
+    - defaultValue: "100"
+      description: The maximum size of each file (in MB) when using a wild card path.
+      name: max_file_size
+    description: Initiate file download for a single file or multiple files to the
+      endpoint server.
+    name: rsa-nw-file-download
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    - description: Drive or NTFS mount path for which MFT is requested. this parameter
+        is required when using API version 11.5 onwards.
+      name: path
+    description: Initiates the MFT download to the endpoint server.
+    name: rsa-nw-mft-download-request
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    description: Initiates the download of the system dump to the endpoint server.
+    name: rsa-nw-system-dump-download-request
+  - arguments:
+    - description: The host agent ID.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    - description: The process ID.
+      name: process_id
+      required: true
+    - description: The process identifier in Windows.
+      name: eprocess
+      required: true
+    - description: the file name.
+      name: file_name
+      required: true
+    - description: The file path.
+      name: path
+    - description: The hash (sha256 or md5) of the file. Can be found in the 'rsa-nw-snapshot-details-get'
+        command response under field fileProperties.checksumSha256 or fileProperties.checksumMd5.
+      name: hash
+      required: true
+    - description: The process UTC created time. Can be found in the 'rsa-nw-snapshot-details-get'
+        response under field windows.processes.createUtcTime.
+      name: process_create_utctime
+      required: true
+    description: Initiates the download of the process dump to the endpoint server.
+      You can find the process details by using the 'rsa-nw-snapshot-details-get'
+      and filter by category=PROCESSES, or use the RSA NW UI.
+    name: rsa-nw-process-dump-download-request
+  - arguments:
+    - description: The unique host identifier.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    - auto: PREDEFINED
+      description: Allow DNS communication.
+      name: allow_dns_only_by_system
+      predefined:
+      - "True"
+      - "False"
+    - description: A comma-separated list of IPv4 or IPv6 addresses to excluded from
+        isolation. For example, 1.2.3.4,11:22:33:44.
+      name: exclusion_list
+    - description: Additional information.
+      name: comment
+      required: true
+    description: Isolates the host with the specified agent ID from the network.
+    name: rsa-nw-endpoint-isolate-from-network
+  - arguments:
+    - description: The unique host identifier.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    - description: Allows DNS communication.
+      name: allow_dns_only_by_system
+    - description: A comma-separated list of IPv4 or IPv6 addresses to excluded from
+        isolation. For example, 1.2.3.4,11:22:33:44.
+      name: exclusion_list
+      required: true
+    - description: Additional information.
+      name: comment
+      required: true
+    description: Updates the network isolation exclusion list for the host with the
+      specified agent ID.
+    name: rsa-nw-endpoint-update-exclusions
+  - arguments:
+    - description: The unique host identifier.
+      name: agent_id
+      required: true
+    - description: The service ID of the endpoint server to be connected.
+      name: service_id
+    - description: Allows DNS communication.
+      name: allow_dns_only_by_system
+    - description: Additional information.
+      name: comment
+      required: true
+    description: Restores the network connection and removes IP addresses added to
+      the exclusion list for the host with the specified agent ID.
+    name: rsa-nw-endpoint-isolation-remove
+  - arguments: []
+    description: Returns the list of fields to map in outgoing mirroring. This command
+      is only used for debugging purposes.
+    name: get-mapping-fields
+  - arguments:
+    - description: The remote incident ID.
+      name: id
+      required: true
+    - defaultValue: "0"
+      description: The UTC timestamp in seconds of the last update. The incident is
+        only updated if it was modified after the last update time.
+      name: lastUpdate
+    description: Gets data from a remote incident. This method does not update the
+      current incident, and should be used for debugging purposes only.
+    name: get-remote-data
+  - arguments:
+    - description: Date string representing the local time. The incident is only returned
+        if it was modified after the last update time.
+      name: lastUpdate
+      required: true
+    description: Gets the list of incidents and detections that were modified since
+      the last update time. This method is used for debugging purposes.
+    name: get-modified-remote-data
+  - arguments: []
+    description: Updates the remote incident with local incident changes. This method
+      is only used for debugging purposes and will not update the current incident.
+    name: update-remote-system
+  dockerimage: demisto/python3:3.10.13.83255
+  isfetch: true
+  ismappable: true
+  isremotesyncin: true
+  isremotesyncout: true
+  runonce: false
+  script: |
+    register_module_line('RSANetWitnessv115', 'start', __line__())
+    ### pack version: 3.2.1
+
+
+    from requests import HTTPError
+    from datetime import datetime, timedelta, timezone
+
+
+    ERROR_TITLES = {
+        400: "400 Bad Request - The request was malformed, check the given arguments\n",
+        401: "401 Unauthorized - authentication is required and has failed\n",
+        403: "403 Forbidden - he user might not have the necessary permissions for a resource.\n ",
+        404: "404 Not Found - The requested resource does not exist.\n",
+        500: "500 Internal Server Error - An unexpected error has occurred.\n"
+    }
+    DATE_FORMAT = '%Y-%m-%dT%H:%M:%S.%MZ'
+    DEFAULT_MAX_INCIDENT_ALERTS = 50
+
+    # =========== Mirroring Mechanism Globals ===========
+    MAX_NB_MIRROR_PULL = 1500
+    MIRROR_DIRECTION = {
+        'None': None,
+        'Incoming': 'In',
+        'Outgoing': 'Out',
+        'Incoming And Outgoing': 'Both'
+    }
+    OUTGOING_MIRRORED_FIELDS = ['status', 'assignee']
+
+
+    class Client(BaseClient):
+        def __init__(self, server_url, verify, proxy, headers, service_id, fetch_time, fetch_limit, cred):
+            self.refresh_token = None
+            self.service_id = service_id
+            self.fetch_time = fetch_time
+            self.fetch_limit = fetch_limit
+            self.cred = cred
+            super().__init__(base_url=server_url, verify=verify, proxy=proxy, headers=headers)
+
+        def get_username(self):
+            return self.cred['identifier']
+
+        def get_incident_url(self, inc_id: str):
+            return urljoin(self._base_url, f'respond/incident/{inc_id}')
+
+        def _http_request(self, method, url_suffix='', **kwargs):
+            """Http request wrapper, handles authentication in case token expires.
+
+               Args:
+                   method (str): The request method e.g 'GET'
+                   url_suffix (str): The request url
+                   **kwargs (dict): The arguments for the real http request
+
+               Returns:
+                   The request response
+               """
+            try:
+                res = super()._http_request(method, url_suffix, error_handler=exception_handler, **kwargs)
+            except Exception as e:
+                if 'Expired Token' in e.__str__():
+                    self.generate_new_token()
+                    res = super()._http_request(method, url_suffix, error_handler=exception_handler, **kwargs)
+                else:
+                    raise e
+            return res
+
+        def list_incidents_request(self, page_size: str | None, page_number: str | None,
+                                   until: str | None, since: str | None) -> dict:
+            params = assign_params(until=until, since=since, pageSize=page_size, pageNumber=page_number)
+            return self._http_request('GET', 'rest/api/incidents', params=params)
+
+        def get_incident_request(self, inc_id: str | None) -> dict:
+            return self._http_request('GET', f'rest/api/incidents/{inc_id}')
+
+        def update_incident_request(self, id_: Any | None, status: Any | None, assignee: Any | None) -> dict:
+            data = assign_params(status=status, assignee=assignee)
+            return self._http_request('PATCH', f'rest/api/incidents/{id_}', json_data=data)
+
+        def remove_incident_request(self, id_: str | None) -> dict:
+            return self._http_request(
+                'DELETE', f'rest/api/incidents/{id_}', return_empty_response=True
+            )
+
+        def incident_add_journal_entry_request(self, id_: str | None, author, notes: str | None,
+                                               milestone: str | None) -> dict:
+            data = assign_params(author=author, milestone=milestone, notes=notes)
+            return self._http_request(
+                'POST',
+                f'rest/api/incidents/{id_}/journal',
+                json_data=data,
+                empty_valid_codes=[201],
+                return_empty_response=True,
+            )
+
+        def incident_list_alerts_request(self, page_size: str | None, page_number: str | None, id_: str | None) -> dict:
+            params = assign_params(pageNumber=page_number, pageSize=page_size)
+            return self._http_request(
+                'GET', f'rest/api/incidents/{id_}/alerts', params=params
+            )
+
+        def services_list_request(self, name: Any | None) -> dict:
+            params = assign_params(name=name)
+            return self._http_request('GET', 'rest/api/services', params=params)
+
+        def hosts_list_request(self, page_size: str | None, page_number: str | None, service_id: str | None,
+                               added_filter: dict | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, pageNumber=page_number, pageSize=page_size)
+            data = added_filter
+            return self._http_request(
+                'GET', 'rest/api/hosts', params=params, json_data=data
+            )
+
+        def snapshots_list_for_host_request(self, agent_id: str | None, service_id: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            return self._http_request(
+                'GET', f'rest/api/host/{agent_id}/snapshots', params=params
+            )
+
+        def snapshot_details_get_request(self, agent_id: str | None, snapshot_timestamp: str | None,
+                                         service_id: str | None, categories: list | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, categories=categories)
+            return self._http_request(
+                'GET',
+                f'rest/api/host/{agent_id}/snapshots/{snapshot_timestamp}',
+                params=params,
+            )
+
+        def files_list_request(self, page_size: str | None, page_number: str | None,
+                               service_id: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, pageNumber=page_number, pageSize=page_size)
+            return self._http_request('GET', 'rest/api/files', params=params)
+
+        def scan_request_request(self, agent_id: str | None, service_id: str | None, scan_type: str | None,
+                                 cpu_max: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, scanType=scan_type, cpuMax=cpu_max)
+            return self._http_request(
+                'POST',
+                f'rest/api/host/{agent_id}/scan',
+                params=params,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def scan_stop_request_request(self, agent_id: str | None, service_id: str | None,
+                                      scan_type: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, scanType=scan_type)
+            return self._http_request(
+                'DELETE',
+                f'rest/api/host/{agent_id}/scan',
+                params=params,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def host_alerts_list_request(self, agent_id: str | None, service_id: str | None,
+                                     alert_category: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, alertCategory=alert_category)
+            return self._http_request(
+                'GET', f'rest/api/host/{agent_id}/alerts', params=params
+            )
+
+        def file_alerts_list_request(self, checksum: str | None, service_id: str | None,
+                                     alert_category: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, alertCategory=alert_category)
+            return self._http_request(
+                'GET', f'rest/api/file/{checksum}/alerts', params=params
+            )
+
+        def file_download_request(self, agent_id: str | None, service_id: str | None, path: str | None,
+                                  count_files: str | None, max_file_size: Any | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            if path and '*' in path:
+                url = f'rest/api/host/{agent_id}/download/download-files'
+                data = {'countFiles': count_files, 'maxFileSize': max_file_size, "path": path}
+
+            else:
+                url = f'rest/api/host/{agent_id}/download/download-file'
+                data = {"path": path}
+
+            return self._http_request(
+                'POST',
+                url,
+                params=params,
+                json_data=data,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def mft_download_request_request(self, agent_id: str | None, service_id: str | None, path: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id, path=path)
+            return self._http_request(
+                'POST',
+                f'rest/api/host/{agent_id}/download/mft',
+                params=params,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def system_dump_download_request_request(self, agent_id: str | None, service_id: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            return self._http_request(
+                'POST',
+                f'rest/api/host/{agent_id}/download/system-dump',
+                params=params,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def process_dump_download_request_request(self, agent_id: str | None, service_id: str | None,
+                                                  process_id: str | None, eprocess: str | None,
+                                                  file_name: str | None, path: str | None, file_hash: str | None,
+                                                  process_create_utctime: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            data = assign_params(processId=process_id, eprocess=eprocess, fileName=file_name, path=path, hash=file_hash,
+                                 processCreateUtcTime=process_create_utctime)
+            return self._http_request(
+                'POST',
+                f'rest/api/host/{agent_id}/download/process-dump',
+                params=params,
+                json_data=data,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def endpoint_isolate_from_network_request(self, agent_id: str | None, service_id: str | None,
+                                                  allow_dns_only: str | None, exclusions: list | None,
+                                                  comment: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            data = assign_params(comment=comment, allowDnsOnlyBySystem=allow_dns_only, exclusions=exclusions)
+
+            return self._http_request(
+                'POST',
+                f'rest/api/host/{agent_id}/isolation',
+                params=params,
+                json_data=data,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def endpoint_update_exclusions_request(self, agent_id: str | None, service_id: str | None,
+                                               allow_dns_only: str | None, exclusions: list | None,
+                                               comment: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            data = assign_params(comment=comment, allowDnsOnlyBySystem=allow_dns_only, exclusions=exclusions)
+            return self._http_request(
+                'PATCH',
+                f'rest/api/host/{agent_id}/isolation',
+                params=params,
+                json_data=data,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def endpoint_isolation_remove_request(self, agent_id: str | None, service_id: str | None,
+                                              allow_dns_only: str | None, comment: str | None) -> dict:
+            service_id = service_id or self.service_id
+            params = assign_params(serviceId=service_id)
+            data = assign_params(comment=comment, allowDnsOnlyBySystem=allow_dns_only)
+            return self._http_request(
+                'DELETE',
+                f'rest/api/host/{agent_id}/isolation',
+                params=params,
+                json_data=data,
+                empty_valid_codes=[200],
+                return_empty_response=True,
+            )
+
+        def get_token(self) -> None:
+            """Get a token from integration context or generate one,
+                save token in the client headers.
+               """
+            context_dict = demisto.getIntegrationContext()
+            cur_token = context_dict.get('token')
+            refresh_token = context_dict.get('refresh_token')
+
+            if cur_token:
+                self._headers['NetWitness-Token'] = cur_token
+                self.refresh_token = refresh_token
+            else:
+                self.generate_new_token(refresh_token)
+
+        def generate_new_token(self, refresh_token: str | None = None) -> None:
+            """Generate a new token via an API request. save the new token to client's headers.
+
+                Args:
+                    refresh_token (Optional[str]) : refresh token from previous run, if exits.
+               """
+            if not refresh_token:
+                user_name = self.cred['identifier']
+                password = self.cred['password']
+                data = f'username={user_name}&password={password}'
+                url = '/rest/api/auth/userpass'
+
+            else:
+                data = f'token={self.refresh_token}'
+                url = '/rest/api/auth/token'
+
+            headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+
+            response = self._http_request(
+                'POST', url, data=data, headers=headers)
+
+            new_token = response.get('accessToken')
+            refresh_token = response.get('refreshToken')
+
+            if new_token:
+                self._headers['NetWitness-Token'] = new_token
+                self.refresh_token = refresh_token
+                # since context store other data, we get the context, update the right field and set the context
+                context_dict = demisto.getIntegrationContext()
+                context_dict["token"] = new_token
+                context_dict["refresh_token"] = refresh_token
+                demisto.setIntegrationContext(context_dict)
+
+            else:
+                raise DemistoException("Error in authentication process- couldn't generate a token")
+
+        def get_incidents(self) -> tuple[list[Any], Any, Any | None]:
+            """Get incidents for fetch_incidents command.
+
+            Return:
+             (list) fetched incidents
+             (list) last fetched ids from last run
+             (str) timestamp from last rum
+
+               """
+            timestamp = None
+            fetch_limit = arg_to_number(self.fetch_limit)
+            fetch_time = self.fetch_time
+            if not fetch_limit or not fetch_time:
+                raise DemistoException('Missing parameter - fetch limit or fetch time')
+            last_run = demisto.getLastRun()
+            if last_run and last_run.get('timestamp'):
+                timestamp = last_run.get('timestamp', '')
+                last_fetched_ids = last_run.get('last_fetched_ids', [])
+            else:
+                if last_fetch := arg_to_datetime(fetch_time, required=True):
+                    # convert to ISO 8601 format and add Z suffix
+                    timestamp = last_fetch.strftime(DATE_FORMAT)
+                last_fetched_ids = []
+
+            page_size = '100'
+            # set the until argument to prevent duplicates
+            until = get_now_time()
+            response = self.list_incidents_request(page_size, '0', until, timestamp)
+            if not response.get('items'):
+                return [], last_fetched_ids, timestamp
+
+            page_number = response.get('totalPages', 1) - 1
+            total = 0
+            total_items: list[dict] = []
+            while total < fetch_limit and page_number >= 0:
+                try:
+                    response = self.list_incidents_request(page_size, page_number, until, timestamp)
+                except HTTPError as e:
+                    if e.response is not None and e.response.status_code == 429:
+                        raise DemistoException(
+                            'Too many requests, try later or reduce the number of Fetch Limit parameter.'
+                        ) from e
+                    raise e
+
+                items = response.get('items', [])
+                new_items = remove_duplicates_for_fetch(items, last_fetched_ids)
+                # items order is from old to new , add new items at the start of list to maintain order
+                total_items = new_items + total_items
+                total += len(new_items)
+                page_number -= 1
+
+            # bring the last 'fetch_limit' items, as order is reversed
+            total_items = total_items[len(total_items) - fetch_limit:]
+            return total_items, last_fetched_ids, timestamp
+
+
+    def paging_command(limit: int | None, page_size: Union[str, None, int], page_number: str | None, func_command,
+                       page_size_def='50', **kwargs) -> tuple[Any, Union[list, Any]]:
+        """Generic command for requests that support paging.
+
+           Args:
+               limit (str): The given limit.
+               page_size (str): The given page size.
+               page_number (str): The given page_number.
+               func_command : The request function.
+               page_size_def (str) : The default page size to use, default is 50.
+
+           Returns:
+               (dict) The last request response.
+               (list) The retrieved items.
+           """
+        response = {}
+        items = []
+        if not limit:
+            page_size = page_size or page_size_def
+            response = func_command(page_size, page_number, **kwargs)
+            items = response.get('items', [])
+        else:
+            if page_number or page_size:
+                raise DemistoException("Can't supply limit and page number/page size")
+            page_size = page_size if limit > 100 else limit
+            total = 0
+            while total < limit:
+                response = func_command(page_size, page_number, **kwargs)
+                items += response.get('items', [])
+                if not response.get('hasNext'):
+                    break
+                total += len(response.get('items', []))
+                page_number = response.get('pageNumber', 0) + 1
+            items = items[:limit]
+
+        return response, items
+
+
+    def list_incidents_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        limit = arg_to_number(args.get('limit'))
+        # we always supply 'until' argument to prevent duplications due to paging
+        until = create_time(args.get('until')) or get_now_time()
+        since = create_time(args.get('since'))
+        page_size = args.get('page_size')
+        page_number = args.get('page_number')
+
+        if inc_id := args.get('id'):
+            response = client.get_incident_request(inc_id)
+            items = [response]
+            context_data = {'RSANetWitness115.Incidents(val.id === obj.id)': response}
+            text = f'Incident {inc_id} retrieved-'
+        else:
+            response, items = paging_command(limit, page_size, page_number, client.list_incidents_request, until=until,
+                                             since=since)
+            context_data = prepare_paging_context_data(response, items, 'Incidents')
+            page_number = response.get('pageNumber')
+            total_pages = response.get('totalPages')
+            text = f'Total Retrieved Incidents : {len(items)}\n Page number {page_number} out of {total_pages} '
+        output = prepare_incidents_readable_items(items)
+        humanReadable = tableToMarkdown(text, output, ['Id', 'Title', 'Summary', 'Priority', 'RiskScore', 'Status',
+                                                       'AlertCount', 'Created', 'LastUpdated', 'Assignee', 'Sources',
+                                                       'Categories'])
+        return CommandResults(
+            outputs=context_data,
+            readable_output=humanReadable,
+            raw_response=response,
+        )
+
+
+    def update_incident_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        id_ = args.get('id')
+        status = args.get('status')
+        assignee = args.get('assignee')
+
+        response = client.update_incident_request(id_, status, assignee)
+
+        items = prepare_incidents_readable_items([response])
+        humanReadable = tableToMarkdown(f'Updated Incident {id_}', items,
+                                        ['Id', 'Title', 'Summary', 'Priority', 'RiskScore', 'Status',
+                                         'AlertCount', 'Created', 'LastUpdated', 'Assignee', 'Sources', 'Categories'])
+        return CommandResults(
+            outputs_prefix='RSANetWitness115.Incidents',
+            outputs_key_field='id',
+            outputs=response,
+            readable_output=humanReadable,
+            raw_response=response,
+        )
+
+
+    def remove_incident_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        id_ = args.get('id')
+
+        client.remove_incident_request(id_)
+        return CommandResults(
+            readable_output=f'Incident {id_} deleted successfully',
+        )
+
+
+    def incident_add_journal_entry_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        id_ = args.get('id')
+        author = args.get('author') or client.get_username()
+        notes = args.get('notes')
+        milestone = args.get('milestone')
+
+        client.incident_add_journal_entry_request(id_, author, notes, milestone)
+        return CommandResults(
+            readable_output=f'Journal entry added successfully for incident {id_} '
+        )
+
+
+    def incident_list_alerts_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        id_ = args.get('id')
+        page_number = args.get('page_number')
+        page_size = args.get('page_size')
+        limit = arg_to_number(args.get('limit'))
+
+        response, items = paging_command(limit, page_size, page_number, client.incident_list_alerts_request, id_=id_)
+
+        # remove duplicates that might occur from paging
+        items = remove_duplicates_in_items(items, 'id')
+        for item in items:
+            item['IncidentId'] = id_
+        context_data = prepare_paging_context_data(response, items, 'IncidentAlerts')
+        page_number = response.get('pageNumber')
+        output = prepare_alerts_readable_items(items)
+        total_pages = response.get('totalPages')
+        text = f'Total Retrieved Alerts : {len(output)} for incident {id_}\n Page number {page_number} out of {total_pages}'
+        humanReadable = tableToMarkdown(text, output,
+                                        ['Id', 'Title', 'Detail', 'Created', 'Source', 'RiskScore', 'Type', 'Events'],
+                                        removeNull=True, )
+        return CommandResults(
+            outputs=context_data,
+            readable_output=humanReadable,
+            raw_response=response,
+        )
+
+
+    def services_list_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        name = args.get('name')
+
+        response = client.services_list_request(name)
+        if not response:
+            command_results = CommandResults(
+                readable_output='No Services were found '
+            )
+        else:
+            command_results = CommandResults(
+                outputs_prefix='RSANetWitness115.ServicesList',
+                outputs_key_field='id',
+                outputs=response,
+                raw_response=response
+            )
+
+        return command_results
+
+
+    def hosts_list_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        service_id = args.get('service_id')
+        page_number = args.get('page_number')
+        page_size = args.get('page_size')
+        custom_filter = args.get('filter')
+        agent_id = args.get('agent_id')
+        host_name = args.get('host_name')
+        risk_score = args.get('risk_score')
+        host_ip = args.get('ip')
+        try:
+            if custom_filter:
+                added_filter = json.loads(custom_filter) if type(custom_filter) is str else custom_filter
+            else:
+                added_filter = create_filter(
+                    assign_params(agentId=agent_id, riskScore=risk_score, ip=host_ip, hostName=host_name))
+        except ValueError:
+            raise DemistoException("filter structure is invalid")
+
+        limit = arg_to_number(args.get('limit'))
+        response, items = paging_command(limit, page_size, page_number, client.hosts_list_request, service_id=service_id,
+                                         added_filter=added_filter)
+        # remove duplicates that might occur from paging
+        items = remove_duplicates_in_items(items, 'hostName')
+        context_data = prepare_paging_context_data(response, items, 'HostsList', filter_id='agentId')
+        page_number = response.get('pageNumber')
+        output = prepare_hosts_readable_items(items)
+        total_pages = response.get('totalPages')
+        text = f'Total Retrieved Hosts : {len(output)} \n Page number {page_number} out of {total_pages}'
+        humanReadable = tableToMarkdown(text, output,
+                                        ['agentId', 'hostName', 'riskScore', 'networkInterfaces', 'lastSeenTime'],
+                                        removeNull=True)
+        return CommandResults(
+            outputs=context_data,
+            readable_output=humanReadable,
+            raw_response=response,
+        )
+
+
+    def endpoint_command(client: Client, args: dict[str, Any]) -> list[CommandResults]:
+        endpoint_id = args.get('id')
+        ip = args.get('ip')
+        host_name = args.get('hostname')
+        new_args = assign_params(agentId=endpoint_id, ip=ip, hostName=host_name)
+        added_filter = create_filter(new_args)
+
+        if not client.service_id:
+            raise DemistoException("No Service Id provided - To use endpoint command via RSA NetWitness"
+                                   " service id must be set in the integration configuration.")
+        response = client.hosts_list_request(None, None, None, added_filter)
+        hosts = response.get('items', [])
+        command_results = []
+
+        for host in hosts:
+            ips, mac_addresses = get_network_interfaces_info(host)
+            endpoint_entry = Common.Endpoint(
+                id=host.get('agentId'),
+                hostname=host.get('hostName'),
+                ip_address=ips,
+                mac_address=mac_addresses,
+                vendor='RSA NetWitness 11.5 Response')
+
+            endpoint_context = endpoint_entry.to_context().get(Common.Endpoint.CONTEXT_PATH)
+            md = tableToMarkdown(f'RSA NetWitness 11.5 -  Endpoint: {host.get("agentId")}', endpoint_context)
+
+            command_results.append(CommandResults(
+                readable_output=md,
+                raw_response=response,
+                indicator=endpoint_entry
+            ))
+
+        return command_results
+
+
+    def snapshots_list_for_host_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        response = client.snapshots_list_for_host_request(agent_id, service_id)
+
+        readable_output = [{'Snapshot Id': snapshot_id} for snapshot_id in response]
+        humanReadable = tableToMarkdown(f'Snapshot list for agent id {agent_id}-', readable_output)
+        return CommandResults(
+            outputs_prefix='RSANetWitness115.SnapshotsListForHost',
+            outputs=response,
+            readable_output=humanReadable,
+            raw_response=response,
+        )
+
+
+    def snapshot_details_get_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        snapshot_timestamp = args.get('snapshot_timestamp')
+        service_id = args.get('service_id')
+        categories = argToList(args.get('categories'))
+        limit = arg_to_number(args.get('limit')) or 50
+        offset = arg_to_number(args.get('offset')) or 0
+
+        response = client.snapshot_details_get_request(agent_id, snapshot_timestamp, service_id, categories)
+
+        results = response[offset:offset + limit]
+        humanReadable = tableToMarkdown(f'Snapshot details for agent id {agent_id}-'
+                                        f' \nshowing {len(results)} results out of {len(response)}',
+                                        results, ['hostName', 'agentId', 'scanStartTime', 'directory', 'fileName'])
+        return CommandResults(
+            outputs_prefix='RSANetWitness115.SnapshotDetailsGet',
+            readable_output=humanReadable,
+            outputs=results,
+            raw_response=results,
+        )
+
+
+    def files_list_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        service_id = args.get('service_id')
+        page_number = args.get('page_number')
+        page_size = args.get('page_size')
+        limit = arg_to_number(args.get('limit'))
+
+        response, items = paging_command(limit, page_size, page_number, client.files_list_request, page_size_def='10',
+                                         service_id=service_id)
+
+        # remove duplicates that might occur from paging
+        items = remove_duplicates_in_items(items, 'firstFileName')
+        context_data = prepare_paging_context_data(response, items, 'FilesList', filter_id='firstFileName')
+        page_number = response.get('pageNumber')
+        output = prepare_files_readable_items(items)
+        total_pages = response.get('totalPages')
+        text = f'Total Retrieved Files : {len(output)} \n Page number {page_number} out of {total_pages}'
+        humanReadable = tableToMarkdown(text, output,
+                                        ['File Name', 'Risk Score', 'First Seen Time', 'Reputation', 'Size', 'Signature',
+                                         'PE Resources', 'File Status', 'Remediation'],
+                                        removeNull=True)
+
+        return CommandResults(
+            readable_output=humanReadable,
+            outputs=context_data,
+            raw_response=response,
+        )
+
+
+    def scan_request_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        scan_type = 'QUICK_SCAN'
+        cpu_max = args.get('cpu_max')
+
+        client.scan_request_request(agent_id, service_id, scan_type, cpu_max)
+        return CommandResults(
+            readable_output=f"Scan request for host {agent_id}, sent successfully",
+        )
+
+
+    def scan_stop_request_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        scan_type = 'CANCEL_SCAN'
+
+        client.scan_stop_request_request(agent_id, service_id, scan_type)
+        return CommandResults(
+            readable_output=f'Scan cancellation request for host {agent_id}, sent successfully',
+        )
+
+
+    def host_alerts_list_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        alert_category = args.get('alert_category')
+
+        response = client.host_alerts_list_request(agent_id, service_id, alert_category)
+        return CommandResults(
+            outputs_prefix='RSANetWitness115.HostAlerts',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response,
+        )
+
+
+    def file_alerts_list_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        checksum = args.get('check_sum')
+        service_id = args.get('service_id')
+        alert_category = args.get('alert_category')
+
+        response = client.file_alerts_list_request(checksum, service_id, alert_category)
+        return CommandResults(
+            outputs_prefix='RSANetWitness115.FileAlerts',
+            outputs_key_field='id',
+            outputs=response,
+            raw_response=response,
+        )
+
+
+    def file_download_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        path = args.get('path')
+        count_files = args.get('count_files')
+        max_file_size = args.get('max_file_size')
+
+        client.file_download_request(agent_id, service_id, path, count_files, max_file_size)
+        return CommandResults(
+            readable_output=f'Request for download {path} sent successfully'
+        )
+
+
+    def mft_download_request_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        path = args.get('path')
+
+        client.mft_download_request_request(agent_id, service_id, path=path)
+
+        return CommandResults(
+            readable_output=f'MFT download request for host {agent_id} sent successfully'
+        )
+
+
+    def system_dump_download_request_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+
+        client.system_dump_download_request_request(agent_id, service_id)
+        return CommandResults(
+            readable_output=f'System Dump download request for host {agent_id} sent successfully'
+        )
+
+
+    def process_dump_download_request_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        process_id = args.get('process_id')
+        eprocess = args.get('eprocess')
+        file_name = args.get('file_name')
+        path = args.get('path')
+        file_hash = args.get('hash')
+        process_create_utctime = args.get('process_create_utctime')
+
+        client.process_dump_download_request_request(agent_id, service_id, process_id, eprocess, file_name, path, file_hash,
+                                                     process_create_utctime)
+        return CommandResults(
+            readable_output='Process Dump request sent successfully'
+        )
+
+
+    def endpoint_isolate_from_network_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        allow_dns_only = args.get('allow_dns_only_by_system')
+        exclusion_list = create_exclusions_list(args.get('exclusion_list')) if args.get('exclusion_list') else None
+        comment = args.get('comment')
+
+        client.endpoint_isolate_from_network_request(agent_id, service_id, allow_dns_only, exclusion_list,
+                                                     comment)
+        return CommandResults(
+            readable_output=f'Isolate request for Host {agent_id} has been sent successfully'
+        )
+
+
+    def endpoint_update_exclusions_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        allow_dns_only = args.get('allow_dns_only_by_system')
+        exclusion_list = create_exclusions_list(args.get('exclusion_list')) if args.get('exclusion_list') else None
+        comment = args.get('comment')
+
+        client.endpoint_update_exclusions_request(agent_id, service_id, allow_dns_only, exclusion_list, comment)
+        return CommandResults(
+            readable_output=f'Isolate update exclusions request, for Host {agent_id} ,sent successfully'
+        )
+
+
+    def endpoint_isolation_remove_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        agent_id = args.get('agent_id')
+        service_id = args.get('service_id')
+        comment = args.get('comment')
+        allow_dns_only = args.get('allow_dns_only_by_system')
+
+        client.endpoint_isolation_remove_request(agent_id, service_id, allow_dns_only, comment)
+        return CommandResults(
+            readable_output=f'Isolate remove request, for Host {agent_id} ,sent successfully'
+        )
+
+
+    def fetch_alerts_related_incident(client: Client, incident_id: str, max_alerts: int) -> list[dict[str, Any]]:
+        """
+        Returns the alerts that are associated with the given incident.
+        """
+        alerts: list[dict] = []
+        has_next = True
+        page_number = 0
+        while has_next and len(alerts) < max_alerts:
+            demisto.debug(f"fetching alerts, {page_number=}")
+            try:
+                response_body = client.incident_list_alerts_request(
+                    page_number=str(page_number),
+                    id_=incident_id,
+                    page_size=None
+                )
+            except HTTPError as e:
+                if e.response is not None and e.response.status_code == 429:
+                    raise DemistoException(
+                        'Too many requests, try later or reduce the number of Fetch Limit parameter.'
+                    ) from e
+                raise e
+
+            except Exception:
+                demisto.error(f"Error occurred while fetching alerts related to {incident_id=}. {page_number=}")
+                raise
+
+            items = response_body.get('items', [])
+            alerts.extend(items[:max_alerts - len(alerts)])
+            page_number += 1
+            has_next = response_body.get('hasNext', False)
+
+        return alerts
+
+
+    def fetch_incidents(client: Client, params: dict) -> list:
+        total_items, last_fetched_ids, timestamp = client.get_incidents()
+        incidents: list[dict] = []
+        new_ids = []
+        context_dict = demisto.getIntegrationContext()
+        inc_data = context_dict.get("IncidentsDataCount", {})
+        for item in total_items:
+            inc_id = item['id']
+            new_ids.append(inc_id)
+            item['incident_url'] = client.get_incident_url(inc_id)
+
+            # add to incident object an array of all related alerts
+            if params['import_alerts']:
+                max_alerts = min(arg_to_number(params.get('max_alerts')) or DEFAULT_MAX_INCIDENT_ALERTS, DEFAULT_MAX_INCIDENT_ALERTS)
+                item['alerts'] = fetch_alerts_related_incident(client, inc_id, max_alerts)
+
+            item['mirror_instance'] = demisto.integrationInstance()
+            item['mirror_direction'] = MIRROR_DIRECTION.get(str(params.get('mirror_direction')))
+
+            incident = {"name": f"RSA NetWitness 11.5 {inc_id} - {item.get('title')}",
+                        "occurred": item.get('created'),
+                        "rawJSON": json.dumps(item)}
+            # items arrived from last to first - change order
+            incidents.insert(0, incident)
+            inc_data[inc_id] = struct_inc_context(item.get('alertCount'), item.get('eventCount'), item.get('created'))
+        # store some data for mirroring purposes
+        demisto.setIntegrationContext(context_dict)
+
+        new_last_run = incidents[-1].get('occurred') if incidents else timestamp
+        # in case a couple of incidents have the same timestamp, we want to add to our last id list and not run over it
+        if is_new_run_time_equal_last_run_time(timestamp, new_last_run):
+            new_ids.extend(last_fetched_ids)
+
+        demisto.setLastRun({"timestamp": new_last_run, "last_fetched_ids": new_ids})
+        return incidents
+
+
+    def is_new_run_time_equal_last_run_time(last_run_time: Any | None, new_run_time: Any | None) -> bool:
+        """Check if the two given string times are equal.
+
+           Args:
+               last_run_time (str): last run time.
+               new_run_time (str): new run time.
+
+           Returns:
+               (bool) True if the times are equal. False otherwise.
+           """
+        try:
+            last_run_datetime = arg_to_datetime(last_run_time)
+            new_datetime = arg_to_datetime(new_run_time)
+
+        except ValueError as e:
+            raise DemistoException("Incorrect date time in fetch") from e
+
+        return last_run_datetime == new_datetime
+
+
+    def remove_duplicates_for_fetch(items: list, last_fetched_ids: list) -> list:
+        """Remove items that were already sent in last fetch.
+
+           Args:
+               items (list): Items retrieved in this fetch.
+               last_fetched_ids (list): ID's of items from last fetch.
+
+           Returns:
+               (list) New items without items from last fetch.
+           """
+        return [
+            item
+            for item in items
+            if item.get('id') and item.get('id') not in last_fetched_ids
+        ]
+
+
+    def remove_duplicates_in_items(items: list, id_key: str) -> list:
+        """Remove duplicate items based on the given id key,
+
+           Args:
+               items (list): The items list.
+               id_key (str): The ID key for suplication check.
+
+           Returns:
+               (list) New items without duplications.
+           """
+        ids = {}
+        new_items = []
+        for item in items:
+            item_id = item.get(id_key)
+            if item_id not in ids:
+                ids[item_id] = True
+                new_items.append(item)
+
+        return new_items
+
+
+    def prepare_incidents_readable_items(items: list[dict[str, Any]]) -> list:
+        return [
+            {
+                'Id': item.get('id'),
+                'Title': item.get('title'),
+                'Summary': item.get('summary'),
+                'Priority': item.get('priority'),
+                'RiskScore': item.get('riskScore'),
+                'Status': item.get('status'),
+                'AlertCount': item.get('alertCount'),
+                'Created': item.get('created'),
+                'LastUpdated': item.get('lastUpdated'),
+                'Assignee': item.get('assignee'),
+                'Sources': item.get('sources'),
+                'Categories': item.get('categories'),
+            }
+            for item in items
+        ]
+
+
+    def prepare_alerts_readable_items(items: list[dict[str, Any]]) -> list:
+        return [
+            {
+                'Id': item.get('id'),
+                'Title': item.get('title'),
+                'Detail': item.get('detail'),
+                'Created': item.get('created'),
+                'Source': item.get('source'),
+                'RiskScore': item.get('riskScore'),
+                'Type': item.get('type'),
+                'Events': item.get('events'),
+            }
+            for item in items
+        ]
+
+
+    def prepare_hosts_readable_items(items: list[dict[str, Any]]) -> list[dict]:
+        return [
+            {
+                'agentId': item.get('agentId'),
+                'hostName': item.get('hostName'),
+                'riskScore': item.get('riskScore'),
+                'networkInterfaces': item.get('networkInterfaces'),
+                'lastSeenTime': item.get('lastSeenTime'),
+            }
+            for item in items
+        ]
+
+
+    def prepare_files_readable_items(items: list[dict[str, Any]]) -> list[dict]:
+        return [
+            {
+                'File Name': item.get('firstFileName'),
+                'Risk Score': item.get('globalRiskScore'),
+                'First Seen Time': item.get('firstSeenTime'),
+                'Reputation': item.get('reputationStatus'),
+                'Size': item.get('size'),
+                'Signature': item.get('signature'),
+                'PE Resources': item.get('pe', {}).get('resources')
+                if item.get('pe')
+                else None,
+                'File Status': item.get('fileStatus'),
+                'Remediation': item.get('remediationAction'),
+            }
+            for item in items
+        ]
+
+
+    def prepare_paging_context_data(response: dict[str, Any], items: list[dict[str, Any]], suffix: str,
+                                    filter_id='id') -> dict:
+        return (
+            {}
+            if not items
+            else {
+                f'RSANetWitness115.{suffix}(val.{filter_id} === obj.{filter_id})': items,
+                f'RSANetWitness115.paging.{suffix}(true)': {
+                    "pageNumber": response.get('pageNumber'),
+                    "pageSize": response.get('pageSize'),
+                    "totalPages": response.get('totalPages'),
+                    "totalItems": response.get('totalItems'),
+                    "hasNext": response.get('hasNext'),
+                    "hasPrevious": response.get('hasPrevious'),
+                },
+            }
+        )
+
+
+    def exception_handler(res):
+        """Handle exceptions from requests to API.
+
+           Args:
+               res: The response with error.
+           """
+        try:
+            res_data = res.json()
+            error_code = res_data['status']
+            error_msg = build_error_msg(res_data['errors'])
+            exception = DemistoException(ERROR_TITLES.get(error_code, '') + error_msg)
+
+        except Exception:
+            exception = DemistoException(f'Error in API call [{res.status_code}] - {res.reason}')
+
+        raise exception
+
+
+    def build_error_msg(error_body: dict) -> str:
+        """Build the specific error string from error_body.
+
+           Args:
+               error_body (list): The items list.
+
+           Returns:
+               (str) Error message.
+           """
+        ret_error_msg = ''
+        for error in error_body:
+            if error.get('field'):
+                ret_error_msg += 'field ' + error['field']
+            if error.get('message'):
+                ret_error_msg += ' ' + error['message']
+        return ret_error_msg
+
+
+    def create_exclusions_list(ips_str_list: Any | None) -> list:
+        """Build exclusion list in API format from ip list.
+
+           Args:
+               ips_str_list (str): The IP's list argument from request.
+
+           Returns:
+               (list) The exclusion list in the API format.
+           """
+        ips_list = argToList(ips_str_list, ',')
+        exclusion_list = []
+        for ip in ips_list:
+            ip_type = auto_detect_indicator_type(ip)
+            if ip_type not in ('IP', 'IPv6'):
+                raise DemistoException(f'Invalid ip address - {ip}')
+            is_v4 = ip_type == 'IP'
+            ip_data = {"ip": ip, "v4": is_v4}
+            exclusion_list.append(ip_data)
+        return exclusion_list
+
+
+    def create_filter(args: dict) -> dict | None:
+        """
+        Create filter in the API format for hosts_list request.
+
+           Args:
+               args (dict): Arguments dict with only the following keys - agentId, riskScore, ip, hostName
+
+           Returns:
+               (str) The created filter.
+           """
+        if 'ip' in args:
+            args['networkInterfaces.ipv4'] = args.pop('ip')
+        expression_list = []
+        for arg in args:
+            value = args.get(arg)
+            if arg == 'riskScore':
+                restriction = "GREATER_THAN_OR_EQUAL_TO"
+                values_list = [arg_to_number(value)]
+            else:
+                restriction = "IN"
+                values_list = argToList(value)
+
+            values_res = [{"value": val} for val in values_list]
+            expression = {
+                "propertyName": arg,
+                "restrictionType": restriction,
+                "propertyValues": values_res
+            }
+            expression_list.append(expression)
+        if expression_list:
+            return {"criteria": {"criteriaList": [{"expressionList": expression_list}], "predicateType": "AND"}}
+        else:
+            return None
+
+
+    def get_network_interfaces_info(endpoint: dict) -> tuple[list, list]:
+        """Retrieve ip and mac lists from an endpoint item.
+
+           Args:
+               endpoint (dict): Endpoint item from request response.
+
+           Returns:
+               (list) IP's list from the item.
+               (list) mac addresses list from the item.
+           """
+        ips_list = []
+        mac_address_list = []
+        for data in endpoint.get('networkInterfaces', []):
+            ips_list.append(data.get('ipv4'))
+            mac_address_list.append(data.get('macAddress'))
+
+        return ips_list, mac_address_list
+
+
+    def create_time(given_time: Any | None) -> str | None:
+        """
+        Convert given argument time to iso format with Z ending, if received None returns None.
+
+           Args:
+               given_time (str): Time argument in str.
+
+           Returns:
+               (str) Str time argument in iso format for API.
+           """
+        if not given_time:
+            return None
+        if datetime_time := arg_to_datetime(given_time):
+            return datetime_time.strftime(DATE_FORMAT)
+        else:
+            raise DemistoException("Time parameter supplied in invalid, make sure to supply a valid argument")
+
+
+    def get_now_time() -> str | None:
+        """
+        Create a string time of the current time in date format.
+        """
+        if now_time := arg_to_datetime('now'):
+            return now_time.strftime(DATE_FORMAT)
+        else:
+            return None
+
+
+    '''Mirror in and out'''
+
+
+    def get_mapping_fields_command() -> GetMappingFieldsResponse:
+        """
+        This command pulls the remote schema for the different incident types, and their associated incident fields,
+        from the remote system.
+        Returns: A list of keys you want to map
+        """
+        mapping_response = GetMappingFieldsResponse()
+        incident_type_scheme = SchemeTypeMapping(type_name='RSA Netwitness incident')
+
+        for field in OUTGOING_MIRRORED_FIELDS:
+            incident_type_scheme.add_field(name=field)
+
+        mapping_response.add_scheme_type(incident_type_scheme)
+
+        return mapping_response
+
+
+    def xsoar_status_to_rsa_status(xsoar_status: int, xsoar_close_reason: str) -> str | None:
+        """
+        xsoar_status_to_rsa_status: Convert XSOAR status to RSA status
+        Args:
+            xsoar_status: XSOAR status
+            xsoar_close_reason: XSOAR close reason
+
+        Returns:
+            str: RSA status
+        """
+        if xsoar_status == 2 and xsoar_close_reason == "False positive":
+            return "ClosedFalsePositive"
+        elif xsoar_status == 2:
+            return "Closed"
+        elif xsoar_status == 1:
+            return "New"
+        return None
+
+
+    def update_remote_system_command(client: Client, args: dict, params: dict) -> str:
+        """update-remote-system command: pushes local changes to the remote system
+
+        :type client: ``Client``
+        :param client: XSOAR client to use
+
+        :type args: ``Dict[str, Any]``
+        :param args:
+            all command arguments, usually passed from ``demisto.args()``.
+            ``args['data']`` the data to send to the remote system
+            ``args['entries']`` the entries to send to the remote system
+            ``args['incidentChanged']`` boolean telling us if the local incident indeed changed or not
+            ``args['remoteId']`` the remote incident id
+
+        :return:
+            ``str`` containing the remote incident id - really important if the incident is newly created remotely
+
+        :rtype: ``str``
+        """
+        parsed_args = UpdateRemoteSystemArgs(args)
+        if parsed_args.delta:
+            demisto.debug(f'Got the following delta keys {str(list(parsed_args.delta.keys()))}')
+
+        demisto.debug(f"Starting mirror out for the remote incident {parsed_args.remote_incident_id}")
+        new_incident_id: str = parsed_args.remote_incident_id
+
+        xsoar_status = parsed_args.data.get("status")
+        xsoar_close_reason = parsed_args.data.get("closeReason")
+        response = client.get_incident_request(new_incident_id)
+        rsa_status = xsoar_status_to_rsa_status(xsoar_status, xsoar_close_reason)
+
+        if rsa_status and response["status"] != rsa_status:
+            demisto.debug(f"Current status should be {rsa_status} on RSA but is {response['status']}, updating incident...")
+            response = client.update_incident_request(parsed_args.remote_incident_id, rsa_status, response.get("assignee"))
+            demisto.debug(json.dumps(response))
+        else:
+            demisto.debug(f'Skipping updating remote incident fields [{parsed_args.remote_incident_id}] as it is '
+                          f'not new nor changed.')
+
+        return new_incident_id
+
+
+    def get_remote_data_command(client: Client, args: dict, params: dict):
+        """
+        get-remote-data command: Returns an updated incident and entries
+        Args:
+            client: XSOAR client to use
+            args:
+                id: incident id to retrieve
+                lastUpdate: when was the last time we retrieved data
+
+        Returns:
+            GetRemoteDataResponse: The Response containing the update incident to mirror and the entries
+        """
+
+        entries = []
+        remote_args = GetRemoteDataArgs(args)
+        inc_id = remote_args.remote_incident_id
+        close_incident = argToBoolean(params.get('close_incident', True))
+        fetch_alert = argToBoolean(params.get("import_alerts", False))
+        max_fetch_alerts = min(arg_to_number(params.get('max_alerts')) or DEFAULT_MAX_INCIDENT_ALERTS, DEFAULT_MAX_INCIDENT_ALERTS)
+
+        response = client.get_incident_request(inc_id)
+
+        # check if the user enable alerts fetching
+        if fetch_alert:
+            demisto.debug(f'Pulling alerts from incident {inc_id} !')
+            inc_alert_count = int(response['alertCount'])
+            if inc_alert_count <= max_fetch_alerts:
+                alerts = fetch_alerts_related_incident(client, inc_id, inc_alert_count)
+                demisto.debug(f'{len(alerts)} alerts pulled !')
+                response['alerts'] = alerts
+            else:
+                demisto.debug("Skipping this step, max number of pull alerts reached for this incident !")
+
+        if (response.get('status') == 'Closed' or response.get('status') == 'ClosedFalsePositive') and close_incident:
+            demisto.info(f'Closing incident related to incident {inc_id}')
+            entries = [{
+                'Type': EntryType.NOTE,
+                'Contents': {
+                    'dbotIncidentClose': True,
+                    'closeReason': 'Incident was closed on RSA Netwitness.'
+                },
+                'ContentsFormat': EntryFormat.JSON
+            }]
+
+        int_cont = get_integration_context()
+        inc_data = int_cont.get("IncidentsDataCount", {})
+        inc_data[inc_id] = struct_inc_context(response.get('alertCount'), response.get('eventCount'), response.get('created'))
+        demisto.setIntegrationContext(int_cont)
+
+        return GetRemoteDataResponse(mirrored_object=response, entries=entries)
+
+
+    def get_modified_remote_data_command(client: Client, args: dict, params: dict):
+        """ Gets the list of all incident ids that have change since a given time
+
+        Args:
+            client (Client): Client object
+            args (dict): The command argumens
+
+        Returns:
+            GetModifiedRemoteDataResponse: The response containing the list of ids of notables changed
+
+        """
+        modified_incidents_ids = []
+        remote_args = GetModifiedRemoteDataArgs(args)
+        max_fetch_alerts = min(arg_to_number(params.get('max_alerts')) or DEFAULT_MAX_INCIDENT_ALERTS, DEFAULT_MAX_INCIDENT_ALERTS)
+        max_time_mirror_inc = min(arg_to_number(params.get("max_mirror_time")) or 3, 24)
+        last_update = remote_args.last_update
+        last_update_format = dateparser.parse(last_update, settings={'TIMEZONE': 'UTC'})  # converts to a UTC timestamp
+
+        demisto.debug(f'Running get-modified-remote-data command. Last update is: {last_update_format}')
+
+        # setting request
+        datetime_now = datetime.now()
+        since = datetime_now - timedelta(days=max_time_mirror_inc)
+        since_format = since.strftime(DATE_FORMAT)
+        until_format = datetime_now.strftime(DATE_FORMAT)
+        response, items = paging_command(MAX_NB_MIRROR_PULL, None, None, client.list_incidents_request,
+                                         until=until_format, since=since_format)
+
+        demisto.debug(f"Total Retrieved Incidents : {len(items)} in {response.get('totalPages')} pages")
+
+        # clean the integration context data of "old" incident
+        clean_old_inc_context(max_time_mirror_inc)
+        intCont = get_integration_context().get("IncidentsDataCount", {})
+        for inc in items:
+            if intCont.get(inc.get('id')):
+                save_alert_count = intCont.get(inc.get('id'), {}).get('alertCount')
+                save_event_count = intCont.get(inc.get('id'), {}).get('eventCount')
+                demisto.debug(f"Last run incident {inc.get('id')} => "
+                              f"Alert count: {save_alert_count} "
+                              f"Event count: {save_event_count}")
+                if save_alert_count != inc.get('alertCount') or save_event_count != inc.get('eventCount'):
+                    # compare the save nb of alert to see if we need to pull the alert or not
+                    if save_alert_count <= max_fetch_alerts:
+                        modified_incidents_ids.append(inc.get("id"))
+                        continue  # if added no need to do it twice
+                    else:
+                        demisto.debug(f"Skipping this step, max number of pull alerts already reached"
+                                      f"({save_alert_count} > {max_fetch_alerts}) for the incident {inc.get('id')} !")
+            inc_last_update = arg_to_datetime(inc["lastUpdated"])
+            if inc_last_update and last_update_format:
+                demisto.debug(f"Incident {inc.get('id')} - "
+                              f"Last run {last_update_format.timestamp()} - Last updated {inc_last_update.timestamp()} - "
+                              f"Need update => {last_update_format.timestamp() < inc_last_update.timestamp()}")
+                if last_update_format.timestamp() < inc_last_update.timestamp():
+                    modified_incidents_ids.append(inc.get("id"))
+                    continue  # if added no need to do it twice
+
+        return GetModifiedRemoteDataResponse(list(set(modified_incidents_ids)))
+
+
+    def struct_inc_context(alert_count, event_count, created):
+        """
+        Strcture uses in the context data to save incident alert/event
+        """
+        return {"alertCount": alert_count, "eventCount": event_count, "Created": created}
+
+
+    def clean_old_inc_context(max_time_mirror_inc: int):
+        """
+        Clean the integration context of old incident
+        """
+        demisto.debug(f"Current context integration before cleaning => {json.dumps(clean_secret_integration_context())}")
+        int_cont = demisto.getIntegrationContext()
+        inc_data = int_cont.get("IncidentsDataCount", {})
+        current_time = datetime.now()
+        current_time = current_time.replace(tzinfo=timezone.utc)
+        total_know = 0
+        res = {}
+        for inc_id, inc in inc_data.items():
+            inc_created = arg_to_datetime(inc["Created"])
+            if inc_created:
+                inc_created = inc_created.replace(tzinfo=timezone.utc)
+                diff = current_time - inc_created
+                if diff.days <= max_time_mirror_inc:  # maximum RSA aggregation time 24 days
+                    res[inc_id] = inc
+                else:
+                    demisto.debug(f"Incident {inc_id} has expired => {diff.days}")
+                    total_know += 1
+        demisto.debug(f"{total_know} incidents cleaned from integration context for exceeding RSA monitoring age")
+        demisto.debug(f"Current context integration after cleaning => {json.dumps(clean_secret_integration_context())}")
+        int_cont["IncidentsDataCount"] = res
+        demisto.setIntegrationContext(int_cont)
+
+
+    def clean_secret_integration_context() -> dict:
+        """
+        Sanitize context for output purpose
+        """
+        int_cont = demisto.getIntegrationContext()
+        int_cont["refresh_token"] = "SECRET REPLACED"
+        int_cont["token"] = "SECRET REPLACED"
+        return int_cont
+
+
+    def test_module(client: Client, params) -> None:
+        if params.get('isFetch'):
+            client.get_incidents()
+
+        if params.get('service_id'):
+            client.hosts_list_request('1', '0', None, None)
+
+        return_results('ok')
+
+
+    def main() -> None:
+        command = demisto.command()
+        params: dict[str, Any] = demisto.params()
+        args: dict[str, Any] = demisto.args()
+        url = params.get('url')
+        verify_certificate: bool = not params.get('insecure', False)
+        proxy = params.get('proxy', False)
+        service_id = params.get('service_id')
+        fetch_time = params.get('first_fetch', '1 days')
+        fetch_limit = params.get('max_fetch', '100')
+        cred = params.get('credentials')
+        headers: dict[str, str] = {}
+
+        demisto.debug(f'Command being called is {command}')
+
+        try:
+            client: Client = Client(url, verify_certificate, proxy, headers=headers, service_id=service_id,
+                                    fetch_time=fetch_time, fetch_limit=fetch_limit, cred=cred)
+            client.get_token()
+
+            commands = {
+                'rsa-nw-list-incidents': list_incidents_command,
+                'rsa-nw-update-incident': update_incident_command,
+                'rsa-nw-remove-incident': remove_incident_command,
+                'rsa-nw-incident-add-journal-entry': incident_add_journal_entry_command,
+                'rsa-nw-incident-list-alerts': incident_list_alerts_command,
+                'rsa-nw-services-list': services_list_command,
+                'rsa-nw-hosts-list': hosts_list_command,
+                'endpoint': endpoint_command,
+                'rsa-nw-snapshots-list-for-host': snapshots_list_for_host_command,
+                'rsa-nw-snapshot-details-get': snapshot_details_get_command,
+                'rsa-nw-files-list': files_list_command,
+                'rsa-nw-scan-request': scan_request_command,
+                'rsa-nw-scan-stop-request': scan_stop_request_command,
+                'rsa-nw-host-alerts-list': host_alerts_list_command,
+                'rsa-nw-file-alerts-list': file_alerts_list_command,
+                'rsa-nw-file-download': file_download_command,
+                'rsa-nw-mft-download-request': mft_download_request_command,
+                'rsa-nw-system-dump-download-request': system_dump_download_request_command,
+                'rsa-nw-process-dump-download-request': process_dump_download_request_command,
+                'rsa-nw-endpoint-isolate-from-network': endpoint_isolate_from_network_command,
+                'rsa-nw-endpoint-update-exclusions': endpoint_update_exclusions_command,
+                'rsa-nw-endpoint-isolation-remove': endpoint_isolation_remove_command,
+            }
+            if command == 'test-module':
+                test_module(client, params)
+            elif command == 'fetch-incidents':
+                incidents = fetch_incidents(client, params)
+                demisto.incidents(incidents)
+            elif command == 'get-remote-data':
+                return_results(get_remote_data_command(client, args, params))
+            elif demisto.command() == 'get-modified-remote-data':
+                return_results(get_modified_remote_data_command(client, args, params))
+            elif command == 'update-remote-system':
+                return_results(update_remote_system_command(client, args, params))
+            elif demisto.command() == 'get-mapping-fields':
+                return_results(get_mapping_fields_command())
+            elif command in commands:
+                return_results(commands[command](client, args))
+            else:
+                raise NotImplementedError(f'{command} command is not implemented.')
+
+        except Exception as e:
+            return_error(str(e))
+
+
+    if __name__ in ['__main__', 'builtin', 'builtins']:
+        main()
+
+    register_module_line('RSANetWitnessv115', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
