@@ -1,0 +1,219 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"automation",
+		"incidentfield",
+		"incidenttype",
+		"playbook",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Executes a command in Cortex XSOAR in debug mode and pulls logs from the command execution.",
+				"name": "TroubleshootExecuteCommand",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Exports all certificate-related information from the Python Docker container and decodes it using RFC. It also retrieves the certificate located in the specified endpoint.",
+				"name": "CertificatesTroubleshoot",
+				"tags": [
+					"Utility"
+				]
+			},
+			{
+				"description": "Populates the InstanceName field with active instances.",
+				"name": "TroubleshootInstanceField",
+				"tags": [
+					"field-display"
+				]
+			},
+			{
+				"description": "Gets an instance's configuration parameters in order to troubleshoot the instance.",
+				"name": "TroubleshootGetInstanceParameters",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Gets a Docker image and checks if it exists on the machine running Cortex XSOAR.",
+				"name": "TroubleshootIsDockerImageExists",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Collects all results from previous tasks. (Available from Cortex XSOAR 5.0.0.)",
+				"name": "TroubleshootAggregateResults",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Gets a command with its arguments, validates the command and the arguments, and then parses it to use in the Cortex XSOAR context.",
+				"name": "TroubleshootGetCommandandArgs",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Click the \"Test\" button and return if the test failed.",
+				"name": "TroubleshootTestInstance",
+				"tags": [
+					"troubleshoot"
+				]
+			}
+		],
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "Name of the instance to troubleshoot",
+				"name": "Instance Name",
+				"type": "singleSelect"
+			},
+			{
+				"description": "The aggregated results of the troubleshooting playbook.",
+				"name": "Troubleshoot Summary",
+				"type": "markdown"
+			},
+			{
+				"description": "Pick configuration if you have problem with configuring the integration. Pick command for troubleshooting running a command.",
+				"name": "Troubleshoot type",
+				"type": "singleSelect"
+			},
+			{
+				"description": "Will run the command with 'insecure' flag.",
+				"name": "Run with 'insecure'",
+				"type": "boolean"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "Integration Troubleshooting",
+				"playbook": "Integration Troubleshooting",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": [
+			{
+				"description": "Use this layout to view the Troubleshooting summary and files.",
+				"name": "Integration Troubleshooting Layout"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "Troubleshoot a problem with either an integration's configuration or with running a command.",
+				"name": "Integration Troubleshooting"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "2.0.14",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.8",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.13.15",
+			"name": "Common Scripts"
+		},
+		"CommonTypes": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.3.96",
+			"name": "Common Types"
+		},
+		"DemistoRESTAPI": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.3.43",
+			"name": "Cortex REST API"
+		}
+	},
+	"deprecated": false,
+	"description": "Use this pack to troubleshoot your environment.",
+	"disabledMonthly": false,
+	"downloads": 2251,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "Troubleshoot",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/DemistoRESTAPI/CoreRESTAPI_image.png",
+			"name": "Core REST API"
+		},
+		{
+			"imagePath": "content/packs/DemistoRESTAPI/DemistoRESTAPI_image.png",
+			"name": "Demisto REST API (Deprecated)"
+		}
+	],
+	"itemVersion": "2.0.14",
+	"keywords": [],
+	"legacy": true,
+	"name": "Troubleshoot",
+	"packID": "Troubleshoot",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "This pack contains utilities for troubleshooting your environment. \n\nWhen encountering issues, make sure to check out our [Troubleshooting Guide](https://xsoar.pan.dev/docs/reference/articles/troubleshooting-guide).\n\n# Troubleshooting Playbook\n\n---\nThis playbook is meant for automatic troubleshooting when encountering a problem with configuring an \ninstance or running a command.\n\nThe playbook will run the command/instance with several tests and will output a summary and a zip file with information\nthat you can later submit to the [Cortex XSOAR support site](https://support.paloaltonetworks.com)\n\n## How to use \n\n---\n* Configure a [Core REST API integration](https://xsoar.pan.dev/docs/reference/packs/integrations-and-incident-health-check#1-core-rest-api-integration) instance.\n* Create a new incident of type \"Integration Troubleshooting\"\n* **Troubleshoot type**:\n    * Use ***I'm unable to configure an instance*** if you fail to configure an integration (the test button returns an error). \n    Note you must save this integration even if the test button fails.\n    * Use ***I have a problem with running a command*** if you fail to run a particular command.\n* **Instance Name**: The name of the instance to troubleshoot.\n* **Command Line**: Fill if you used the ***command*** as the **troubleshoot type**. (The command name with all its arguments.)\n* Create the incident.\n* The playbook will collect the following information:\n    * Instance configuration (without sensitive information such as the password or api keys).\n    * Logs of running the Test button with several configurations.\n    * Logs of executing the command (if you picked ***command*** in **Troubleshoot type**).\n* A summary will be posted to the War Room alongside a zip file that will contain all collected information.\n* With this information you can submit a bug to the [Cortex XSOAR support site](https://support.paloaltonetworks.com).\n",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-12-28T10:24:45Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "722180",
+	"videos": []
+}
