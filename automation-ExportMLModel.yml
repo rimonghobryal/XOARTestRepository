@@ -1,0 +1,57 @@
+args:
+- description: The name of the ML model to export to a file.
+  name: modelName
+comment: 'Exports an existing ML model to a file. '
+commonfields:
+  id: ExportMLModel
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.4.9
+    packID: ML
+    packName: Machine Learning
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.83255
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: ExportMLModel
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('ExportMLModel', 'start', __line__())
+  ### pack version: 1.4.9
+
+
+
+  def get_ml_model_data(model_name):
+      res = demisto.executeCommand("getMLModel", {"modelName": model_name})
+      res = res[0]
+      if is_error(res):
+          return_error("error reading model %s from Demisto" % model_name)
+      return res['Contents']
+
+
+  def main():
+      model_data = get_ml_model_data(model_name=demisto.args()['modelName'])
+      file_result = fileResult('model.data', json.dumps(model_data))
+      demisto.results(file_result)
+
+
+  if __name__ in ['__main__', '__builtin__', 'builtins']:
+      main()
+
+  register_module_line('ExportMLModel', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- ml
+type: python
