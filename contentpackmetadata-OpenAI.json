@@ -1,0 +1,118 @@
+{
+	"author": "NVISO \u0026 Sameh El-Hakim",
+	"authorImage": "content/packs/OpenAI/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Enter an instruction and watch the API respond with a completion that attempts to match the context or pattern you provided.",
+						"name": "openai-completions"
+					}
+				],
+				"description": "The OpenAI API can be applied to virtually any task that involves understanding or generating natural language or code. We offer a spectrum of models with different levels of power suitable for different tasks, as well as the ability to fine-tune your own custom models. These models can be used for everything from content generation to semantic search and classification.",
+				"id": "OpenAI",
+				"name": "OpenAI (Community Contribution)"
+			},
+			{
+				"category": "Messaging and Conferencing",
+				"commands": [
+					{
+						"description": "Send Text Message as a prompt to ChatGPT",
+						"name": "chatgpt-send-prompt"
+					}
+				],
+				"description": "This integration provides access to the OpenAI ChatGPT API, which generates human-like responses to text prompts.\n\nOpenAI ChatGPT is a revolutionary conversational AI system that is designed to interact with humans just like real people, this cutting-edge system is capable of understanding human language, responding to complex queries, and even mimicking human personality traits. Using advanced natural language processing techniques, OpenAI ChatGPT can simulate human conversation to an unprecedented degree of accuracy and effectiveness, making it an ideal tool for a wide range of applications, including customer service, virtual assistance, and more.",
+				"id": "OpenAi ChatGPT v3",
+				"name": "OpenAi ChatGPT v3 (Community Contribution)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.2",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.33",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "The OpenAI API can be applied to virtually any task that involves understanding or generating natural language or code.",
+	"disabledMonthly": false,
+	"downloads": 382,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "OpenAI",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/OpenAI/OpenAI_image.png",
+			"name": "OpenAI"
+		},
+		{
+			"imagePath": "content/packs/OpenAI/OpenAiChatGPTv3_image.png",
+			"name": "OpenAi ChatGPT v3"
+		}
+	],
+	"itemVersion": "1.1.2",
+	"keywords": [],
+	"legacy": true,
+	"name": "OpenAI",
+	"packID": "OpenAI",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-09-14T09:40:10Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6319909",
+	"videos": []
+}
