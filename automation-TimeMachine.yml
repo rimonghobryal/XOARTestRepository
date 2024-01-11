@@ -59,7 +59,7 @@ script: |2-
                   #remote_command = 'date --date yesterday'
                   #stdin, stdout, stderr = ssh.exec_command(remote_command)
                   #demisto.info(stdout)
-                  remote_command = "date -s '20 DEC 2023 15:00:00'"
+                  remote_command = "date -s '10 DEC 2024 15:00:00'"
                   stdin, stdout, stderr = ssh.exec_command(remote_command)
                   demisto.info("giorno settato")
                   time.sleep(10)
@@ -90,10 +90,11 @@ script: |2-
                   else:
                       demisto.info("all good")
                       # Perform SSH operations here, e.g., execute commands, transfer files, etc.
+                      demisto.executeCommand("closeInvestigation", {})
           finally:
               # Close the SSH connection when done
               ssh.close()
-              demisto.executeCommand("closeInvestigation", {})
+
               return_results("ok")
 
       except Exception as ex:
