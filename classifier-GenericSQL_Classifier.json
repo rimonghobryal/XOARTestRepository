@@ -1,0 +1,39 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "Classifier for GenericSQL Record",
+	"feed": false,
+	"fromServerVersion": "6.5.0",
+	"id": "GenericSQL Classifier",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "1.1.5",
+	"keyTypeMap": {
+		"GenericSQL Record": "GenericSQL Record"
+	},
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": null,
+	"name": "GenericSQL Classifier",
+	"nameRaw": "GenericSQL Classifier",
+	"packID": "GenericSQL",
+	"packName": "GenericSQL",
+	"packPropagationLabels": [
+		"all"
+	],
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": true,
+	"toServerVersion": "",
+	"transformer": {
+		"simple": "type"
+	},
+	"type": "classification",
+	"unclassifiedCases": null,
+	"version": -1
+}
