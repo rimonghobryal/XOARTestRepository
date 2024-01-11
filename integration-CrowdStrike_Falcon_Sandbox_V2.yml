@@ -1,0 +1,2840 @@
+category: Forensics & Malware Analysis
+commonfields:
+  id: CrowdStrike Falcon Sandbox V2
+  version: -1
+configuration:
+- defaultvalue: https://www.hybrid-analysis.com
+  display: Server URL (e.g. https://www.hybrid-analysis.com)
+  name: serverUrl
+  required: true
+  type: 0
+- display: ""
+  displaypassword: API Key
+  hiddenusername: true
+  name: credentials
+  required: true
+  type: 9
+- additionalinfo: Reliability of the source providing the intelligence data.
+  defaultvalue: C - Fairly reliable
+  display: Source Reliability
+  name: integrationReliability
+  options:
+  - A+ - 3rd party enrichment
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: true
+  type: 15
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.2.0
+    itemVersion: 2.0.19
+    packID: CrowdStrikeFalconSandbox
+    packName: CrowdStrike Falcon Sandbox
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Fully automated malware analysis using Hybrid Analysis API.
+detaileddescription: "### Get an API Key\nYou must have an account with Hybrid-Analysis.
+  If you do not have an account, you can [sign up here.](https://www.hybrid-analysis.com/signup)\n\nObtain
+  an API key by:\n1. In your [profile page](https://www.hybrid-analysis.com/my-account?tab=%23api-key-tab),
+  from the top right menu navigate to the **API key** tab. \n2. Click the **Create
+  API key** button.\n\n\n---\n[View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/crowd-strike-falcon-sandbox-v2)"
+display: CrowdStrike Falcon Sandbox v2 (Hybrid-Analysis)
+image: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAAyCAYAAACXpx/YAAAMWUlEQVR4Xu1ZaZBU1RW+yEwvb+1BEAHFYZue7rf2jIAiYdFgUgruiKUQXAC1VFxiZAIqIyEQEDEmGGMi0bgU0QS3JGoWYyVRy1SwEqskscoYloHufmv3zIhWNHHyncc80rRMSZX+kNT9ql5N3/fuu9s55zvfecMYBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwfHp8X2YUzaxpjQx9ig+mcc/wfYM0k+umRKF4Rj06PJyK7GpL+3sqPxu6G+L8cRCBjyqLIpzHE05Y5dWiLfdxxL+/nE2WWT6ds1lqjvz3EEou9klnYMdUmgyz8sGtK0XZakuYa4zDdTpxZHMqG+P8cRhh0T2bGgZtsxhCW+KW2tavLiotYwNdCFTteQrtmXE0YwnqOPXICm04GevrCcky5y9MR5vqU8Ghry953c4HNKmrgsMMTNoa7Mf3s8G8bF2JGJQcUWNtTV0td6hnCblxPOROTe6pvKs74h3oLIvrJqKr/pblN/5ZnqzXvzmcKOZpaqH4TjcwyKzGAyUzwtfZGvSd8rm+nrXSM9N9Clb3umeGdZExZXLOUP+9oyXrWQ+UdoZ54JLbWjYjRM37NfdR9VPybH5xDFdiaEesL0DOk2VxcfCC3hylK+8bKylr7BNZLXdNvKm5VC03962jL/6m3PdFcKSjGw1VcDU10PxzgVyluqH5Pjc4aXUANX7EwmzMqnEGU7ptDp5MQFTo7N8gxx47ttqlMtNPWFdNmZPkT0h++1ZXp72tQ9gSn/rFpIndaFcqt+3Ho4k9lw1xIKZSNhBEOYUpvfydGgC453dDbu/XY2um+AlBCPUYLyr1X8NNY77U0q/h4o9ajG38FYKp6H1vhWdqiM9mBqh+hfsllzFXPuxdx9A5SJFZtlnEKjVbKYRh+K6B71DXR2vJtjE5zxyXFOS2os5hvfjSscy9ROMFyxXR5aNlNjqI/fwkbVl6HEhO+MbVKf6F/Pq1hfCbon7kffJna2sxF9/ft8wxwuFrX0aJqHxuzSkuP7sJ7DZlMaeAc247c0TixqqUXlltRpJfyu2pnfVdqaPgxgYLoiQ/cbe9+JTe/j+V9LtjRjoI8lxfaRQslIXerp4vrAkm7z4EABfu+1G07pG8+S1Af35kDcbfSM1CpXV1b7urCmlJe0ePPkAC7GgAiMxgg0YRWNUTRTXyB9QEakqsArSNPJkNT2LbmjqKcWVA3WRGMEZvr8op4+N277urIUa9rg6amV+L06RGoKdHVWeTgTD6zdUNsDW3kQz35esaTfIo2tJWfwrfQoXxPXurr6uG+qL/qG/IqnKU97uvK4o4uzyPlcU1rtGcrzvqE+GZrq89Azd1azqTGs3+ECQ7o9sOTLydDU7rLSk+C83wnyCY3arjVknmfJG/0WuTXaH8YNTfkZX89AK6k/9XX5YezppK6TPzm4yFsSFMn0mwxNXuiMSZiVZhjcTC0ERe+o9Bu49qq2ZWBoNQh1YXa9hxI64V0uNgFB19FrJvRdo1kTRUSgsXxgsuO2MdZI/VxbXBho6uKqnhzXpbEhQZQixMtIDJKHIiUsKhtyR6+V0GgMMpKXTc30NPEu3xYm0todGNPThEU4iOG9iATXkDe7ZvqeSi51AkUtDnyFYyVPp487kQPo6oqSkTyjdwo7huZ0WtmUwBTvrhRS01FBJMm56IA9Xd5Q0US7VEjkfY1N9LKMWKChPE46pqslPcojh7PEB7HHqT7a5CDbcZ6uoW72jXTH7lxCL5vKSYEh/9LJi/OJWaI9m8q9cNKbaRxqk3NinCcqYKiKnWqGczwO0XtpMJ4pUX9UPp4pbfE0aeburDDSw0VRT2ccn/eA2K4Nk0pa40RHa7R2ZFjGy7ER8MKhdHC0ocDKbOxtawrJoLUG7mlHJFvq68Wc0FY/JoGMWEKk+VrjpJgaCfQ7jk6Ca8uXFnVxfk+rHHmzawpXeFbyKlD28LLJxviWuM4zGtsPGgMO5VjSVaT60ecYijY/Ly934CTQFNNxOB2+nr6HIoKoDhGzqisrmmRculxdWoGDnBFXCOSgiOT5SBXXd4FSIycw5G95tvRYNyKF+tF50P14DQRUH0vhPPe6ueSE+B45LhhkMxhpMQUJUbuPdObYwhIKnug9K7MJgvbmsrnfwCUYGNXMk1j/6T6iH862vmscaLh/Phh4nmfIj1Rx1sR8cXAcFmgQ5I8h5axwlqsnlsOzfgQK/oVnyov+OUYc7oLvewryhqqtumTU3vYhiN4hfd24wrZMd2CpT9Jh+wZrrY1kT2880ckLnd14v3a+elSs1ILAlO4p69LSwFBuRO6/u0dvmEKR5BYy0+C1t5Ph6t8rm+Jpvp76OuW6KFcawh2VlkbLM9Qlni6cCUq/ZY+ZOtVpFU939PRXKZrpvdjAnpWaWVsCOpgTTLCSmITau/E3tKVvhpb8fLelbHTaEuQgB6WiyMCWsqnWwFFgmPID2NNW35bXwEl+gNTyk25NmBg7ab2Bi1rTVATSK6Dz3/u28jc457kHrc1KnxdYyp9g/BeQFra6pnwF2Sx+/onoRKjTZ8y9JsvigBaHlrQltJTX4FWbSvnBF7qtqYW+KSxHPvoxSqhfB6byZ4ist3DtRC7ZU7HUMijkj74x+Jw4j/kTjs55VnpdUU/k6qY7CH5B+YqvyWuh3i+Gkv8uvPU6t5kdS89c0CMieo1nJrP17znIq4GRvikSSVT6mekb6J5nJFaVx0LMmckvu1pqIei+o5RPzI3z78AGTs5ytcStVTPKlRHTRGJMUyb5lrQJzPBYGZRbG8WHMjBFFxnYR39HF1bCMK+VDOVaSi8H3qszsFuQpsEZnsZ5z8U89/umuAb7OS7uH5Wxlrq1aqXnYc7JRTgrpYL4+WGDNvWGycSeFnloDw61bA6eU84OPrsM4VU15edg9NdBP2/6ltqF3Bh4ttoDmq7C0HthzLex6BdDO33KtnbWSILHs4RVyIsLKMJq5oCgy2TiaCCKpnzzHsTLHjtjoz5fR+VbZ/TPESZi099AFF8U0xsBlDYMc60P9cGzqQ/d8/TkbMdIb8S1rtKaaq4U2AmRiNLEB53W9JS+flrbb2B5OeXNWD1TbgSN3+HkU5cQrUbj5YQRRK/0XjmfnoxU8QJ9s4+jkDCQgYmiUWpeS2rbs8SbQLkPkXA88N4hKBrzPwHmObFiw6l18VnHlM6PqwWkjnmOKT8U6qJJDNF3OLn3k0CDkIeToSjZgx6WVmz1HZRKH1QKmX/j70fdhaaPUBvvCm3lEYieG0CTq3xLuW7n/m/arAgVSOoTB7MCavksohpPg1rOp+fu6D9IiIvLyrp8eWm8RJ9HG0JNuMbXpatJMJExSpqUR3u1a4kdniafFejShY4h34XouPrdZpEiPYooomrkqecQ9cuo5LifIglKGYe1paQl8jX7GkROU9aFFfSxpwTnQsRtgDDr2AmlS8+jdZjy18BUWyAk7/Qs9SkY7eGiLh3ERmVLuRHnch80Q0t8LzKwrTxE+yAB12WxUaDUra6tXB/TKsa7j/7J0wv9ELVRiSDinyID981gDWDFm9B+tDJBtGk9oPsLsJaXg4gZxLWhkVrrGg3Twvb/Of2nAhkbqnYqlOXLPYWmDygHw9h/qZjSylKLMJE8MfL2yUzZmWVj4tqYvH0fRJtrCGc4+eRVULqLS60NM3pqvogR/RYNlAP9dLm7wEZiMyRsIgegMbwThNoxFgXIl5hjSK0n4zfqU3GWNzbZEosQj0qd1iifR2o0BiL65G4Y1zHES0qgvz1o97SzobXij1QyWOp8lEXLnLx6JTFavbgJDdEo5nDQNexCa4K6nlnOMZ10BLVJSXutDdNjVRyixHPtRjs+Jy87dGTRSn6pB5UDtXtxnmUtOafUypppTVWIzdAWL3Y0YQl9aUSpuLgry8yYvT4TEJ3t1VCzWuprYSHzLq4ifQzxcqlFvcizNUX6gUPqbw8iJohKDFAh5Q66Fz9/aT/lHBAvdCA0Vm2fQ40RP6sFrbHWSJQqyCi1Y8X9qL4mvdBfOn1MlXb2MxgZJep3CFqk8evXSqDxiUEOtNGv39hRP3pe6yx0ZnSvs3+OeL/xWdLfbbReGDS+6P24/2cGWmRoSjrobTaob7Ofa/giDj0bjGMDfg3iOMJA3kReC8/WnBY2loRA5wBfsjiOYFDERrTT+RnTBAcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwfH4eK/APBW+AgIEowAAAAASUVORK5CYII=
+name: CrowdStrike Falcon Sandbox V2
+script:
+  commands:
+  - arguments:
+    - description: A comma-separated list of file hashes (MD5, SHA1, or SHA256).
+      isArray: true
+      name: file
+      required: true
+    - auto: PREDEFINED
+      description: Whether to poll until there is at least one result.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - description: The JobID to check the state of when polling.
+      name: JobID
+    - deprecated: true
+      name: hide_polling_output
+    description: Gets summary information for a given MD5, SHA1, or SHA256 and all
+      the reports generated for any environment ID.
+    name: cs-falcon-sandbox-scan
+    outputs:
+    - contextPath: CrowdStrike.Report.job_id
+      description: The report job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The name of the file when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    polling: true
+  - arguments:
+    - description: A comma-separated list of file hashes (MD5, SHA1, or SHA256).
+      isArray: true
+      name: file
+      required: true
+    - auto: PREDEFINED
+      description: Whether to poll until there is at least one result.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - description: The JobID to check the state of when polling.
+      name: JobID
+    - deprecated: true
+      name: hide_polling_output
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-scan instead.
+    name: crowdstrike-scan
+    outputs:
+    - contextPath: CrowdStrike.Report.job_id
+      description: The file job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The file name when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The report submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    polling: true
+  - arguments: []
+    description: Gets a list of all available environments.
+    name: cs-falcon-sandbox-get-environments
+    outputs:
+    - contextPath: CrowdStrike.Environment.ID
+      description: The environment ID.
+      type: number
+    - contextPath: CrowdStrike.Environment.description
+      description: The environment description.
+      type: string
+    - contextPath: CrowdStrike.Environment.architecture
+      description: The environment architecture.
+      type: string
+    - contextPath: CrowdStrike.Environment.VMs_total
+      description: The total number of virtual machines in the environment.
+      type: number
+    - contextPath: CrowdStrike.Environment.VMs_busy
+      description: The number of busy virtual machines in the environment.
+      type: number
+    - contextPath: CrowdStrike.Environment.analysisMode
+      description: The environment analysis mode.
+      type: string
+    - contextPath: CrowdStrike.Environment.groupicon
+      description: The environment icon.
+      type: string
+  - arguments: []
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-get-environments instead.
+    name: crowdstrike-get-environments
+    outputs:
+    - contextPath: CrowdStrike.Environment.ID
+      description: The environment ID.
+      type: number
+    - contextPath: CrowdStrike.Environment.description
+      description: The environment description.
+      type: string
+    - contextPath: CrowdStrike.Environment.architecture
+      description: The environment architecture.
+      type: string
+    - contextPath: CrowdStrike.Environment.VMs_total
+      description: The total number of virtual machines in the environment.
+      type: number
+    - contextPath: CrowdStrike.Environment.VMs_busy
+      description: The number of busy virtual machines in the environment.
+      type: number
+    - contextPath: CrowdStrike.Environment.analysisMode
+      description: The environment analysis mode.
+      type: string
+    - contextPath: CrowdStrike.Environment.groupicon
+      description: The environment icon.
+      type: string
+  - arguments:
+    - description: The War Room entry ID.
+      name: entryId
+      required: true
+    - auto: PREDEFINED
+      defaultValue: "100"
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+      required: true
+    - auto: PREDEFINED
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is never shared with any third party.
+      name: no_share_third_party
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', no hash lookup is done on the sample.
+      name: no_hash_lookup
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is available for the community.
+      name: allow_community_access
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Optional custom runtime action script. Available runtime scripts:
+        default, default_maxantievasion, default_randomfiles, default_randomtheme,
+        default_openie.'
+      name: action_script
+      predefined:
+      - default
+      - default_maxantievasion
+      - default_randomfiles
+      - default_randomtheme
+      - default_openie
+    - auto: PREDEFINED
+      description: When set to 'false', no memory dump or memory dump analysis is
+        done.
+      name: hybrid_analysis
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets all Kernelmode Monitor experimental anti-evasion
+        options.
+      name: experimental_anti_evasion
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets the Kernelmode Monitor in-depth script
+        logging engine.
+      name: script_logging
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', allows Kernelmode Monitor experimental anti-evasion
+        options that tamper with the input sample.
+      name: input_sample_tampering
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Network settings. Available options: default: ''Fully operating
+        network'', tor: ''Route network traffic via TOR'', simulated: ''Simulate network
+        traffic''.'
+      name: network_settings
+      predefined:
+      - default
+      - tor
+      - simulated
+    - description: Optional email address that may be associated with the submission
+        for notification.
+      name: email
+    - description: 'Optional comment text that may be associated with the submission/sample
+        (Note: you can use #tags).'
+      name: comment
+    - description: Optional command line that should be passed to the analysis file.
+      name: custom_cmd_line
+    - description: Optional runtime duration (in seconds).
+      name: custom_run_time
+    - description: Optional 'submission name' field that will be used for file type
+        detection and analysis. Ignored unless url contains a file.
+      name: submit_name
+    - auto: PREDEFINED
+      description: Optional priority value between 1 (lowest) and 10 (highest). By
+        default all samples run with highest priority.
+      name: priority
+      predefined:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+    - description: Optional document password used to fill in Adobe/Office password
+        prompts.
+      name: document_password
+    - description: Optional system environment value. The value is provided in the
+        format name=value.
+      name: environment_variable
+    description: Submits a file from the investigation to the analysis server.
+    name: cs-falcon-sandbox-submit-sample
+    outputs:
+    - contextPath: CrowdStrike.Submit.job_id
+      description: The submitted report job ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_id
+      description: The report submission ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Submit.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.job_id
+      description: The report job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The name of the file when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    polling: true
+  - arguments:
+    - description: The War Room entry ID.
+      name: entryId
+      required: true
+    - auto: PREDEFINED
+      defaultValue: "100"
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+      required: true
+    - deprecated: true
+      description: The environment ID.
+      name: environmentId
+    - auto: PREDEFINED
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is never shared with any third party.
+      name: no_share_third_party
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', no hash lookup is done on the sample.
+      name: no_hash_lookup
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is available for the community.
+      name: allow_community_access
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Optional custom runtime action script. Available runtime scripts:
+        default, default_maxantievasion, default_randomfiles, default_randomtheme,
+        default_openie.'
+      name: action_script
+      predefined:
+      - default
+      - default_maxantievasion
+      - default_randomfiles
+      - default_randomtheme
+      - default_openie
+    - auto: PREDEFINED
+      description: When set to 'false', no memory dump or memory dump analysis is
+        done.
+      name: hybrid_analysis
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets all Kernelmode Monitor experimental anti-evasion
+        options.
+      name: experimental_anti_evasion
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets the Kernelmode Monitor in-depth script
+        logging engine.
+      name: script_logging
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', allows Kernelmode Monitor experimental anti-evasion
+        options that tamper with the input sample.
+      name: input_sample_tampering
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Network settings. Available options: default: ''Fully operating
+        network'', tor: ''Route network traffic via TOR'', simulated: ''Simulate network
+        traffic''.'
+      name: network_settings
+      predefined:
+      - default
+      - tor
+      - simulated
+    - description: Optional email address that may be associated with the submission
+        for notification.
+      name: email
+    - description: 'Optional comment text that may be associated with the submission/sample
+        (Note: you can use #tags).'
+      name: comment
+    - description: Optional command line that should be passed to the analysis file.
+      name: custom_cmd_line
+    - description: Optional runtime duration (in seconds).
+      name: custom_run_time
+    - description: Optional 'submission name' field that will be used for file type
+        detection and analysis. Ignored unless url contains a file.
+      name: submit_name
+    - auto: PREDEFINED
+      description: Optional priority value between 1 (lowest) and 10 (highest). By
+        default all samples run with highest priority.
+      name: priority
+      predefined:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+    - description: Optional document password used to fill in Adobe/Office password
+        prompts.
+      name: document_password
+    - description: Optional system environment value. The value is provided in the
+        format name=value.
+      name: environment_variable
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-submit-sample instead.
+    name: crowdstrike-submit-sample
+    outputs:
+    - contextPath: CrowdStrike.Submit.job_id
+      description: The file job ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.environment_id
+      description: The submission environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Submit.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    polling: true
+  - arguments:
+    - description: The Falcon Sandbox query syntax, for example url:google,host:95.181.53.78.
+        This argument integrates all other arguments into one and cannot be given
+        along with the other arguments.
+      name: query
+    - description: The file name, for example invoice.exe.
+      name: filename
+    - description: 'The file type. Available options: 64bits, android, assembly, bat,
+        cmd, com, csv, data, doc, docx, elf, empty, executable, flash, html, hwp,
+        hwpx, img, iqy, java, javascript, library, lnk, macho, mshelp, msi, native,
+        neexe, office, outlook, pdf, pedll, peexe, perl, ppt, pptx, ps, pub, python,
+        rtf, script, sct, sh, svg, text, url, vbe, vbs, wsf, xls, xlsx.'
+      name: filetype
+    - description: The file type description, for example PE32 executable.
+      name: filetype_desc
+    - description: The environment ID.
+      name: env_id
+    - description: The country (3 digit ISO), for example swe.
+      name: country
+    - auto: PREDEFINED
+      description: 'The search result verdict. Available options: Whitelisted, NoVerdict,
+        NoSpecificThreat, Suspicious, Malicious.'
+      name: verdict
+      predefined:
+      - Whitelisted
+      - NoVerdict
+      - NoSpecificThreat
+      - Suspicious
+      - Malicious
+    - description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      name: av_detect
+    - description: The AV Family Substring, for example nemucod.
+      name: vx_family
+    - defaultValue: "10"
+      description: The max number of search results to return.
+      name: limit
+    - description: The hashtag, for example ransomware.
+      name: tag
+    - description: The date from in format 'YYYY-MM-DD HH:MM', for example 2018-09-28
+        15:30.
+      name: date_from
+    - description: The date to in format 'YYYY-MM-DD HH:MM', for example 2018-09-28
+        15:30.
+      name: date_to
+    - description: The port, for example 8080.
+      name: port
+    - description: The host, for example 192.168.0.1.
+      name: host
+    - description: The domain, for example checkip.dyndns.org
+      name: domain
+    - description: The HTTP request substring, for example google.
+      name: url
+    - description: Similar samples, for example <sha256>.
+      name: similar_to
+    - description: Sample context, for example <sha256>.
+      name: context
+    - description: The import hash.
+      name: imp_hash
+    - description: The SSDeep hash.
+      name: ssdeep
+    - description: The file authentihash.
+      name: authentihash
+    description: Searches the database using the Falcon Sandbox search syntax.
+    name: cs-falcon-sandbox-search
+    outputs:
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Extension
+      description: The file extension.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The malware family associated with the file.
+      type: String
+    - contextPath: CrowdStrike.Search.search_terms.id
+      description: The id of the search term.
+      type: String
+    - contextPath: CrowdStrike.Search.search_terms.value
+      description: The value of the search term.
+      type: String
+    - contextPath: CrowdStrike.Search.count
+      description: The number of results for this search.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Search.result.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: String
+    - contextPath: CrowdStrike.Search.result.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Search.result.job_id
+      description: The JobID of the result.
+      type: String
+    - contextPath: CrowdStrike.Search.result.sha256
+      description: The sha256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Search.result.environment_id
+      description: The environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Search.result.submit_name
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Search.result.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Search.result.size
+      description: The size of the file.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Search.result.type_short
+      description: The short description of the file type.
+      type: String
+  - arguments:
+    - description: The Falcon Sandbox query syntax, for example url:google,host:95.181.53.78.
+        This argument integrates all other arguments into one and cannot be given
+        along with the other arguments.
+      name: query
+    - description: The file name, for example invoice.exe.
+      name: filename
+    - description: 'The file type. Available options: 64bits, android, assembly, bat,
+        cmd, com, csv, data, doc, docx, elf, empty, executable, flash, html, hwp,
+        hwpx, img, iqy, java, javascript, library, lnk, macho, mshelp, msi, native,
+        neexe, office, outlook, pdf, pedll, peexe, perl, ppt, pptx, ps, pub, python,
+        rtf, script, sct, sh, svg, text, url, vbe, vbs, wsf, xls, xlsx.'
+      name: filetype
+    - description: The file type description, for example PE32 executable.
+      name: filetype_desc
+    - description: The environment ID.
+      name: env_id
+    - description: The country (3 digit ISO), for example swe.
+      name: country
+    - auto: PREDEFINED
+      description: 'The search result verdict. Available options: Whitelisted, NoVerdict,
+        NoSpecificThreat, Suspicious, Malicious.'
+      name: verdict
+      predefined:
+      - Whitelisted
+      - NoVerdict
+      - NoSpecificThreat
+      - Suspicious
+      - Malicious
+    - description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      name: av_detect
+    - description: The AV Family Substring, for example nemucod.
+      name: vx_family
+    - defaultValue: "10"
+      description: The max number of search results to return.
+      name: limit
+    - description: The hashtag, for example ransomware.
+      name: tag
+    - description: The date from in format 'YYYY-MM-DD HH:MM', for example 2018-09-28
+        15:30.
+      name: date_from
+    - description: The date to in format 'YYYY-MM-DD HH:MM', for example 2018-09-28
+        15:30.
+      name: date_to
+    - description: The port, for example 8080.
+      name: port
+    - description: The host, for example 192.168.0.1.
+      name: host
+    - description: The domain, for example checkip.dyndns.org
+      name: domain
+    - description: HTTP Request Substring e.g. google.
+      name: url
+    - description: Similar samples, for example <sha256>.
+      name: similar_to
+    - description: Sample context, for example <sha256>.
+      name: context
+    - description: The import hash of the file.
+      name: imp_hash
+    - description: The SSDeep hash of the file.
+      name: ssdeep
+    - description: The file authentihash.
+      name: authentihash
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-search instead.
+    name: crowdstrike-search
+    outputs:
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Extension
+      description: The file extension.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The malware family associated with the file.
+      type: String
+    - contextPath: CrowdStrike.Search.search_terms.id
+      description: The ID of the search term.
+      type: String
+    - contextPath: CrowdStrike.Search.search_terms.value
+      description: The value of the search term.
+      type: String
+    - contextPath: CrowdStrike.Search.count
+      description: The number of results for this search.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Search.result.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: String
+    - contextPath: CrowdStrike.Search.result.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Search.result.job_id
+      description: The JobID of the result.
+      type: String
+    - contextPath: CrowdStrike.Search.result.sha256
+      description: The sha256 of the file.
+      type: String
+    - contextPath: CrowdStrike.Search.result.environment_id
+      description: The environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Search.result.submit_name
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Search.result.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Search.result.size
+      description: The size of the file.
+      type: Number
+    - contextPath: CrowdStrike.Search.result.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Search.result.type_short
+      description: The short description of the file type.
+      type: String
+  - arguments:
+    - auto: PREDEFINED
+      defaultValue: "true"
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - description: The file hash (MD5, SHA1, or SHA256).
+      name: file
+    - deprecated: true
+      name: hide_polling_output
+    - auto: PREDEFINED
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+    - description: The file job ID to generate a report for.
+      name: JobID
+    - auto: PREDEFINED
+      defaultValue: pdf
+      description: The file type.
+      name: file-type
+      predefined:
+      - xml
+      - json
+      - html
+      - pdf
+      - maec
+      - stix
+      - misp
+      - misp-json
+      - openioc
+    description: 'Retrieves result data on a file. Note: This command returns a file.'
+    name: cs-falcon-sandbox-result
+    outputs:
+    - contextPath: CrowdStrike.Report.job_id
+      description: The file job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The file name when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The ID of the submission.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    - contextPath: InfoFile.Name
+      description: The file name.
+      type: string
+    - contextPath: InfoFile.EntryID
+      description: The file entry ID.
+      type: string
+    - contextPath: InfoFile.Size
+      description: The file size.
+      type: number
+    - contextPath: InfoFile.Type
+      description: The file type, for example "PE".
+      type: string
+    - contextPath: InfoFile.Info
+      description: Basic information about the file.
+      type: string
+    - contextPath: InfoFile.Extension
+      description: The file extension.
+      type: string
+    polling: true
+  - arguments:
+    - auto: PREDEFINED
+      defaultValue: "true"
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - description: The file hash (MD5, SHA1 or SHA256).
+      name: file
+    - deprecated: true
+      name: hide_polling_output
+    - auto: PREDEFINED
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+    - deprecated: true
+      description: The environment ID.
+      name: environmentId
+    - description: The file job ID to generate a report for.
+      name: JobID
+    - auto: PREDEFINED
+      defaultValue: pdf
+      description: The file type.
+      name: file-type
+      predefined:
+      - xml
+      - json
+      - html
+      - pdf
+      - maec
+      - stix
+      - misp
+      - misp-json
+      - openioc
+      - ""
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-result instead.
+    name: crowdstrike-result
+    outputs:
+    - contextPath: CrowdStrike.Report.job_id
+      description: The file job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The file name when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    - contextPath: InfoFile.Name
+      description: The file name.
+      type: string
+    - contextPath: InfoFile.EntryID
+      description: The file entry ID.
+      type: string
+    - contextPath: InfoFile.Size
+      description: The file size.
+      type: number
+    - contextPath: InfoFile.Type
+      description: The file type, for example "PE".
+      type: string
+    - contextPath: InfoFile.Info
+      description: Basic information about the file.
+      type: string
+    - contextPath: InfoFile.Extension
+      description: The file extension.
+      type: string
+    polling: true
+  - arguments:
+    - description: The URL for analysis or the URL of the file to submit.
+      name: url
+      required: true
+    - auto: PREDEFINED
+      defaultValue: "100"
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+      required: true
+    - auto: PREDEFINED
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is never shared with any third party.
+      name: no_share_third_party
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', no hash lookup is done on the sample.
+      name: no_hash_lookup
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is available for the community.
+      name: allow_community_access
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Optional custom runtime action script. Available runtime scripts:
+        default, default_maxantievasion, default_randomfiles, default_randomtheme,
+        default_openie.'
+      name: action_script
+      predefined:
+      - default
+      - default_maxantievasion
+      - default_randomfiles
+      - default_randomtheme
+      - default_openie
+    - auto: PREDEFINED
+      description: When set to 'false', no memory dump or memory dump analysis is
+        done.
+      name: hybrid_analysis
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets all Kernelmode Monitor experimental anti-evasion
+        options.
+      name: experimental_anti_evasion
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets the Kernelmode Monitor in-depth script
+        logging engine.
+      name: script_logging
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', allows Kernelmode Monitor experimental anti-evasion
+        options that tamper with the input sample.
+      name: input_sample_tampering
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Network settings. Available options: default: ''Fully operating
+        network'', tor: ''Route network traffic via TOR'', simulated: ''Simulate network
+        traffic''.'
+      name: network_settings
+      predefined:
+      - default
+      - tor
+      - simulated
+    - description: Optional email address that may be associated with the submission
+        for notification.
+      name: email
+    - description: 'Optional comment text that may be associated with the submission/sample
+        (Note: you can use #tags).'
+      name: comment
+    - description: Optional command line that should be passed to the analysis file.
+      name: custom_cmd_line
+    - description: Optional runtime duration (in seconds).
+      name: custom_run_time
+    - description: Optional 'submission name' field that will be used for file type
+        detection and analysis. Ignored unless url contains a file.
+      name: submit_name
+    - auto: PREDEFINED
+      description: Optional priority value between 1 (lowest) and 10 (highest). By
+        default all samples run with highest priority.
+      name: priority
+      predefined:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+    - description: Optional document password used to fill in Adobe/Office password
+        prompts.
+      name: document_password
+    - description: Optional system environment value. The value is provided in the
+        format name=value.
+      name: environment_variable
+    description: Submits a URL for analysis.
+    name: cs-falcon-sandbox-submit-url
+    outputs:
+    - contextPath: CrowdStrike.Submit.job_id
+      description: The The submitted report job ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_type
+      description: The type of the submission.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Submit.environment_id
+      description: The submission environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Submit.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.job_id
+      description: The report job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The file name when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware famil.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+    polling: true
+  - arguments:
+    - description: The URL for analysis or the URL of the file to submit.
+      name: url
+      required: true
+    - auto: PREDEFINED
+      defaultValue: "100"
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+      required: true
+    - auto: PREDEFINED
+      description: Whether the command should poll until the result is ready.
+      name: polling
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is never shared with any third party.
+      name: no_share_third_party
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', no hash lookup is done on the sample.
+      name: no_hash_lookup
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', the sample is available for the community.
+      name: allow_community_access
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Optional custom runtime action script. Available runtime scripts:
+        default, default_maxantievasion, default_randomfiles, default_randomtheme,
+        default_openie.'
+      name: action_script
+      predefined:
+      - default
+      - default_maxantievasion
+      - default_randomfiles
+      - default_randomtheme
+      - default_openie
+    - auto: PREDEFINED
+      description: When set to 'false', no memory dump or memory dump analysis is
+        done.
+      name: hybrid_analysis
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets all Kernelmode Monitor experimental anti-evasion
+        options.
+      name: experimental_anti_evasion
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', sets the Kernelmode Monitor in-depth script
+        logging engine.
+      name: script_logging
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: When set to 'true', allows Kernelmode Monitor experimental anti-evasion
+        options that tamper with the input sample.
+      name: input_sample_tampering
+      predefined:
+      - "true"
+      - "false"
+    - auto: PREDEFINED
+      description: 'Network settings. Available options: default: ''Fully operating
+        network'', tor: ''Route network traffic via TOR'', simulated: ''Simulate network
+        traffic''.'
+      name: network_settings
+      predefined:
+      - default
+      - tor
+      - simulated
+    - description: Optional email address that may be associated with the submission
+        for notification.
+      name: email
+    - description: 'Optional comment text that may be associated with the submission/sample
+        (Note: you can use #tags).'
+      name: comment
+    - description: Optional command line that should be passed to the analysis file.
+      name: custom_cmd_line
+    - description: Optional runtime duration (in seconds).
+      name: custom_run_time
+    - description: Optional 'submission name' field that will be used for file type
+        detection and analysis. Ignored unless url contains a file.
+      name: submit_name
+    - auto: PREDEFINED
+      description: Optional priority value between 1 (lowest) and 10 (highest). By
+        default all samples run with highest priority.
+      name: priority
+      predefined:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+    - description: Optional document password used to fill in Adobe/Office password
+        prompts.
+      name: document_password
+    - description: Optional system environment value. The value is provided in the
+        format name=value.
+      name: environment_variable
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-submit-url instead.
+    name: crowdstrike-submit-url
+    outputs:
+    - contextPath: CrowdStrike.Submit.job_id
+      description: The JobID of the file.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_type
+      description: The type of the submission.
+      type: String
+    - contextPath: CrowdStrike.Submit.submission_id
+      description: The submission id.
+      type: String
+    - contextPath: CrowdStrike.Submit.environment_id
+      description: The environment id for the submission.
+      type: Number
+    - contextPath: CrowdStrike.Submit.sha256
+      description: The sha256 hash of the file.
+      type: String
+    polling: true
+  - arguments:
+    - description: The sha256 hash of a file.
+      name: file
+    - auto: PREDEFINED
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+    - description: The file job ID.
+      name: JobID
+    description: Retrieves screenshots from a report.
+    name: cs-falcon-sandbox-get-screenshots
+    outputs:
+    - contextPath: InfoFile.Name
+      description: The file name.
+      type: string
+    - contextPath: InfoFile.EntryID
+      description: The file entry ID.
+      type: string
+    - contextPath: InfoFile.Size
+      description: The file size.
+      type: number
+    - contextPath: InfoFile.Type
+      description: The file type, for example "PE".
+      type: string
+    - contextPath: InfoFile.Info
+      description: Basic information about the file.
+      type: string
+    - contextPath: InfoFile.Extension
+      description: The file extension.
+      type: string
+  - arguments:
+    - description: The SHA256 hash of a file.
+      name: file
+    - auto: PREDEFINED
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+    - description: The file job ID.
+      name: JobID
+    deprecated: true
+    description: Deprecated. Use cs-falcon-sandbox-get-screenshots instead.
+    name: crowdstrike-get-screenshots
+  - arguments:
+    - description: The SHA256 hash of the file.
+      name: file
+      required: true
+    description: Gets the hash overview.
+    name: cs-falcon-sandbox-analysis-overview
+    outputs:
+    - contextPath: CrowdStrike.AnalysisOverview.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.last_file_name
+      description: The last name of the file.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.AnalysisOverview.size
+      description: The size of the file.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.AnalysisOverview.last_multi_scan
+      description: The last multi-scan.
+      type: Date
+    - contextPath: CrowdStrike.AnalysisOverview.architecture
+      description: The environment architecture.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.multiscan_result
+      description: The multi-scan result.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.name
+      description: The name of the scanner.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.status
+      description: The status of the scanner.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.error_message
+      description: The error message.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.progress
+      description: The progress of the scanner.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.total
+      description: The total number of scanners.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.positives
+      description: The number of positives.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.percent
+      description: The percent of the scanner.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.anti_virus_results.name
+      description: The name of the antivirus results.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.anti_virus_results.result
+      description: The antivirus result.
+      type: Boolean
+    - contextPath: CrowdStrike.AnalysisOverview.scanners.anti_virus_results.threat_found
+      description: The threat found the the scanner.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.reports
+      description: The reports of the analysis.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverview.whitelisted
+      description: If the result is whitelisted.
+      type: Boolean
+    - contextPath: CrowdStrike.AnalysisOverview.children_in_queue
+      description: The number of children in queue.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverview.children_in_progress
+      description: The number of children in progress.
+      type: Number
+    - contextPath: File.Size
+      description: The file size.
+      type: number
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file name.
+      type: string
+    - contextPath: File.type
+      description: The file type.
+      type: string
+  - arguments:
+    - description: The SHA256 hash of the file.
+      name: file
+      required: true
+    description: Returns the hash overview.
+    name: cs-falcon-sandbox-analysis-overview-summary
+    outputs:
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.last_multi_scan
+      description: The last multi-scan.
+      type: Date
+    - contextPath: CrowdStrike.AnalysisOverviewSummary.multiscan_result
+      description: The multi-scan result.
+      type: Number
+  - arguments:
+    - description: The SHA256 hash of the file.
+      name: file
+      required: true
+    description: Refreshes the overview and downloads fresh data from external services.
+    name: cs-falcon-sandbox-analysis-overview-refresh
+  - arguments:
+    - default: true
+      description: A comma-separated list of file hashes (MD5, SHA1, or SHA256).
+      isArray: true
+      name: file
+      required: true
+    description: Returns file information and reputation.
+    name: file
+    outputs:
+    - contextPath: CrowdStrike.Report.job_id
+      description: The file job ID.
+      type: String
+    - contextPath: CrowdStrike.Report.environment_id
+      description: The report environment ID.
+      type: Number
+    - contextPath: CrowdStrike.Report.environment_description
+      description: The environment description.
+      type: String
+    - contextPath: CrowdStrike.Report.size
+      description: The file size.
+      type: Number
+    - contextPath: CrowdStrike.Report.type
+      description: The file type.
+      type: String
+    - contextPath: CrowdStrike.Report.type_short
+      description: The short description of the file type.
+      type: String
+    - contextPath: CrowdStrike.Report.target_url
+      description: The target url.
+      type: String
+    - contextPath: CrowdStrike.Report.state
+      description: The report state.
+      type: String
+    - contextPath: CrowdStrike.Report.error_type
+      description: The error type.
+      type: String
+    - contextPath: CrowdStrike.Report.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.Report.submit_name
+      description: The file name when submitted.
+      type: String
+    - contextPath: CrowdStrike.Report.md5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.sha512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.ssdeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.imphash
+      description: The imphash hash of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.av_detect
+      description: The AV Multiscan range, for example 50-70 (min 0, max 100).
+      type: Number
+    - contextPath: CrowdStrike.Report.vx_family
+      description: The file malware family.
+      type: String
+    - contextPath: CrowdStrike.Report.url_analysis
+      description: Whether this report is url analysis.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.analysis_start_time
+      description: The start time of the analysis.
+      type: Date
+    - contextPath: CrowdStrike.Report.threat_score
+      description: The file threat score.
+      type: Number
+    - contextPath: CrowdStrike.Report.interesting
+      description: Whether the file was found to be interesting.
+      type: Boolean
+    - contextPath: CrowdStrike.Report.threat_level
+      description: The file threat level.
+      type: Number
+    - contextPath: CrowdStrike.Report.verdict
+      description: The file verdict.
+      type: String
+    - contextPath: CrowdStrike.Report.total_network_connections
+      description: The total number of network connections.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_processes
+      description: The total number of processes.
+      type: Number
+    - contextPath: CrowdStrike.Report.total_signatures
+      description: The total number of signatures.
+      type: Number
+    - contextPath: CrowdStrike.Report.file_metadata
+      description: The file metadata.
+      type: Object
+    - contextPath: CrowdStrike.Report.submissions.submission_id
+      description: The submission ID.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.filename
+      description: The name of the file.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.url
+      description: The url.
+      type: String
+    - contextPath: CrowdStrike.Report.submissions.created_at
+      description: When the submission was created.
+      type: Date
+    - contextPath: CrowdStrike.Report.network_mode
+      description: The network mode.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: string
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: string
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: string
+    - contextPath: File.Name
+      description: The file submission name.
+      type: string
+    - contextPath: File.MalwareFamily
+      description: The file family classification.
+      type: string
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that decided the file was malicious.
+      type: string
+    - contextPath: File.Malicious.Description
+      description: The reason the vendor decided the file was malicious.
+      type: string
+    - contextPath: DBotScore.Indicator
+      description: The tested indicator.
+      type: string
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: string
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: string
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: number
+  - arguments:
+    - description: The SHA256 hash of the file.
+      name: file
+      required: true
+    description: Downloads the sample file.
+    name: cs-falcon-sandbox-sample-download
+    outputs:
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: File.SHA512
+      description: The SHA512 hash of the file.
+      type: String
+    - contextPath: File.SSDeep
+      description: The SSDeep hash of the file.
+      type: String
+    - contextPath: File.EntryID
+      description: The file entry ID.
+      type: String
+    - contextPath: File.Info
+      description: Information about the file.
+      type: String
+    - contextPath: File.Type
+      description: The file type.
+      type: String
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: File.Extension
+      description: The file extension.
+      type: String
+  - arguments:
+    - description: The file job ID.
+      name: JobID
+    - auto: PREDEFINED
+      description: 'The environment ID. Available environment IDs: 300: "Linux (Ubuntu
+        16.04, 64 bit)"", 200: "Android Static Analysis", 120: "Windows 7 64 bit",
+        110: "Windows 7 32 bit (HWP Support)", 100: "Windows 7 32 bit".'
+      name: environmentID
+      predefined:
+      - "100"
+      - "110"
+      - "120"
+      - "200"
+      - "300"
+    - description: The hash of the file.
+      name: file
+    description: Gets the report state for the given ID.
+    name: cs-falcon-sandbox-report-state
+    outputs:
+    - contextPath: CrowdStrike.State.state
+      description: The state of the report.
+      type: String
+    - contextPath: CrowdStrike.State.error_type
+      description: The error type of the report.
+      type: String
+    - contextPath: CrowdStrike.State.error_origin
+      description: The error origin.
+      type: String
+    - contextPath: CrowdStrike.State.error
+      description: The error description.
+      type: String
+  dockerimage: demisto/python3:3.10.13.83255
+  runonce: false
+  script: |
+    register_module_line('CrowdStrike Falcon Sandbox V2', 'start', __line__())
+    ### pack version: 2.0.19
+
+
+    from requests import Response
+
+    import urllib3
+    from typing import Dict, Any, Callable
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()  # pylint: disable=no-member
+    SEARCH_TERM_QUERY_ARGS = ('filename', 'filetype', 'filetype_desc', 'env_id', 'country', 'verdict', 'av_detect',
+                              'vx_family', 'tag', 'date_from', 'date_to', 'port', 'host', 'domain', 'url', 'similar_to',
+                              'context', 'imp_hash', 'ssdeep', 'authentihash')
+    # envid repeated for bw compatibility. Must be in this order so old overrides new default
+    SUBMISSION_PARAMETERS = ('environmentID', 'environmentId', 'no_share_third_party', 'allow_community_access',
+                             'no_hash_lookup',
+                             'action_script', 'hybrid_analysis', 'experimental_anti_evasion', 'script_logging',
+                             'input_sample_tampering', 'network_settings', 'email', 'comment', 'custom_cmd_line',
+                             'custom_run_time', 'submit_name', 'priority', 'document_password', 'environment_variable',
+                             )
+
+
+    class Client(BaseClient):
+
+        def get_environments(self) -> List[Dict]:
+            return self._http_request(method='GET', url_suffix='/system/environments')
+
+        def get_screenshots(self, key: str) -> List[Dict[str, Any]]:
+            return self._http_request(method='GET', url_suffix=f'/report/{key}/screenshots')
+
+        def search(self, query_args: Dict[str, Any]):
+            self._headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            return self._http_request(method='POST', url_suffix='/search/terms', data=query_args)
+
+        def scan(self, files: List[str]) -> List[Dict[str, Any]]:
+            self._headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            return self._http_request(method='POST', url_suffix='/search/hashes', data={'hashes[]': files})
+
+        def analysis_overview(self, sha256hash: str) -> Dict[str, Any]:
+            return self._http_request(method='GET', url_suffix=f'/overview/{sha256hash}')
+
+        def analysis_overview_summary(self, sha256hash: str) -> Dict[str, Any]:
+            return self._http_request(method='GET', url_suffix=f'/overview/{sha256hash}/summary')
+
+        def analysis_overview_refresh(self, sha256hash: str):
+            self._http_request(method='GET', url_suffix=f'/overview/{sha256hash}/refresh')
+
+        def get_report(self, key: str, filetype: str) -> Response:
+            return self._http_request(method='GET', url_suffix=f'/report/{key}/report/{filetype}', resp_type='response',
+                                      ok_codes=(200, 404))
+
+        def get_state(self, key: str) -> Dict[str, Any]:
+            return self._http_request(method='GET', url_suffix=f'/report/{key}/state')
+
+        def submit_url(self, url: str, params: Dict[str, Any]) -> Dict[str, Any]:
+            return self._http_request(method='POST', data={'url': url, **params},
+                                      url_suffix='/submit/url')
+
+        def submit_file(self, file_contents: Dict, params: Dict[str, Any]) -> Dict:
+            return self._http_request(method='POST', data=params, url_suffix='/submit/file',
+                                      files={'file': (file_contents['name'], open(file_contents['path'], 'rb'))})
+
+        def download_sample(self, sha256hash: str) -> Response:
+            return self._http_request(method='GET', url_suffix=f'/overview/{sha256hash}/sample', resp_type='response')
+
+
+    # for BW compatibility with v1 we need to return same object keys
+    def map_dict_keys(obj: Dict, map_rules: Dict[str, str], only_given_fields: bool = False) -> Dict[Any, Any]:
+        """
+        This function will switch the keys of a dictionary according to the provided map_rules.
+        Example: map_dict_keys( {'a' : 'b', 'c' : 'd' }, {'a' : 'y', 'c' : 'z' }) -> {'y' : 'b' , 'z' : 'd'}
+        Args:
+            obj: The original dictionary
+            map_rules: The mapping the keys should be changed by
+            only_given_fields: whether fields besides for those in map_rules should be used
+        Returns : a Dict according to the map_rules
+        """
+        return {map_rules.get(key, key): obj[key] for key in obj.keys() if not only_given_fields or key in map_rules}
+
+
+    def translate_verdict(param: str) -> int:
+        return {
+            'Whitelisted': 1,
+            'NoVerdict': 2,
+            'NoSpecificThreat': 3,
+            'Suspicious': 4,
+            'Malicious': 5
+        }[param]
+
+
+    def split_query_to_term_args(query: str) -> Dict[str, Any]:
+        def get_value(term: str) -> str:
+            return term[term.index(':') + 1:].strip()
+
+        def get_key(term: str) -> str:
+            return term[:term.index(':')].strip()
+
+        return {get_key(term): get_value(term) for term in query.split(',') if get_value(term)}
+
+
+    def validated_term(key: str, val: Any) -> Any:
+        if key == 'verdict':
+            return translate_verdict(val)
+        if key == 'country' and len(val) != 3:
+            raise ValueError('Country ISO code should be 3 characters long')
+        return val
+
+
+    def validated_search_terms(query_args: Dict[str, Any]) -> Dict[str, Any]:
+        if len(query_args) == 0:
+            raise ValueError('Must have at least one search term')
+        return {key: validated_term(key, query_args[key]) for key in query_args}
+
+
+    def get_search_term_args(args: Dict[str, Any]) -> Dict[str, Any]:
+        if args.get('query'):
+            return split_query_to_term_args(args['query'])
+        else:
+            return {term: args[term] for term in SEARCH_TERM_QUERY_ARGS if args.get(term, None)}
+
+
+    def get_api_id(args: Dict[str, Any]) -> str:
+        # must fist check environmentId (deprecated) to override default args of environmentID
+        if args.get('file') and (args.get('environmentId') or args.get('environmentID')):
+            return f"{args['file']}:{args.get('environmentId') or args.get('environmentID')}"
+        elif args.get('JobID'):
+            return args['JobID']
+        else:
+            raise ValueError('Must supply JobID or environmentID and file')
+
+
+    def test_module(client: Client, _) -> str:
+        """Tests API connectivity and authentication'
+        :return: 'ok' if test passed, anything else will fail the test.
+        :rtype: ``str``
+        """
+
+        try:
+            client.get_environments()
+            message = 'ok'
+        except DemistoException as e:
+            if 'Forbidden' in str(e) or 'Authorization' in str(e):
+                message = 'Authorization Error: make sure API Key is correctly set'
+            else:
+                raise e
+        return message
+
+
+    def get_default_file_name(filetype: str) -> str:
+        return f'CrowdStrike_report_{round(time.time())}.{get_file_suffix(filetype)}'
+
+
+    def get_file_suffix(filetype: str = 'bin') -> str:  # check this
+        if filetype in ('pcap', 'bin', 'xml', 'html'):
+            return 'gz'
+        if filetype == 'json':
+            return 'json'
+        if filetype in ('misp', 'stix'):
+            return 'xml'
+        return filetype
+
+
+    def has_error_state(client: Client, key: str) -> bool:
+        state = client.get_state(key)
+        demisto.debug(f'state to check if should poll response: {state}')
+        if state['state'] == 'ERROR':
+            raise Exception(f'Got Error state from server: {state}')
+        return False
+
+
+    class BWCFile(Common.File):
+        def __init__(self, bwc_fields: Dict, key_change_map: Dict, only_given_fields, *args, **kwargs):
+            super(BWCFile, self).__init__(*args, **kwargs)
+            self.bwc_fields = bwc_fields
+            self.key_change_map = key_change_map
+            self.only_given_fields = only_given_fields
+
+        def to_context(self) -> Any:
+            super_ret = super().to_context()
+            for key in super_ret.keys():
+                if key.startswith('File'):
+                    super_ret[key].update(map_dict_keys(self.bwc_fields, self.key_change_map, self.only_given_fields))
+            return super_ret
+
+
+    def create_scan_results_readable_output(scan_response) -> Any:
+        table_field_dict = {
+            'submit_name': 'submit name',
+            'threat_level': 'threat level',
+            'threat_score': 'threat score',
+            'verdict': 'verdict',
+            'total_network_connections': 'total network connections',
+            'target_url': 'target url',
+            'classification_tags': 'classification tags',
+            'total_processes': 'total processes',
+            'environment_description': 'environment description',
+            'interesting': 'interesting',
+            'environment_id': 'environment id',
+            'url_analysis': 'url analysis',
+            'analysis_start_time': 'analysis start time',
+            'total_signatures': 'total signatures',
+            'type': 'type',
+            'type_short': 'type short',
+            'vx_family': 'Malware Family',
+            'sha256': 'sha256'
+
+        }
+        return tableToMarkdown('Scan Results:', scan_response, headers=list(table_field_dict.keys()),
+                               headerTransform=lambda x: table_field_dict.get(x, x), removeNull=True)
+
+
+    def get_dbot_score(filehash, threat_score: int) -> Common.DBotScore:
+        def calc_score() -> int:
+            return {3: 0,
+                    2: 3,
+                    1: 2,
+                    0: 1}.get(threat_score, 0)
+
+        return Common.DBotScore(indicator=filehash, integration_name='CrowdStrike Falcon Sandbox V2',
+                                indicator_type=DBotScoreType.FILE, score=calc_score(),
+                                malicious_description=f'Score of {calc_score()}',
+                                reliability=DBotScoreReliability.get_dbot_score_reliability_from_str(
+                                    demisto.params().get('integrationReliability')))
+
+
+    def get_submission_arguments(args: Dict[str, Any]) -> Dict[str, Any]:
+        return {camel_case_to_underscore(arg): args[arg] for arg in SUBMISSION_PARAMETERS if args.get(arg)}
+
+
+    def submission_response(client, response, polling) -> List[CommandResults]:
+        context = {'CrowdStrike.Submit(val.submission_id && val.submission_id === obj.submission_id)': response,
+                   'CrowdStrike.JobID': response.get('job_id'),
+                   'CrowdStrike.EnvironmentID': response.get('environment_id')}
+        submission_res = CommandResults(outputs_prefix='', outputs_key_field='',
+                                        raw_response=response, outputs=context,
+                                        readable_output=tableToMarkdown('Submission Data:', response,
+                                                                        headerTransform=underscore_to_space))
+
+        if not polling:
+            return [submission_res]
+        else:
+            return_results(submission_res)  # return early
+        return crowdstrike_scan_command(
+            {'file': response.get('sha256'), 'JobID': response.get('job_id'), 'polling': True}, client
+        )
+
+
+    def crowdstrike_submit_url_command(client: Client, args: Dict[str, Any]) -> List[CommandResults]:
+        submission_args = get_submission_arguments(args)
+        url = args['url']
+        response = client.submit_url(url, submission_args)
+        return submission_response(client, response, args.get('polling'))
+
+
+    def crowdstrike_submit_sample_command(client: Client, args: Dict[str, Any]) -> List[CommandResults]:
+        file_contents = demisto.getFilePath(args['entryId'])
+        submission_args = get_submission_arguments(args)
+        response = client.submit_file(file_contents, submission_args)
+        return submission_response(client, response, args.get('polling'))
+
+
+    def crowdstrike_analysis_overview_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        result = client.analysis_overview(args['file'])
+        file = Common.File(Common.DBotScore.NONE, sha256=result.get('sha256'), size=result.get('size'),
+                           file_type=result.get('type'), name=result.get('last_file_name'))
+
+        table_cols = ['last_file_name', 'threat_score', 'other_file_name', 'sha256', 'verdict', 'url_analysis', 'size',
+                      'type', 'type_short']
+
+        return CommandResults(
+            outputs_prefix='CrowdStrike.AnalysisOverview',
+            outputs_key_field='sha256',
+            outputs=result,
+            raw_response=result,
+            indicator=file,
+            readable_output=tableToMarkdown('Analysis Overview:', result, headers=table_cols,
+                                            headerTransform=underscore_to_space,
+                                            removeNull=True)
+        )
+
+
+    def crowdstrike_search_command(client: Client, args: Dict[str, Any]) -> List[CommandResults]:
+        query_args: Dict = get_search_term_args(args)
+        query_args = validated_search_terms(query_args)
+        response = client.search(query_args)
+
+        key_name_changes = {'job_id': 'JobID',
+                            'sha256': 'SHA256',
+                            'environment_id': 'environmentId',
+                            'threat_score': 'threatscore',
+                            'environment_description': 'environmentDescription',
+                            'submit_name': 'submitname',
+                            'analysis_start_time': 'start_time'}
+
+        # each indicator needs its own CR since indicators is deprecated.
+        def convert_to_file_res(res) -> CommandResults:
+            return CommandResults(
+                readable_output=tableToMarkdown('Search Results:', res, removeNull=True,
+                                                headerTransform=underscore_to_space,
+                                                headers=['submit_name', 'verdict', 'vx_family', 'threat_score', 'sha256',
+                                                         'size',
+                                                         'environment_id', 'type', 'type_short', 'analysis_start_time']),
+                indicator=BWCFile(res, key_name_changes, False, size=res.get('size'),
+                                  sha256=res.get('sha256'),
+                                  dbot_score=Common.DBotScore.NONE,
+                                  extension=res.get('type_short'),
+                                  name=res.get('submit_name'),
+                                  malware_family=res.get('vx_family')))
+
+        try:
+            return [CommandResults(
+                raw_response=response, outputs_prefix='CrowdStrike.Search',
+                outputs_key_field='sha256', outputs=response.get('result'),
+                readable_output=f"Search returned {response.get('count')} results. Limit set to {args['limit']}"),
+
+                *[convert_to_file_res(res) for res in response.get('result')[:max(int(args['limit']), 1)]]]
+        except ValueError:
+            raise ValueError("The limit argument must be numeric.")
+
+
+    @polling_function('cs-falcon-sandbox-scan')
+    def crowdstrike_scan_command(args: Dict[str, Any], client: Client):
+        hashes = args['file'].split(',')
+        scan_response = client.scan(hashes)
+
+        def file_with_bwc_fields(res) -> CommandResults:
+            return CommandResults(
+                readable_output=create_scan_results_readable_output(res),
+                indicator=BWCFile(res, only_given_fields=False, size=res.get('size'),
+                                  file_type=res.get('type'), sha1=res.get('sha1'),
+                                  sha256=res.get('sha256'), md5=res.get('md5'), sha512=res.get('sha512'),
+                                  name=res.get('submit_name'),
+                                  ssdeep=res.get('ssdeep'), malware_family=res.get('vx_family'),
+                                  dbot_score=get_dbot_score(res.get('sha256'), res.get('threat_level')),
+                                  key_change_map={
+                                      'sha1': 'SHA1', 'sha256': 'SHA256', 'md5': 'MD5',
+                                      'job_id': 'JobID', 'environment_id': 'environmentId',
+                                      'threat_score': 'threatscore', 'environment_description': 'environmentDescription',
+                                      'submit_name': 'submitname', 'url_analysis': 'isurlanalysis',
+                                      'interesting:': 'isinteresting', 'vx_family': 'family'},
+                                  )
+            )
+
+        command_result = [CommandResults(outputs_prefix='CrowdStrike.Report',
+                                         raw_response=scan_response, outputs=scan_response,
+                                         readable_output=f'Scan returned {len(scan_response)} results'),
+                          *[file_with_bwc_fields(res) for res in scan_response]]
+        if len(scan_response) != 0:
+            return PollResult(command_result)
+        try:
+            if len(hashes) == 1:
+                key = get_api_id(args)
+                demisto.debug(f'key found for poll state: {key}')
+                return PollResult(continue_to_poll=lambda: not has_error_state(client, key), response=command_result)
+        except ValueError:
+            demisto.debug(f'Cannot get a key to check state for {hashes}')
+        return PollResult(continue_to_poll=True, response=command_result)
+
+
+    def crowdstrike_analysis_overview_summary_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        result = client.analysis_overview_summary(args['file'])
+        return CommandResults(
+            outputs_prefix='CrowdStrike.AnalysisOverview',
+            outputs_key_field='sha256',
+            outputs=result,
+            raw_response=result,
+            readable_output=tableToMarkdown('Analysis Overview Summary:', result,
+                                            headerTransform=lambda x: {'analysis_start_time': 'Analysis Start Time',
+                                                                       'last_multi_scan': 'Last Multi Scan',
+                                                                       'multiscan_result': 'Multiscan Result',
+                                                                       'threat_score': 'Threat Score',
+                                                                       'verdict': 'Verdict',
+                                                                       'sha256': 'Sha256'
+                                                                       }.get(x, x), removeNull=True)
+
+        )
+
+
+    def crowdstrike_analysis_overview_refresh_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        client.analysis_overview_refresh(args['file'])
+        return CommandResults(readable_output='The request to refresh the analysis overview was sent successfully.')
+
+
+    @polling_function('cs-falcon-sandbox-result')
+    def crowdstrike_result_command(args: Dict[str, Any], client: Client):
+        key = get_api_id(args)
+        report_response = client.get_report(key, args['file-type'])
+        demisto.debug(f'get report response code: {report_response.status_code}')
+        successful_response = report_response.status_code == 200
+
+        if successful_response:
+            ret_list = [fileResult(get_default_file_name(args['file-type']), report_response.content,
+                                   file_type=EntryType.ENTRY_INFO_FILE)]
+            if args.get('file'):
+                ret_list.append(crowdstrike_scan_command(args, client))
+            return PollResult(ret_list)
+
+        else:
+            error_response = CommandResults(raw_response=report_response,
+                                            readable_output='Falcon Sandbox returned an error: status code '
+                                                            + f'{report_response.status_code}, response: '
+                                                            + f'{report_response.text}',
+                                            entry_type=entryTypes['error'])
+
+            return PollResult(continue_to_poll=lambda: not has_error_state(client, key), response=error_response)
+
+
+    def underscore_to_space(x: str) -> str:
+        return pascalToSpace(underscoreToCamelCase(x))
+
+
+    def crowdstrike_report_state_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        key = get_api_id(args)
+        state = client.get_state(key)
+        return CommandResults(outputs_prefix='CrowdStrike.State', raw_response=state, outputs=state,
+                              readable_output=tableToMarkdown('State', state, headerTransform=underscore_to_space))
+
+
+    def crowdstrike_get_environments_command(client: Client, _) -> CommandResults:
+        environments = client.get_environments()
+        environments = [map_dict_keys(env, {'environment_id': 'ID', 'total_virtual_machines': 'VMs_total',
+                                            'analysis_mode': 'analysisMode', 'group_icon': 'groupicon',
+                                            'busy_virtual_machines': 'VMs_busy'}) for env in environments]
+
+        readable_output_column_conversion = {
+            'ID': '_ID', 'description': 'Description', 'architecture': 'Architecture',
+            'VMs_total': 'Total VMS', 'VMs_busy': 'Busy VMS', 'analysisMode': 'Analysis mode',
+            'groupicon': 'Group icon'
+        }
+        return CommandResults(
+            outputs_prefix='CrowdStrike.Environment',
+            outputs_key_field='id',
+            outputs=environments,
+            readable_output=tableToMarkdown('Execution Environments:',
+                                            environments, list(readable_output_column_conversion.keys()), removeNull=True,
+                                            headerTransform=lambda x: readable_output_column_conversion[x]),
+            raw_response=environments
+        )
+
+
+    def crowdstrike_get_screenshots_command(client: Client, args: Dict[str, Any]):
+        def to_image_result(image: Dict):
+            return fileResult(image['name'], base64.b64decode(image['image']), entryTypes['entryInfoFile'])
+
+        key = get_api_id(args)
+        ret = [to_image_result(image) for image in client.get_screenshots(key)]
+        return ret if len(ret) > 0 else CommandResults(readable_output='No screenshots returned')
+
+
+    def crowdstrike_sample_download_command(client: Client, args: Dict[str, Any]):
+        hash_value = args['file']
+        response = client.download_sample(hash_value)
+        file_name = response.headers.get('Vx-Filename', hash_value + '.gz')
+        return fileResult(file_name, data=response.content, file_type=EntryType.FILE)
+
+
+    def main() -> None:
+        """main function, parses params and runs command_func functions
+
+        :return:
+        :rtype:
+        """
+        params: Dict[str, Any] = demisto.params()
+        args: Dict[str, Any] = demisto.args()
+
+        verify_certificate = not params.get('insecure', False)
+        server_url = params.get('serverUrl', '') + '/api/v2'
+
+        proxy = params.get('proxy', False)
+
+        demisto_command = demisto.command()
+        demisto.debug(f'Command being called is {demisto_command}')
+        try:
+            headers: Dict = {
+                'api-key': demisto.params().get('credentials', {}).get('password'),
+                'User-Agent': 'Falcon Sandbox'
+            }
+
+            client = Client(
+                base_url=server_url,
+                verify=verify_certificate,
+                headers=headers,
+                proxy=proxy)
+            command_func: Callable
+            if demisto_command in ['test-module']:
+                command_func = test_module
+            elif demisto_command in ['cs-falcon-sandbox-search', 'crowdstrike-search']:
+                command_func = crowdstrike_search_command
+            elif demisto_command in ['cs-falcon-sandbox-scan', 'crowdstrike-scan', 'file']:
+                return_results(crowdstrike_scan_command(args, client))
+                return
+            elif demisto_command in ['crowdstrike-get-environments', 'cs-falcon-sandbox-get-environments']:
+                command_func = crowdstrike_get_environments_command
+            elif demisto_command in ['cs-falcon-sandbox-get-screenshots', 'crowdstrike-get-screenshots']:
+                command_func = crowdstrike_get_screenshots_command
+            elif demisto_command in ['cs-falcon-sandbox-result', 'crowdstrike-result']:
+                return_results(crowdstrike_result_command(args, client))
+                return
+            elif demisto_command in ['cs-falcon-sandbox-analysis-overview']:
+                command_func = crowdstrike_analysis_overview_command
+            elif demisto_command in ['cs-falcon-sandbox-analysis-overview-summary']:
+                command_func = crowdstrike_analysis_overview_summary_command
+            elif demisto_command in ['cs-falcon-sandbox-analysis-overview-refresh']:
+                command_func = crowdstrike_analysis_overview_refresh_command
+            elif demisto_command in ['crowdstrike-submit-sample', 'cs-falcon-sandbox-submit-sample']:
+                command_func = crowdstrike_submit_sample_command
+            elif demisto_command in ['cs-falcon-sandbox-submit-url', 'crowdstrike-submit-url']:
+                command_func = crowdstrike_submit_url_command
+            elif demisto_command in ['cs-falcon-sandbox-sample-download']:
+                command_func = crowdstrike_sample_download_command
+            elif demisto_command in ['cs-falcon-sandbox-report-state']:
+                command_func = crowdstrike_report_state_command
+            else:
+                raise NotImplementedError(f'Command not implemented: {demisto_command}')
+
+            return_results(command_func(client, args))
+
+        except Exception as e:
+            return_error(f'Failed to execute {demisto_command} command_func.\nError:\n{str(e)}')
+
+
+    ''' ENTRY POINT '''
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):
+        main()
+
+    register_module_line('CrowdStrike Falcon Sandbox V2', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
