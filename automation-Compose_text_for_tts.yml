@@ -1,3 +1,7 @@
+args:
+- description: For audio text generation
+  name: IoC
+  required: true
 commonfields:
   id: 72cc381d-c606-4f10-8efd-1ba44381a1d9
   version: -1
@@ -17,10 +21,60 @@ enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: Compose_text_for_tts
+outputs:
+- contextPath: Response
+  description: Risposta autogenerata
+  type: unknown
 pswd: ""
 runas: DBotWeakRole
 runonce: false
-script: 'def main():'
+script: |-
+  def main():
+      try:
+          stringa_finale="è appena scattato il seguente incidente, Catastrofe informatica. Valori di ai-o-si. \n"
+          args=demisto.args()
+          ioc=args.get('IoC','')
+          for x in ioc:
+              stringa_finale=stringa_finale+str(x)+" "+str(ioc[x])+" \n"
+
+          stringa_finale=stringa_finale+"Siete invitati ad effettuare i dovuti controlli. \nSaluti,\nIl vostro amato so-ar."
+          #return_results(stringa_finale)
+
+          """
+          results = CommandResults(
+                      #outputs_key_field='VirusTotal',
+                      outputs_prefix='mainKey.EDL',
+                      outputs=stringa_finale,
+                      readable_output=stringa_finale,
+                      raw_response=stringa_finale
+                  )
+          return_results(results)
+          """
+          output ={
+              'mainKey':{
+                  'text':stringa_finale
+              }
+          }
+
+          results = CommandResults(
+                      outputs_key_field='mainKey',
+                      outputs=output,
+                      readable_output=output,
+                      raw_response=output
+                  )
+          return_results(results)
+
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
 scripttarget: 0
 subtype: python3
 tags: []
