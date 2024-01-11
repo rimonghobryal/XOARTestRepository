@@ -1,0 +1,70 @@
+args:
+- default: true
+  description: '[optional string] Query must contain page, start, limit.'
+  name: query
+comment: Get a list of components in the NetWitness architecture.
+commonfields:
+  id: NetwitnessSAGetComponents
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.0.12
+    packID: RsaNetwitnessSecurityAnalytics
+    packName: RSA NetWitness Security Analytics
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - netwitness-im-get-components
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: NetwitnessSAGetComponents
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('NetwitnessSAGetComponents', 'start', __line__())
+  ### pack version: 1.0.12
+
+
+
+
+  def netwitness_im_get_components():
+      resp = demisto.executeCommand("netwitness-im-get-components", demisto.args())
+
+      if isError(resp[0]):
+          result = resp
+      else:
+          data = demisto.get(resp[0], "Contents.components")
+          if data:
+              data = flattenTable(data)
+              result = {"ContentsFormat": formats["table"], "Type": entryTypes["note"], "Contents": data}
+          else:
+              result = "No results."
+      return_results(result)
+
+
+  def main():  # pragma: no cover
+      try:
+          netwitness_im_get_components()
+      except Exception as e:
+          err_msg = f'Encountered an error while running the script: [{e}]'
+          return_error(err_msg, error=e)
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('NetwitnessSAGetComponents', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- RSA NetWitness Security Analytics
+type: python
