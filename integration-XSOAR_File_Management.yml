@@ -1,0 +1,612 @@
+category: Utilities
+commonfields:
+  id: XSOAR File Management
+  version: -1
+configuration:
+- additionalinfo: Make sure XSOAR config 'External Host Name' is set and let this
+    field empty otherwise set the external ip of XSOAR. Using https://127.0.0.1 don't
+    work.
+  display: Server URL (e.g. https://example.net)
+  name: url
+  required: false
+  type: 0
+- display: ""
+  displaypassword: XSOAR Server API Key
+  hiddenusername: true
+  name: creds_apikey
+  required: false
+  type: 9
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.0.2
+    packID: XSOARFileManagement
+    packName: XSOAR File Management
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: This integration uses the XSOAR API to perform basic but essentials actions
+  on files.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: Pierre
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  Creating API keys is done in the Demisto interface, under Settings -> Integrations -> API Keys
+
+  This integration works without the integration 'Demisto REST API'
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/xsoar-file-management)
+display: XSOAR File Management (Community Contribution)
+image: data:image/png;base64,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
+name: XSOAR File Management
+script:
+  commands:
+  - arguments:
+    - description: Incident ID to upload the file. If empty, the current incident
+        ID is taken.
+      name: incidentID
+    - description: Content of the file encoded in Base64 (if set let filePath, entrID
+        and fileContent empty).
+      name: fileContentB64
+    - description: Non binary content of the file (if set let filePath, entryID and
+        fileContentB64 empty).
+      name: fileContent
+    - description: Entry ID of the file to read (if set let filePath, fileContent
+        and fileContentB64 empty).
+      name: entryID
+    - description: 'Path of the file to read ex: incident.attachment.path (if set
+        let entryID, fileContent and fileContentB64 empty).'
+      name: filePath
+    - description: Name of the file. Mandatory if used with filePath and fileContent
+        otherwise the name of the file will not change.
+      name: fileName
+    - auto: PREDEFINED
+      defaultValue: war room entry
+      description: 'Where to upload the file - Available options are: - ''war room
+        entry'': the file will be uploaded as war room entry. - ''incident attachment'':
+        the file will be uploaded as incident attachment. - default are ''war room
+        entry''.'
+      name: target
+      predefined:
+      - war room entry
+      - incident attachment
+    description: Copies a file from this incident to the specified incident. Usefull
+      if you want to manipule file in the preprocessing.
+    name: file-management-upload-file-to-incident
+  - arguments:
+    - description: Entry ID of the file.
+      name: entryID
+      required: true
+    description: Delete the file from the incident and from the XSOAR server.
+    execution: true
+    name: file-management-delete-file
+  - arguments:
+    - description: Entry ID of the file.
+      name: entryID
+      required: true
+    description: Check if entry ID exist.
+    name: file-management-check-file
+    outputs:
+    - contextPath: IsFileExists
+      description: Dictionary with EntryID as key and boolean if the file exists as
+        value.
+  - arguments:
+    - description: File path of the file.
+      name: filePath
+      required: true
+    - description: ID of the incident to delete attachment.
+      name: incidentID
+    - description: Name of the field (type attachment) you want to remove the attachment
+        by default it's the incident attachment (incident.attachment) field.
+      name: fieldName
+    description: Delete the attachment from the incident and from the XSOAR server.
+    execution: true
+    name: file-management-delete-attachment
+  - arguments:
+    - description: Entry ID of the file to rename.
+      name: entryID
+      required: true
+    - description: New name for the file.
+      name: newFileName
+      required: true
+    description: 'Rename a file. Warning: use this only if necessary, it''s HEAVY
+      to run, this will delete and recreate the file with another name.'
+    name: file-management-rename-file
+  dockerimage: demisto/python3:3.10.13.78960
+  runonce: false
+  script: |
+    register_module_line('XSOAR File Management', 'start', __line__())
+    ### pack version: 1.0.2
+
+
+    import re
+    import time
+    from typing import Tuple
+    import urllib3
+    import base64
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+
+    ''' CLIENT CLASS '''
+
+
+    class Client(BaseClient):
+        def upload_file(self, incident_id: str,
+                        file_content,
+                        file_name: str,
+                        as_incident_attachment: bool = True):
+            """Upload file
+            Arguments:
+                client: (Client) The client class.
+                incident_id {str} -- incident id to upload the file to
+                file_content -- content of the file to upload
+                file_name {str} -- name of the file in the dest incident
+                as_incident_attachment {bool} -- upload the file as an attachment or an entry
+            Returns:
+                json -- return of the API
+            """
+
+            service_name = 'incident' if as_incident_attachment else 'entry'
+            response = self._http_request(
+                method='POST',
+                url_suffix=f'/{service_name}/upload/{incident_id}',
+                files={
+                    "file": (file_name, file_content, 'application/octet-stream')
+                }
+            )
+            return response
+
+        def delete_context(self, incident_id: str, key_to_delete: str):
+            """Send the command "DeleteContext" to a specific incident
+            Arguments:
+                client: (Client) The client class.
+                incident_id {str} -- incident id to upload the file to
+                key_to_delete {str} -- context data incident key to delete
+            Returns:
+                json -- return of the API
+            """
+            body_content = {
+                "id": "",
+                "version": 0,
+                "investigationId": incident_id,
+                "data": f"!DeleteContext key={key_to_delete}",
+                "args": None,
+                "markdown": False
+            }
+            response = self._http_request(
+                method='POST',
+                url_suffix='/entry',
+                json_data=body_content
+            )
+            return response
+
+        def delete_file(self, entry_id: str, delete_artifact=True):
+            """Delete file by entry ID
+            Arguments:
+                client: (Client) The client class.
+                entry_id {str} -- entry ID of the file to delete
+                delete_artifact {bool} -- delete the artifact
+            Returns:
+                json -- return of the API
+            """
+            body_content = {
+                "id": entry_id,
+                "deleteArtifact": delete_artifact
+            }
+            response = self._http_request(
+                method='POST',
+                url_suffix='/entry/delete/v2',
+                json_data=body_content
+            )
+            return response
+
+        def create_attachment_data_json(self, file_path: str, field_name: str):
+            """Structure to delete attachments
+            Arguments:
+                client: (Client) The client class.
+                file_path {str} -- Path of the file to delete
+                field_name {str} -- Name of the field containing the attachment
+            Returns:
+                json -- structure for the API
+            """
+            # full structure in comment in case the API change the requirement
+            # attachment_name = attachment['name']
+            attachment_path = file_path  # attachment['path']
+            # attachment_type = attachment['type']
+            # attachment_media_file = attachment['showMediaFile']
+            # attachment_description = attachment['description']
+            file_data = {
+                "fieldName": field_name,
+                "files": {
+                    attachment_path: {
+                        # "description": "",
+                        # "name": attachment_name,
+                        "path": attachment_path,
+                        # "showMediaFile": attachment_media_file,
+                        # "type": attachment_type
+                    }
+                },
+                "originalAttachments": [
+                    {
+                        # "description": attachment_description,
+                        # "name": attachment_name,
+                        "path": attachment_path,
+                        # "showMediaFile": attachment_media_file,
+                        # "type": attachment_type
+                    }
+                ]}
+            return file_data
+
+        def delete_attachment(self, incident_id: str, file_path: str, field_name: str = "attachment"):
+            """Delete attachments by path
+            Arguments:
+                client: (Client) The client class.
+                incident_id {str} -- incident id to upload the file to
+                file_path {str} -- Path of the file to delete
+                field_name {str} -- Name of the field containing the attachment
+            Returns:
+                json -- return of the API
+            """
+            response = self._http_request(
+                method='POST',
+                url_suffix=f'/incident/remove/{incident_id}',
+                json_data=self.create_attachment_data_json(file_path, field_name)
+            )
+            return response
+
+        def get_file(self, entry_id: str):
+            """Get the content of the file
+            Arguments:
+                client: (Client) The client class.
+                entry_id {str} -- entry ID of the file
+            Returns:
+                json -- return of the API
+            """
+            response = self._http_request(
+                method='GET',
+                url_suffix=f'/entry/download/{entry_id}',
+            )
+            return response
+
+        def get_current_user(self):
+            """Get current user
+            Arguments:
+                client: (Client) The client class.
+            Returns:
+                json -- return of the API
+            """
+            self._http_request(
+                method='GET',
+                url_suffix='/user'
+            )
+
+
+    def test_module(client: Client) -> str:
+        """Test module command
+        Arguments:
+            client: (Client) The client class.
+        Returns:
+            str -- ok or the error
+        """
+        try:
+            client.get_current_user()
+            return 'ok'
+        except DemistoException as error:
+            if 'Forbidden' in str(error):
+                return 'Authorization Error: make sure API Key is correctly set'
+            else:
+                raise error
+
+
+    def get_incident_id(entry_id: str) -> str:
+        """Parse the entryID to get the incident id
+        Arguments:
+            entryID {str} -- entry ID of the file
+        Returns:
+            str -- incident id
+        """
+        res = re.findall("(\d+)@(\d+)", entry_id)
+        if len(res) <= 0:
+            return_error("EntryID unknow or malformatted !")
+        return res[0][1]
+
+
+    def rename_file_command(client: Client, args: dict) -> CommandResults:
+        """Check if a file exist on the disk
+        Arguments:
+            incidentID {str} -- incident id to upload the file to
+            entryID {str} -- entry ID of the file
+            newFileName {str} -- new name of the file
+        Returns:
+            CommandResults -- Readable output
+        Note:
+            This command should not be use in loop, I/O consumming
+        """
+        entry_id = args.get('entryID', '')
+        file_name = args.get('newFileName', '')
+
+        res_path, res_name = get_file_path_name(entry_id)
+        # read file
+        file_binary = open(res_path, 'rb')
+        # create new file new name
+        incident_id = get_incident_id(entry_id)
+        response = client.upload_file(incident_id, file_binary, file_name, False)
+        file_binary.close()
+        # create data for the key file
+        nfu = {
+            "Size": response["entries"][0]["fileMetadata"]["size"],
+            "SHA1": response["entries"][0]["fileMetadata"]["sha1"],
+            "SHA256": response["entries"][0]["fileMetadata"]["sha256"],
+            "SHA512": response["entries"][0]["fileMetadata"]["sha512"],
+            "Name": response["entries"][0]["file"],
+            "SSDeep": response["entries"][0]["fileMetadata"]["ssdeep"],
+            "EntryID": response["entries"][0]["id"],
+            "Info": response["entries"][0]["fileMetadata"]["type"],
+            "Type": response["entries"][0]["fileMetadata"]["info"],
+            "MD5": response["entries"][0]["fileMetadata"]["md5"],
+            "Extension": response["entries"][0]["file"]
+        }
+        res = nfu.get("Name", "").split(".")
+        if len(res) > 1:
+            nfu["Extension"] = res[-1]
+        # delete old file
+        new_files = delete_file(client, entry_id)
+        new_files.append(nfu)
+        return CommandResults(readable_output=f'File {res_name} was renamed to {file_name} under the new entry id {nfu["EntryID"]}',
+                              outputs=new_files,
+                              outputs_prefix="File")
+
+
+    def check_file_command(client: Client, args: dict) -> CommandResults:
+        """Check if a file exist on the disk
+        Arguments:
+            entryID {str} -- entry ID of the file
+        Returns:
+            CommandResults -- Readable output
+        """
+        entry_id = args.get('entryID')
+        output_content = demisto.context().get('IsFileExists', {})
+        if len(output_content) > 0:
+            client.delete_context(demisto.incident()["id"], "IsFileExists")
+            time.sleep(1)  # to let the API execute the request
+        try:
+            path_res = demisto.getFilePath(entry_id)
+            # file_path = path_res.get("path")
+            file_name = path_res.get('name')
+            output_tmp = {entry_id: True}
+            output_content = {**output_content, **output_tmp}
+            return CommandResults(readable_output=f"File {entry_id} exist under the name {file_name} !",
+                                  outputs_prefix="IsFileExists",
+                                  outputs=output_content)
+        except Exception as err:
+            output_tmp = {entry_id: False}
+            output_content = {**output_content, **output_tmp}
+            return CommandResults(readable_output=f"File {entry_id} does not exist ! {err}",
+                                  outputs_prefix="IsFileExists",
+                                  outputs=output_content)
+
+
+    def delete_attachment_command(client: Client, args: dict) -> CommandResults:
+        """Delete an attachment
+        Arguments:
+            incidentID {str} -- incident number where the file will be deleted
+            filePath {str} -- path of the file
+            fieldName {str} -- name of the field (type attachment) you want to remove the attachment.
+                               By default it's the incident attachment (incident.attachment) field
+        Returns:
+            CommandResults -- Readable output
+        Note:
+            This command delete file on the disk
+        """
+        incident_id = args.get('incidentID', demisto.incident()["id"])
+        file_path = args.get('filePath', "")
+        field_name = args.get('fieldName', "attachment")
+
+        if not file_path:
+            return_error("Argument file_path is empty.")
+        try:
+            client.delete_attachment(incident_id, file_path, field_name)
+        except DemistoException as error:
+            return_error(f"File already deleted or not found !\n{str(error)}")
+        return CommandResults(readable_output=f"Attachment {file_path} deleted !")
+
+
+    def delete_file(client: Client, entry_id: str):
+        files = demisto.context().get('File', [])
+        files = [files] if not isinstance(files, list) else files
+        # delete old file
+        try:
+            client.delete_file(entry_id)
+        except DemistoException as error:
+            return_error(f"File already deleted or not found !\n{str(error)}")
+        # output
+        incident_id = get_incident_id(entry_id)
+        client.delete_context(incident_id, "File")
+        time.sleep(1)  # to let the API execute the request
+        new_files = [file for file in files if file.get("EntryID") != entry_id]
+        return new_files
+
+
+    def delete_file_command(client: Client, args: dict) -> CommandResults:
+        """Delete a file
+        Arguments:
+            entryID {str} -- entry ID of the file
+        Returns:
+            CommandResults -- Readable output
+        Note:
+            This command delete file on the disk
+        """
+        entry_id = args.get('entryID', "")
+
+        if not entry_id:
+            return_error("Argument entry_id is empty.")
+        new_files = delete_file(client, entry_id)
+        return CommandResults(readable_output=f"File {entry_id} deleted !", outputs=new_files, outputs_prefix="File")
+
+
+    def get_file_path_name(file_input: str) -> Tuple[str, str]:
+        """Get the path and the name of a file
+        Arguments:
+            file_input {str} -- can be an entryID or a path under the key incident.attachments.path
+        Returns:
+            Tuple -- first element is the path and second the name of the file
+        Note:
+            getFilePath does not react the same in preprocessing and playground so we use try catch
+        """
+        try:
+            path_res = demisto.getFilePath(file_input)
+            file_path = path_res.get("path")
+            file_name = path_res.get('name')
+            return file_path, file_name
+        except Exception:
+            res = re.findall("_(.*)_(.*)", file_input)
+            if len(res) <= 0:
+                return_error("File not found... entryID or path invalid !")
+            path_res = demisto.getFilePath(res[0][0])
+            file_path = path_res.get("path")
+            file_name = res[0][1]
+            return file_path, file_name
+
+
+    def upload_file_command(client: Client, args: dict) -> CommandResults:
+        """Upload a new file
+        Arguments:
+            incidentID {str} -- incident id to upload the file to
+            fileContent -- content of the file to upload
+            fileName {str} -- name of the file in the dest incident
+            entryID {str} -- entry ID of the file
+            filePath {str} -- path of the file
+            target {bool} -- upload the file as an attachment or an war room entry
+        Returns:
+            CommandResults -- Readable output
+        Note:
+            You can give either the entryID, the filePath or the fileContent.
+            fileName have to contain the extension if you want one
+        """
+        incident_id = args.get('incidentID', demisto.incident()["id"])
+        file_content = args.get('fileContent', '')
+        file_content_b64 = args.get('fileContentB64', '')
+        entry_id = args.get('entryID', '')
+        file_path = args.get('filePath', '')
+        file_name = args.get('fileName', '')
+        target = args.get('target', 'war room entry')
+
+        # id can be empty if this command is triggered by a field changed
+        if not incident_id:
+            return_error("Unable to get the incident id of the incident !")
+        # check if some content is given and not too many
+        if len(list(filter(None, [file_content, file_content_b64, entry_id, file_path]))) != 1:
+            return_error("You have to give either the content of the file using the arg 'fileContent'"
+                         "or 'fileContentB64' or an entryID or a file path !")
+        # if file_name is not set when using content of the file
+        if (file_content or file_content_b64) and not file_name:
+            return_error("You have to choose a name for your file !")
+
+        response = {}
+        if file_content:
+            response = client.upload_file(incident_id,
+                                          file_content,
+                                          file_name,
+                                          target == 'incident attachment')
+        elif file_content_b64:
+            file_content_tmp = base64.b64decode(file_content_b64)
+            response = client.upload_file(incident_id,
+                                          file_content_tmp,
+                                          file_name,
+                                          target == 'incident attachment')
+        else:
+            arg_path: str = list(filter(None, [entry_id, file_path]))[0]
+            res_path, res_name = get_file_path_name(arg_path)
+            # file name override by user
+            file_name = file_name if file_name else res_name
+            if not file_name:
+                return_error("Impossible to detect a filename in the path, "
+                             "use the argument 'fileName' to set one !")
+            file_binary = open(res_path, 'rb')
+            response = client.upload_file(incident_id,
+                                          file_binary,
+                                          file_name,
+                                          target == 'incident attachment')
+            file_binary.close()
+        readable = f'File {file_name} uploaded successfully to incident {incident_id}.'
+        # in case the file uploaded as war room entry
+        if target == 'war room entry':
+            readable += f' Entry ID is {response["entries"][0]["id"]}'
+
+        return CommandResults(readable_output=readable)
+
+
+    ''' MAIN FUNCTION '''
+
+
+    def main() -> None:
+        """
+        main function, parses params and runs command functions
+        """
+
+        params = demisto.params()
+        args = demisto.args()
+        command = demisto.command()
+
+        api_key = demisto.get(demisto.params(), 'creds_apikey.password')
+        server_url = demisto.demistoUrls()["server"]
+        base_url = params.get('url', server_url)
+        verify_certificate = not params.get('insecure', False)
+        proxy = params.get('proxy', False)
+
+        try:
+            headers = {
+                'Authorization': api_key
+            }
+            client = Client(
+                base_url=base_url,
+                verify=verify_certificate,
+                headers=headers,
+                proxy=proxy)
+
+            if command == 'test-module':
+                result = test_module(client)
+                return_results(result)
+            elif command == 'file-management-upload-file-to-incident':
+                return_results(upload_file_command(client, args))
+            elif command == 'file-management-delete-file':
+                return_results(delete_file_command(client, args))
+            elif command == 'file-management-delete-attachment':
+                return_results(delete_attachment_command(client, args))
+            elif command == 'file-management-check-file':
+                return_results(check_file_command(client, args))
+            elif command == 'file-management-rename-file':
+                return_results(rename_file_command(client, args))
+            else:
+                raise NotImplementedError(f'Command {command} is not implemented')
+
+        # Log exceptions and return errors
+        except Exception as error:
+            return_error(f'Failed to execute {command} command.\nError:\n{str(error)}')
+
+
+    ''' ENTRY POINT '''
+
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):
+        main()
+
+    register_module_line('XSOAR File Management', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
