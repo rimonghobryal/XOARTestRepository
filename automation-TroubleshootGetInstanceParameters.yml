@@ -1,0 +1,199 @@
+args:
+- description: The name of the instance for which to get its parameters.
+  name: instance_name
+  required: true
+comment: Gets an instance's configuration parameters in order to troubleshoot the
+  instance.
+commonfields:
+  id: TroubleshootGetInstanceParameters
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 2.0.14
+    packID: Troubleshoot
+    packName: Troubleshoot
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dependson:
+  must:
+  - core-api-post
+dockerimage: demisto/python3:3.10.13.83255
+engineinfo: {}
+mainengineinfo: {}
+name: TroubleshootGetInstanceParameters
+outputs:
+- contextPath: InstanceParameters.instance_name
+  description: The instance name.
+  type: String
+- contextPath: InstanceParameters.system
+  description: Whether the integration is a system integration (not custom).
+  type: Boolean
+- contextPath: InstanceParameters.deprecated
+  description: Whether the integration is deprecated.
+  type: Boolean
+- contextPath: InstanceParameters.isFetch
+  description: Whether "Is fetch" is configured.
+  type: Boolean
+- contextPath: InstanceParameters.proxy
+  description: Whether "use proxy" is selected. If any parameter is not called proxy,
+    it will be wrong.
+  type: Boolean
+- contextPath: InstanceParameters.proxy_key
+  description: The proxy key in which insecure is hosted. Can be null if no key is
+    found.
+  type: String
+- contextPath: InstanceParameters.insecure
+  description: Whether "use unsecure connection" is selected. If any parameter is
+    not called insecure, it will be wrong.
+  type: Boolean
+- contextPath: InstanceParameters.insecure_key
+  description: The insecure key in which insecure is hosted. Can be null if no key
+    is found.
+  type: String
+- contextPath: InstanceParameters.type
+  description: The type of the integration. Can be JavaScript or Python.
+  type: String
+- contextPath: InstanceParameters.subtype
+  description: The subtype of a Python integration. Can be Python2 or Python3.
+  type: String
+- contextPath: InstanceParameters.engine
+  description: The engine used by the integration, if any.
+  type: String
+- contextPath: InstanceParameters.dockerimage
+  description: The Docker image used by the integration, if any.
+  type: String
+- contextPath: InstanceParameters.RawInstance
+  description: The raw instance. Should be used when checking the instance configuration.
+  type: String
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('TroubleshootGetInstanceParameters', 'start', __line__())
+  ### pack version: 2.0.14
+
+
+
+
+  def get_configurations_from_xsoar() -> dict:
+      res = demisto.executeCommand('core-api-post', {
+          'uri': 'settings/integration/search',
+          'body': """{"size": 500}"""
+      })
+      if is_error(res):
+          raise DemistoException(get_error(res))
+      return res[0]['Contents']['response']
+
+
+  def get_conf(name: str) -> tuple[dict, dict]:
+      configurations = get_configurations_from_xsoar()
+      try:
+          instance_config = list(filter(lambda item: item['name'] == name, configurations['instances']))[0]
+      except IndexError as exc:
+          raise DemistoException(f'Could not find the instance {name}') from exc
+      brand = instance_config['brand']
+      configuration = list(filter(lambda item: item['id'] == brand, configurations['configurations']))[0]
+
+      return configuration, instance_config
+
+
+  def get_proxy_key(instance: dict) -> Optional[str]:
+      proxy_key = None
+      if 'proxy' in instance:
+          proxy_key = 'proxy'
+      for key in list(instance.keys()):  # Find proxy substring
+          if 'proxy' in key:
+              proxy_key = key
+      return proxy_key
+
+
+  def get_proxy_key_value(instance: dict) -> tuple[Optional[str], Optional[bool]]:
+      # Try to find any param named proxy
+      if (proxy_key := get_proxy_key(instance)) is not None:
+          return proxy_key, bool(instance[proxy_key])
+      else:
+          demisto.info('Could not find any key name proxy')
+          return None, None
+
+
+  def get_insecure_key(instance: dict) -> Optional[str]:
+      insecure_keys = ['insecure', 'unsecure']
+      for key in insecure_keys:
+          if key in instance:
+              return key
+      return None
+
+
+  def get_insecure_key_value(instance: dict) -> tuple[Optional[str], Optional[bool]]:
+      if (key := get_insecure_key(instance)) is not None:
+          return key, bool(instance[key])
+      else:
+          demisto.info('Could not find any key name insecure')
+          return None, None
+
+
+  def build_parameters(integration_config: dict, instance_config: dict) -> dict:
+      """Gets configurations and building the parameters to context
+
+      Args:
+          integration_config: The integration's configuration
+          instance_config: The instance's config
+
+      Returns:
+          A dictionary of parameters to check later.
+      """
+      if data := instance_config.get('data'):
+          instance = {field['name']: field['value'] for field in data}
+      else:
+          instance = {}
+      instance['engine'] = instance_config['engine']
+      try:
+          del instance['credentials']
+      except KeyError:
+          pass
+      integration_configuration = integration_config['integrationScript']
+      integration_configuration['system'] = integration_config.get('system', True)
+      integration_configuration['deprecated'] = integration_config.get('deprecated', False)
+      # Remove heavy and/or sensitive information
+      del integration_configuration['script']
+      del integration_configuration['commands']
+      instance.update(integration_configuration)
+      instance['proxy_key'], instance['proxy'] = get_proxy_key_value(instance)
+      instance['insecure_key'], instance['insecure'] = get_insecure_key_value(instance)
+      return instance
+
+
+  def main():
+      try:
+          instance_name = demisto.args().get('instance_name')
+          config, instance = get_conf(instance_name)
+          parameters = build_parameters(config, instance)
+          parameters['instance_name'] = instance_name
+          human_readable = tableToMarkdown(f"Configured parameters for instance {instance_name}", parameters)
+          parameters['RawInstance'] = instance
+          return_outputs(
+              human_readable,
+              {
+                  'InstanceParameters(obj.instance_name === val.instance_name)': parameters
+              },
+              instance
+          )
+      except Exception as exc:
+          return_error(exc)
+
+
+  if __name__ in ("__main__", "builtin", "builtins"):
+      main()
+
+  register_module_line('TroubleshootGetInstanceParameters', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- troubleshoot
+type: python
