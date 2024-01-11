@@ -1,0 +1,270 @@
+category: Data Enrichment & Threat Intelligence
+commonfields:
+  id: Tor Exit Addresses Feed
+  version: -1
+configuration:
+- defaultvalue: "true"
+  display: Fetch indicators
+  name: feed
+  required: false
+  type: 8
+- additionalinfo: Indicators from this integration instance will be marked with this
+    reputation
+  defaultvalue: Suspicious
+  display: Indicator Reputation
+  name: feedReputation
+  options:
+  - None
+  - Good
+  - Suspicious
+  - Bad
+  required: false
+  type: 18
+- additionalinfo: Reliability of the source providing the intelligence data
+  defaultvalue: A - Completely reliable
+  display: Source Reliability
+  name: feedReliability
+  options:
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: true
+  type: 15
+- additionalinfo: The Traffic Light Protocol (TLP) designation to apply to indicators
+    fetched from the feed
+  display: Traffic Light Protocol Color
+  name: tlp_color
+  options:
+  - RED
+  - AMBER
+  - GREEN
+  - WHITE
+  required: false
+  type: 15
+- defaultvalue: suddenDeath
+  display: ""
+  name: feedExpirationPolicy
+  options:
+  - never
+  - interval
+  - indicatorType
+  - suddenDeath
+  required: false
+  type: 17
+- defaultvalue: "20160"
+  display: ""
+  name: feedExpirationInterval
+  required: false
+  type: 1
+- defaultvalue: "10"
+  display: Feed Fetch Interval
+  name: feedFetchInterval
+  required: false
+  type: 19
+- additionalinfo: When selected, the exclusion list is ignored for indicators from
+    this feed. This means that if an indicator from this feed is on the exclusion
+    list, the indicator might still be added to the system.
+  display: Bypass exclusion list
+  name: feedBypassExclusionList
+  required: false
+  type: 8
+- additionalinfo: Supports CSV values.
+  display: Tags
+  name: feedTags
+  required: false
+  type: 0
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.5.0
+    itemVersion: 1.0.8
+    packID: FeedTorExitAddresses
+    packName: Tor Exit Addresses Feed
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Tor is free software and an open network that helps you defend against
+  traffic analysis, a form of network surveillance that threatens personal freedom
+  and privacy, confidential business activities and relationships, and state security.
+detaileddescription: |-
+  ## Tor Exit Addresses
+  Tor is free software and an open network that helps you defend against traffic analysis, a form of network surveillance that threatens personal freedom and privacy, confidential business activities and relationships, and state security.
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/tor-exit-addresses-feed)
+display: Tor Exit Addresses Feed
+image: data:image/png;base64,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
+name: Tor Exit Addresses Feed
+script:
+  commands:
+  - arguments:
+    - defaultValue: "50"
+      description: The maximum number of results to return. The default value is 50.
+      name: limit
+    description: Gets the feed indicators.
+    name: tor-get-indicators
+  dockerimage: demisto/python3:3.10.12.63474
+  feed: true
+  runonce: false
+  script: |
+    register_module_line('Tor Exit Addresses Feed', 'start', __line__())
+    ### pack version: 1.0.8
+
+
+
+
+    import requests
+    import urllib3
+    from typing import Dict, List, Optional
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+    SOURCE_NAME = "Tor Exit Addresses"
+    DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
+
+
+    class Client(BaseClient):
+        def __init__(self, insecure: bool = False, proxy: bool = False, tlp_color: Optional[str] = None):
+            super().__init__(base_url='https://check.torproject.org/exit-addresses', verify=not insecure, proxy=proxy)
+            self.url = 'https://check.torproject.org/exit-addresses'
+            self.tlp_color = tlp_color
+
+        def http_request_indicators(self):
+            res = requests.get(
+                url=self.url,
+                verify=self._verify
+            )
+
+            try:
+                res.raise_for_status()
+
+            except Exception:
+                LOG(f'Tor Exit Addresses - exception in request: {res.status_code!r} {res.content!r}')
+                raise
+
+            return res.text
+
+        def datestring_to_server_format(self, date_string):
+            """
+            formats a datestring to the ISO-8601 format which the server expects to recieve
+            :param date_string: Date represented as a tring
+            :return: ISO-8601 date string
+            """
+            parsed_date = dateparser.parse(date_string, settings={'TIMEZONE': 'UTC'})
+            assert parsed_date is not None, f'could not parse {date_string}'
+            return parsed_date.strftime(DATE_FORMAT)
+
+        def build_iterator(self, feedTags, limit):
+            raw_res = self.http_request_indicators()
+            raw_indicator_list = raw_res.split('\n')
+            indicator_list = []  # type: List
+            indicator = {}  # type: Dict
+            current_indicator_index = 0
+            for line in raw_indicator_list:
+                if line.startswith('ExitNode'):
+                    indicator = {
+                        "type": FeedIndicatorType.IP,
+                        'name': line.split()[1]
+                    }
+
+                elif line.startswith('Published'):
+                    date = line.split(' ', 1)[1]
+                    indicator['firstseenbysource'] = self.datestring_to_server_format(date)
+
+                elif line.startswith('LastStatus'):
+                    date = line.split(' ', 1)[1]
+                    indicator['lastseenbysource'] = self.datestring_to_server_format(date)
+
+                elif line.startswith('ExitAddress'):
+                    indicator['value'] = line.split()[1]
+                    raw_json = indicator.copy()
+                    indicator['rawJSON'] = raw_json
+                    indicator['fields'] = {
+                        'firstseenbysource': indicator.get('firstseenbysource'),
+                        'lastseenbysource': indicator.get('lastseenbysource'),
+                        'tags': feedTags,
+                    }
+
+                    if self.tlp_color:
+                        indicator['fields']['trafficlightprotocol'] = self.tlp_color
+
+                    indicator_list.append(indicator)
+
+                    current_indicator_index = current_indicator_index + 1
+                    if limit is not None and current_indicator_index >= limit:
+                        break
+
+            return indicator_list
+
+
+    def fetch_indicators_command(client, feedTags=None, limit=None):
+        indicator_list = client.build_iterator(feedTags, limit)
+        return indicator_list
+
+
+    def get_indicators_command(client: Client, args: dict):
+        limit = args.get('limit')
+        if limit:
+            limit = int(limit)
+        indicator_list = fetch_indicators_command(client, None, limit)
+        human_readable = tableToMarkdown("Indicators from Tor Exit Addresses:", indicator_list,
+                                         headers=['value', 'type', 'firstseenbysource', 'lastseenbysource', 'name'],
+                                         removeNull=True)
+        return human_readable, {}, indicator_list
+
+
+    def module_test_command(client: Client, args: dict):
+        client.http_request_indicators()
+        return 'ok', {}, {}
+
+
+    def main():
+        params = demisto.params()
+        feedTags = argToList(params.get('feedTags'))
+        tlp_color = params.get('tlp_color')
+        client = Client(params.get('insecure'),
+                        params.get('proxy'),
+                        tlp_color)
+
+        command = demisto.command()
+        demisto.info(f'Command being called is {command}')
+        # Switch case
+        commands = {
+            'test-module': module_test_command,
+            'tor-get-indicators': get_indicators_command
+        }
+        try:
+            if demisto.command() == 'fetch-indicators':
+                indicators = fetch_indicators_command(client, feedTags)
+                # we submit the indicators in batches
+                for b in batch(indicators, batch_size=2000):
+                    demisto.createIndicators(b)
+            else:
+                readable_output, outputs, raw_response = commands[command](client, demisto.args())
+                return_outputs(readable_output, outputs, raw_response)
+        except Exception as e:
+            raise Exception(f'Error in {SOURCE_NAME} Integration [{e}]')
+
+
+    if __name__ == '__builtin__' or __name__ == 'builtins':
+        main()
+
+    register_module_line('Tor Exit Addresses Feed', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
