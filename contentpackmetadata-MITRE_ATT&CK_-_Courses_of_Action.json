@@ -1,0 +1,693 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"automation",
+		"incidentfield",
+		"incidenttype",
+		"playbook",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Entry widget that shows the number of techniques that were already handled by the CoA playbooks.",
+				"name": "EntryWidgetCoAHandled",
+				"tags": [
+					"dynamic-section"
+				]
+			},
+			{
+				"description": "Entry widget that shows the number of techniques that were not yet handled by the CoA playbooks.",
+				"name": "EntryWidgetCoATechniquesList",
+				"tags": [
+					"dynamic-section"
+				]
+			}
+		],
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "This field will be automatically populated by the \"MITRE ATT\u0026CK - Courses of Action\" playbook with a description of the \"Executed Remediation Summary\" layout tab. ",
+				"name": "Executed Remediation Summary Description",
+				"type": "markdown"
+			},
+			{
+				"description": "The techniques that were not handled by the CoA playbooks.",
+				"name": "Unhandled Techniques",
+				"type": "grid"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Initial Access MITRE ATT\u0026CK phase.",
+				"name": "Initial Access Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Credential Access MITRE ATT\u0026CK phase.",
+				"name": "Credential Access Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "WildFire best practices profile name.",
+				"name": "WildFire Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Collection MITRE ATT\u0026CK phase.",
+				"name": "Collection Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - Anti-Virus",
+				"type": "markdown"
+			},
+			{
+				"description": "Anti-Spyware best practices profile name.",
+				"name": "Anti-Spyware Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - Anti-Spyware",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Privilege Escalation MITRE ATT\u0026CK phase.",
+				"name": "Privilege Escalation Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - URL Filtering",
+				"type": "markdown"
+			},
+			{
+				"description": "The techniques that were handled by the CoA playbooks.",
+				"name": "Handled Techniques",
+				"type": "grid"
+			},
+			{
+				"description": "The list of rules that the Vulnerability Protection best practices profile is applied to.",
+				"name": "Vulnerability Protection Rules",
+				"type": "shortText"
+			},
+			{
+				"description": "This field will be automatically populated by the \"MITRE ATT\u0026CK - Courses of Action\" playbook with a description of the \"Best Practices\" layout tab. ",
+				"name": "Best Practices Description",
+				"type": "markdown"
+			},
+			{
+				"description": "Anti-Virus best practices profile status.",
+				"name": "Anti-Virus Profile Status",
+				"type": "shortText"
+			},
+			{
+				"description": "URL Filtering best practices profile name.",
+				"name": "URL Filtering Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Discovery MITRE ATT\u0026CK phase.",
+				"name": "Discovery Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - File Blocking",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Impact MITRE ATT\u0026CK phase.",
+				"name": "Impact Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Exfiltration MITRE ATT\u0026CK phase.",
+				"name": "Exfiltration Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Execution MITRE ATT\u0026CK phase.",
+				"name": "Execution Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - Anti-Spyware",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of rules that the Anti-Spyware best practices profile is applied to.",
+				"name": "Anti-Virus Rules",
+				"type": "shortText"
+			},
+			{
+				"description": "Anti-Virus best practices profile name.",
+				"name": "Anti-Virus Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - Vulnerability Protection",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Command and Control MITRE ATT\u0026CK phase.",
+				"name": "Command and Control Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "Anti-Spyware best practices profile status.",
+				"name": "Vulnerability Protection Profile Status",
+				"type": "shortText"
+			},
+			{
+				"description": "WildFire best practices profile status.",
+				"name": "WildFire Profile Status",
+				"type": "shortText"
+			},
+			{
+				"description": " Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - WildFire",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - File Blocking",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of rules that the WildFire best practices profile is applied to.",
+				"name": "WildFire Rules",
+				"type": "shortText"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Failed Checks - Vulnerability Protection",
+				"type": "markdown"
+			},
+			{
+				"description": "Vulnerability Protection best practices profile name.",
+				"name": "Vulnerability Protection Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Lateral Movement MITRE ATT\u0026CK phase.",
+				"name": "Lateral Movement Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": " Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - WildFire",
+				"type": "markdown"
+			},
+			{
+				"description": "Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - URL Filtering",
+				"type": "markdown"
+			},
+			{
+				"description": "File Blocking best practices profile name.",
+				"name": "File Blocking Profile Name",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Persistence MITRE ATT\u0026CK phase.",
+				"name": "Persistence Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "The techniques that were not yet handled by the CoA playbooks.",
+				"name": "Techniques to Handle",
+				"type": "markdown"
+			},
+			{
+				"description": "The techniques that were handled by the CoA playbooks.",
+				"name": "Remediated Techniques",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of products used for remediation of techniques that belong to the Defense Evasion MITRE ATT\u0026CK phase.",
+				"name": "Defense Evasion Remediation Products",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of rules that the Anti-Spyware best practices profile is applied to.",
+				"name": "File Blocking Rules",
+				"type": "shortText"
+			},
+			{
+				"description": " Results returned from a BPA triggered job.",
+				"name": "BPA Passed Checks - Anti-Virus",
+				"type": "markdown"
+			},
+			{
+				"description": "The list of MITRE ATT\u0026CK techniques.",
+				"name": "Techniques List",
+				"type": "longText"
+			},
+			{
+				"description": "Anti-Spyware best practices profile status.",
+				"name": "Anti-Spyware Profile Status",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of rules that the URL Filtering best practices profile is applied to.",
+				"name": "URL Filtering Rules",
+				"type": "shortText"
+			},
+			{
+				"description": "The list of rules that the Anti-Spyware best practices profile is applied to.",
+				"name": "Anti-Spyware Rules",
+				"type": "shortText"
+			},
+			{
+				"description": "File Blocking best practices profile status.",
+				"name": "File Blocking Profile Status",
+				"type": "shortText"
+			},
+			{
+				"description": "URL Filtering best practices profile status.",
+				"name": "URL Filtering Profile Status",
+				"type": "shortText"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "MITRE ATT\u0026CK CoA",
+				"playbook": "MITRE ATT\u0026CK - Courses of Action",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": null,
+		"layoutscontainer": [
+			{
+				"description": "",
+				"name": "Mitre COA - MITRE Layout"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "This is the parent playbook, which contains all phases and remediates MITRE ATT\u0026CK techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. The playbook utilizes several other MITRE ATT\u0026CK remediation playbooks.\n \nThe playbook follows the MITRE ATT\u0026CK kill chain phases and takes action to protect the organization from the inputted techniques, displaying and implementing security policy recommendations for Palo Alto Networks products.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nPossible playbook triggers:\n- The playbook can be triggered by a feed integration fetching indicators that contain MITRE ATT\u0026CK techniques as “Feed Related Indicators”, using the \"MITRE ATT\u0026CK - Courses of Action - Job\" playbook.\n- The playbook can be triggered manually for specific MITRE ATT\u0026CK techniques using the ‘techniqueByIncident’ playbook input.\n- An incident that contains MITRE ATT\u0026CK technique IDs using the ‘techniqueByIncident’ playbook input.\n",
+				"name": "MITRE ATT\u0026CK - Courses of Action"
+			},
+			{
+				"description": "This playbook Remediates the Network Share Discovery technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1135: Network Share Discovery\n\nKill Chain phases:\n- Discovery\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may look for folders and drives shared on remote systems as a means of identifying sources of information to gather as a precursor for Collection and to identify potential systems of interest for Lateral Movement. Networks often contain shared network drives and folders that enable users to access file directories on various systems across a network.\n\nFile sharing over a Windows network occurs over the SMB protocol. [1] [2] Net can be used to query a remote system for available shared drives using the net view \\remotesystem command. It can also be used to query shared drives on the local system using net share.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1135 - Network Share Discovery"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0040: Impact\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to manipulate, interrupt, or destroy your systems and data.\n\nImpact consists of techniques that adversaries use to disrupt availability or compromise integrity by manipulating business and operational processes. Techniques used for impact can include destroying or tampering with data. In some cases, business processes can look fine, but may have been altered to benefit the adversaries’ goals. These techniques might be used by adversaries to follow through on their end goal or to provide cover for a confidentiality breach.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Impact"
+			},
+			{
+				"description": "This playbook Remediates the Software Discovery technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1518: Software Discovery\n\nKill Chain phases:\n- Discovery\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may attempt to get a listing of software and software versions that are installed on a system or in a cloud environment. Adversaries may use the information from Software Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nAdversaries may attempt to enumerate software for a variety of reasons, such as figuring out what security measures are present or if the compromised system has a version of software that is vulnerable to Exploitation for Privilege Escalation.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1518 - Software Discovery"
+			},
+			{
+				"description": "This playbook Remediates the Service Execution technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1569.002: System Services: Service Execution\n\nKill Chain phases:\n- Execution\n\nMITRE ATT\u0026CK Description:\nAdversaries may abuse the Windows service control manager to execute malicious commands or payloads. The Windows service control manager (services.exe) is an interface to manage and manipulate services.[1] The service control manager is accessible to users via GUI components as well as system utilities such as sc.exe and Net.\nPsExec can also be used to execute commands or payloads via a temporary Windows service created through the service control manager API.[2]\nAdversaries may leverage these mechanisms to execute malicious content. This can be done by either executing a new or modified service. This technique is the execution used in conjunction with Windows Service during service persistence or privilege escalation.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1569.002 - Service Execution"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0006: Credential Access\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to steal account names and passwords.\n\nCredential Access consists of techniques for stealing credentials like account names and passwords. Techniques used to get credentials include keylogging or credential dumping. Using legitimate credentials can give adversaries access to systems, make them harder to detect, and provide the opportunity to create more accounts to help achieve their goals.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Credential Access"
+			},
+			{
+				"description": "This playbook enforces the WildFire Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Check for WildFire license (If license is not activated, the playbook refers users to their Palo Alto Networks account manager for further instructions).\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce WildFire Best Practices Profile"
+			},
+			{
+				"description": "This playbook Remediates the OS Credential Dumping technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1003: OS Credential Dumping\n\nKill Chain phases:\n- Defense Evasion\n\nMITRE ATT\u0026CK Description:\nAdversaries may attempt to dump credentials to obtain account login and credential material, normally in the form of a hash or a clear text password, from the operating system and software. Credentials can then be used to perform Lateral Movement and to access restricted information.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1003 - OS Credential Dumping"
+			},
+			{
+				"description": "This playbook Remediates the Remote Desktop Protocol technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1021.001: Remote Desktop Protocol\n\nKill Chain phases:\n- Lateral Movement\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may use Valid Accounts to log into a computer using the Remote Desktop Protocol (RDP). The adversary may then perform actions as the logged-on user.\n\nRemote desktop is a common feature in operating systems. It allows a user to log into an interactive session with a system desktop graphical user interface on a remote system. Microsoft refers to its implementation of the Remote Desktop Protocol (RDP) as Remote Desktop Services (RDS).\n\nAdversaries may connect to a remote system over RDP/RDS to expand access if the service is enabled and allows access to accounts with known credentials. Adversaries will likely use Credential Access techniques to acquire credentials to use with RDP. Adversaries may also use RDP in conjunction with the Accessibility Features technique for Persistence.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1021.001 - Remote Desktop Protocol"
+			},
+			{
+				"description": "This playbook Remediates the Registry Run Keys / Startup Folder technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1547.001: Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder\n\nKill Chain phases:\n- Persistence\n- Privilege Escalation\n\nMITRE ATT\u0026CK Description:\nAdversaries may achieve persistence by adding a program to a startup folder or referencing it with a Registry run key. Adding an entry to the \"run keys\" in the Registry or startup folder will cause the program referenced to be executed when a user logs in. [1] These programs will be executed under the context of the user and will have the account's associated permissions level.\n\nPlacing a program within a startup folder will also cause that program to execute when a user logs in. There is a startup folder location for individual user accounts as well as a system-wide startup folder that will be checked regardless of which user account logs in. The startup folder path for the current user is C:\\Users[Username]\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup. The startup folder path for all users is C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\StartUp.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1547.001 - Registry Run Keys Startup Folder"
+			},
+			{
+				"description": "This playbook Remediates the Brute Force technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1110 : Brute Force\n\nKill Chain phases:\n- Credential Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained. Without knowledge of the password for an account or set of accounts, an adversary may systematically guess the password using a repetitive or iterative mechanism. Brute forcing passwords can take place via interaction with a service that will check the validity of those credentials or offline against previously acquired credential data, such as password hashes.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1110 - Brute Force"
+			},
+			{
+				"description": "This playbook Remediates the Obfuscated Files or Information technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1027: Obfuscated Files or Information\n\nKill Chain phases:\n- Defense Evasion\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may attempt to make an executable or file difficult to discover or analyze by encrypting, encoding, or otherwise obfuscating its contents on the system or in transit. This is common behavior that can be used across different platforms and the network to evade defenses.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1027 - Obfuscated Files or Information"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0008: Lateral Movement\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to move through your environment.\n\nLateral Movement consists of techniques that adversaries use to enter and control remote systems on a network. Following through on their primary objective often requires exploring the network to find their target and subsequently gaining access to it. Reaching their objective often involves pivoting through multiple systems and accounts to gain. Adversaries might install their own remote access tools to accomplish Lateral Movement or use legitimate credentials with native network and operating system tools, which may be stealthier.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Lateral Movement"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTechniques Handled:\n- T1005 - Data from Local System\n- Kill Chain phase:\n- Collection\n\nMITRE ATT\u0026CK Description: \nThe adversary is attempting to gather data of interest to accomplish their goal.\n \nCollection consists of techniques adversaries may use to gather information and the sources information is collected from that are relevant to following through on the adversary’s objectives. Frequently, the next goal after collecting data is to steal (exfiltrate) the data. Common target sources include various drive types, browsers, audio, video, and email. Common collection methods include capturing screenshots and keyboard input.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Collection"
+			},
+			{
+				"description": "This playbook Remediates the Spear-Phishing Attachment technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1566.001: Spear-Phishing Attachment\n\nKill Chain phases:\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may send spearphishing emails with a malicious attachment in an attempt to gain access to victim systems. Spearphishing attachment is a specific variant of spearphishing. Spearphishing attachment is different from other forms of spearphishing in that it employs the use of malware attached to an email. All forms of spearphishing are electronically delivered social engineering targeted at a specific individual, company, or industry. In this scenario, adversaries attach a file to the spearphishing email and usually rely upon User Execution to gain execution.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1566.001 - Spear-Phishing Attachment"
+			},
+			{
+				"description": "This playbook Remediates the Boot or Logon Autostart Execution technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1547: Boot or Logon Autostart Execution\n\nKill Chain phases:\n- Persistence\n- Privilege Escalation\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may configure system settings to automatically execute a program during system boot or logon to maintain persistence or gain higher-level privileges on compromised systems. Operating systems may have mechanisms for automatically running a program on system boot or account logon.[1][2][3][4][5]  These mechanisms may include automatically executing programs that are placed in specially designated directories or are referenced by repositories that store configuration information, such as the Windows Registry. An adversary may achieve the same goal by modifying or extending features of the kernel.\n\nSince some boot or logon autostart programs run with higher privileges, an adversary may leverage these to elevate privileges.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1547 - Boot or Logon Autostart Execution"
+			},
+			{
+				"description": "This playbook Remediates the Exfiltration Over Alternative Protocol technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1048: Exfiltration Over Alternative Protocol\n\nKill Chain phases:\n- Exfiltration\n\nMITRE ATT\u0026CK Description:\nAdversaries may steal data by exfiltrating it over a different protocol than that of the existing command and control channel. The data may also be sent to an alternate network location from the main command and control server.\nAlternate protocols include FTP, SMTP, HTTP/S, DNS, SMB, or any other network protocol not being used as the main command and control channel. Different protocol channels could also include Web services such as cloud storage. Adversaries may also opt to encrypt and/or obfuscate these alternate channels.\nExfiltration Over Alternative Protocol can be done using various common operating system utilities such as Net/SMB or FTP.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1048 - Exfiltration Over Alternative Protocol"
+			},
+			{
+				"description": "This playbook Remediates the User Execution technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1204: User Execution\n\nKill Chain phases:\n- Execution\n\nMITRE ATT\u0026CK Description:\n\nAn adversary may rely upon specific actions by a user in order to gain execution. Users may be subjected to social engineering to get them to execute malicious code by, for example, opening a malicious document file or link. These user actions will typically be observed as follow-on behavior from forms of Phishing.\n\nWhile User Execution frequently occurs shortly after Initial Access it may occur at other phases of an intrusion, such as when an adversary places a file in a shared directory or on a user's desktop hoping that a user will click on it. This activity may also be seen shortly after Internal Spearphishing.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.  ",
+				"name": "MITRE ATT\u0026CK CoA - T1204 - User Execution"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0002: Execution\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to run malicious code.\n\nExecution consists of techniques that result in adversary-controlled code running on a local or remote system. Techniques that run malicious code are often paired with techniques from all other tactics to achieve broader goals, like exploring a network or stealing data. For example, an adversary might use a remote access tool to run a PowerShell script that does Remote System Discovery.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Execution"
+			},
+			{
+				"description": "This playbook enforces the Vulnerability Protection Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Check for Threat Prevention license (If license is not activated, the playbook refers users to their Palo Alto Networks account manager for further instructions).\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce Vulnerability Protection Best Practices Profile"
+			},
+			{
+				"description": "This playbook Remediates the Drive-by Compromise technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1189: Drive-by Compromise\n\nKill Chain phases:\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may gain access to a system through a user visiting a website over the normal course of browsing. With this technique, the user's web browser is typically targeted for exploitation, but adversaries may also use compromised websites for non-exploitation behavior such as acquiring Application Access Token.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1189 - Drive-by Compromise"
+			},
+			{
+				"description": "This playbook Remediates the Standard Cryptographic Protocol technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- 1573.002: Encrypted Channel: Asymmetric Cryptography\n\nKill Chain phases:\n- Command And Control\n\nMITRE ATT\u0026CK Description:\nAdversaries may employ a known asymmetric encryption algorithm to conceal command and control traffic rather than relying on any inherent protections provided by a communication protocol. Asymmetric cryptography, also known as public key cryptography, uses a keypair per party: one public that can be freely distributed, and one private. Due to how the keys are generated, the sender encrypts data with the receiver’s public key and the receiver decrypts the data with their private key. This ensures that only the intended recipient can read the encrypted data. Common public key encryption algorithms include RSA and ElGamal.\n\nFor efficiency, may protocols (including SSL/TLS) use symmetric cryptography once a connection is established, but use asymmetric cryptography to establish or transmit a key. As such, these protocols are classified as Asymmetric Cryptography.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1573.002 - Asymmetric Cryptography"
+			},
+			{
+				"description": "This playbook is used to find and remove all rules that allow unauthorized applications communication as any.\nThe playbook performs the following tasks:\n- Lists PAN-OS policy rules.\n- Checks for a rule that allows applications as any.\n- Deletes the rule based on user approval.\n- Commits the configuration.\n",
+				"name": "PAN-OS - Block all unknown and unauthorized applications"
+			},
+			{
+				"description": "This playbook Remediates the Ingress tool transfer technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1105: Ingress tool transfer\n\nKill Chain phases:\n- Command And Control\n\nMITRE ATT\u0026CK Description:\nAdversaries may transfer tools or other files from an external system into a compromised environment. Files may be copied from an external adversary controlled system through the command and control channel to bring tools into the victim network or through alternate protocols with another tool such as FTP. Files can also be copied over on Mac and Linux with native tools like scp, rsync, and sftp.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1105 - Ingress tool transfer"
+			},
+			{
+				"description": "This playbook Remediates the Process Discovery technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1057: Process Discovery\n\nKill Chain phases:\n- Discovery\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may attempt to get information about running processes on a system. Information obtained could be used to gain an understanding of common software/applications running on systems within the network. Adversaries may use the information from Process Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1057 - Process Discovery"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0003: Persistence\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to maintain their foothold.\n\nPersistence consists of techniques that adversaries use to keep access to systems across restarts, changed credentials, and other interruptions that could cut off their access. Techniques used for persistence include any access, action, or configuration changes that let them maintain their foothold on systems, such as replacing or hijacking legitimate code or adding startup code.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Persistence"
+			},
+			{
+				"description": "This playbook Remediates the External Remote Services technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1133: External Remote Services\n\nKill Chain phases:\n- Persistence\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may use brute force techniques to gain access to accounts when passwords are unknown or when password hashes are obtained. Without knowledge of the password for an account or set of accounts, an adversary may systematically guess the password using a repetitive or iterative mechanism. Brute forcing passwords can take place via interaction with a service that will check the validity of those credentials or offline against previously acquired credential data, such as password hashes.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1133 - External Remote Services"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0005: Defense Evasion\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to avoid being detected.\n\nDefense Evasion consists of techniques that adversaries use to avoid detection throughout their compromise. Techniques used for defense evasion include uninstalling/disabling security software or obfuscating/encrypting data and scripts. Adversaries also leverage and abuse trusted processes to hide and masquerade their malware. Other tactics’ techniques are cross-listed here when those techniques include the added benefit of subverting defenses.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Defense Evasion"
+			},
+			{
+				"description": "This is a wrapper playbook for the \"MITRE ATT\u0026CK - Courses of Action\" use-case.\n\nPossible playbook triggers:\n- Through a job, by a feed integration fetching indicators that contain MITRE ATT\u0026CK techniques as “Feed Related Indicators”, or with custom inputs.\n- Through an incident, using custom playbook inputs.\n\nOnce triggered, the playbook will create a new incident from type \"MITRE ATT\u0026CK CoA\". The incident will trigger the playbook \"MITRE ATT\u0026CK - Courses of Action\", \nwhich contains all phases and remediates MITRE ATT\u0026CK techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. \n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n",
+				"name": "MITRE ATT\u0026CK - Courses of Action Trigger Job"
+			},
+			{
+				"description": "This playbook Remediates the Command and Scripting Interpreter technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1059: Command and Scripting Interpreter\n\nKill Chain phases:\n- Execution\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may abuse command and script interpreters to execute commands, scripts, or binaries. These interfaces and languages provide ways of interacting with computer systems and are a common feature across many different platforms. Most systems come with some built-in command-line interface and scripting capabilities, for example, macOS and Linux distributions include some flavor of Unix Shell while Windows installations include the Windows Command Shell and PowerShell.\n\nThere are also cross-platform interpreters such as Python, as well as those commonly associated with client applications such as JavaScript/JScript and Visual Basic.\n\nAdversaries may abuse these technologies in various ways as a means of executing arbitrary commands. Commands and scripts can be embedded in Initial Access payloads delivered to victims as lure documents or as secondary payloads downloaded from an existing C2. Adversaries may also execute commands through interactive terminals/shells.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1059 - Command and Scripting Interpreter"
+			},
+			{
+				"description": "This playbook Remediates the Exfiltration Over C2 Channel technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1041: Exfiltration Over C2 Channel\n\nKill Chain phases:\n- Exfiltration\n\nMITRE ATT\u0026CK Description:\nAdversaries may steal data by exfiltrating it over an existing command and control channel. Stolen data is encoded into the normal communications channel using the same protocol as command and control communications.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1041 - Exfiltration Over C2 Channel"
+			},
+			{
+				"description": "This playbook enforces the File Blocking Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce File Blocking Best Practices Profile"
+			},
+			{
+				"description": "This playbook Remediates the File and Directory Discovery technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1083: File and Directory Discovery\n\nKill Chain phases:\n- Discovery\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may enumerate files and directories or may search in specific locations of a host or network share for certain information within a file system. Adversaries may use the information from File and Directory Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nMany command shell utilities can be used to obtain this information. Examples include dir, tree, ls, find, and locate.  Custom tools may also be used to gather file and directory information and interact with the Native API.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1083 - File and Directory Discovery"
+			},
+			{
+				"description": "This playbook Remediates the Windows Service technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1543.003: Create or Modify System Process: Windows Service\n\nKill Chain phases:\n- Persistence\n- Privilege Escalation\n\nMITRE ATT\u0026CK Description:\nAdversaries may create or modify Windows services to repeatedly execute malicious payloads as part of persistence. When Windows boots up, it starts programs or applications called services that perform background system functions.[1] Windows service configuration information, including the file path to the service's executable or recovery programs/commands, is stored in the Windows Registry. Service configurations can be modified using utilities such as sc.exe and Reg.\n\nAdversaries may install a new service or modify an existing service by using system utilities to interact with services, by directly modifying the Registry, or by using custom tools to interact with the Windows API. Adversaries may configure services to execute at startup in order to persist on a system.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n\n\n",
+				"name": "MITRE ATT\u0026CK CoA - T1543.003 - Windows Service"
+			},
+			{
+				"description": "This playbook Remediates the Data from Local System technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1005: Data from Local System\n\nKill Chain phases:\n- Collection\n\nMITRE ATT\u0026CK Description:\nAdversaries may search local system sources, such as file systems or local databases, to find files of interest and sensitive data prior to Exfiltration. Adversaries may do this using a Command and Scripting Interpreter, such as cmd, which has functionality to interact with the file system to gather information. Some adversaries may also use Automated Collection on the local system.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1005 - Data from Local System"
+			},
+			{
+				"description": "This playbook Remediates the Command and Scripting Interpreter technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1059.001: Command and Scripting Interpreter: PowerShell\n\nKill Chain phases:\n- Execution\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system. [1] Adversaries can use PowerShell to perform a number of actions, including discovery of information and execution of code. Examples include the Start-Process cmdlet which can be used to run an executable and the Invoke-Command cmdlet which runs a command locally or on a remote computer (though administrator permissions are required to use PowerShell to connect to remote systems).\n\nPowerShell may also be used to download and run executables from the Internet, which can be executed from disk or in memory without touching disk.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1059.001 - PowerShell"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0010: Exfiltration\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to steal data.\n\nExfiltration consists of techniques that adversaries may use to steal data from your network. Once they’ve collected data, adversaries often package it to avoid detection while removing it. This can include compression and encryption. Techniques for getting data out of a target network typically include transferring it over their command and control channel or an alternate channel and may also include putting size limits on the transmission.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Exfiltration"
+			},
+			{
+				"description": "This playbook Remediates the NTFS File Attributes technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1564.004: NTFS File Attributes\n\nKill Chain phases:\n- Defense Evasion\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may use NTFS file attributes to hide their malicious data in order to evade detection. Every New Technology File System (NTFS) formatted partition contains a Master File Table (MFT) that maintains a record for every file/directory on the partition. [1] Within MFT entries are file attributes, [2] such as Extended Attributes (EA) and Data [known as Alternate Data Streams (ADSs) when more than one Data attribute is present], that can be used to store arbitrary data (and even complete files).\n\nAdversaries may store malicious data or binaries in file attribute metadata instead of directly in files. This may be done to evade some defenses, such as static indicator scanning tools and anti-virus.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1564.004 - NTFS File Attributes"
+			},
+			{
+				"description": "This playbook Remediates the Trusted Relationship technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1199: Trusted Relationship\n\nKill Chain phases:\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may breach or otherwise leverage organizations who have access to intended victims. Access through trusted third party relationship exploits an existing connection that may not be protected or receives less scrutiny than standard mechanisms of gaining access to a network.\n\nOrganizations often grant elevated access to second or third-party external providers in order to allow them to manage internal systems as well as cloud-based environments. Some examples of these relationships include IT services contractors, managed security providers, infrastructure contractors (e.g. HVAC, elevators, physical security). The third-party provider's access may be intended to be limited to the infrastructure being maintained, but may exist on the same network as the rest of the enterprise. As such, Valid Accounts used by the other party for access to internal network systems may be compromised and used.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1199 - Trusted Relationship"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0011: command and control\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to communicate with compromised systems to control them.\n\nCommand and Control consists of techniques that adversaries may use to communicate with systems under their control within a victim network. Adversaries commonly attempt to mimic normal, expected traffic to avoid detection. There are many ways an adversary can establish command and control with various levels of stealth depending on the victim’s network structure and defenses.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Command and Control"
+			},
+			{
+				"description": "This playbook enforces the Anti-Spyware Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Check for DNS Security license (If license is not activated, the playbook refers users to their Palo Alto Networks account manager for further instructions).\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce Anti-Spyware Best Practices Profile"
+			},
+			{
+				"description": "This playbook is used to apply a PAN-OS security profile to a policy rule.\nThe playbook performs the following tasks:\n- Accepts a rule name to apply the security profile to.\n- Applies the security profile to the rule if the rule exists. If not, creates the rule and applies.\n- Commits the configuration.\n",
+				"name": "PAN-OS - Apply Security Profile to Policy Rule"
+			},
+			{
+				"description": "This playbook Remediates the Exploitation for Privilege Escalation technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1068: Exploitation for Privilege Escalation\n\nKill Chain phases:\n- Privilege Escalation\n\nMITRE ATT\u0026CK Description:\nAdversaries may exploit software vulnerabilities in an attempt to collect elevate privileges. Exploitation of a software vulnerability occurs when an adversary takes advantage of a programming error in a program, service, or within the operating system software or kernel itself to execute adversary-controlled code. Security constructs such as permission levels will often hinder access to information and use of certain techniques, so adversaries will likely need to perform privilege escalation to include use of software exploitation to circumvent those restrictions.\n\nWhen initially gaining access to a system, an adversary may be operating within a lower privileged process which will prevent them from accessing certain resources on the system. Vulnerabilities may exist, usually in operating system components and software commonly running at higher permissions, that can be exploited to gain higher levels of access on the system. This could enable someone to move from unprivileged or user level permissions to SYSTEM or root permissions depending on the component that is vulnerable. This may be a necessary step for an adversary compromising a endpoint system that has been properly configured and limits other privilege escalation methods.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1068 - Exploitation for Privilege Escalation"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0004: Privilege Escalation\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to gain higher-level permissions.\n\nPrivilege Escalation consists of techniques that adversaries use to gain higher-level permissions on a system or network. Adversaries can often enter and explore a network with unprivileged access but require elevated permissions to follow through on their objectives. Common approaches are to take advantage of system weaknesses, misconfigurations, and vulnerabilities. Examples of elevated access include: • SYSTEM/root level• local administrator• user account with admin-like access • user accounts with access to specific system or perform specific functionThese techniques often overlap with Persistence techniques, as OS features that let an adversary persist can execute in an elevated context.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Privilege Escalation"
+			},
+			{
+				"description": "This playbook accepts a list of BPA checks, triggers a job and returns the checks results.",
+				"name": "Palo Alto Networks BPA - Submit Scan"
+			},
+			{
+				"description": "This playbook Remediates the Data Encrypted for Impact technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1486: Data Encrypted for Impact\n\nKill Chain phases:\n- Impact\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may encrypt data on target systems or on large numbers of systems in a network to interrupt availability to system and network resources. They can attempt to render stored data inaccessible by encrypting files or data on local and remote drives and withholding access to a decryption key. This may be done in order to extract monetary compensation from a victim in exchange for decryption or a decryption key (ransomware) or to render data permanently inaccessible in cases where the key is not saved or transmitted.[1][2][3][4] In the case of ransomware, it is typical that common user files like Office documents, PDFs, images, videos, audio, text, and source code files will be encrypted. In some cases, adversaries may encrypt critical system files, disk partitions, and the MBR.\n\nTo maximize impact on the target organization, malware designed for encrypting data may have worm-like features to propagate across a network by leveraging other attack techniques like Valid Accounts, OS Credential Dumping, and SMB/Windows Admin Shares.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1486 - Data Encrypted for Impact"
+			},
+			{
+				"description": "This playbook Remediates the Phishing technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1566: Phishing\n\nKill Chain phases:\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may send phishing messages to gain access to victim systems. All forms of phishing are electronically delivered social engineering. Phishing can be targeted, known as spearphishing. In spearphishing, a specific individual, company, or industry will be targeted by the adversary. More generally, adversaries can conduct non-targeted phishing, such as in mass malware spam campaigns.\n\nAdversaries may send victims emails containing malicious attachments or links, typically to execute malicious code on victim systems or to gather credentials for use of Valid Accounts. Phishing may also be conducted via third-party services, like social media platforms.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1566 - Phishing"
+			},
+			{
+				"description": "This playbook Remediates the Disable or Modify Tools technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1562.001: Impair Defenses: Disable or Modify Tools\n\nKill Chain phases:\n- Defense Evasion\n\nMITRE ATT\u0026CK Description:\nAdversaries may disable security tools to avoid possible detection of their tools and activities. This can take the form of killing security software or event logging processes, deleting Registry keys so that tools do not start at run time, or other methods to interfere with security tools scanning or reporting information.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n\n",
+				"name": "MITRE ATT\u0026CK CoA - T1562.001 - Disable or Modify Tools"
+			},
+			{
+				"description": "This playbook enforces the Anti-Virus Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Check for Threat Prevention license (If license is not activated, the playbook refers users to their Palo Alto Networks account manager for further instructions).\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce Anti-Virus Best Practices Profile"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0007: Discovery\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to figure out your environment.\n\nDiscovery consists of techniques an adversary may use to gain knowledge about the system and internal network. These techniques help adversaries observe the environment and orient themselves before deciding how to act. They also allow adversaries to explore what they can control and what’s around their entry point in order to discover how it could benefit their current objective. Native operating system tools are often used toward this post-compromise information-gathering objective.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Discovery"
+			},
+			{
+				"description": "This playbook enforces the URL Filtering Best Practices Profile as defined by Palo Alto Networks BPA.\nThe playbook performs the following tasks:\n- Check for URL Filtering license (If license is not activated, the playbook refers users to their Palo Alto Networks account manager for further instructions).\n- Get the existing profile information.\n- Get the best practices profile information.\n- Check if the best practices profile set by Cortex XSOAR is enforced. (If not, the playbook allows the user to compare the existing profile with the best practices and decide on the action to take).\n- Create best practices profile.\n- Apply profile to policy rules on PAN-OS firewall or Panorama.\n",
+				"name": "PAN-OS - Enforce URL Filtering Best Practices Profile"
+			},
+			{
+				"description": "This playbook Remediates the Application Layer Protocol technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1071: Application Layer Protocol\n\nKill Chain phases:\n- Command And Control\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may communicate using application layer protocols to avoid detection/network filtering by blending in with existing traffic. Commands to the remote system, and often the results of those commands, will be embedded within the protocol traffic between the client and server.\n\nAdversaries may utilize many different protocols, including those used for web browsing, transferring files, electronic mail, or DNS. For connections that occur internally within an enclave (such as those between a proxy or pivot node and other nodes), commonly used protocols are SMB, SSH, or RDP.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1071 - Application Layer Protocol"
+			},
+			{
+				"description": "This playbook handles MITRE ATT\u0026CK Techniques using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team. It utilizes each of the sub-playbooks for specific techniques that belong to this phase (tactic) according to the MITRE ATT\u0026CK kill chain. The sub-playbook called depends on the technique input.\n \n***Disclaimer: This playbook does not simulate an attack using the specified techniques, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\n \nTactic:\n- TA0001: Initial Access\n\nMITRE ATT\u0026CK Description: \nThe adversary is trying to get into your network.\n\nInitial Access consists of techniques that use various entry vectors to gain their initial foothold within a network. Techniques used to gain a foothold include targeted spearphishing and exploiting weaknesses on public-facing web servers. Footholds gained through initial access may allow for continued access, like valid accounts and use of external remote services, or may be limited-use due to changing passwords.\n\nPossible playbook triggers:\n- The playbook can be used as a part of the “Courses of Action - Collection” playbook to remediate techniques based on kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, that can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "Courses of Action - Initial Access"
+			},
+			{
+				"description": "This playbook Remediates the Valid Accounts technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1078: Valid Accounts\n\nKill Chain phases:\n- Defense Evasion\n- Persistence\n- Privilege Escalation\n- Initial Access\n\nMITRE ATT\u0026CK Description:\n\nAdversaries may obtain and abuse credentials of existing accounts as a means of gaining Initial Access, Persistence, Privilege Escalation, or Defense Evasion. Compromised credentials may be used to bypass access controls placed on various resources on systems within the network and may even be used for persistent access to remote systems and externally available services, such as VPNs, Outlook Web Access and remote desktop. Compromised credentials may also grant an adversary increased privilege to specific systems or access to restricted areas of the network. Adversaries may choose not to use malware or tools in conjunction with the legitimate access those credentials provide to make it harder to detect their presence.\n\nThe overlap of permissions for local, domain, and cloud accounts across a network of systems is of concern because the adversary may be able to pivot across accounts and systems to reach a high level of access (i.e., domain or enterprise administrator) to bypass access controls set within the enterprise.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.\n",
+				"name": "MITRE ATT\u0026CK CoA - T1078 - Valid Accounts"
+			},
+			{
+				"description": "This playbook Remediates the System Information Discovery technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1082: System Information Discovery\n\nKill Chain phases:\n- Discovery\n\nMITRE ATT\u0026CK Description:\n\nAn adversary may attempt to get detailed information about the operating system and hardware, including version, patches, hotfixes, service packs, and architecture. Adversaries may use the information from System Information Discovery during automated discovery to shape follow-on behaviors, including whether or not the adversary fully infects the target and/or attempts specific actions.\n\nTools such as Systeminfo can be used to gather detailed system information. A breakdown of system data can also be gathered through the macOS systemsetup command, but it requires administrative privileges.\n\nInfrastructure as a Service (IaaS) cloud providers such as AWS, GCP, and Azure allow access to instance and virtual machine information via APIs. Successful authenticated API calls can return data such as the operating system platform and status of a particular instance or the model view of a virtual machine.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1082 - System Information Discovery"
+			},
+			{
+				"description": "This playbook Remediates the Data Encrypted technique using intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team.\n \n***Disclaimer: This playbook does not simulate an attack using the specified technique, but follows the steps to remediation as defined by Palo Alto Networks Unit 42 team’s Actionable Threat Objects and Mitigations (ATOMs).\nTechniques Handled:\n- T1560.001: Archive Collected Data: Archive via Utility\n\nKill Chain phases:\n- Exfiltration\n\nMITRE ATT\u0026CK Description:\n\nAn adversary may compress or encrypt data that is collected prior to exfiltration using 3rd party utilities. Many utilities exist that can archive data, including 7-Zip[1], WinRAR[2], and WinZip[3]. Most utilities include functionality to encrypt and/or compress data.\n\nSome 3rd party utilities may be preinstalled, such as tar on Linux and macOS or zip on Windows systems.\n\nPossible playbook uses:\n- The playbook can be used independently to handle and remediate the specific technique.\n- The playbook can be used as a part of the “Courses of Action - Defense Evasion” playbook to remediate techniques based on the kill chain phase.\n- The playbook can be used as a part of the “MITRE ATT\u0026CK - Courses of Action” playbook, which can be triggered by different sources and accepts the technique MITRE ATT\u0026CK ID as an input.",
+				"name": "MITRE ATT\u0026CK CoA - T1560.001 - Archive via Utility"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.4",
+	"definitionId": "",
+	"dependencies": {
+		"AccessInvestigation": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.2.5",
+			"name": "Access Investigation"
+		},
+		"BPA": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.2.22",
+			"name": "Best Practice Assessment (BPA) by Palo Alto Networks"
+		},
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.5",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.13.8",
+			"name": "Common Scripts"
+		},
+		"CommonTypes": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "3.3.95",
+			"name": "Common Types"
+		},
+		"CortexXDR": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "6.0.10",
+			"name": "Cortex XDR by Palo Alto Networks"
+		},
+		"FiltersAndTransformers": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.2.47",
+			"name": "Filters And Transformers"
+		},
+		"Malware": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.4.9",
+			"name": "Malware Core"
+		},
+		"PAN-OS": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "2.1.16",
+			"name": "PAN-OS by Palo Alto Networks"
+		},
+		"Phishing": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "3.6.3",
+			"name": "Phishing"
+		},
+		"Ransomware": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "1.0.11",
+			"name": "Ransomware"
+		}
+	},
+	"deprecated": false,
+	"description": "Looking for actionable intelligence? This intelligence-driven Pack provides manual or automated remediation of MITRE ATT\u0026CK techniques.",
+	"disabledMonthly": false,
+	"downloads": 550,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.5.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "MITRECoA",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/PAN-OS/Panorama_image.png",
+			"name": "Palo Alto Networks PAN-OS"
+		},
+		{
+			"imagePath": "content/packs/CortexXDR/CortexXDR-IOC_image.png",
+			"name": "Cortex XDR - IOC"
+		},
+		{
+			"imagePath": "content/packs/CortexXDR/CortexXDR-XQLQueryEngine_image.png",
+			"name": "Cortex XDR - XQL Query Engine"
+		},
+		{
+			"imagePath": "content/packs/CortexXDR/CortexXDR-IR_image.png",
+			"name": "Palo Alto Networks Cortex XDR - Investigation and Response"
+		},
+		{
+			"imagePath": "content/packs/BPA/BPA_image.png",
+			"name": "Palo Alto Networks BPA"
+		}
+	],
+	"itemVersion": "1.0.4",
+	"keywords": [
+		"MITRE ATT\u0026CK",
+		"Courses of Action",
+		"Unit 42",
+		"Best Practices"
+	],
+	"legacy": true,
+	"name": "MITRE ATT\u0026CK - Courses of Action",
+	"packID": "MITRECoA",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "The process of ingesting quality threat intelligence, mapping the intelligence reports into MITRE ATT\u0026CK tactics and techniques, and then translating this information into reliable and usable remediation steps can be tedious and very time consuming. This MITRE ATT\u0026CK - Courses of Action Pack contains intelligence-driven Courses of Action (COA) defined by Palo Alto Networks Unit 42 team, that will enable you to handle MITRE ATT\u0026CK techniques and sub-techniques in an organized and automated manner. This will make sure your organization is not only blocking specific reported IOCs but also taking a more holistic approach to prevent future attacks.\n\nUsing this content Pack, you can automate this whole process and have all of the information gathered in one place to help you keep your organization protected.\nEach technique is mapped out-of-the-box into the specific Courses of Action that your organization needs in order to stay protected, using Palo Alto Networks products.\n\nWith this Pack, you can reduce the time your teams spend on consuming threat intelligence and translating the reports into action items, and on sustaining best practices policies for your security products. \n\n**What does this Pack do?**\n- Automatically maps MITRE ATT\u0026CK Techniques into Courses of Action playbooks.\n- Takes action to remediate the techniques throughout Palo Alto Networks security products, following the MITRE ATT\u0026CK kill chain.\n- Checks existing profiles against best practices and suggests manual or automated policy changes. \n- The playbooks in the Pack can be triggered manually, by a job, by an incident, or by any threat intelligence feed.\n- MITRE ATT\u0026CK techniques are the playbook inputs and therefore playbooks can be triggered by any 3-rd party tools mapping to this framework.  \n- When used with Unit 42 feed ingesting Actionable Threat Objects and Mitigations (ATOMs) - get notified as soon as there is a new threat actor report and take action immediately. \n\nFor more information, please refer to the [MITRE ATT\u0026CK - Courses of Action article](https://xsoar.pan.dev/docs/reference/packs/courses-of-action).  \n\n\n**MITRE ATT\u0026CK Dashboard**\n![MITRE_Dashboard](https://storage.googleapis.com/marketplace-dist/content/packs/MITRECoA/readme_images/MITRE_Dashboard.png)\n\n**Unit 42 STIX Report Indicators**\n![Maze_Ransomware](https://storage.googleapis.com/marketplace-dist/content/packs/MITRECoA/readme_images/Maze_Indicator.png)\n\n**MITRE ATT\u0026CK - Courses of Action Sample Playbook**\n![Courses_of_Action](https://storage.googleapis.com/marketplace-dist/content/packs/MITRECoA/readme_images/MITRE_ATT%26CK_CoA_-_T1027.png)\n",
+	"searchRank": 20,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.5.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Featured",
+		"Use Case"
+	],
+	"toServerVersion": "",
+	"updated": "2023-12-19T20:23:50Z",
+	"useCases": [
+		"Threat Intelligence Management"
+	],
+	"version": -1,
+	"versionInfo": "7209615",
+	"videos": []
+}
