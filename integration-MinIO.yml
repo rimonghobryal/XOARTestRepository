@@ -1,0 +1,657 @@
+category: Database
+commonfields:
+  id: MinIO
+  version: -1
+configuration:
+- display: Server Name or Address (e.g. 8.8.8.8)
+  name: server
+  required: true
+  type: 0
+- defaultvalue: "9000"
+  display: Port Number
+  name: port
+  required: true
+  type: 0
+- display: Access Key
+  name: access_key
+  required: true
+  type: 4
+- display: Access Secret
+  name: access_secret
+  required: true
+  type: 4
+- display: Connect over SSL
+  name: ssl
+  required: false
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.8
+    packID: DevSecOps
+    packName: DevSecOps
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: An Integration with MinIO Object Storage.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: Ayman Mahmoud
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  ## MinIO
+  MinIO's high-performance object storage suite is software defined and enables customers to build cloud-native data infrastructure for machine learning, analytics and application data workloads.
+
+  ### Create a new MinIO User
+  MinIO admin utility can be used to create a new user's access key and access secret, for more information.
+  https://docs.minio.io/docs/minio-admin-complete-guide.html#user
+
+  ### URL
+  The Base URL of MinIO API : http://minio-server:9000
+
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/min-io)
+display: MinIO (Community Contribution)
+image: data:image/png;base64,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
+name: MinIO
+script:
+  commands:
+  - arguments:
+    - description: Bucket Name.
+      name: name
+      required: true
+    description: Create a new bucket.
+    name: minio-make-bucket
+    outputs:
+    - contextPath: MinIO.Buckets.bucket
+      description: MinIO Bucket Name.
+      type: Unknown
+    - contextPath: MinIO.Buckets.status
+      description: MinIO Bucket Status.
+      type: Unknown
+  - arguments:
+    - description: Bucket Name.
+      name: name
+      required: true
+    description: Remove an existing bucket.
+    name: minio-remove-bucket
+    outputs:
+    - contextPath: MinIO.Buckets.bucket
+      description: MinIO Bucket Name.
+      type: Unknown
+    - contextPath: MinIO.Buckets.status
+      description: MinIO Bucket Status.
+      type: Unknown
+  - arguments: []
+    description: List All MinIO Buckets.
+    name: minio-list-buckets
+    outputs:
+    - contextPath: MinIO.Buckets
+      description: MinIO Buckets.
+      type: Unknown
+  - arguments:
+    - description: Name of the bucket.
+      name: bucket_name
+      required: true
+    - description: Object name starts with prefix.
+      name: prefix
+    - description: List objects after this key name.
+      name: start_after
+    - auto: PREDEFINED
+      description: MinIO specific flag to control to include user metadata.
+      name: include_user_meta
+      predefined:
+      - "True"
+      - "False"
+    description: Lists object information of a bucket.
+    name: minio-list-objects
+    outputs:
+    - contextPath: MinIO.Objects
+      description: MinIO Objects.
+      type: Unknown
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Object Name.
+      name: name
+      required: true
+    - description: Start byte position of object data.
+      name: offset
+    - description: Number of bytes of object data from offset.
+      name: length
+    - description: Any additional headers to be added with GET request.
+      name: request_headers
+    - description: Extra query parameters for advanced usage.
+      name: extra_query_params
+    description: Gets data from offset to length of an object.
+    name: minio-get-object
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Object Name.
+      name: name
+      required: true
+    - description: Extra query parameters for advanced usage.
+      name: extra_query_params
+    description: Get object information and metadata of an object.
+    name: minio-stat-object
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Object Name.
+      name: name
+      required: true
+    description: Remove an object.
+    name: minio-remove-object
+    outputs:
+    - contextPath: MinIO.Objects.name
+      description: Object Name.
+      type: Unknown
+    - contextPath: MinIO.Objects.status
+      description: Object Status.
+      type: Unknown
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: File Entry ID.
+      name: entry_id
+      required: true
+    - description: File Type.
+      name: content_type
+    - description: Any additional metadata to be uploaded along with your PUT request.
+      name: metadata
+    description: Uploads data from a file to an object in a bucket.
+    name: minio-fput-object
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Contains object data.
+      name: data
+      required: true
+    - description: Object name in the bucket.
+      name: name
+      required: true
+    - description: File Type.
+      name: content_type
+    - description: Any additional metadata to be uploaded along with your PUT request.
+      name: metadata
+    description: Uploads data from a stream to an object in a bucket.
+    name: minio-put-object
+  - arguments:
+    - description: Bucket Name Source.
+      name: bucket_name_src
+      required: true
+    - description: Object Name Source.
+      name: name_src
+      required: true
+    - description: Bucket Name Destination.
+      name: bucket_name_dst
+      required: true
+    - description: Object Name Destination.
+      name: name_dst
+      required: true
+    - description: Any additional metadata to be copied.
+      name: metadata
+    description: Create an object by server-side copying data from another object.
+    name: minio-copy-object
+    outputs:
+    - contextPath: MinIO.Objects.bucket
+      description: MinIO Destination Bucket Name.
+    - contextPath: MinIO.Objects.object
+      description: MinIO Destination Object Name.
+    - contextPath: MinIO.Objects.status
+      description: MinIO Object status.
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Object Name.
+      name: name
+      required: true
+    description: Get tags configuration of an object.
+    name: minio-get-tags
+    outputs:
+    - contextPath: MinIO.Objects.bucket
+      description: MinIO Bucket Name.
+    - contextPath: MinIO.Objects.object
+      description: MinIO Object Name.
+    - contextPath: MinIO.Objects.tags
+      description: MinIO Object Tags.
+  - arguments:
+    - description: Bucket Name.
+      name: bucket_name
+      required: true
+    - description: Object Name.
+      name: name
+      required: true
+    - description: Key for the tag.
+      name: tag_key
+      required: true
+    - description: Value for the tag.
+      name: tag_value
+      required: true
+    description: Set tags configuration to an object.
+    name: minio-set-tag
+    outputs:
+    - contextPath: MinIO.Objects.bucket
+      description: MinIO Bucket Name.
+    - contextPath: MinIO.Objects.object
+      description: MinIO Object Name.
+    - contextPath: MinIO.Objects.tags
+      description: MinIO Object Tags.
+  dockerimage: demisto/py3-tools:1.0.0.77497
+  runonce: false
+  script: |
+    register_module_line('MinIO', 'start', __line__())
+    ### pack version: 1.1.8
+
+    import urllib3
+    from minio import Minio
+    import io
+    from minio.commonconfig import REPLACE, CopySource
+    from minio.commonconfig import Tags
+
+
+    class Client(Minio):
+        def __init__(self, endpoint, access_key, secret_key, secure=False):
+            super().__init__(endpoint=endpoint, access_key=access_key, secret_key=secret_key, secure=secure)
+
+
+    def make_bucket_command(client, args):
+
+        response = []
+
+        name = str(args.get('name', ''))
+
+        client.make_bucket(bucket_name=name)
+
+        response.append({
+            'bucket': name,
+            'status': 'created'
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Buckets',
+            outputs_key_field='bucket',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def remove_bucket_command(client, args):
+
+        response = []
+        name = str(args.get('name', ''))
+
+        client.remove_bucket(bucket_name=name)
+        response.append({
+            'bucket': name,
+            'status': 'removed'
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Buckets',
+            outputs_key_field='bucket',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def list_buckets_command(client, args):
+        response = []
+        buckets = client.list_buckets()
+
+        for bucket in buckets:
+            response.append({
+                'bucket': bucket.name,
+                'creation_date': str(bucket.creation_date)
+            })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Buckets',
+            outputs_key_field='bucket',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def list_objects_command(client, args):
+        response = []
+
+        bucket_name = str(args.get('bucket_name'))
+        prefix = args.get('prefix')
+        start_after = args.get('start_after')
+        include_user_meta = args.get('include_user_meta', False)
+
+        objects = client.list_objects(bucket_name=bucket_name, prefix=prefix, start_after=start_after,
+                                      include_user_meta=include_user_meta)
+
+        for stored_object in objects:
+            response.append({
+                'bucket': bucket_name,
+                'object': stored_object.object_name,
+                'is_dir': stored_object.is_dir,
+                'size': stored_object.size,
+                'etag': stored_object.etag,
+                'last_modified': str(stored_object.last_modified)
+            })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field='bucket,object',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def get_object_command(client, args):
+        response = None
+
+        bucket_name = str(args.get('bucket_name'))
+        object_name = str(args.get('name'))
+        offset = int(args.get('offset', 0))
+        length = int(args.get('length', 0))
+        extra_query_params = args.get('extra_query_params', None)
+        request_headers = args.get('request_headers', None)
+        object_bytes = None
+        try:
+            response = client.get_object(
+                bucket_name=bucket_name,
+                object_name=object_name,
+                offset=offset,
+                length=length,
+                extra_query_params=extra_query_params,
+                request_headers=request_headers
+            )
+            object_bytes = response.read()
+        finally:
+            if response:
+                response.close()
+                response.release_conn()
+
+        return fileResult(filename=object_name, data=object_bytes)
+
+
+    def stat_object_command(client, args):
+
+        response = []
+        bucket_name = str(args.get('bucket_name'))
+        object_name = str(args.get('name'))
+        extra_query_params = args.get('extra_query_params', None)
+
+        object_stats = client.stat_object(bucket_name=bucket_name, object_name=object_name,
+                                          extra_query_params=extra_query_params)
+
+        response.append({
+            'bucket': bucket_name,
+            'object': object_name,
+            'content-type': object_stats.metadata.get('Content-Type'),
+            'etag': object_stats.metadata.get('ETag'),
+            'size': object_stats.size
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field='bucket,object',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def remove_object_command(client, args):
+
+        response = []
+        name = str(args.get('name', ''))
+        bucket_name = str(args.get('bucket_name', ''))
+
+        client.remove_object(object_name=name, bucket_name=bucket_name)
+        response.append({
+            'bucket': bucket_name,
+            'object': name,
+            'status': 'removed'
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field='bucket,object',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def fput_object_command(client, args):
+
+        response = []
+        bucket_name = str(args.get('bucket_name', ''))
+        entry_id = args.get('entry_id', '')
+        content_type = args.get('content_type', 'application/octet-stream')
+        metadata = args.get('metadata', None)
+
+        get_file_path_res = demisto.getFilePath(entry_id)
+        object_path = get_file_path_res["path"]
+        object_name = get_file_path_res["name"]
+
+        client.fput_object(object_name=object_name, bucket_name=bucket_name,
+                           file_path=object_path, content_type=content_type,
+                           metadata=metadata)
+
+        response.append({
+            'bucket': bucket_name,
+            'object': object_name,
+            'status': 'uploaded'
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field='bucket,object',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def put_object_command(client, args):
+
+        response = []
+        bucket_name = str(args.get('bucket_name', ''))
+        object_name = str(args.get('name'))
+        data_bytes = args.get('data').encode('utf-8')
+        content_type = args.get('content_type', 'application/octet-stream')
+        metadata = args.get('metadata', None)
+
+        data = io.BytesIO(data_bytes)
+
+        client.put_object(object_name=object_name, bucket_name=bucket_name,
+                          data=data, content_type=content_type,
+                          metadata=metadata, length=len(data_bytes))
+
+        response.append({
+            'bucket': bucket_name,
+            'object': object_name,
+            'status': 'uploaded'
+        })
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field='bucket,object',
+            outputs=response,
+            raw_response=response,
+        )
+
+        return command_results
+
+
+    def copy_object_command(client, args):
+
+        bucket_name_src = args.get('bucket_name_src', '')
+        object_name_src = args.get('name_src')
+        bucket_name_dst = args.get('bucket_name_dst', '')
+        object_name_dst = args.get('name_dst')
+
+        metadata = args.get('metadata', None)
+
+        client.copy_object(
+            bucket_name_dst,
+            object_name_dst,
+            CopySource(bucket_name_src, object_name_src),
+            metadata=metadata,
+            metadata_directive=REPLACE
+        )
+
+        res = {
+            'bucket': bucket_name_dst,
+            'object': object_name_dst,
+            'status': 'copied'
+        }
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field=['bucket', 'object'],
+            outputs=res,
+            raw_response=res,
+        )
+
+        return command_results
+
+
+    def get_tags_command(client, args):
+
+        bucket_name = args.get('bucket_name', '')
+        object_name = args.get('name')
+        tag = client.get_object_tags(bucket_name=bucket_name, object_name=object_name)
+        res = {
+            'bucket': bucket_name,
+            'object': object_name,
+            'status': 'completed'
+        }
+        if tag:
+            res['tags'] = tag
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field=['bucket', 'object'],
+            outputs=res,
+            raw_response=res,
+        )
+
+        return command_results
+
+
+    def set_tag_command(client, args):
+
+        bucket_name = args.get('bucket_name', '')
+        object_name = args.get('name')
+        tag_key = args.get('tag_key')
+        tag_value = args.get('tag_value')
+
+        existing_tag = client.get_object_tags(bucket_name=bucket_name, object_name=object_name)
+
+        tags = Tags.new_object_tags()
+        tags[tag_key] = tag_value
+        if existing_tag:
+            tags.update(existing_tag)
+        client.set_object_tags(bucket_name, object_name, tags)
+
+        res = {
+            'bucket': bucket_name,
+            'object': object_name,
+            'tags': tags,
+            'status': 'completed'
+        }
+
+        command_results = CommandResults(
+            outputs_prefix='MinIO.Objects',
+            outputs_key_field=['bucket', 'object'],
+            outputs=res,
+            raw_response=res,
+        )
+
+        return command_results
+
+
+    def test_module(client):
+        # Test functions here
+        client.list_buckets()
+        demisto.results('ok')
+
+
+    def main():
+
+        params = demisto.params()
+        args = demisto.args()
+
+        server = params.get('server')
+        port = params.get('port', '9000')
+        access_key = params.get('access_key')
+        access_secret = params.get('access_secret')
+        secure_connection = params.get('ssl', False)
+
+        endpoint = server + ":" + port
+
+        command = demisto.command()
+
+        LOG(f'Command being called is {command}')
+
+        try:
+            urllib3.disable_warnings()
+            client = Client(
+                endpoint=endpoint,
+                access_key=access_key,
+                secret_key=access_secret,
+                secure=secure_connection
+            )
+            commands = {
+                'minio-make-bucket': make_bucket_command,
+                'minio-remove-bucket': remove_bucket_command,
+                'minio-list-buckets': list_buckets_command,
+                'minio-list-objects': list_objects_command,
+                'minio-get-object': get_object_command,
+                'minio-stat-object': stat_object_command,
+                'minio-remove-object': remove_object_command,
+                'minio-fput-object': fput_object_command,
+                'minio-put-object': put_object_command,
+                'minio-copy-object': copy_object_command,
+                'minio-get-tags': get_tags_command,
+                'minio-set-tag': set_tag_command
+            }
+
+            if command == 'test-module':
+                test_module(client)
+
+            else:
+                return_results(commands[command](client, args))
+
+        except Exception as e:
+            return_error(str(e))
+
+
+    if __name__ in ['__main__', 'builtin', 'builtins']:
+        main()
+
+    register_module_line('MinIO', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
