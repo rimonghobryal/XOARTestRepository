@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: value:[0-9a-f]{64}
+    query: value:\b[0-9a-f]{64}\b
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
