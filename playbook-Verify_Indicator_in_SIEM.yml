@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: ' verdict:Benign'
+    query: expirationStatus:active
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -44,7 +44,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "2"
+      - "3"
     note: false
     quietmode: 0
     separatecontext: false
@@ -139,7 +139,7 @@ tasks:
       populateFields:
         simple: value
       query:
-        simple: type:IP
+        simple: ${playbookQuery}
     separatecontext: false
     skipunavailable: false
     task:
@@ -147,13 +147,13 @@ tasks:
       description: Gets a list of indicator objects and the associated indicator outputs
         that match the specified query and filters. The results are returned in a
         structured data file.
-      id: a447c27a-7cf6-4ce6-8ceb-d71e65ce0882
+      id: 271ffb9b-0a67-406d-87c9-232ce5b39722
       iscommand: false
       name: Untitled Task
-      script: GetIndicatorsByQuery
+      script: 4792970f-ae76-4c75-80b2-24c3bc90dca4
       type: regular
       version: -1
-    taskid: a447c27a-7cf6-4ce6-8ceb-d71e65ce0882
+    taskid: 271ffb9b-0a67-406d-87c9-232ce5b39722
     timertriggers: []
     type: regular
     view: |-
