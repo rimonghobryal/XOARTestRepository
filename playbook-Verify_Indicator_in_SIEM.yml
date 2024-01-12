@@ -1,0 +1,77 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 8dfe12e5-d092-45ca-8eb5-641e415b4dfb
+inputs:
+- description: ""
+  key: ""
+  playbookInputQuery:
+    daterange:
+      fromdate: "0001-01-01T00:00:00Z"
+      fromdatelicenseval: "0001-01-01T00:00:00Z"
+      period:
+        by: ""
+        byfrom: ""
+        byto: ""
+        field: ""
+        fromvalue: null
+        tovalue: null
+      todate: "0001-01-01T00:00:00Z"
+    query: sourceInstances:MalwareBazaar Feed_instance_1
+    queryEntity: indicators
+    results: null
+    runFromLastJobTime: true
+  required: false
+  value: {}
+name: Verify Indicator in SIEM
+outputs: []
+quiet: true
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 660d8a63-afb5-4627-8534-a87541b44ce1
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 660d8a63-afb5-4627-8534-a87541b44ce1
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 100
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 65,
+        "width": 380,
+        "x": 470,
+        "y": 100
+      }
+    }
+  }
