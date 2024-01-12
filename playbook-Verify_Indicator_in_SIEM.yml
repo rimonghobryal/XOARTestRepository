@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: ' '
+    query: ' *'
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
