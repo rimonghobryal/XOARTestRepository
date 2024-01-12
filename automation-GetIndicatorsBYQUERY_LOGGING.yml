@@ -40,7 +40,7 @@ dockerimage: demisto/python3:3.10.12.66339
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
-name: GetIndicatorsByQuery_copy
+name: GetIndicatorsBYQUERY_LOGGING
 pswd: ""
 runas: DBotWeakRole
 runonce: false
