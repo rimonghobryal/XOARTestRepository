@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: SELECT * FROM sourceInstances:MalwareBazaar Feed_instance_1
+    query: SELECT * FROM indicators WHERE sourceInstances=MalwareBazaar Feed_instance_1
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -81,13 +81,13 @@ tasks:
     task:
       brand: ""
       description: Prints text to war room (Markdown supported)
-      id: d21d2069-e71f-43de-818f-597a74097263
+      id: d493872d-46ab-469e-8e67-cbf07c317a74
       iscommand: false
       name: Untitled Task
       script: Print
       type: regular
       version: -1
-    taskid: d21d2069-e71f-43de-818f-597a74097263
+    taskid: d493872d-46ab-469e-8e67-cbf07c317a74
     timertriggers: []
     type: regular
     view: |-
