@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: ' *'
+    query: ' verdict:Benign'
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -44,7 +44,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "1"
+      - "3"
     note: false
     quietmode: 0
     separatecontext: false
@@ -89,8 +89,78 @@ tasks:
     view: |-
       {
         "position": {
+          "x": 0,
+          "y": 460
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${playbookQuery}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 48b2db81-46cb-40c5-88ec-2903ff95a6e5
+      iscommand: false
+      name: Untitled Task
+      script: Print
+      type: regular
+      version: -1
+    taskid: 48b2db81-46cb-40c5-88ec-2903ff95a6e5
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 0,
+          "y": 310
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      dontPopulateFields:
+        simple: id,score,investigationIDs
+      populateFields:
+        simple: value
+      query:
+        simple: type:IP
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Gets a list of indicator objects and the associated indicator outputs
+        that match the specified query and filters. The results are returned in a
+        structured data file.
+      id: 6b732d83-25a3-4c8e-86d1-0f1fb65a47e9
+      iscommand: false
+      name: Untitled Task
+      script: GetIndicatorsByQuery
+      type: regular
+      version: -1
+    taskid: 6b732d83-25a3-4c8e-86d1-0f1fb65a47e9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
           "x": 470,
-          "y": 300
+          "y": 310
         }
       }
 version: -1
@@ -99,9 +169,9 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 265,
-        "width": 380,
-        "x": 470,
+        "height": 425,
+        "width": 850,
+        "x": 0,
         "y": 130
       }
     }
