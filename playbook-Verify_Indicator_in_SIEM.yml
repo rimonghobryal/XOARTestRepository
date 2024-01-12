@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: type:IP expirationStatus:active
+    query: type:IP value:'10.8.8.107'
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -62,7 +62,7 @@ tasks:
       {
         "position": {
           "x": 470,
-          "y": 100
+          "y": 130
         }
       }
   "1":
@@ -73,21 +73,17 @@ tasks:
     isoversize: false
     note: false
     quietmode: 0
-    scriptarguments:
-      value:
-        simple: ${playbookQuery}
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      description: Prints text to war room (Markdown supported)
-      id: d493872d-46ab-469e-8e67-cbf07c317a74
+      id: 29aac4f3-9680-4681-8db0-34f684fad83f
       iscommand: false
       name: Untitled Task
-      script: Print
+      script: 5a866fc7-b31e-443d-8524-a7d15407081c
       type: regular
       version: -1
-    taskid: d493872d-46ab-469e-8e67-cbf07c317a74
+    taskid: 29aac4f3-9680-4681-8db0-34f684fad83f
     timertriggers: []
     type: regular
     view: |-
@@ -103,10 +99,10 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 295,
+        "height": 265,
         "width": 380,
         "x": 470,
-        "y": 100
+        "y": 130
       }
     }
   }
