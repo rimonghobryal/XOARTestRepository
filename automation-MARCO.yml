@@ -28,10 +28,10 @@ commonfields:
 contentitemexportablefields:
   contentitemfields:
     definitionid: ""
-    fromServerVersion: 5.5.0
-    itemVersion: 1.33.18
+    fromServerVersion: ""
+    itemVersion: ""
     packID: ""
-    packName: Base
+    packName: ""
     prevname: ""
     propagationLabels:
     - all
@@ -40,7 +40,7 @@ dockerimage: demisto/python3:3.10.12.66339
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
-name: GetIndicatorsBYQUERY_LOGGING
+name: MARCO
 pswd: ""
 runas: DBotWeakRole
 runonce: false
@@ -137,7 +137,10 @@ script: |
       Finds indicators using while loop with demisto.searchIndicators, and returns result and last page
       """
       iocs: List[dict] = []
+      demisto.info("AAAAAAAAAAAAAA")
+      demisto.info(indicator_query)
       search_indicators = IndicatorsSearcher(query=indicator_query, limit=limit, size=PAGE_SIZE)
+      demisto.info("AAAAAAAAAAAAAA")
       for ioc_res in search_indicators:
           fetched_iocs = ioc_res.get('iocs') or []
           iocs.extend(fetched_iocs)
@@ -171,7 +174,6 @@ script: |
 
   register_module_line('GetIndicatorsByQuery', 'end', __line__())
 scripttarget: 0
-sourcescripid: GetIndicatorsByQuery
 subtype: python3
 tags:
 - ml
