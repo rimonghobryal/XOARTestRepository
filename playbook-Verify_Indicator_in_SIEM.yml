@@ -44,7 +44,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "3"
+      - "2"
     note: false
     quietmode: 0
     separatecontext: false
@@ -109,13 +109,13 @@ tasks:
     task:
       brand: ""
       description: Prints text to war room (Markdown supported)
-      id: 48b2db81-46cb-40c5-88ec-2903ff95a6e5
+      id: eb704be2-ec05-4d86-8491-a70946759630
       iscommand: false
       name: Untitled Task
       script: Print
       type: regular
       version: -1
-    taskid: 48b2db81-46cb-40c5-88ec-2903ff95a6e5
+    taskid: eb704be2-ec05-4d86-8491-a70946759630
     timertriggers: []
     type: regular
     view: |-
@@ -147,13 +147,13 @@ tasks:
       description: Gets a list of indicator objects and the associated indicator outputs
         that match the specified query and filters. The results are returned in a
         structured data file.
-      id: 6b732d83-25a3-4c8e-86d1-0f1fb65a47e9
+      id: a447c27a-7cf6-4ce6-8ceb-d71e65ce0882
       iscommand: false
       name: Untitled Task
       script: GetIndicatorsByQuery
       type: regular
       version: -1
-    taskid: 6b732d83-25a3-4c8e-86d1-0f1fb65a47e9
+    taskid: a447c27a-7cf6-4ce6-8ceb-d71e65ce0882
     timertriggers: []
     type: regular
     view: |-
