@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: sourceInstances:MalwareBazaar Feed_instance_1
+    query: SELECT * FROM sourceInstances:MalwareBazaar Feed_instance_1
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -42,6 +42,9 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
     note: false
     quietmode: 0
     separatecontext: false
@@ -62,13 +65,45 @@ tasks:
           "y": 100
         }
       }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${playbookQuery}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: d21d2069-e71f-43de-818f-597a74097263
+      iscommand: false
+      name: Untitled Task
+      script: Print
+      type: regular
+      version: -1
+    taskid: d21d2069-e71f-43de-818f-597a74097263
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 470,
+          "y": 300
+        }
+      }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 65,
+        "height": 295,
         "width": 380,
         "x": 470,
         "y": 100
