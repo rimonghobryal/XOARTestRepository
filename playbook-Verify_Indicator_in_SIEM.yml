@@ -44,7 +44,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "4"
+      - "3"
     note: false
     quietmode: 0
     separatecontext: false
@@ -131,6 +131,9 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
     note: false
     quietmode: 0
     scriptarguments:
@@ -155,8 +158,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 470,
-          "y": 400
+          "x": 480,
+          "y": 350
         }
       }
   "4":
@@ -170,30 +173,31 @@ tasks:
     scriptarguments:
       concentratorIP:
         simple: 172.16.201.204
+      lastHours:
+        simple: "3"
       lastMinutes:
-        simple: "30"
+        simple: "0"
       query:
-        simple: |
-          (device.type = 'trendmicrods') && time="2024-01-15 10:04:00"-"2024-01-15 10:33:59"
+        simple: select * where device.type='trendmicrods'
     separatecontext: false
     skipunavailable: false
     task:
       brand: RSA NetWitness Packets and Logs
       description: Performs a query against the meta database
-      id: eb43ba78-858b-4580-87ac-a1cca870c3c3
+      id: 6277ee0a-e70c-4f2d-806b-63de988bd763
       iscommand: true
       name: Untitled Task
       script: RSA NetWitness Packets and Logs|||netwitness-query
       type: regular
       version: -1
-    taskid: eb43ba78-858b-4580-87ac-a1cca870c3c3
+    taskid: 6277ee0a-e70c-4f2d-806b-63de988bd763
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 650
+          "x": 490,
+          "y": 640
         }
       }
 version: -1
@@ -202,8 +206,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 615,
-        "width": 860,
+        "height": 605,
+        "width": 870,
         "x": 0,
         "y": 130
       }
