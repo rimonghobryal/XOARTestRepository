@@ -12,7 +12,7 @@ contentitemexportablefields:
 id: 582311c1-fe1c-4836-86e4-308665fd9406
 inputs:
 - description: ""
-  key: chiave/valore
+  key: chiave_valore
   playbookInputQuery: null
   required: false
   value: {}
