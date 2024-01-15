@@ -168,6 +168,9 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
     note: false
     quietmode: 0
     scriptarguments:
@@ -182,15 +185,15 @@ tasks:
     separatecontext: false
     skipunavailable: false
     task:
-      brand: RSA NetWitness Packets and Logs
+      brand: RSA NetWitness Packets and Logs_copy
       description: Performs a query against the meta database
-      id: 6277ee0a-e70c-4f2d-806b-63de988bd763
+      id: 07f5b4fd-f985-4e44-80d3-0a8e331aec61
       iscommand: true
-      name: Untitled Task
-      script: RSA NetWitness Packets and Logs|||netwitness-query
+      name: NW query
+      script: RSA NetWitness Packets and Logs_copy|||netwitness-query
       type: regular
       version: -1
-    taskid: 6277ee0a-e70c-4f2d-806b-63de988bd763
+    taskid: 07f5b4fd-f985-4e44-80d3-0a8e331aec61
     timertriggers: []
     type: regular
     view: |-
@@ -200,13 +203,45 @@ tasks:
           "y": 640
         }
       }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: fine
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 49360a23-b47e-4a02-8722-8838afe2e90d
+      iscommand: false
+      name: Print finale
+      script: Print
+      type: regular
+      version: -1
+    taskid: 49360a23-b47e-4a02-8722-8838afe2e90d
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 490,
+          "y": 820
+        }
+      }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 605,
+        "height": 785,
         "width": 870,
         "x": 0,
         "y": 130
