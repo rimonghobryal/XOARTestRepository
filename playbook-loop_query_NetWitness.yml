@@ -1,0 +1,99 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 582311c1-fe1c-4836-86e4-308665fd9406
+inputs:
+- description: ""
+  key: chiave/valore
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: loop_query_NetWitness
+outputs: []
+quiet: true
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: ae9855e9-4401-4919-8f3b-58284a74f65e
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: ae9855e9-4401-4919-8f3b-58284a74f65e
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      concentratorIP:
+        simple: 172.16.201.204
+      query:
+        simple: select * from chiave = valore
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs_copy
+      description: Performs a query against the meta database
+      id: 0a785192-312b-4da6-8c03-55708d1e1dbd
+      iscommand: true
+      name: Untitled Task
+      script: RSA NetWitness Packets and Logs_copy|||netwitness-query
+      type: regular
+      version: -1
+    taskid: 0a785192-312b-4da6-8c03-55708d1e1dbd
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 250
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 295,
+        "width": 380,
+        "x": 450,
+        "y": 50
+      }
+    }
+  }
