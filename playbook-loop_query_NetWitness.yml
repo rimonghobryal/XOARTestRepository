@@ -12,7 +12,12 @@ contentitemexportablefields:
 id: 582311c1-fe1c-4836-86e4-308665fd9406
 inputs:
 - description: ""
-  key: chiave_valore
+  key: chiave
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: ""
+  key: valore
   playbookInputQuery: null
   required: false
   value: {}
@@ -29,7 +34,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "1"
+      - "2"
     note: false
     quietmode: 0
     separatecontext: false
@@ -68,20 +73,52 @@ tasks:
     task:
       brand: RSA NetWitness Packets and Logs_copy
       description: Performs a query against the meta database
-      id: 0a785192-312b-4da6-8c03-55708d1e1dbd
+      id: fcbc422f-6978-4e92-82ed-c02de95fdca4
       iscommand: true
-      name: Untitled Task
+      name: query
       script: RSA NetWitness Packets and Logs_copy|||netwitness-query
       type: regular
       version: -1
-    taskid: 0a785192-312b-4da6-8c03-55708d1e1dbd
+    taskid: fcbc422f-6978-4e92-82ed-c02de95fdca4
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 250
+          "x": 20,
+          "y": 240
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${inputs.chiave_valore}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 455b5136-348e-48c6-8a09-75851d1b2ff9
+      iscommand: false
+      name: printa
+      script: Print
+      type: regular
+      version: -1
+    taskid: 455b5136-348e-48c6-8a09-75851d1b2ff9
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 460,
+          "y": 220
         }
       }
 version: -1
@@ -90,9 +127,9 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 295,
-        "width": 380,
-        "x": 450,
+        "height": 285,
+        "width": 820,
+        "x": 20,
         "y": 50
       }
     }
