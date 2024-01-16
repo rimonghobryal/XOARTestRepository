@@ -22,7 +22,8 @@ inputs:
   required: false
   value: {}
 name: loop_query_NetWitness
-outputs: []
+outputs:
+- contextPath: NetWitness.Events.isEmpty
 starttaskid: "0"
 tasks:
   "0":
