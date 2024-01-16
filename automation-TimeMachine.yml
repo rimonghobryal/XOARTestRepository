@@ -59,7 +59,7 @@ script: |2-
                   #remote_command = 'date --date yesterday'
                   #stdin, stdout, stderr = ssh.exec_command(remote_command)
                   #demisto.info(stdout)
-                  remote_command = "date -s '10 DEC 2024 15:00:00'"
+                  remote_command = "date -s '10 JAN 2024 15:00:00'"
                   stdin, stdout, stderr = ssh.exec_command(remote_command)
                   demisto.info("giorno settato")
                   time.sleep(10)
