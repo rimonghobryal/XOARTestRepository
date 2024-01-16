@@ -25,7 +25,7 @@ inputs:
         fromvalue: null
         tovalue: null
       todate: "0001-01-01T00:00:00Z"
-    query: expirationStatus:active
+    query: expirationStatus:active and tags:test_playbook
     queryEntity: indicators
     results: null
     runFromLastJobTime: true
@@ -133,7 +133,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "4"
+      - "6"
     note: false
     quietmode: 0
     scriptarguments:
@@ -146,13 +146,13 @@ tasks:
       description: Gets a list of indicator objects and the associated indicator outputs
         that match the specified query and filters. The results are returned in a
         structured data file.
-      id: 0e34a144-3849-4dce-8755-616d178ecde3
+      id: 30ec6896-0899-4619-841a-e37891f61282
       iscommand: false
       name: Extract Value from Indicators
       script: 4792970f-ae76-4c75-80b2-24c3bc90dca4
       type: regular
       version: -1
-    taskid: 0e34a144-3849-4dce-8755-616d178ecde3
+    taskid: 30ec6896-0899-4619-841a-e37891f61282
     timertriggers: []
     type: regular
     view: |-
@@ -181,26 +181,26 @@ tasks:
       lastMinutes:
         simple: "0"
       query:
-        simple: select * where device.type='trendmicrods'
+        simple: select * where ${MARCO.key} = ${MARCO.value}
     separatecontext: false
     skipunavailable: false
     task:
       brand: RSA NetWitness Packets and Logs_copy
       description: Performs a query against the meta database
-      id: 07f5b4fd-f985-4e44-80d3-0a8e331aec61
+      id: e0432df3-5c89-43e4-858f-2f1524c6b622
       iscommand: true
       name: NW query
       script: RSA NetWitness Packets and Logs_copy|||netwitness-query
       type: regular
       version: -1
-    taskid: 07f5b4fd-f985-4e44-80d3-0a8e331aec61
+    taskid: e0432df3-5c89-43e4-858f-2f1524c6b622
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 490,
-          "y": 640
+          "x": 70,
+          "y": 670
         }
       }
   "5":
@@ -231,8 +231,47 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 490,
-          "y": 820
+          "x": 70,
+          "y": 840
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      forEach: true
+      iscommand: false
+      max: 100
+      wait: 1
+    note: false
+    quietmode: 0
+    scriptarguments:
+      chiave:
+        simple: ${MARCO.key}
+      valore:
+        simple: ${MARCO.value}
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      id: fabc48a4-265d-4241-896e-89c85bef80ea
+      iscommand: false
+      name: loop_query_NetWitness
+      playbookId: 582311c1-fe1c-4836-86e4-308665fd9406
+      type: playbook
+      version: -1
+    taskid: fabc48a4-265d-4241-896e-89c85bef80ea
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 480,
+          "y": 540
         }
       }
 version: -1
@@ -241,8 +280,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 785,
-        "width": 870,
+        "height": 805,
+        "width": 860,
         "x": 0,
         "y": 130
       }
