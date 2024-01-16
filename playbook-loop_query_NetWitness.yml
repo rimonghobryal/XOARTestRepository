@@ -23,7 +23,6 @@ inputs:
   value: {}
 name: loop_query_NetWitness
 outputs: []
-quiet: true
 starttaskid: "0"
 tasks:
   "0":
@@ -34,7 +33,7 @@ tasks:
     isoversize: false
     nexttasks:
       '#none#':
-      - "2"
+      - "3"
     note: false
     quietmode: 0
     separatecontext: false
@@ -51,8 +50,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 450,
-          "y": 50
+          "x": 695,
+          "y": 65
         }
       }
   "1":
@@ -66,32 +65,115 @@ tasks:
     scriptarguments:
       concentratorIP:
         simple: 172.16.201.204
+      lastHours:
+        simple: "2"
+      lastMinutes:
+        simple: "5"
       query:
-        simple: select * from chiave = valore
+        simple: select * where  ${inputs.chiave} = ${inputs.valore}
     separatecontext: false
     skipunavailable: false
     task:
       brand: RSA NetWitness Packets and Logs_copy
       description: Performs a query against the meta database
-      id: fcbc422f-6978-4e92-82ed-c02de95fdca4
+      id: 5adcc340-3753-47c7-88c7-cfbd9c3213a8
       iscommand: true
       name: query
       script: RSA NetWitness Packets and Logs_copy|||netwitness-query
       type: regular
       version: -1
-    taskid: fcbc422f-6978-4e92-82ed-c02de95fdca4
+    taskid: 5adcc340-3753-47c7-88c7-cfbd9c3213a8
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 20,
-          "y": 240
+          "x": 1125,
+          "y": 225
         }
       }
-  "2":
+  "3":
     continueonerrortype: ""
-    id: "2"
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      concentratorIP:
+        simple: 172.16.201.204
+      lastHours:
+        simple: "2"
+      lastMinutes:
+        simple: "5"
+      query:
+        simple: select * where ${inputs.chiave} = ${inputs.valore}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs_copy
+      description: Performs a query against the meta database
+      id: 42e0e519-7004-41ab-8fa4-1681728f723e
+      iscommand: true
+      name: query
+      script: RSA NetWitness Packets and Logs_copy|||netwitness-query
+      type: regular
+      version: -1
+    taskid: 42e0e519-7004-41ab-8fa4-1681728f723e
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 225
+        }
+      }
+  "4":
+    conditions:
+    - condition:
+      - - left:
+            value:
+              simple: ${NetWitness.Events.isEmpty}
+          operator: isFalse
+      label: "yes"
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "6"
+      - "11"
+      "yes":
+      - "5"
+      - "10"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 28efa4b0-258c-46de-81c0-fd8634ffc915
+      iscommand: false
+      name: prova
+      type: condition
+      version: -1
+    taskid: 28efa4b0-258c-46de-81c0-fd8634ffc915
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 695,
+          "y": 400
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
@@ -99,26 +181,203 @@ tasks:
     quietmode: 0
     scriptarguments:
       value:
-        simple: ${inputs.chiave_valore}
+        simple: Query andata a vuoto
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
       description: Prints text to war room (Markdown supported)
-      id: 455b5136-348e-48c6-8a09-75851d1b2ff9
+      id: 6d071b84-62de-4d4d-85a1-103a55af7a68
       iscommand: false
       name: printa
       script: Print
       type: regular
       version: -1
-    taskid: 455b5136-348e-48c6-8a09-75851d1b2ff9
+    taskid: 6d071b84-62de-4d4d-85a1-103a55af7a68
     timertriggers: []
     type: regular
     view: |-
       {
         "position": {
-          "x": 460,
-          "y": 220
+          "x": 480,
+          "y": 575
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: trovato qualcosa
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: a2160f60-dfa9-4165-81a4-5d3c398cae56
+      iscommand: false
+      name: Printa
+      script: Print
+      type: regular
+      version: -1
+    taskid: a2160f60-dfa9-4165-81a4-5d3c398cae56
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 575
+        }
+      }
+  "7":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: inputs.valore
+          operator: isEqualString
+          right:
+            value:
+              simple: 8.8.8.0
+      label: "yes"
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "1"
+      "yes":
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7a871aba-43d9-40e2-88f8-eb23b090356e
+      iscommand: false
+      name: Untitled Task
+      type: condition
+      version: -1
+    taskid: 7a871aba-43d9-40e2-88f8-eb23b090356e
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 50
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      concentratorIP:
+        simple: 172.16.201.204
+      lastHours:
+        simple: "2"
+      lastMinutes:
+        simple: "5"
+      query:
+        simple: select * where  ${inputs.chiave} = 1.2.3.4
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: RSA NetWitness Packets and Logs_copy
+      description: Performs a query against the meta database
+      id: dc9cfab6-9586-4a56-864d-b9748b025d24
+      iscommand: true
+      name: query
+      script: RSA NetWitness Packets and Logs_copy|||netwitness-query
+      type: regular
+      version: -1
+    taskid: dc9cfab6-9586-4a56-864d-b9748b025d24
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1555,
+          "y": 225
+        }
+      }
+  "10":
+    continueonerrortype: ""
+    id: "10"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${NetWitness.Events.isEmpty.length}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: 7e955cdd-d8da-4746-88e2-c258db26c076
+      iscommand: false
+      name: Printa empty
+      script: Print
+      type: regular
+      version: -1
+    taskid: 7e955cdd-d8da-4746-88e2-c258db26c076
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 910,
+          "y": 575
+        }
+      }
+  "11":
+    continueonerrortype: ""
+    id: "11"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${NetWitness.Events.isEmpty.length}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Prints text to war room (Markdown supported)
+      id: d00d816b-e98b-4a51-887a-6ef14de072d8
+      iscommand: false
+      name: Printa empty
+      script: Print
+      type: regular
+      version: -1
+    taskid: d00d816b-e98b-4a51-887a-6ef14de072d8
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1340,
+          "y": 575
         }
       }
 version: -1
@@ -127,9 +386,9 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 285,
-        "width": 820,
-        "x": 20,
+        "height": 620,
+        "width": 1885,
+        "x": 50,
         "y": 50
       }
     }
