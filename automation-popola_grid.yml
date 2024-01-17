@@ -1,0 +1,74 @@
+commonfields:
+  id: de94d27e-869d-4e47-803a-abbab1190720
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: popola_grid
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          risultato={}
+          args=demisto.context()
+          data=args.get("info_grafico")
+          for x in data:
+              for y in x:
+                  demisto.info(str(y))
+          """
+
+          gridDict = {
+              "column1": "This is column 5",
+              "column2": "This is column 6"
+          }
+          gridRows = json.dumps({ "gridfield": gridDict })
+          results  = demisto.executeCommand("setIncident", {
+                      'customFields': gridRows
+          })
+          """
+      except Exception as ex:
+          demisto.error(traceback.format_exc())
+          return_error("Failed updating grid field: " +
+              str(ex)
+          )
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
