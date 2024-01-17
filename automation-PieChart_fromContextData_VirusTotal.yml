@@ -1,0 +1,152 @@
+args:
+- name: Data
+commonfields:
+  id: a33aa0b5-ab22-47f8-84f1-968fc5a36d9b
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: PieChart_fromContextData_VirusTotal
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  import collections
+  import random
+  from typing import Counter
+
+  """
+  def parse_data(playbook_names):
+      playbooks_data = []
+
+      if playbook_names:
+          playbooks_collections: Counter = collections.Counter(playbook_names)
+          top_playbooks = playbooks_collections.most_common(10)
+          playbooks_number = len(top_playbooks)
+          playbook_number = 0
+
+          while playbook_number < playbooks_number:
+              for topPlaybook in top_playbooks:
+                  random_number = random.randint(0, 16777215)
+                  hex_number = hex(random_number)  # convert to hexadecimal
+                  color = f'#{hex_number[2:].zfill(6)}'  # remove 0x and prepend '#'
+
+                  playbook_widget_data = {
+                      "data": [
+                          topPlaybook[1]
+                      ],
+                      "groups": None,
+                      "name": str(topPlaybook[0]),
+                      "label": str(topPlaybook[0]),
+                      "color": color
+                  }
+
+                  playbooks_data.append(playbook_widget_data)
+                  playbook_number += 1
+
+          return {
+              "Type": 17,
+              "ContentsFormat": "bar",
+              "Contents": {
+                  "stats":
+                      playbooks_data,
+                  "params": {
+                      "layout": "horizontal"
+                  }
+              }
+          }
+
+
+          DA QUI
+
+
+
+          """
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      try:
+          args = demisto.args()
+          context = demisto.context()
+          virustotal = context.get('VirusTotal')
+          #VirusTotal.File.attributes.last_analysis_stats.confirmed-timeout
+          file = virustotal.get('File')
+          attributes = file.get('attributes')
+          data = attributes.get('last_analysis_stats')
+          #data = args.get('Data','')
+          #demisto.info(data_str)
+          #data = json.loads(data_str)
+          playbooks_data = []
+          for x in data.keys():
+              random_number = random.randint(0, 16777215)
+              hex_number = hex(random_number)  # convert to hexadecimal
+              color = f'#{hex_number[2:].zfill(6)}'  # remove 0x and prepend '#'
+
+              playbook_widget_data = {
+                  "data": [
+                      data[x]
+                  ],
+                  "groups": None,
+                  "name": str(x),
+                  "label": str(x),
+                  "color": color
+              }
+              if(str(x) == "malicious"):
+                  playbook_widget_data['color'] = "red"
+              elif(str(x) == "suspicious"):
+                  playbook_widget_data['color'] = "yellow"
+              elif(str(x) == "harmless"):
+                  playbook_widget_data['color'] = "white"
+              elif(str(x) == "undetected"):
+                  playbook_widget_data['color'] = "orange"
+              playbooks_data.append(playbook_widget_data)
+          data_out = {
+              "Type": 17,
+              "ContentsFormat": "pie",
+              "Contents": {
+                  "stats": playbooks_data,
+                  "params": {
+                     #"layout": "horizontal"
+                  }
+              }
+          }
+          return_results(data_out)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags:
+- dynamic-section
+type: python
