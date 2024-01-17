@@ -1,0 +1,149 @@
+args:
+- name: getMalwareBazar_automation
+commonfields:
+  id: 9ebdab1b-bc20-4ad0-82a8-08b3c8d4b017
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: elaboraListaDiDizionar
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+  import json
+
+
+  ''' MAIN FUNCTION '''
+
+
+  def main():
+      demisto.info("0000")
+      try:
+          demisto.info("111")
+          args=demisto.context()
+          data=args.get("getMalwareBazar_automation")
+          score=[]
+          sign=[]
+          risultato={}
+          test={}
+          for x in data:
+              tupla=x.split(":")
+
+              #risultato.append((int(tupla[0]),tupla[1]))
+              score.append(int(tupla[0]))
+              sign.append(tupla[1])
+              #chiave=int(tupla[0])
+              #valore=tupla[1]
+              #if(chiave in test.keys()):
+              #test[chiave]=valore
+          ##demisto.info(str(test))
+
+          ##output = {"dati": risultato}
+          #output = {"level": lev,"signature":sign}
+          #output = {"chiave": test}
+          ##fine = CommandResults(outputs_prefix="dati_per_grafico", outputs=output)
+          ##return_results(fine)
+
+          gridDict = {
+              "column1": score,
+              "column2": sign
+          }
+
+
+          gridRows = json.dumps({ "gridfield": gridDict })
+          results  = demisto.executeCommand("setIncident", {
+                      'customFields': gridRows
+          })
+
+
+
+          ##demisto.info(str(gridRows))
+          ##currentValue = demisto.incidents()[0]["CustomFields"]["gridfield"];
+          ##demisto.info("fine ",str(currentValue))
+          """
+
+          #if currentValue is None:
+          currentValue = demisto.incidents()[0]['CustomFields']['gridfield']
+          row=json.dumps({
+              "column1": "This is column 5",
+              "column2": "This is column 6"
+          })
+
+          if currentValue is None:
+              currentValue = [json.loads(row)]
+          else:
+              currentValue.append(json.loads(row))
+
+          demisto.info("fine ",str(currentValue))
+
+          val = json.dumps({ 'gridfield': currentValue })
+
+          demisto.info("fine+++ ",str(val))
+          demisto.results(demisto.executeCommand("setIncident", { 'customFields': val }))
+
+          gridRows = json.dumps({ "gridfield": val })
+          results  = demisto.executeCommand("setIncident", {            'customFields': gridRows})
+          """
+
+          """
+          gridDict = {
+              "column1": "sadsa",
+              "column1": "sad2s2a",
+              "column2": "This is column 6"
+          }
+          gridRows = json.dumps({ "gridfield": gridDict })
+          results  = demisto.executeCommand("setIncident", {
+                      'customFields': gridRows})
+          """
+
+
+
+
+
+
+
+
+
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())
+          return_error("Failed updating grid field: " +
+              str(ex)
+          )
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags:
+- field-display
+- field-change-triggered
+type: python
