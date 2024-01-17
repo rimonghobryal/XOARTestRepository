@@ -1,0 +1,139 @@
+commonfields:
+  id: a0983eb5-101d-42e3-884a-2093496636bd
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: testLuca_aggiuntaSuGrid
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |-
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+
+
+  def base():
+      try:
+          gridDict = {
+              "column1": "This is column 1",
+              "column2": "This is column 2"
+          }
+          gridRows = json.dumps({ "gridfield": gridDict })
+          results  = demisto.executeCommand("setIncident", {
+                      'customFields': gridRows
+          })
+          return_results(results)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())
+          return_error("Failed updating grid field: " +
+              str(ex)
+          )
+
+
+
+  def aggiunta(x,y):
+      try:
+          currentValue = demisto.incidents()[0]['CustomFields']['gridfield']
+          row=json.dumps({
+              "column1": str(x),
+              "column2": str(y)
+          })
+
+          if currentValue is None:
+              currentValue = [json.loads(row)]
+          else:
+              currentValue.append(json.loads(row))
+
+          val = json.dumps({ 'gridfield': currentValue })
+
+          #demisto.info("fine+++ ",str(val))
+          demisto.results(demisto.executeCommand("setIncident", { 'customFields': val }))
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  def nuova_aggiunta(x,y):
+      try:
+          currentValue = demisto.incidents()[0]['CustomFields']['gridfield']
+          row=json.dumps({
+              "column1": str(x),
+              "column2": str(y)
+          })
+
+          if currentValue is None:
+              currentValue = [json.loads(row)]
+          else:
+              currentValue.append(json.loads(row))
+
+          val = json.dumps({ 'gridfield': currentValue })
+
+          return val
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+
+  def main():
+      try:
+          args=demisto.context()
+          data=args.get("getMalwareBazar_automation")
+          score=""
+          sign=""
+
+          for x in data:
+              tupla=x.split(":")
+              score=tupla[0]
+              sign=tupla[1]
+              fine = nuova_aggiunta(sign,score)
+              #demisto.info(str(fine))
+
+          #demisto.results()
+          #return_results(fine)
+          demisto.info(str(type(fine)))
+          demisto.results(demisto.executeCommand("setIncident", { 'customFields': fine }))
+
+
+
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      #base()
+      main()
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
