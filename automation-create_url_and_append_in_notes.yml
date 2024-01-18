@@ -1,0 +1,102 @@
+commonfields:
+  id: 85d1a592-db55-4b72-8c0b-bc3b2c63452c
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: create_url_and_append_in_notes
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |+
+  """Base Script for Cortex XSOAR (aka Demisto)
+  This is an empty script with some basic structure according
+  to the code conventions.
+  MAKE SURE YOU REVIEW/REPLACE ALL THE COMMENTS MARKED AS "TODO"
+  Developer Documentation: https://xsoar.pan.dev/docs/welcome
+  Code Conventions: https://xsoar.pan.dev/docs/integrations/code-conventions
+  Linting: https://xsoar.pan.dev/docs/integrations/linting
+  """
+
+  from typing import Dict, Any
+  import traceback
+
+  ''' MAIN FUNCTION '''
+
+  def already_in_notes(x, lista):
+      for item in lista:
+          if item == x:
+              return True
+      return False
+
+  def main():
+      try:
+          context = demisto.context()
+          #File.[0].mitre_attcks
+          file = context.get('File')
+          #demisto.info(file[0].get('mitre_attcks'))
+          mitre_attacks = file[0].get('mitre_attcks')
+          lista = []
+          ids = []
+          a =str("lookup the wiki for further information: \n")
+          currentValue = str(demisto.incidents()[0])
+          #demisto.info(str(currentValue.keys()))
+          demisto.info(currentValue)
+          if ("notes" in currentValue):
+              demisto.info("YESSSSSSS")
+          else:
+              demisto.info("NOPPPPPPP")
+          #lista.append(str("lookup the wiki for further information: \n"))
+          #RIMETTIdemisto.executeCommand("createList", {"listName":"attack_list","listData":" "})
+          for x in mitre_attacks:
+              link = x.get('attck_id_wiki')
+              attack_id = x.get('attck_id')
+              if("." in attack_id):
+                  #demisto.info(attack_id)
+                  attack_id = attack_id.split(".")[0]
+                  link = link[:-3]
+              if(already_in_notes(attack_id, ids)):
+                  #demisto.info("found duplicate")
+                  continue
+              ids.append(attack_id)
+              #demisto.info(a)
+              #demisto.info(str(type(create_clickable_url(link))))
+              #link = [str(attack_id)](str(link))
+              link = "[" + str(attack_id) + "]" + "(" + str(link) + ")" ########## to create URL
+              #demisto.info(link)
+              a = a + link + ","
+              #lista.append(a)
+          #RIMETTIdemisto.executeCommand("addToList", {"listName":"attack_list","listData":a})
+          #demisto.info(lista)
+
+          #RIMETTIreturn_results(demisto.executeCommand("getList", {"listName":"attack_list"})[0]['Contents'][2:])
+          #demisto.executeCommand("markAsNote", {"entryIDs":})
+          results = CommandResults(outputs_prefix = "MitreFilter.Attack", outputs = a[:-1], mark_as_note = True)
+          return_results(results)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
