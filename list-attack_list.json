@@ -1,0 +1,24 @@
+{
+	"cacheVersn": 0,
+	"data": " ,lookup the wiki for further information: \n https://attack.mitre.org/techniques/T1106\n https://attack.mitre.org/techniques/T1569/\n https://attack.mitre.org/techniques/T1047\n https://attack.mitre.org/techniques/T1559\n https://attack.mitre.org/techniques/T1129\n https://attack.mitre.org/techniques/T1204/\n https://attack.mitre.org/techniques/T1543/\n https://attack.mitre.org/techniques/T1574/\n https://attack.mitre.org/techniques/T1546/\n https://attack.mitre.org/techniques/T1055/\n https://attack.mitre.org/techniques/T1134\n https://attack.mitre.org/techniques/T1027\n https://attack.mitre.org/techniques/T1140\n https://attack.mitre.org/techniques/T1564\n https://attack.mitre.org/techniques/T1562/\n https://attack.mitre.org/techniques/T1622\n https://attack.mitre.org/techniques/T1620\n https://attack.mitre.org/techniques/T1070/\n https://attack.mitre.org/techniques/T1112\n https://attack.mitre.org/techniques/T1036\n https://attack.mitre.org/techniques/T1497/\n https://attack.mitre.org/techniques/T1480\n https://attack.mitre.org/techniques/T1555/\n https://attack.mitre.org/techniques/T1552/\n https://attack.mitre.org/techniques/T1012\n https://attack.mitre.org/techniques/T1082\n https://attack.mitre.org/techniques/T1083\n https://attack.mitre.org/techniques/T1033\n https://attack.mitre.org/techniques/T1057\n https://attack.mitre.org/techniques/T1016\n https://attack.mitre.org/techniques/T1010\n https://attack.mitre.org/techniques/T1614\n https://attack.mitre.org/techniques/T1007\n https://attack.mitre.org/techniques/T1021\n https://attack.mitre.org/techniques/T1114\n https://attack.mitre.org/techniques/T1005\n https://attack.mitre.org/techniques/T1113\n https://attack.mitre.org/techniques/T1074/\n https://attack.mitre.org/techniques/T1560\n https://attack.mitre.org/techniques/T1071\n https://attack.mitre.org/techniques/T1090\n https://attack.mitre.org/techniques/T1573/\n https://attack.mitre.org/techniques/T1132\n https://attack.mitre.org/techniques/T1571\n https://attack.mitre.org/techniques/T1105\n https://attack.mitre.org/techniques/T1529\n https://attack.mitre.org/techniques/T1486\n",
+	"definitionId": "",
+	"description": "",
+	"detached": false,
+	"fromServerVersion": "",
+	"id": "attack_list",
+	"itemVersion": "",
+	"locked": false,
+	"name": "attack_list",
+	"nameLocked": false,
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"system": false,
+	"tags": null,
+	"toServerVersion": "",
+	"truncated": false,
+	"type": "plain_text",
+	"version": -1
+}
