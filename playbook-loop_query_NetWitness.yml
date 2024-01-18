@@ -51,7 +51,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 695,
+          "x": 265,
           "y": 65
         }
       }
@@ -89,7 +89,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1125,
+          "x": 695,
           "y": 225
         }
       }
@@ -99,6 +99,9 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
     note: false
     quietmode: 0
     scriptarguments:
@@ -127,7 +130,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 695,
+          "x": 265,
           "y": 225
         }
       }
@@ -135,8 +138,9 @@ tasks:
     conditions:
     - condition:
       - - left:
+            iscontext: true
             value:
-              simple: ${NetWitness.Events.isEmpty}
+              simple: ${isEmpty}
           operator: isFalse
       label: "yes"
     continueonerrortype: ""
@@ -147,28 +151,26 @@ tasks:
     nexttasks:
       '#default#':
       - "6"
-      - "11"
       "yes":
       - "5"
-      - "10"
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: 28efa4b0-258c-46de-81c0-fd8634ffc915
+      id: 803cf16c-b15e-41ed-89e2-f64a6dc7b63a
       iscommand: false
       name: prova
       type: condition
       version: -1
-    taskid: 28efa4b0-258c-46de-81c0-fd8634ffc915
+    taskid: 803cf16c-b15e-41ed-89e2-f64a6dc7b63a
     timertriggers: []
     type: condition
     view: |-
       {
         "position": {
-          "x": 695,
+          "x": 265,
           "y": 400
         }
       }
@@ -178,23 +180,26 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
     note: false
     quietmode: 0
     scriptarguments:
       value:
-        simple: Query andata a vuoto
+        simple: SIEM has no interaction with indicator
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
       description: Prints text to war room (Markdown supported)
-      id: 6d071b84-62de-4d4d-85a1-103a55af7a68
+      id: 9ec86945-80e9-4296-8e7d-b203bcf671c6
       iscommand: false
       name: printa
       script: Print
       type: regular
       version: -1
-    taskid: 6d071b84-62de-4d4d-85a1-103a55af7a68
+    taskid: 9ec86945-80e9-4296-8e7d-b203bcf671c6
     timertriggers: []
     type: regular
     view: |-
@@ -210,23 +215,26 @@ tasks:
     ignoreworker: false
     isautoswitchedtoquietmode: false
     isoversize: false
+    nexttasks:
+      '#none#':
+      - "12"
     note: false
     quietmode: 0
     scriptarguments:
       value:
-        simple: trovato qualcosa
+        simple: trovato qualcosa, Azioni per bloccare sul siem
     separatecontext: false
     skipunavailable: false
     task:
       brand: ""
       description: Prints text to war room (Markdown supported)
-      id: a2160f60-dfa9-4165-81a4-5d3c398cae56
+      id: 92ca22e8-cc79-4509-8a96-539b395bf90e
       iscommand: false
-      name: Printa
+      name: Se qualcosa è trovato sul SIEM blocca
       script: Print
       type: regular
       version: -1
-    taskid: a2160f60-dfa9-4165-81a4-5d3c398cae56
+    taskid: 92ca22e8-cc79-4509-8a96-539b395bf90e
     timertriggers: []
     type: regular
     view: |-
@@ -275,7 +283,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1340,
+          "x": 910,
           "y": 50
         }
       }
@@ -313,7 +321,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1555,
+          "x": 1125,
           "y": 225
         }
       }
@@ -345,8 +353,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 910,
-          "y": 575
+          "x": 1340,
+          "y": 50
         }
       }
   "11":
@@ -377,8 +385,78 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1340,
-          "y": 575
+          "x": 1770,
+          "y": 50
+        }
+      }
+  "12":
+    continueonerrortype: ""
+    id: "12"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      key:
+        simple: isEmpty
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Delete field from context.
+
+        This automation runs using the default Limited User role, unless you explicitly change the permissions.
+        For more information, see the section about permissions here:
+        https://docs-cortex.paloaltonetworks.com/r/Cortex-XSOAR/6.10/Cortex-XSOAR-Administrator-Guide/Automations
+      id: 41bf67eb-48cc-4e6a-887d-8f48576d0b4b
+      iscommand: false
+      name: Untitled Task
+      script: DeleteContext
+      type: regular
+      version: -1
+    taskid: 41bf67eb-48cc-4e6a-887d-8f48576d0b4b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 265,
+          "y": 750
+        }
+      }
+  "13":
+    continueonerrortype: ""
+    id: "13"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    scriptarguments:
+      value:
+        simple: ${isEmpty}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Returns the last element of an array. If the value passed is not
+        an array, it returns the original value that was passed.
+      id: d6cf6d83-1718-4a56-88fe-711907ca3eca
+      iscommand: false
+      name: Extract Last
+      script: 77247f48-4662-40c9-8773-ce15ee447bfa
+      type: regular
+      version: -1
+    taskid: d6cf6d83-1718-4a56-88fe-711907ca3eca
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 2200,
+          "y": 50
         }
       }
 version: -1
@@ -387,8 +465,8 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 620,
-        "width": 1885,
+        "height": 795,
+        "width": 2530,
         "x": 50,
         "y": 50
       }
