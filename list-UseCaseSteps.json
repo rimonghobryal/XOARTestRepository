@@ -19,6 +19,6 @@
 	"tags": null,
 	"toServerVersion": "",
 	"truncated": false,
-	"type": "plain_text",
+	"type": "json",
 	"version": -1
 }
