@@ -1,0 +1,363 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+id: 98ff3f14-c29c-4a2f-88dd-2475fed3f0e3
+inputs: []
+name: Thret Intel Managment
+outputs: []
+starttaskid: "0"
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 7c54bae7-3afc-4f18-89fc-12d582b3b10c
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: 7c54bae7-3afc-4f18-89fc-12d582b3b10c
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "1":
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f20f962d-791b-4443-8cc2-2245de7a6be0
+      iscommand: false
+      name: Metrics and Communication
+      type: title
+      version: -1
+    taskid: f20f962d-791b-4443-8cc2-2245de7a6be0
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: f0e29ff7-50d4-4b62-8fe3-02aee8b791a8
+      iscommand: false
+      name: Analyst Notes
+      type: title
+      version: -1
+    taskid: f0e29ff7-50d4-4b62-8fe3-02aee8b791a8
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 340
+        }
+      }
+  "3":
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a393782a-bcd5-4f0f-8acf-5b304a1f9d58
+      iscommand: false
+      name: Chat App Notifications
+      type: title
+      version: -1
+    taskid: a393782a-bcd5-4f0f-8acf-5b304a1f9d58
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 485
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "5"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 25915309-5824-4e8c-813d-0c6ef4a274c7
+      iscommand: false
+      name: Enrichment
+      type: title
+      version: -1
+    taskid: 25915309-5824-4e8c-813d-0c6ef4a274c7
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 630
+        }
+      }
+  "5":
+    continueonerrortype: ""
+    id: "5"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "6"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Enrich IP addresses using one or more integrations.
+
+        - Resolve IP addresses to hostnames (DNS)
+        - Provide threat information
+        - IP address reputation using !ip command
+        - Separate internal and external IP addresses
+        - For internal IP addresses, get host information.
+
+        When executing this playbook through IP Enrichment - Generic v2, IP classification and resolution will be handled by the main playbook, improving performance.
+      id: a19f28b5-38ed-42bd-8762-01f5ce56f8b6
+      iscommand: false
+      name: IP Enrichment
+      playbookId: IP Enrichment - Generic v2
+      type: playbook
+      version: -1
+    taskid: a19f28b5-38ed-42bd-8762-01f5ce56f8b6
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 775
+        }
+      }
+  "6":
+    continueonerrortype: ""
+    id: "6"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "7"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Enrich domains using one or more integrations.
+        Domain enrichment includes:
+        * Threat information
+        * Domain reputation using !domain command
+      id: 39041868-4f17-441d-8567-2bee37c5fb9e
+      iscommand: false
+      name: Domain Enrichment
+      playbookId: Domain Enrichment - Generic v2
+      type: playbook
+      version: -1
+    taskid: 39041868-4f17-441d-8567-2bee37c5fb9e
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 950
+        }
+      }
+  "7":
+    continueonerrortype: ""
+    id: "7"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "8"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Enrich URLs using one or more integrations.
+
+        URL enrichment includes:
+        * SSL verification for URLs.
+        * Threat information.
+        * Providing of URL screenshots.
+        * URL Reputation using !url.
+      id: 4a38caaf-bad5-408b-81cf-bd1f47534c1c
+      iscommand: false
+      name: URL Enrichment
+      playbookId: URL Enrichment - Generic v2
+      type: playbook
+      version: -1
+    taskid: 4a38caaf-bad5-408b-81cf-bd1f47534c1c
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1125
+        }
+      }
+  "8":
+    continueonerrortype: ""
+    id: "8"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "9"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Calculate and assign the incident severity based on the highest returned severity level from the following calculations:
+
+        - DBotScores of indicators
+        - Critical assets
+        - Email authenticity
+        - Current incident severity
+        - Microsoft Headers
+        - Risky users (XDR)
+        - Risky hosts (XDR).
+      id: 7e068742-f08a-43e1-8719-ac84530d3c91
+      iscommand: false
+      name: Calculate Severity
+      playbookId: Calculate Severity - Generic v2
+      type: playbook
+      version: -1
+    taskid: 7e068742-f08a-43e1-8719-ac84530d3c91
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1300
+        }
+      }
+  "9":
+    continueonerrortype: ""
+    id: "9"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 27d27a69-1da5-4209-89ff-cab4d2a62bfb
+      iscommand: false
+      name: Finished
+      type: title
+      version: -1
+    taskid: 27d27a69-1da5-4209-89ff-cab4d2a62bfb
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 1475
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {},
+    "paper": {
+      "dimensions": {
+        "height": 1490,
+        "width": 380,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
