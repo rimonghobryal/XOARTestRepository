@@ -1,0 +1,25 @@
+commonfields:
+  id: 3d7184d7-04e7-412c-8288-a32fc4e83949
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.13.84405
+engineinfo: {}
+mainengineinfo: {}
+name: L-A_checkRelationship
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: ""
+scripttarget: 0
+tags: []
+type: python
