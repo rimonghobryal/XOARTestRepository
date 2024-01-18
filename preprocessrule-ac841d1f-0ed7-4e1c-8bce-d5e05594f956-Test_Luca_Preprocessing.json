@@ -1,0 +1,106 @@
+{
+	"action": "drop",
+	"cacheVersn": 0,
+	"definitionId": "",
+	"enabled": true,
+	"existingEventsFilters": [],
+	"fromServerVersion": "",
+	"id": "ac841d1f-0ed7-4e1c-8bce-d5e05594f956",
+	"index": 1,
+	"itemVersion": "",
+	"linkTo": "oldest",
+	"locked": false,
+	"name": "Test_Luca_Preprocessing",
+	"newEventFilters": [
+		[
+			{
+				"left": {
+					"isContext": true,
+					"value": {
+						"simple": "type"
+					}
+				},
+				"operator": "isEqualString",
+				"right": {
+					"isContext": false,
+					"value": {
+						"simple": "XSOAR Engineer - URL Alerts"
+					}
+				},
+				"type": "singleSelect"
+			}
+		],
+		[
+			{
+				"left": {
+					"isContext": true,
+					"value": {
+						"simple": "eventtype"
+					}
+				},
+				"operator": "isEqualString",
+				"right": {
+					"isContext": false,
+					"value": {
+						"simple": "url blocked"
+					}
+				},
+				"type": "shortText"
+			}
+		]
+	],
+	"packID": "",
+	"packName": "",
+	"period": {
+		"by": "days",
+		"fromValue": 30
+	},
+	"propagationLabels": [
+		"all"
+	],
+	"readyExistingEventsFilters": [],
+	"readyNewEventFilters": [
+		[
+			{
+				"left": {
+					"isContext": true,
+					"value": {
+						"simple": "type"
+					}
+				},
+				"operator": "isEqualString",
+				"right": {
+					"isContext": false,
+					"value": {
+						"simple": "XSOAR Engineer - URL Alerts"
+					}
+				},
+				"type": "singleSelect"
+			}
+		],
+		[
+			{
+				"left": {
+					"isContext": true,
+					"value": {
+						"simple": "eventtype"
+					}
+				},
+				"operator": "isEqualString",
+				"right": {
+					"isContext": false,
+					"value": {
+						"simple": "url blocked"
+					}
+				},
+				"type": "shortText"
+			}
+		]
+	],
+	"scriptID": "",
+	"scriptName": "",
+	"searchClosed": false,
+	"system": false,
+	"toServerVersion": "",
+	"version": -1
+}
