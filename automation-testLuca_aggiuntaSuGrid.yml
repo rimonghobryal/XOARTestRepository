@@ -131,7 +131,7 @@ script: |-
 
 
   if __name__ in ('__main__', '__builtin__', 'builtins'):
-      #base()
+      base()
       main()
 scripttarget: 0
 subtype: python3
