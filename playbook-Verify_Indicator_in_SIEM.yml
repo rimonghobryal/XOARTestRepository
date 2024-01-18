@@ -33,7 +33,6 @@ inputs:
   value: {}
 name: Verify Indicator in SIEM
 outputs: []
-quiet: true
 starttaskid: "0"
 tasks:
   "0":
@@ -61,8 +60,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 470,
-          "y": 130
+          "x": 50,
+          "y": 65
         }
       }
   "1":
@@ -89,8 +88,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 0,
-          "y": 460
+          "x": 480,
+          "y": 50
         }
       }
   "2":
@@ -121,8 +120,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 0,
-          "y": 270
+          "x": 910,
+          "y": 50
         }
       }
   "3":
@@ -158,8 +157,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 350
+          "x": 50,
+          "y": 225
         }
       }
   "4":
@@ -199,8 +198,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 70,
-          "y": 670
+          "x": 1340,
+          "y": 50
         }
       }
   "5":
@@ -231,8 +230,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 70,
-          "y": 840
+          "x": 1340,
+          "y": 225
         }
       }
   "6":
@@ -246,7 +245,7 @@ tasks:
       forEach: true
       iscommand: false
       max: 100
-      wait: 1
+      wait: 2
     note: false
     quietmode: 0
     scriptarguments:
@@ -254,24 +253,24 @@ tasks:
         simple: ${MARCO.key}
       valore:
         simple: ${MARCO.value}
-    separatecontext: true
+    separatecontext: false
     skipunavailable: false
     task:
       brand: ""
-      id: fabc48a4-265d-4241-896e-89c85bef80ea
+      id: b4906cf7-d4b1-43db-8ee1-a5fc28e718b1
       iscommand: false
       name: loop_query_NetWitness
       playbookId: 582311c1-fe1c-4836-86e4-308665fd9406
       type: playbook
       version: -1
-    taskid: fabc48a4-265d-4241-896e-89c85bef80ea
+    taskid: b4906cf7-d4b1-43db-8ee1-a5fc28e718b1
     timertriggers: []
     type: playbook
     view: |-
       {
         "position": {
-          "x": 480,
-          "y": 540
+          "x": 50,
+          "y": 400
         }
       }
 version: -1
@@ -280,10 +279,10 @@ view: |-
     "linkLabelsPosition": {},
     "paper": {
       "dimensions": {
-        "height": 805,
-        "width": 860,
-        "x": 0,
-        "y": 130
+        "height": 445,
+        "width": 1670,
+        "x": 50,
+        "y": 50
       }
     }
   }
