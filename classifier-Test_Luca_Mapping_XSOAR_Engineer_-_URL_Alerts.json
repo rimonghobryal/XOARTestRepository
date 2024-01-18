@@ -1,0 +1,82 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "",
+	"feed": false,
+	"fromServerVersion": "",
+	"id": "947d955b-898d-41c4-8a48-10554f4d06f7",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "",
+	"keyTypeMap": {},
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": {
+		"XSOAR Engineer - URL Alerts": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {
+				"Event ID": {
+					"complex": {
+						"filters": [],
+						"root": "eventID",
+						"transformers": []
+					}
+				},
+				"Event Type": {
+					"simple": "type"
+				},
+				"Source IP": {
+					"complex": {
+						"filters": [],
+						"root": "sourceIP",
+						"transformers": []
+					}
+				},
+				"Source Username": {
+					"simple": "sourceUser"
+				},
+				"Suspicious URL": {
+					"simple": "url"
+				},
+				"URL Category": {
+					"complex": {
+						"filters": [],
+						"root": "urlCategory",
+						"transformers": []
+					}
+				},
+				"User Agent": {
+					"complex": {
+						"filters": [],
+						"root": "userAgent",
+						"transformers": []
+					}
+				},
+				"occurred": {
+					"complex": {
+						"filters": [],
+						"root": "occurred",
+						"transformers": []
+					}
+				}
+			}
+		}
+	},
+	"name": "Test_Luca_Mapping_XSOAR Engineer - URL Alerts",
+	"nameRaw": "Test_Luca_Mapping_XSOAR Engineer - URL Alerts",
+	"packID": "",
+	"packName": "",
+	"propagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": false,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "mapping-incoming",
+	"unclassifiedCases": null,
+	"version": -1
+}
