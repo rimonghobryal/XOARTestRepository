@@ -122,16 +122,15 @@ tasks:
     separatecontext: false
     skipunavailable: false
     task:
-      brand: ""
-      description: Check IP reputation (when information is available, returns a JSON
-        with details). Uses all configured Threat Intelligence feeds.
-      id: 9c192c8a-a84a-44fa-87b5-213bf623a5af
+      brand: VirusTotal (API v3)
+      description: Checks the reputation of an IP address.
+      id: efce7671-cf6d-444d-800c-9251e6b071f5
       iscommand: true
       name: ip
-      script: '|||ip'
+      script: VirusTotal (API v3)|||ip
       type: regular
       version: -1
-    taskid: 9c192c8a-a84a-44fa-87b5-213bf623a5af
+    taskid: efce7671-cf6d-444d-800c-9251e6b071f5
     timertriggers: []
     type: regular
     view: |-
