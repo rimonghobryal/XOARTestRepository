@@ -22,7 +22,7 @@ inputs:
   playbookInputQuery: null
   required: false
   value: {}
-name: Comprehensive PAN-OS Best Practice Assessment
+name: Comprehensive PAN-OS Best Practice Assessment (Deprecated)
 outputs: []
 starttaskid: "0"
 system: true
