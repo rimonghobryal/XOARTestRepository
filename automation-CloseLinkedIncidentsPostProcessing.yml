@@ -8,7 +8,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 1.4.6
+    itemVersion: 1.4.7
     packID: CaseManagement-Generic
     packName: CaseManagement-Generic
     packPropagationLabels:
@@ -16,7 +16,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
+dockerimage: demisto/python3:3.10.14.91134
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -26,7 +26,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('CloseLinkedIncidentsPostProcessing', 'start', __line__())
-  ### pack version: 1.4.6
+  ### pack version: 1.4.7
 
 
 
@@ -38,7 +38,7 @@ script: |
       incident_id = incident.get("id")
       linked_incidents = incident.get("linkedIncidents")
 
-      if linked_incidents and not close_notes.startswith("Closed from parent Incident"):
+      if linked_incidents and not str(close_notes).startswith("Closed from parent Incident"):
           demisto.executeCommand("executeCommandAt",
                                  {"command": "closeInvestigation",
                                   "arguments": {
