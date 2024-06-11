@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -22,7 +22,7 @@ description: |-
   - AWS IAM
   - Cortex XDR (account enrichment and reputation)
 
-  Also, the playbook supports the generic command 'iam-get-user' (implemented in IAM integrations. For more information, visit https://xsoar.pan.dev/docs/integrations/iam-integrations.
+  Also, the playbook supports the generic command 'iam-get-user' (implemented in IAM integrations). For more information, visit https://xsoar.pan.dev/docs/integrations/iam-integrations.
 id: Account Enrichment - Generic v2.1
 inputs:
 - description: |-
@@ -815,6 +815,8 @@ tasks:
       - "29"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: SailPointIdentityIQ
@@ -853,6 +855,8 @@ tasks:
       - "31"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: PingOne
@@ -999,6 +1003,8 @@ tasks:
       - "34"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: Okta v2
@@ -1106,6 +1112,8 @@ tasks:
       - "44"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: AWS - IAM
@@ -1243,6 +1251,8 @@ tasks:
       - "52"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: SailPointIdentityNow
@@ -1445,6 +1455,8 @@ tasks:
       - "57"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: Microsoft Graph User
@@ -1844,6 +1856,8 @@ tasks:
       - "66"
     note: false
     quietmode: 0
+    results:
+    - brandInstances
     scriptarguments:
       brandname:
         simple: Cortex XDR - IR
