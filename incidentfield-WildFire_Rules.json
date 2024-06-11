@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_wildfirerules",
 	"isReadOnly": false,
-	"itemVersion": "1.0.4",
+	"itemVersion": "1.0.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "WildFire Rules",
