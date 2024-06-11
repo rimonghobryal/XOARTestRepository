@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.2.0
-    itemVersion: 1.0.8
+    itemVersion: 1.0.9
     packID: FeedRSS
     packName: RSS Feed
     packPropagationLabels:
