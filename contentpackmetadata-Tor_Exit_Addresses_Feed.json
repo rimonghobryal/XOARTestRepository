@@ -1,0 +1,111 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [
+					{
+						"description": "Gets the feed indicators.",
+						"name": "tor-get-indicators"
+					}
+				],
+				"description": "Tor is free software and an open network that helps you defend against traffic analysis, a form of network surveillance that threatens personal freedom and privacy, confidential business activities and relationships, and state security.",
+				"id": "Tor Exit Addresses Feed",
+				"name": "Tor Exit Addresses Feed"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.10",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.53",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "Tor is free software and an open network that helps you defend against\n  traffic analysis, a form of network surveillance that threatens personal freedom\n  and privacy, confidential business activities and relationships, and state security.",
+	"disabledMonthly": false,
+	"downloads": 2186,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.5.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "FeedTorExitAddresses",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/FeedTorExitAddresses/TorExitAddressesFeed_image.png",
+			"name": "Tor Exit Addresses Feed"
+		}
+	],
+	"itemVersion": "1.0.10",
+	"keywords": [],
+	"legacy": true,
+	"name": "Tor Exit Addresses Feed",
+	"packID": "FeedTorExitAddresses",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.5.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Threat Intelligence Management",
+		"TIM",
+		"Plug \u0026 Fetch",
+		"Free Feed",
+		"Getting Started"
+	],
+	"toServerVersion": "",
+	"updated": "2024-05-07T09:23:22Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "1000160",
+	"videos": []
+}
