@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -23,11 +23,9 @@ inputs:
       root: IP
       transformers:
       - operator: uniq
-- description: 'A list of internal IP ranges to check IP addresses against. The list
-    should be provided in CIDR notation, separated by commas. An example of a list
-    of ranges would be: "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16" (without quotes).
-    If a list is not provided, will use default list provided in the IsIPInRanges
-    script (the known IPv4 private address ranges).'
+- description: 'A list of internal IP ranges to check IP addresses against. The comma-separated
+    list should be provided in CIDR notation. For example, of a list of ranges would
+    be: "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16" (without quotes).'
   key: InternalRange
   playbookInputQuery: null
   required: false
@@ -142,6 +140,19 @@ inputs:
   required: false
   value:
     simple: "False"
+- description: Whether to execute the reputation command on the indicator.
+  key: UseReputationCommand
+  playbookInputQuery: null
+  required: false
+  value:
+    simple: "False"
+- description: |-
+    Optional - This input is needed for the IAM-get-user command (used in the Account Enrichment - IAM playbook). Please provide the domain name that the user is related to.
+    Example: @xsoar.com
+  key: AccountDomain
+  playbookInputQuery: null
+  required: false
+  value: {}
 name: Entity Enrichment - Generic v3
 outputs:
 - contextPath: IP
@@ -476,6 +487,8 @@ tasks:
     note: false
     quietmode: 0
     scriptarguments:
+      ExecutedFromParent:
+        simple: "True"
       IP:
         complex:
           root: inputs.IP
@@ -489,6 +502,12 @@ tasks:
       ResolveIP:
         complex:
           root: inputs.ResolveIP
+      UseReputationCommand:
+        simple: ${inputs.UseReputationCommand}
+      extended_data:
+        simple: "False"
+      threat_model_association:
+        simple: "False"
     separatecontext: true
     skipunavailable: false
     task:
@@ -550,6 +569,8 @@ tasks:
           root: inputs.SHA256
           transformers:
           - operator: uniq
+      UseReputationCommand:
+        simple: ${inputs.UseReputationCommand}
     separatecontext: true
     skipunavailable: false
     task:
@@ -596,7 +617,7 @@ tasks:
           transformers:
           - operator: uniq
       UseReputationCommand:
-        simple: "False"
+        simple: ${inputs.UseReputationCommand}
       VerifyURL:
         complex:
           root: inputs.URLSSLVerification
@@ -650,6 +671,8 @@ tasks:
           root: inputs.Domain
           transformers:
           - operator: uniq
+      UseReputationCommand:
+        simple: ${inputs.UseReputationCommand}
     separatecontext: true
     skipunavailable: false
     task:
@@ -707,6 +730,8 @@ tasks:
           root: inputs.InternalDomains
           transformers:
           - operator: uniq
+      UseReputationCommand:
+        simple: ${inputs.UseReputationCommand}
     separatecontext: true
     skipunavailable: false
     task:
@@ -745,6 +770,11 @@ tasks:
     note: false
     quietmode: 0
     scriptarguments:
+      Domain:
+        complex:
+          root: inputs.AccountDomain
+          transformers:
+          - operator: uniq
       Username:
         complex:
           root: inputs.Username
@@ -754,13 +784,26 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
-      id: 7f313517-52cb-4653-8c77-08819d4910f3
+      description: |-
+        Enrich accounts using one or more integrations.
+        Supported integrations:
+        - Active Directory
+        - Microsoft Graph User
+        - SailPoint IdentityNow
+        - SailPoint IdentityIQ
+        - PingOne
+        - Okta
+        - AWS IAM
+        - Cortex XDR (account enrichment and reputation)
+
+        Also, the playbook supports the generic command 'iam-get-user' (implemented in IAM integrations. For more information, visit https://xsoar.pan.dev/docs/integrations/iam-integrations.
+      id: 3543872e-d47e-47a3-8456-39ff9ccfcabd
       iscommand: false
       name: Account Enrichment - Generic v2.1
       playbookId: Account Enrichment - Generic v2.1
       type: playbook
       version: -1
-    taskid: 7f313517-52cb-4653-8c77-08819d4910f3
+    taskid: 3543872e-d47e-47a3-8456-39ff9ccfcabd
     timertriggers: []
     type: playbook
     view: |-
