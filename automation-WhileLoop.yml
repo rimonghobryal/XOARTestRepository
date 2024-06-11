@@ -29,7 +29,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.3.8
+    itemVersion: 1.3.15
     packID: DeveloperTools
     packName: Developer Tools
     packPropagationLabels:
@@ -46,7 +46,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.3.8
+  // pack version: 1.3.15
   var val = invContext.keyToWatch;
   var expectedValue = args.value;
   var argumentsVal = args.cmdArguments;
