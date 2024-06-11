@@ -20,22 +20,6 @@
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Post Processing Script that will close linked Incidents when the Incident is closed.  Will set the same close code as the parent, and add closing notes from the parent. ",
-				"name": "CloseLinkedIncidentsPostProcessing",
-				"tags": [
-					"post-processing",
-					"training",
-					"internal"
-				]
-			},
-			{
-				"description": "Dynamic display script to display a list of useful Analyst Tools on an Incident layout.\n\nCreate an XSOAR list called \"Case Management Analyst Tools\", and add a markdown table to provide your own list.",
-				"name": "CaseMgmtAnalystTools",
-				"tags": [
-					"dynamic-section"
-				]
-			},
-			{
 				"description": "This is an SLA breach script that will complete playbook tasks tagged with 'timerbreach' when the SLA breaches. \n\nThis can be used to complete tasks waiting for manual input when a timer breaches its SLA, and move the playbook along.",
 				"name": "CompleteTaskOnTimerBreach",
 				"tags": [
@@ -43,35 +27,7 @@
 				]
 			},
 			{
-				"description": "Adds an XSOAR User to the Incident, this automation can be used as part of a playbook task.",
-				"name": "AddUserToIncidentTeam",
-				"tags": [
-					"Utility"
-				]
-			},
-			{
-				"description": "Restricts the Incident Types a user can create manually, based on their assigned XSOAR Role(s). \n\nRequirements - Create an XSOAR List called IncidentTypeRBAC with the following structure, the names must match exactly to the names in the Incident Types under Settings!\n\nExample List:\n{\n\"Default\":[\"Case\",\"Job\",\"Unclassified\"],\n\"Analyst\":[\"Phishing\",\"Malware\"],\n\"ThreatHunters\":[\"Hunt\"]\n}",
-				"name": "CaseMgmtIncidentTypesByRole",
-				"tags": [
-					"field-display"
-				]
-			},
-			{
-				"description": "Restricts the Incident Types a user can create manually based on an XSOAR list, and prevents changing the Incident Type manually once it is created.\n\nRequirements - Create an XSOAR List called IncidentTypesFromList a list of comma separated Incident Types\n\nIncident Type 1,Incident Type 2, Incident Type 3 ",
-				"name": "CaseMgmtIncidentTypesDisplay",
-				"tags": [
-					"field-display"
-				]
-			},
-			{
-				"description": "Dynamic section that will display the Labels for an Incident in a markdown table.  ",
-				"name": "CaseMgmtDisplayLabels",
-				"tags": [
-					"dynamic-section"
-				]
-			},
-			{
-				"description": "Dynamic display script to display a response process on an Incident layout.   The response process display can change depending on the Incident Type.",
+				"description": "Dynamic display script to display a response process on an Incident layout. The response process display can change depending on the Incident Type.",
 				"name": "CaseMgmtResponseProcess",
 				"tags": [
 					"dynamic-section"
@@ -82,6 +38,50 @@
 				"name": "TimersOnOwnerChange",
 				"tags": [
 					"field-change-triggered"
+				]
+			},
+			{
+				"description": "Dynamic section that will display the Labels for an Incident in a markdown table. ",
+				"name": "CaseMgmtDisplayLabels",
+				"tags": [
+					"dynamic-section"
+				]
+			},
+			{
+				"description": "Restricts the Incident Types a user can create manually, based on their assigned XSOAR Role(s). \n\nRequirements - Create an XSOAR List called IncidentTypeRBAC with the following structure, the names must match exactly to the names in the Incident Types under Settings!\n\nExample List:\n{\n\"Default\":[\"Case\",\"Job\",\"Unclassified\"],\n\"Analyst\":[\"Phishing\",\"Malware\"],\n\"ThreatHunters\":[\"Hunt\"]\n}",
+				"name": "CaseMgmtIncidentTypesByRole",
+				"tags": [
+					"field-display"
+				]
+			},
+			{
+				"description": "Dynamic display script to display a list of useful Analyst Tools on an Incident layout.\n\nCreate an XSOAR list called \"Case Management Analyst Tools\", and add a markdown table to provide your own list.",
+				"name": "CaseMgmtAnalystTools",
+				"tags": [
+					"dynamic-section"
+				]
+			},
+			{
+				"description": "Adds an XSOAR User to the Incident, this automation can be used as part of a playbook task.",
+				"name": "AddUserToIncidentTeam",
+				"tags": [
+					"Utility"
+				]
+			},
+			{
+				"description": "Post Processing Script that will close linked Incidents when the Incident is closed. Will set the same close code as the parent, and add closing notes from the parent. ",
+				"name": "CloseLinkedIncidentsPostProcessing",
+				"tags": [
+					"post-processing",
+					"training",
+					"internal"
+				]
+			},
+			{
+				"description": "Restricts the Incident Types a user can create manually based on an XSOAR list, and prevents changing the Incident Type manually once it is created.\n\nRequirements - Create an XSOAR List called IncidentTypesFromList a list of comma separated Incident Types\n\nIncident Type 1,Incident Type 2, Incident Type 3 ",
+				"name": "CaseMgmtIncidentTypesDisplay",
+				"tags": [
+					"field-display"
 				]
 			}
 		],
@@ -118,34 +118,34 @@
 		"layoutscontainer": [
 			{
 				"description": "",
-				"name": "Case layout"
+				"name": "Case Management Layout v2"
 			},
 			{
 				"description": "",
-				"name": "Case Management Layout v2"
+				"name": "Case layout"
 			}
 		],
 		"list": null,
 		"playbook": [
 			{
-				"description": "This playbook executes when no other playbook is associated with an incident. It enriches indicators in an incident using one or more integrations.",
-				"name": "Case Management - Generic"
-			},
-			{
-				"description": "This playbook will start the Time to Assignment or Remediation SLA timers based on whether an Owner is assigned to the Incident.\n\nCan be used as a sub-playbook to perform the same logic across different playbooks/use cases.",
-				"name": "Case Management - Generic - Start SLA Timers"
-			},
-			{
-				"description": "Sets the SLAs for Incidents, the Time to Assignment Timer, and the Remediation SLA Timer based on the Incident Severity.",
-				"name": "Case Management - Generic - Set SLAs based on Severity"
+				"description": "This playbook will extract and enrich indicators upon trigger, calculate Severity, and set SLAs and Timers. \n\nCan be used as a default playbook to ingest new Incidents, or for manually created Incidents. ",
+				"name": "Case Management - Generic v2"
 			},
 			{
 				"description": "This playbook can be used to send email notification if an Incidents severity is Critical or High.  \n\nCan be used as a sub-playbook to perform the same logic across different playbooks/use cases.",
 				"name": "Case Management - Generic - Send On Call Notification"
 			},
 			{
-				"description": "This playbook will extract and enrich indicators upon trigger, calculate Severity, and set SLAs and Timers. \n\nCan be used as a default playbook to ingest new Incidents, or for manually created Incidents. ",
-				"name": "Case Management - Generic v2"
+				"description": "Sets the SLAs for Incidents, the Time to Assignment Timer, and the Remediation SLA Timer based on the Incident Severity.",
+				"name": "Case Management - Generic - Set SLAs based on Severity"
+			},
+			{
+				"description": "This playbook will start the Time to Assignment or Remediation SLA timers based on whether an Owner is assigned to the Incident.\n\nCan be used as a sub-playbook to perform the same logic across different playbooks/use cases.",
+				"name": "Case Management - Generic - Start SLA Timers"
+			},
+			{
+				"description": "This playbook executes when no other playbook is associated with an incident. It enriches indicators in an incident using one or more integrations.",
+				"name": "Case Management - Generic"
 			}
 		],
 		"report": [
@@ -157,6 +157,12 @@
 		"reputation": null,
 		"widget": [
 			{
+				"name": "Mean Time to Remediation (Remediation SLA)"
+			},
+			{
+				"name": "My Mean Time to Remediation (Remediation SLA)"
+			},
+			{
 				"name": "Mean Time to Assignment (Time to Assignment)"
 			},
 			{
@@ -166,53 +172,47 @@
 				"name": "Participating Incidents Count"
 			},
 			{
-				"name": "My Mean Time to Remediation (Remediation SLA)"
-			},
-			{
 				"name": "Participating Incidents"
-			},
-			{
-				"name": "Mean Time to Remediation (Remediation SLA)"
 			}
 		],
 		"wizard": null
 	},
-	"currentVersion": "1.4.6",
+	"currentVersion": "1.4.7",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.33.50",
 			"name": "Base"
 		},
 		"CommonPlaybooks": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "2.4.3",
+			"minVersion": "2.6.28",
 			"name": "Common Playbooks"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.12.23",
+			"minVersion": "1.14.31",
 			"name": "Common Scripts"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.87",
+			"minVersion": "3.4.9",
 			"name": "Common Types"
 		}
 	},
 	"deprecated": false,
 	"description": "Case Management - Generic\n\nBuilt by the Cortex Customer Success Team to provide quick deployment of Case Management with XSOAR",
 	"disabledMonthly": false,
-	"downloads": 5108,
+	"downloads": 5360,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -221,7 +221,7 @@
 	"id": "CaseManagement-Generic",
 	"installMessage": "",
 	"integrations": [],
-	"itemVersion": "1.4.6",
+	"itemVersion": "1.4.7",
 	"keywords": [
 		"Case Management",
 		"SIEM"
@@ -249,15 +249,15 @@
 		"url": ""
 	},
 	"tags": [
-		"Use Case",
-		"Getting Started"
+		"Getting Started",
+		"Use Case"
 	],
 	"toServerVersion": "",
-	"updated": "2023-09-14T09:43:38Z",
+	"updated": "2024-04-11T09:28:39Z",
 	"useCases": [
 		"Case Management"
 	],
 	"version": -1,
-	"versionInfo": "6319909",
+	"versionInfo": "949376",
 	"videos": []
 }
