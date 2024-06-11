@@ -1,0 +1,54 @@
+comment: Automatically changes email field when choosing classification.
+commonfields:
+  id: IronscalesEmailFieldTrigger
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.12
+    packID: Ironscales
+    packName: Ironscales
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+dockerimage: demisto/python3:3.10.14.95956
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: IronscalesEmailFieldTrigger
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |
+  register_module_line('IronscalesEmailFieldTrigger', 'start', __line__())
+  ### pack version: 1.1.12
+
+
+
+
+  def main():
+      try:
+          args = demisto.args()
+          res = args.get("user").get("email")
+          cmd_res = demisto.executeCommand(command="setIncident", args={"ironscalesresolveremailaddress": res})
+          return_results(cmd_res)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute BaseScript. Error: {str(ex)}')
+
+
+  ''' ENTRY POINT '''
+
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
+
+  register_module_line('IronscalesEmailFieldTrigger', 'end', __line__())
+scripttarget: 0
+subtype: python3
+system: true
+tags:
+- field-change-triggered
+type: python
