@@ -6,7 +6,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.9.0
-    itemVersion: 3.2.1
+    itemVersion: 3.2.4
     packID: RSANetWitness_v11_1
     packName: RSA NetWitness
     packPropagationLabels:
@@ -24,7 +24,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('RSA_DisplayMetasEvents', 'start', __line__())
-  ### pack version: 3.2.1
+  ### pack version: 3.2.4
 
 
 
