@@ -17,29 +17,8 @@
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Executes a command in Cortex XSOAR in debug mode and pulls logs from the command execution.",
-				"name": "TroubleshootExecuteCommand",
-				"tags": [
-					"troubleshoot"
-				]
-			},
-			{
-				"description": "Exports all certificate-related information from the Python Docker container and decodes it using RFC. It also retrieves the certificate located in the specified endpoint.",
-				"name": "CertificatesTroubleshoot",
-				"tags": [
-					"Utility"
-				]
-			},
-			{
-				"description": "Populates the InstanceName field with active instances.",
-				"name": "TroubleshootInstanceField",
-				"tags": [
-					"field-display"
-				]
-			},
-			{
-				"description": "Gets an instance's configuration parameters in order to troubleshoot the instance.",
-				"name": "TroubleshootGetInstanceParameters",
+				"description": "Collects all results from previous tasks. (Available from Cortex XSOAR 5.0.0.)",
+				"name": "TroubleshootAggregateResults",
 				"tags": [
 					"troubleshoot"
 				]
@@ -52,10 +31,17 @@
 				]
 			},
 			{
-				"description": "Collects all results from previous tasks. (Available from Cortex XSOAR 5.0.0.)",
-				"name": "TroubleshootAggregateResults",
+				"description": "Click the \"Test\" button and return if the test failed.",
+				"name": "TroubleshootTestInstance",
 				"tags": [
 					"troubleshoot"
+				]
+			},
+			{
+				"description": "Exports all certificate-related information from the Python Docker container and decodes it using RFC. It also retrieves the certificate located in the specified endpoint.",
+				"name": "CertificatesTroubleshoot",
+				"tags": [
+					"Utility"
 				]
 			},
 			{
@@ -66,10 +52,24 @@
 				]
 			},
 			{
-				"description": "Click the \"Test\" button and return if the test failed.",
-				"name": "TroubleshootTestInstance",
+				"description": "Executes a command in Cortex XSOAR in debug mode and pulls logs from the command execution.",
+				"name": "TroubleshootExecuteCommand",
 				"tags": [
 					"troubleshoot"
+				]
+			},
+			{
+				"description": "Gets an instance's configuration parameters in order to troubleshoot the instance.",
+				"name": "TroubleshootGetInstanceParameters",
+				"tags": [
+					"troubleshoot"
+				]
+			},
+			{
+				"description": "Populates the InstanceName field with active instances.",
+				"name": "TroubleshootInstanceField",
+				"tags": [
+					"field-display"
 				]
 			}
 		],
@@ -79,24 +79,24 @@
 		"generictype": null,
 		"incidentfield": [
 			{
-				"description": "Name of the instance to troubleshoot",
-				"name": "Instance Name",
+				"description": "Pick configuration if you have problem with configuring the integration. Pick command for troubleshooting running a command.",
+				"name": "Troubleshoot type",
 				"type": "singleSelect"
 			},
 			{
-				"description": "The aggregated results of the troubleshooting playbook.",
-				"name": "Troubleshoot Summary",
-				"type": "markdown"
-			},
-			{
-				"description": "Pick configuration if you have problem with configuring the integration. Pick command for troubleshooting running a command.",
-				"name": "Troubleshoot type",
+				"description": "Name of the instance to troubleshoot",
+				"name": "Instance Name",
 				"type": "singleSelect"
 			},
 			{
 				"description": "Will run the command with 'insecure' flag.",
 				"name": "Run with 'insecure'",
 				"type": "boolean"
+			},
+			{
+				"description": "The aggregated results of the troubleshooting playbook.",
+				"name": "Troubleshoot Summary",
+				"type": "markdown"
 			}
 		],
 		"incidenttype": [
@@ -129,42 +129,42 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "2.0.14",
+	"currentVersion": "2.0.20",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.8",
+			"minVersion": "1.33.45",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.13.15",
+			"minVersion": "1.14.24",
 			"name": "Common Scripts"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.96",
+			"minVersion": "3.4.7",
 			"name": "Common Types"
 		},
 		"DemistoRESTAPI": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.3.43",
+			"minVersion": "1.3.52",
 			"name": "Cortex REST API"
 		}
 	},
 	"deprecated": false,
 	"description": "Use this pack to troubleshoot your environment.",
 	"disabledMonthly": false,
-	"downloads": 2251,
+	"downloads": 2712,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -185,7 +185,7 @@
 			"name": "Demisto REST API (Deprecated)"
 		}
 	],
-	"itemVersion": "2.0.14",
+	"itemVersion": "2.0.20",
 	"keywords": [],
 	"legacy": true,
 	"name": "Troubleshoot",
@@ -211,9 +211,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2023-12-28T10:24:45Z",
+	"updated": "2024-04-01T09:24:57Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "722180",
+	"versionInfo": "925751",
 	"videos": []
 }
