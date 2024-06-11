@@ -6,7 +6,8 @@
 		"Phishing",
 		"Phishing Alerts",
 		"Trend Micro CAS Event",
-		"Email Communication"
+		"Email Communication",
+		"PhishingTest"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -26,7 +27,7 @@
 	"hidden": false,
 	"id": "incident_attachmentname",
 	"isReadOnly": false,
-	"itemVersion": "3.6.4",
+	"itemVersion": "3.6.19",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Attachment Name",
