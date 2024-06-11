@@ -1,6 +1,5 @@
 args:
 - description: The object value to check, if empty.
-  isArray: true
   name: value
 - description: The new value to return if the original value was empty.
   name: defaultValue
@@ -21,7 +20,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -37,7 +36,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.2.52
+  // pack version: 1.2.73
   function toBoolean(value) {
       if (typeof (value) === 'string') {
           if (['yes', 'true'].indexOf(value.toLowerCase()) != -1) {
@@ -64,28 +63,23 @@ script: |
   function getValueToSet(value) {
       const applyIfEmpty = toBoolean(args.applyIfEmpty);
 
-      if (value === null || (applyIfEmpty && isValueEmpty(value))) {
+      if (value == null || (applyIfEmpty && isValueEmpty(value))) {
           value = args.defaultValue;
       }
 
-      if (value === null) {
+      if (value == null) {
           return [];
-      } else
+      } else if (Array.isArray(value)) {
+          return JSON.parse(JSON.stringify(value));  // solve reference issue from chaining transformers XSUP-32809
+      } else {
           return value;
+      }
   }
 
 
   function main() {
-      let values = args.value;
-      if (!values || (Array.isArray(values) && values.length === 0) || (values.constructor == Object && Object.keys(values).length === 0)) {
-          values = [null];
-      }
-      values = argToList(values);
-
-      for (let i = 0; i < values.length; i++) {
-          values[i] = getValueToSet(values[i]);
-      }
-      return values;
+      let value = args.value;
+      return getValueToSet(value);
   }
 
 
