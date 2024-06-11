@@ -100,7 +100,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.0.27
+    itemVersion: 2.0.30
     packID: GitHub
     packName: GitHub
     packPropagationLabels:
@@ -3895,12 +3895,12 @@ script:
     - contextPath: GitHub.Workflow.updated_at
       description: Datetime the GitHub workflow was updated at.
       type: Date
-  dockerimage: demisto/auth-utils:1.0.0.76157
+  dockerimage: demisto/auth-utils:1.0.0.88424
   isfetch: true
   runonce: false
   script: |
     register_module_line('GitHub', 'start', __line__())
-    ### pack version: 2.0.27
+    ### pack version: 2.0.30
 
 
 
@@ -4018,7 +4018,7 @@ script:
             BASE_URL + url_suffix,
             verify=USE_SSL,
             params=params,
-            data=json.dumps(data),
+            data=json.dumps(data) if data else None,
             headers=headers or HEADERS
         )
         if res.status_code >= 400:
