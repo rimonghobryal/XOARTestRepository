@@ -12,21 +12,21 @@
 		"layoutscontainer",
 		"generictype",
 		"genericfield",
-		"genericdefinition",
-		"genericmodule"
+		"genericmodule",
+		"genericdefinition"
 	],
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Sets a Threat Intel Report as unpublished.",
-				"name": "UnpublishThreatIntelReport",
+				"description": "Sets a Threat Intel Report as published.",
+				"name": "PublishThreatIntelReport",
 				"tags": [
 					"threatIntelReport-action-button"
 				]
 			},
 			{
-				"description": "Sets a Threat Intel Report as published.",
-				"name": "PublishThreatIntelReport",
+				"description": "Sets a Threat Intel Report as unpublished.",
+				"name": "UnpublishThreatIntelReport",
 				"tags": [
 					"threatIntelReport-action-button"
 				]
@@ -36,13 +36,10 @@
 		"dashboard": null,
 		"genericdefinition": [
 			{
+				"deprecated": false,
 				"description": "",
 				"fromversion": "6.5.0",
 				"id": "ThreatIntelReport",
-				"marketplaces": [
-					"xsoar",
-					"marketplacev2"
-				],
 				"name": "Threat Intel Report",
 				"toversion": ""
 			}
@@ -50,13 +47,8 @@
 		"genericfield": [
 			{
 				"description": "",
-				"name": "Value",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "Primary Motivation",
-				"type": "shortText"
+				"name": "Body Malware",
+				"type": "markdown"
 			},
 			{
 				"description": "",
@@ -65,92 +57,12 @@
 			},
 			{
 				"description": "",
-				"name": "Body Vulnerability",
-				"type": "markdown"
-			},
-			{
-				"description": "",
-				"name": "Body Threat Actor",
-				"type": "markdown"
-			},
-			{
-				"description": "",
-				"name": "Vulnerability Type",
-				"type": "multiSelect"
-			},
-			{
-				"description": "",
-				"name": "Published",
-				"type": "date"
-			},
-			{
-				"description": "",
-				"name": "Body Malware",
-				"type": "markdown"
-			},
-			{
-				"description": "",
-				"name": "Operating System",
-				"type": "tagsSelect"
-			},
-			{
-				"description": "",
-				"name": "Malware Type",
-				"type": "multiSelect"
-			},
-			{
-				"description": "",
-				"name": "Threat Actor",
+				"name": "First Seen By Source",
 				"type": "shortText"
 			},
 			{
 				"description": "",
-				"name": "Logo",
-				"type": "markdown"
-			},
-			{
-				"description": "",
-				"name": "Modified",
-				"type": "date"
-			},
-			{
-				"description": "",
-				"name": "Traffic Light Protocol",
-				"type": "singleSelect"
-			},
-			{
-				"description": "",
-				"name": "Fuzzy Hash",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "Sophistication",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "Aliases",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "CVE",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "Threat Actor Types",
-				"type": "multiSelect"
-			},
-			{
-				"description": "",
-				"name": "First Seen",
-				"type": "date"
-			},
-			{
-				"description": "",
-				"name": "Description",
+				"name": "Body Campaign",
 				"type": "markdown"
 			},
 			{
@@ -160,48 +72,18 @@
 			},
 			{
 				"description": "",
-				"name": "Tags",
-				"type": "tagsSelect"
-			},
-			{
-				"description": "",
-				"name": "Secondary Motivations",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "Goals",
-				"type": "tagsSelect"
-			},
-			{
-				"description": "",
-				"name": "Source",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "First Seen By Source",
-				"type": "shortText"
-			},
-			{
-				"description": "",
-				"name": "CVSS",
-				"type": "shortText"
-			},
-			{
-				"description": "",
 				"name": "Objective",
 				"type": "shortText"
 			},
 			{
 				"description": "",
-				"name": "Last Seen",
-				"type": "date"
+				"name": "Body Vulnerability",
+				"type": "markdown"
 			},
 			{
 				"description": "",
-				"name": "Body Campaign",
-				"type": "markdown"
+				"name": "Fuzzy Hash",
+				"type": "shortText"
 			},
 			{
 				"description": "",
@@ -215,19 +97,131 @@
 			},
 			{
 				"description": "",
+				"name": "Sophistication",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Description",
+				"type": "markdown"
+			},
+			{
+				"description": "",
+				"name": "Operating System",
+				"type": "tagsSelect"
+			},
+			{
+				"description": "",
+				"name": "Body Threat Actor",
+				"type": "markdown"
+			},
+			{
+				"description": "",
+				"name": "Published",
+				"type": "date"
+			},
+			{
+				"description": "",
+				"name": "Traffic Light Protocol",
+				"type": "singleSelect"
+			},
+			{
+				"description": "",
 				"name": "Targeting",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Threat Actor Types",
+				"type": "multiSelect"
+			},
+			{
+				"description": "",
+				"name": "Goals",
+				"type": "tagsSelect"
+			},
+			{
+				"description": "",
+				"name": "Logo",
+				"type": "markdown"
+			},
+			{
+				"description": "",
+				"name": "Threat Actor",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "CVE",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Malware Type",
+				"type": "multiSelect"
+			},
+			{
+				"description": "",
+				"name": "Last Seen",
+				"type": "date"
+			},
+			{
+				"description": "",
+				"name": "Secondary Motivations",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Tags",
+				"type": "tagsSelect"
+			},
+			{
+				"description": "",
+				"name": "First Seen",
+				"type": "date"
+			},
+			{
+				"description": "",
+				"name": "Modified",
+				"type": "date"
+			},
+			{
+				"description": "",
+				"name": "Value",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Aliases",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "CVSS",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Vulnerability Type",
+				"type": "multiSelect"
+			},
+			{
+				"description": "",
+				"name": "Source",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Primary Motivation",
 				"type": "shortText"
 			}
 		],
 		"genericmodule": [
 			{
+				"deprecated": false,
 				"description": "",
 				"fromversion": "6.5.0",
 				"id": "threatIntel",
-				"marketplaces": [
-					"xsoar",
-					"marketplacev2"
-				],
 				"name": "Threat Intel",
 				"toversion": ""
 			}
@@ -235,11 +229,11 @@
 		"generictype": [
 			{
 				"description": "",
-				"name": "Executive Brief"
+				"name": "Threat Actor"
 			},
 			{
 				"description": "",
-				"name": "Malware"
+				"name": "Campaign"
 			},
 			{
 				"description": "",
@@ -247,11 +241,11 @@
 			},
 			{
 				"description": "",
-				"name": "Threat Actor"
+				"name": "Malware"
 			},
 			{
 				"description": "",
-				"name": "Campaign"
+				"name": "Executive Brief"
 			}
 		],
 		"incidentfield": null,
@@ -268,16 +262,16 @@
 				"name": "Executive Brief Report"
 			},
 			{
-				"description": "A layout template for an out of the box report describing a Campaign ran by a threat actor",
-				"name": "Campaign Report"
-			},
-			{
 				"description": "A report specifically made dor Threat Actors with additional sections including meta data about the actor",
 				"name": "Threat Actor Report"
 			},
 			{
 				"description": "A template specifically designed for a report about a malware with fields such as OS, hash and more",
 				"name": "Malware Report"
+			},
+			{
+				"description": "A layout template for an out of the box report describing a Campaign ran by a threat actor",
+				"name": "Campaign Report"
 			}
 		],
 		"list": null,
@@ -287,42 +281,42 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.11",
+	"currentVersion": "1.0.15",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.34.11",
 			"name": "Base"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.87",
+			"minVersion": "3.5.5",
 			"name": "Common Types"
 		},
 		"FireMonSecurityManager": {
 			"author": "FireMon",
-			"certification": "certified",
+			"certification": "",
 			"mandatory": false,
-			"minVersion": "1.1.16",
+			"minVersion": "1.2.0",
 			"name": "FireMon Security Manager"
 		},
 		"Malware": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.4.9",
+			"minVersion": "1.4.13",
 			"name": "Malware Core"
 		}
 	},
 	"deprecated": false,
 	"description": "Threat Intel Reports gives the user the ability to create, review, publish, and export threat intelligence reports.",
 	"disabledMonthly": false,
-	"downloads": 5552,
+	"downloads": 8724,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.5.0",
 	"general": [
@@ -339,7 +333,7 @@
 			"name": "FireMon Security Manager"
 		}
 	],
-	"itemVersion": "1.0.11",
+	"itemVersion": "1.0.15",
 	"keywords": [],
 	"legacy": true,
 	"name": "Threat Intel Reports (BETA)",
@@ -368,11 +362,11 @@
 		"Use Case"
 	],
 	"toServerVersion": "",
-	"updated": "2023-09-14T09:38:24Z",
+	"updated": "2024-06-10T09:22:47Z",
 	"useCases": [
 		"Threat Intelligence Management"
 	],
 	"version": -1,
-	"versionInfo": "6319909",
+	"versionInfo": "1082615",
 	"videos": []
 }
