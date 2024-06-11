@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_whatcorrectiveactionscanpreventsimilarincidentsinthefuture",
 	"isReadOnly": false,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "What corrective actions can prevent similar incidents in the future?",
