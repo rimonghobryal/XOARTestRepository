@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 3.6.4
+    itemVersion: 3.6.19
     packID: Phishing
     packName: Phishing
     packPropagationLabels:
@@ -117,9 +117,13 @@ tasks:
                 value:
                   simple: "3"
           root: inputs.DBotScore
+          transformers:
+          - operator: uniq
       ListenerMailbox:
         complex:
           root: inputs.ListenerMailbox
+      ResultsLimit:
+        simple: "50"
       SHA256:
         complex:
           filters:
@@ -158,6 +162,12 @@ tasks:
                 value:
                   simple: "64"
           root: inputs.DBotScore.Indicator
+          transformers:
+          - operator: uniq
+      SearchTimeframe:
+        simple: "7"
+      Timeout:
+        simple: "180"
       URLDomain:
         complex:
           accessor: Indicator
@@ -189,12 +199,14 @@ tasks:
                 value:
                   simple: "3"
           root: inputs.DBotScore
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
       description: |
-        This playbook retrieves email data based on the `URLDomain`, `SHA256`, `IPAddress`, and `MessageID` inputs. The output will be a unified object with all of the retrieved emails based on the sub-playbooks outputs:
+        This playbook retrieves email data based on the `URLDomain`, `SHA256`, `IPAddress`, and `MessageID` inputs. The output is a unified object with all of the retrieved emails based on the following sub-playbooks outputs:
 
         - **Microsoft 365 Defender - Get Email URL clicks**:
                 Retrieves data based on URL click events.
@@ -203,14 +215,14 @@ tasks:
         - **Microsoft 365 Defender - Emails Indicators Hunt**:
                 Retrieves data based on several different email events.
 
-        Read the playbooks' descriptions in order to get the full details.
-      id: f0a7a0b1-156d-4f73-8a68-e0c06661cb54
+        Read the playbook's descriptions in order to get the full details.
+      id: 2f9c6950-28fb-4994-8d79-5dfe301cd2e2
       iscommand: false
       name: Microsoft 365 Defender - Threat Hunting Generic
       playbookName: Microsoft 365 Defender - Threat Hunting Generic
       type: playbook
       version: -1
-    taskid: f0a7a0b1-156d-4f73-8a68-e0c06661cb54
+    taskid: 2f9c6950-28fb-4994-8d79-5dfe301cd2e2
     timertriggers: []
     type: playbook
     view: |-
