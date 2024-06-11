@@ -6,7 +6,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 3.6.4
+    itemVersion: 3.6.19
     packID: Phishing
     packName: Phishing
     packPropagationLabels:
@@ -14,7 +14,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.9.7.24076
+dockerimage: demisto/python3:3.10.13.89009
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -24,7 +24,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('LinkToPhishingCampaign', 'start', __line__())
-  ### pack version: 3.6.4
+  ### pack version: 3.6.19
 
 
 
