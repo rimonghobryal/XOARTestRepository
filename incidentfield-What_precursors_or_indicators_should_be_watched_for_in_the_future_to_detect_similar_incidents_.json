@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_whatprecursorsorindicatorsshouldbewatchedforinthefuturetodetectsimilarincidents",
 	"isReadOnly": false,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "What precursors or indicators should be watched for in the future to detect similar incidents?",
