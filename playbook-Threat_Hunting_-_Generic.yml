@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -12,7 +12,7 @@ contentitemexportablefields:
     toServerVersion: ""
 description: "This playbook enables threat hunting for IOCs in your enterprise. It
   currently supports the following integrations: \n- Splunk\n- Qradar\n- Pan-os \n-
-  Cortex data lake \n- Autofocus\n- Microsoft 365 Defender"
+  Cortex Data Lake \n- Autofocus\n- Microsoft 365 Defender"
 id: Threat Hunting - Generic
 inputs:
 - description: The MD5 hash file or an array of hashes to search.
@@ -43,10 +43,8 @@ inputs:
   required: false
   value: {}
 - description: 'A comma-separated list of internal IP ranges to check IP addresses
-    against. The list should be provided in CIDR notation. An example of a list of
-    ranges would be: "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16" (without quotes). If
-    a list is not provided, uses the default list provided in the IsIPInRanges script
-    (the known IPv4 private address ranges).'
+    against. The list should be provided in CIDR notation. For example, a list of
+    ranges would be: "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16" (without quotes).'
   key: InternalRange
   playbookInputQuery: null
   required: false
