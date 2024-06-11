@@ -54,7 +54,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -62,7 +62,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.13.89009
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -72,15 +72,12 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('GridFieldSetup', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
 
 
-  from typing import Dict, List
-
-
-  def grid_field_setup(keys: List[str], vals: Dict, res_list: List) -> List[str]:
+  def grid_field_setup(keys: list[str], vals: dict, res_list: list) -> list[str]:
       """Returns a list of dictionaries based on the key/values provided.
       :type keys: ``str``
       :type vals: ``dict``
@@ -104,7 +101,7 @@ script: |
   ''' COMMAND FUNCTION '''
 
 
-  def grid_field_setup_command(args: Dict[str, str]) -> CommandResults:
+  def grid_field_setup_command(args: dict[str, str]) -> CommandResults:
       keys = argToList(args.pop('keys', []))
       overwrite = args.pop('overwrite', False)
       gridfield = args.pop('gridfield', None)
