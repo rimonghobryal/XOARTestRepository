@@ -24,7 +24,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.3.8
+    itemVersion: 1.3.15
     packID: DeveloperTools
     packName: Developer Tools
     packPropagationLabels:
@@ -41,7 +41,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.3.8
+  // pack version: 1.3.15
   var fields = [args.field1, args.field2, args.field3, args.field4];
   var values = [args.value1, args.value2, args.value3, args.value4];
 
