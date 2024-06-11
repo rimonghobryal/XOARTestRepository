@@ -41,16 +41,16 @@
 				"category": "Database",
 				"commands": [
 					{
-						"description": "Runs a SQL query. Deprecated. Use the generic sql-command instead.",
-						"name": "pgsql-query"
+						"description": "Running a sql query.",
+						"name": "sql-command"
 					},
 					{
 						"description": "Runs a SQL query. Deprecated. Use the generic sql-command instead.",
 						"name": "query"
 					},
 					{
-						"description": "Running a sql query",
-						"name": "sql-command"
+						"description": "Runs a SQL query. Deprecated. Use the generic sql-command instead.",
+						"name": "pgsql-query"
 					}
 				],
 				"description": "Use the Generic SQL integration to run SQL queries on the following databases: MySQL, PostgreSQL, Microsoft SQL Server, and Oracle.",
@@ -66,21 +66,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.1.5",
+	"currentVersion": "1.3.0",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.14",
+			"minVersion": "1.34.4",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "Connect and execute sql queries in 4 Databases: MySQL, PostgreSQL, Microsoft SQL Server and Oracle",
 	"disabledMonthly": false,
-	"downloads": 9796,
+	"downloads": 11928,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -97,7 +97,7 @@
 			"name": "Generic SQL"
 		}
 	],
-	"itemVersion": "1.1.5",
+	"itemVersion": "1.3.0",
 	"keywords": [],
 	"legacy": true,
 	"name": "GenericSQL",
@@ -122,9 +122,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-01-08T10:25:39Z",
+	"updated": "2024-05-20T19:19:00Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "747798",
+	"versionInfo": "1029456",
 	"videos": []
 }
