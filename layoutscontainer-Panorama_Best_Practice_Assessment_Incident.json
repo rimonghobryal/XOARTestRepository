@@ -302,12 +302,12 @@
 	"id": "Panorama Best Practice Assessment",
 	"indicatorsDetails": null,
 	"indicatorsQuickView": null,
-	"itemVersion": "1.2.22",
+	"itemVersion": "1.2.23",
 	"locked": false,
 	"mobile": null,
 	"name": "Panorama Best Practice Assessment Incident",
 	"packID": "BPA",
-	"packName": "Best Practice Assessment (BPA) by Palo Alto Networks",
+	"packName": "Best Practice Assessment (BPA) by Palo Alto Networks (Deprecated)",
 	"packPropagationLabels": [
 		"all"
 	],
