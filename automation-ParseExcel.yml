@@ -1,9 +1,9 @@
 args:
-- description: The entry id of the excel file
+- description: The entry id of the excel file.
   name: entryId
   required: true
 comment: The automation takes Excel file (entryID) as an input and parses its content
-  to the war room and context
+  to the war room and context.
 commonfields:
   id: ParseExcel
   version: -1
@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,20 +19,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.49703
+dockerimage: demisto/py3-tools:1.0.0.96102
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: ParseExcel
 outputs:
 - contextPath: ParseExcel
-  description: ParseExcel
+  description: ParseExcel.
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ParseExcel', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
   import xlrd
 
