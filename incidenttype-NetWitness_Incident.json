@@ -17,7 +17,7 @@
 	"hours": 0,
 	"hoursR": 0,
 	"id": "NetWitness Incident",
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"layout": "RSA NetWitness Layout",
 	"locked": false,
 	"name": "NetWitness Incident",
