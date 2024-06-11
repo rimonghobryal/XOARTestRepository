@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_exactlywhathappenedandatwhattimes",
 	"isReadOnly": false,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Exactly what happened, and at what times?",
