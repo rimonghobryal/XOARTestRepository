@@ -23,7 +23,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.0.7
+    itemVersion: 1.1.1
     packID: DemistoLocking
     packName: Cortex Lock
     packPropagationLabels:
@@ -31,7 +31,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-description: Locking mechanism that prevents concurrent execution of different tasks
+description: Locking mechanism that prevents concurrent execution of different tasks.
 detaileddescription: "The Demisto Locking integration allows prevention of concurrent
   execution of scripts or commands, using a wait-lock-release flow (mutex). \nUse
   the lock name argument to support multiple locks in different flows.\n\n---\n[View
@@ -43,36 +43,43 @@ script:
   commands:
   - arguments:
     - default: true
-      description: Name of lock. When omitted, name is set to Default
+      description: Name of lock. When omitted, name is set to Default.
       name: name
-    - description: Additional information to provide for the lock instance
+    - description: Additional information to provide for the lock instance.
       name: info
-    - description: Timeout (seconds) for wait on lock to be freed
+    - description: Timeout (seconds) for wait on lock to be freed.
       name: timeout
+    - description: Unique identifier value of the lock.
+      hidden: true
+      name: guid
+    - description: Polling Timeout error message.
+      hidden: true
+      name: timeout_err_msg
     description: Gets a specific lock. If the lock doesn't exist, it creates one.
       If the lock is already in use, the command waits until the lock is released
       or until timeout is reached. If timeout is reached and the lock hasn't been
       released, the command fails to get the lock.
     name: demisto-lock-get
+    polling: true
   - arguments:
     - default: true
-      description: Name of lock to release. When omitted, name is set to Default
+      description: Name of lock to release. When omitted, name is set to Default.
       name: name
-    description: Release a lock
+    description: Release a lock.
     name: demisto-lock-release
   - arguments:
     - default: true
       description: Specific lock to show info for. If not specified, shows info for
-        all locks
+        all locks.
       name: name
-    description: Show information on locks
+    description: Show information on locks.
     name: demisto-lock-info
   - arguments: []
-    description: Release all locks
+    description: Release all locks.
     name: demisto-lock-release-all
   runonce: false
   script: |
-    // pack version: 1.0.7
+    // pack version: 1.1.1
     function guid() {
       function s4() {
         return Math.floor((1 + Math.random()) * 0x10000)
@@ -115,43 +122,88 @@ script:
         case 'demisto-lock-get':
             var lockTimeout = args.timeout || params.timeout || 600;
             var lockInfo = 'Locked by incident #' + incidents[0].id + '.';
-            lockInfo += (args.info) ? ' Additional info: ' + args.info :'';
+            lockInfo += (args.info) ? ' Additional info: ' + args.info : '';
 
-            var guid = guid();
+            var guid = args.guid || guid();
             var time = 0;
             var lock, version;
 
-            do{
+            if (isDemistoVersionGE('8.0.0')) {  // XSOAR 8 lock implementation with polling.
+                logDebug('Running on XSOAR version 8');
+
+                // check if the process already holds the lock
                 [lock, version] = getLock();
-                if (lock.guid === guid) {
-                    break;
+
+                if (typeof version === "object") {
+                    version = JSON.stringify(version)
                 }
-                if (!lock.guid) {
-                    try {
-                        setLock(guid, lockInfo, version);
-                    } catch(err) {
-                        logDebug(err.message)
+                logDebug('Task guid: ' + guid + ' | Current lock is: ' + JSON.stringify(lock) + ', version: ' + version);
+
+                if (lock.guid === guid) {
+                    var md = '### Demisto Locking Mechanism\n';
+                    md += 'Lock acquired successfully\n';
+                    md += 'GUID: ' + guid;
+                    logDebug(md)
+                    return { ContentsFormat: formats.markdown, Type: entryTypes.note, Contents: md };
+                }
+                else {
+                    // attempt to acquire the lock
+                    if (!lock.guid) {
+                        logDebug("Attempting to acquire lock")
+                        try {
+                            setLock(guid, lockInfo, version);
+                        } catch (err) {
+                            logDebug(err.message);
+                        }
+                    }
+                    var timeout_err_msg = 'Timeout waiting for lock\n';
+                    timeout_err_msg += 'Lock name: ' + lockName + '\n';
+                    timeout_err_msg += 'Lock info: ' + lock.info + '\n';
+                    logDebug(timeout_err_msg)
+                    return {
+                        Type: entryTypes.note,
+                        Contents: 'Lock was not acquired, Polling.',
+                        PollingCommand: 'demisto-lock-get',
+                        NextRun: '30',
+                        PollingArgs: { name: lockName, info: args.info, timeout: args.timeout, guid: guid, timeout_err_msg: timeout_err_msg },
+                        Timeout: String(lockTimeout)
                     }
                 }
-                wait(1);
-            } while (time++ < lockTimeout) ;
+            } else {  // XSOAR 6 lock implementation without polling.
+                logDebug('Running on XSOAR version 6');
+                do {
+                    [lock, version] = getLock();
+                    if (lock.guid === guid) {
+                        break;
+                    }
+                    if (!lock.guid) {
+                        try {
+                            setLock(guid, lockInfo, version);
+                        } catch (err) {
+                            logDebug(err.message)
+                        }
+                    }
+                    wait(1);
+                } while (time++ < lockTimeout);
 
-            [lock, version] = getLock();
+                [lock, version] = getLock();
 
-            if (lock.guid === guid) {
-                var md = '### Demisto Locking Mechanism\n';
-                md += 'Lock acquired successfully\n';
-                md += 'GUID: ' + guid;
-                return { ContentsFormat: formats.markdown, Type: entryTypes.note, Contents: md } ;
-            } else {
-                var md = 'Timeout waiting for lock\n';
-                md += 'Lock name: ' + lockName + '\n';
-                md += 'Lock info: ' + lock.info + '\n';
-                return { ContentsFormat: formats.text, Type: entryTypes.error, Contents: md };
+                if (lock.guid === guid) {
+                    var md = '### Demisto Locking Mechanism\n';
+                    md += 'Lock acquired successfully\n';
+                    md += 'GUID: ' + guid;
+                    return { ContentsFormat: formats.markdown, Type: entryTypes.note, Contents: md };
+                } else {
+                    var md = 'Timeout waiting for lock\n';
+                    md += 'Lock name: ' + lockName + '\n';
+                    md += 'Lock info: ' + lock.info + '\n';
+                    return { ContentsFormat: formats.text, Type: entryTypes.error, Contents: md };
+                }
+                break;
             }
-            break;
 
         case 'demisto-lock-release':
+            logDebug('Releasing lock lockName: ' + lockName);
             if(sync)   {
                 mergeVersionedIntegrationContext({newContext : {[lockName] : 'remove'}, retries : 5});
             } else {
@@ -159,6 +211,9 @@ script:
                 delete integrationContext[lockName];
                 setVersionedIntegrationContext(integrationContext, sync);
             }
+            [lock, version] = getLock();
+            logDebug('Current lock is: ' + JSON.stringify(lock) + ', version: ' + JSON.stringify(version));
+
 
             var md = '### Demisto Locking Mechanism\n';
             md += 'Lock released successfully';
