@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -1213,11 +1213,9 @@ tasks:
       - "41"
     note: false
     quietmode: 0
-    results:
-    - brandInstances
     scriptarguments:
       brandname:
-        simple: Netcraft
+        simple: Netcraft V2
     separatecontext: false
     skipunavailable: false
     task:
@@ -1261,12 +1259,14 @@ tasks:
     separatecontext: false
     skipunavailable: true
     task:
-      brand: Netcraft
-      description: Reports an attack to Netcraft.
+      brand: ""
+      description: |
+        Report a new attack or authorize an existing attack in the Takedown Service.
+        If a takedown for the attack already exists in the Netcraft system it will be authorized, otherwise, a new takedown will be added and authorized.
       id: 0e06c863-2829-4749-8d1a-6daeb34d89c6
       iscommand: true
       name: Block URL with Netcraft
-      script: Netcraft|||netcraft-report-attack
+      script: '|||netcraft-attack-report'
       type: regular
       version: -1
     taskid: 0e06c863-2829-4749-8d1a-6daeb34d89c6
