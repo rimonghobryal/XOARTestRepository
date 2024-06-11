@@ -14,7 +14,8 @@
 		"AWS EC2 Instance Misconfiguration",
 		"Netwitness Incident",
 		"Symantec DLP Discover Incident",
-		"Prisma Cloud - VM Alert Prioritization"
+		"Prisma Cloud - VM Alert Prioritization",
+		"NetWitness Incident_testing"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -34,7 +35,7 @@
 	"hidden": false,
 	"id": "incident_lastmodifiedby",
 	"isReadOnly": false,
-	"itemVersion": "3.3.98",
+	"itemVersion": "3.5.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Last Modified By",
