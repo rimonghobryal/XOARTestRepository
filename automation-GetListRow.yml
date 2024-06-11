@@ -27,7 +27,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -35,7 +35,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.80593
+dockerimage: demisto/python3:3.10.14.96411
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -61,7 +61,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('GetListRow', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
 
@@ -81,7 +81,8 @@ script: |
           return_error("Error: The supplied header name was not found.")
 
 
-  def list_to_headers_and_lines(list_data, list_separator: str):
+  def list_to_headers_and_lines(list_data: str, list_separator: str):
+      list_data = list_data.strip()
       lines_and_headers = [(line.replace("\r", "") if line.endswith("\r") else line).split(list_separator)
                            for line in list_data.split('\n')]
       headers = lines_and_headers[0]
