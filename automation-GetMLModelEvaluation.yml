@@ -1,28 +1,28 @@
 args:
-- description: A list of labels of the test set
+- description: A list of labels of the test set.
   isArray: true
   name: yTrue
   required: true
-- description: A list of dictionaries contain probability predictions for all classes
+- description: A list of dictionaries contain probability predictions for all classes.
   isArray: true
   name: yPred
   required: true
 - defaultValue: "0.5"
-  description: minimum precision of all classes, ranges 0-1
+  description: minimum precision of all classes, ranges 0-1.
   name: targetPrecision
 - defaultValue: "0.0"
-  description: minimum recall of all classes, ranges 0-1
+  description: minimum recall of all classes, ranges 0-1.
   isArray: true
   name: targetRecall
 - defaultValue: "true"
   description: if set to 'true', the output will include a full exaplanation of the
-    confidence threshold meaning
+    confidence threshold meaning.
   isArray: true
   name: detailedOutput
   predefined:
   - "true"
   - "false"
-comment: Finds a threshold for ML model, and performs an evaluation based on it
+comment: Finds a threshold for ML model, and performs an evaluation based on it.
 commonfields:
   id: GetMLModelEvaluation
   version: -1
@@ -30,7 +30,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.33.16
+    itemVersion: 1.34.11
     packID: Base
     packName: Base
     packPropagationLabels:
@@ -38,14 +38,14 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/ml:1.0.0.30541
+dockerimage: demisto/ml:1.0.0.88591
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: GetMLModelEvaluation
 outputs:
 - contextPath: GetMLModelEvaluation.Threshold
-  description: The found thresholds which meets the conditions of precision and recall
+  description: The found thresholds which meets the conditions of precision and recall.
   type: String
 - contextPath: GetMLModelEvaluation.ConfusionMatrixAtThreshold
   description: The model evaluation confusion matrix for mails above the threhsold.
@@ -59,7 +59,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('GetMLModelEvaluation', 'start', __line__())
-  ### pack version: 1.33.16
+  ### pack version: 1.34.11
   import numpy as np
   import pandas as pd
   from sklearn.metrics import precision_score, recall_score, precision_recall_curve
@@ -108,14 +108,19 @@ script: |
       df = pd.DataFrame(columns=['Class', 'Precision', 'Recall', 'TP', 'FP', 'Coverage', 'Total'])
       for class_ in sorted(y_pred_per_class):
           row = calculate_df_row(class_, threshold, y_true_per_class, y_pred_per_class)
-          df = df.append(row, ignore_index=True)
-      df = df.append({'Class': 'All',
-                      'Precision': df["Precision"].mean(),
-                      'Recall': df["Recall"].mean(),
-                      'TP': df["TP"].sum(),
-                      'FP': df["FP"].sum(),
-                      'Coverage': df["Coverage"].sum(),
-                      'Total': df["Total"].sum()}, ignore_index=True)
+          df = pd.concat([df, pd.DataFrame([row])], ignore_index=True)
+      df = pd.concat([
+          df,
+          pd.DataFrame([{
+              'Class': 'All',
+              'Precision': df["Precision"].mean(),
+              'Recall': df["Recall"].mean(),
+              'TP': df["TP"].sum(),
+              'FP': df["FP"].sum(),
+              'Coverage': df["Coverage"].sum(),
+              'Total': df["Total"].sum()}
+          ]),
+      ], ignore_index=True)
       df = df[['Class', 'Precision', 'TP', 'FP', 'Coverage', 'Total']]
       explained_metrics = ['Precision', 'TP (true positive)', 'FP (false positive)', 'Coverage', 'Total']
       explanation = ['{} {}'.format(bold_hr(metric), METRICS[metric]) for metric in explained_metrics]
@@ -351,7 +356,7 @@ script: |
           for threshold in sorted(class_to_thresholds[class_]):
               row = calculate_df_row(class_, threshold, y_true_per_class, y_pred_per_class)
               row['Threshold'] = threshold
-              class_threshold_df = class_threshold_df.append(row, ignore_index=True)
+              class_threshold_df = pd.concat([class_threshold_df, pd.DataFrame([row])], ignore_index=True)
           class_threshold_df = reformat_df_fractions_to_percentage(class_threshold_df)
           class_threshold_df['Threshold'] = class_threshold_df['Threshold'].apply(lambda p: '{:.2f}'.format(p))
           class_threshold_df = class_threshold_df[['Threshold', 'Precision', 'TP', 'FP', 'Coverage', 'Total']]
