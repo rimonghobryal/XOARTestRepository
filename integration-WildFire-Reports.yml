@@ -37,7 +37,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.1.39
+    itemVersion: 2.1.47
     packID: Palo_Alto_Networks_WildFire
     packName: WildFire by Palo Alto Networks
     packPropagationLabels:
@@ -47,15 +47,14 @@ contentitemexportablefields:
     toServerVersion: ""
 description: Generates a Palo Alto Networks WildFire PDF report. For internal use
   with the TIM Sample Analysis feature.
-detaileddescription: "This integration is set up by default on Cortex XSOAR versions
-  6.5+ with the Threat Intel Module (TIM). It is designed for internal use with the
-  TIM Sample Analysis feature. To run ad hoc CLI commands to generate WildFire reports,
-  use the Palo Alto Networks WildFire v2 integration instead.\n\n#### How to retrieve
-  a Palo Alto Networks WildFire Reports API key\n\nNote: If you have a TIM license
-  that is up-to-date and are running Cortex XSOAR version 6.5, you do not need to
-  set up an API key.\nThe required information is automatically retrieved from your
-  Cortex XSOAR TIM license. \nThis API key is used in the *API Key* field in the integration
-  configuration.\n\n1. Navigate to your [WildFire Account](https://wildfire.paloaltonetworks.com/wildfire/account).\n2.
+detaileddescription: "This integration is set up by default on Cortex XSOAR with the
+  Threat Intel Module (TIM). It is designed for internal use with the TIM Sample Analysis
+  feature. To run ad hoc CLI commands to generate WildFire reports, use the Palo Alto
+  Networks WildFire v2 integration instead.\n\n#### How to retrieve a Palo Alto Networks
+  WildFire Reports API key\n\nNote: If you have a TIM license that is up-to-date,
+  you do not need to set up an API key.\nThe required information is automatically
+  retrieved from your Cortex XSOAR TIM license. \nThis API key is used in the *API
+  Key* field in the integration configuration.\n\n1. Navigate to your [WildFire Account](https://wildfire.paloaltonetworks.com/wildfire/account).\n2.
   Log in to your *WildFire* account.\n3. Select the *Account* tab from the menu.\n4.
   Copy the API key.\n\n\n---\n[View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/wild-fire-reports)"
 display: Palo Alto Networks WildFire Reports
@@ -73,7 +72,7 @@ script:
   runonce: false
   script: |
     register_module_line('WildFire-Reports', 'start', __line__())
-    ### pack version: 2.1.39
+    ### pack version: 2.1.47
 
     import urllib3
     # Disable insecure warnings
