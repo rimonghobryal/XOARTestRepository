@@ -64,6 +64,8 @@ args:
   - "yes"
   - "no"
 comment: |-
+  Deprecated. Use DBotFindSimilarIncidents instead.
+
   Finds similar incidents by common incident keys, labels, custom fields or context keys.
   It's highly recommended to use incident keys if possible (e.g., "type" for the same incident type).
   For best performance, it's recommended to avoid using context keys if possible (for example, if the value also appears in a label key, use label).
@@ -78,7 +80,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -86,6 +88,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
+deprecated: true
 dockerimage: demisto/python3:3.10.13.83255
 enabled: true
 engineinfo: {}
@@ -109,7 +112,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('FindSimilarIncidents', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
   # type: ignore
 
 
