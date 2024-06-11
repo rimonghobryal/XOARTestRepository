@@ -7,7 +7,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 1.4.6
+    itemVersion: 1.4.7
     packID: CaseManagement-Generic
     packName: CaseManagement-Generic
     packPropagationLabels:
@@ -25,7 +25,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('CaseMgmtDisplayLabels', 'start', __line__())
-  ### pack version: 1.4.6
+  ### pack version: 1.4.7
 
 
 
