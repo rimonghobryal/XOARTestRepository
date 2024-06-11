@@ -24,41 +24,41 @@
 				"category": "Data Enrichment \u0026 Threat Intelligence",
 				"commands": [
 					{
-						"description": "Checks the reputation of the supplied URLs.",
-						"name": "url"
-					},
-					{
-						"description": "Reloads the PhishTank downloadable database. PhishTank database is an up to date phishing detection file (updated hourly) .",
-						"name": "phishtank-reload"
-					},
-					{
-						"description": "Shows the status (timestamp) of the last time that PhishTank database was loaded.",
+						"description": "Show PhishTank database status",
 						"name": "phishtank-status"
-					}
-				],
-				"description": "PhishTank is a free community site where anyone can submit, verify, track, and share phishing data.",
-				"id": "PhishTank V2",
-				"name": "PhishTank v2"
-			},
-			{
-				"category": "Data Enrichment \u0026 Threat Intelligence",
-				"commands": [
-					{
-						"description": "Check URL Reputation",
-						"name": "url"
 					},
 					{
 						"description": "Reload PhishTank database",
 						"name": "phishtank-reload"
 					},
 					{
-						"description": "Show PhishTank database status",
-						"name": "phishtank-status"
+						"description": "Check URL Reputation",
+						"name": "url"
 					}
 				],
 				"description": "Deprecated. Use the PhishTank v2 integration instead.",
 				"id": "PhishTank",
 				"name": "PhishTank (Deprecated)"
+			},
+			{
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [
+					{
+						"description": "Shows the status (timestamp) of the last time that PhishTank database was loaded.",
+						"name": "phishtank-status"
+					},
+					{
+						"description": "Reloads the PhishTank downloadable database. PhishTank database is an up to date phishing detection file (updated hourly) .",
+						"name": "phishtank-reload"
+					},
+					{
+						"description": "Checks the reputation of the supplied URLs.",
+						"name": "url"
+					}
+				],
+				"description": "PhishTank is a free community site where anyone can submit, verify, track, and share phishing data.",
+				"id": "PhishTank V2",
+				"name": "PhishTank v2"
 			}
 		],
 		"layoutscontainer": null,
@@ -69,21 +69,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "2.0.29",
+	"currentVersion": "2.0.31",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.34.9",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "PhishTank is a free community site where anyone can submit, verify, track and share phishing data",
 	"disabledMonthly": false,
-	"downloads": 7296,
+	"downloads": 8044,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -104,7 +104,7 @@
 			"name": "PhishTank v2"
 		}
 	],
-	"itemVersion": "2.0.29",
+	"itemVersion": "2.0.31",
 	"keywords": [],
 	"legacy": true,
 	"name": "PhishTank",
@@ -132,9 +132,9 @@
 		"Plug \u0026 Enrich"
 	],
 	"toServerVersion": "",
-	"updated": "2023-09-19T19:23:42Z",
+	"updated": "2024-06-03T19:19:42Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6367558",
+	"versionInfo": "1066075",
 	"videos": []
 }
