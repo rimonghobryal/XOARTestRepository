@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 2.0.14
+    itemVersion: 2.0.15
     packID: HealthCheck
     packName: System Diagnostics and Health Check
     packPropagationLabels:
