@@ -29,7 +29,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.3.43
+    itemVersion: 1.3.56
     packID: DemistoRESTAPI
     packName: Cortex REST API
     packPropagationLabels:
@@ -51,7 +51,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DemistoUploadFileV2', 'start', __line__())
-  ### pack version: 1.3.43
+  ### pack version: 1.3.56
   from typing import Tuple
 
 
