@@ -17,48 +17,10 @@
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Deprecated. Use playbook filters instead. Verifies path in context - Verifies path existence - If matching object is an array - verify fields exists in each of the objects in the array - If matching object is not an array - verify fields exists in matching object - if 'expectedValue' is given - ensure that the given value is equal to the context path",
-				"name": "VerifyContext",
-				"tags": [
-					"context",
-					"Utility"
-				]
-			},
-			{
-				"description": "Deprecated. No available replacement. Checks whether substring is within string. Returns - yes - string contains substring. no - string does not contain substring. If stringSeperator is provided, the substring will be split using the separator, and each item will be checked. If one of the items will be found in the string, the srcipt will return yes. This script is deprecated. The StringContainsArray filter implements the exact functionality.",
-				"name": "StringContains",
-				"tags": [
-					"Condition",
-					"Utility"
-				]
-			},
-			{
-				"description": "Verify given entry contains a string",
-				"name": "VerifyHumanReadableContains",
-				"tags": []
-			},
-			{
-				"description": "Use rakyll/hey to test a web application with a load of requests.",
-				"name": "Hey",
-				"tags": []
-			},
-			{
-				"description": "Verifies that a given object includes all the given fields.",
-				"name": "VerifyObjectFieldsList",
+				"description": "Wait and complete tasks by given status. Used for test playbooks.",
+				"name": "WaitAndCompleteTask",
 				"tags": [
 					"basescript"
-				]
-			},
-			{
-				"description": "Returns, whether there're, are enough indicators in the system.",
-				"name": "VerifyEnoughIndicators",
-				"tags": []
-			},
-			{
-				"description": "Deprecated. No available replacement. Sets key/value pair in incident's context.",
-				"name": "SetContext",
-				"tags": [
-					"Utility"
 				]
 			},
 			{
@@ -67,31 +29,10 @@
 				"tags": []
 			},
 			{
-				"description": "Wait and complete tasks by given status. Used for test playbooks.",
-				"name": "WaitAndCompleteTask",
-				"tags": [
-					"basescript"
-				]
-			},
-			{
-				"description": "Deprecated. No available replacement. While loop is utility script, to do while loops on specific commands or scripts, it will allow you to loop over until some condition is fulfilled (${keyToWatch} == value). Please make sure timeout of the script also sufficient for the loop.",
-				"name": "WhileLoop",
-				"tags": [
-					"Utility"
-				]
-			},
-			{
 				"description": "Checks for existing errors in a given integration.",
 				"name": "VerifyIntegrationHealth",
 				"tags": [
 					"basescript"
-				]
-			},
-			{
-				"description": "Deprecated. Use playbook filters instead. Verify fields are in context.",
-				"name": "VerifyContextFields",
-				"tags": [
-					"Utility"
 				]
 			},
 			{
@@ -102,9 +43,75 @@
 				]
 			},
 			{
+				"description": "Verify given entry contains a string",
+				"name": "VerifyHumanReadableContains",
+				"tags": []
+			},
+			{
+				"description": "Deprecated. Use playbook filters instead. Verifies path in context - Verifies path existence - If matching object is an array - verify fields exists in each of the objects in the array - If matching object is not an array - verify fields exists in matching object - if 'expectedValue' is given - ensure that the given value is equal to the context path",
+				"name": "VerifyContext",
+				"tags": [
+					"context",
+					"Utility"
+				]
+			},
+			{
+				"description": "Returns, whether there're, are enough indicators in the system.",
+				"name": "VerifyEnoughIndicators",
+				"tags": []
+			},
+			{
+				"description": "Deprecated. Use playbook filters instead. Verify fields are in context.",
+				"name": "VerifyContextFields",
+				"tags": [
+					"Utility"
+				]
+			},
+			{
+				"description": "Use rakyll/hey to test a web application with a load of requests.",
+				"name": "Hey",
+				"tags": []
+			},
+			{
+				"description": "Deprecated. No available replacement. Sets key/value pair in incident's context.",
+				"name": "SetContext",
+				"tags": [
+					"Utility"
+				]
+			},
+			{
+				"description": "Get version and URL of current XSOAR server.",
+				"name": "GetServerInfo",
+				"tags": [
+					"basescript"
+				]
+			},
+			{
 				"description": "Execute FetchIncident for a given instance",
 				"name": "FetchFromInstance",
 				"tags": []
+			},
+			{
+				"description": "Deprecated. No available replacement. Checks whether substring is within string. Returns - yes - string contains substring. no - string does not contain substring. If stringSeperator is provided, the substring will be split using the separator, and each item will be checked. If one of the items will be found in the string, the srcipt will return yes. This script is deprecated. The StringContainsArray filter implements the exact functionality.",
+				"name": "StringContains",
+				"tags": [
+					"Condition",
+					"Utility"
+				]
+			},
+			{
+				"description": "Verifies that a given object includes all the given fields.",
+				"name": "VerifyObjectFieldsList",
+				"tags": [
+					"basescript"
+				]
+			},
+			{
+				"description": "Deprecated. No available replacement. While loop is utility script, to do while loops on specific commands or scripts, it will allow you to loop over until some condition is fulfilled (${keyToWatch} == value). Please make sure timeout of the script also sufficient for the loop.",
+				"name": "WhileLoop",
+				"tags": [
+					"Utility"
+				]
 			},
 			{
 				"description": "Find the differences between two indicators lists.",
@@ -125,46 +132,57 @@
 		"indicatorfield": [
 			{
 				"description": "",
-				"name": "Developer Tools param2",
+				"name": "Developer Tools param1",
 				"type": "shortText"
 			},
 			{
 				"description": "",
-				"name": "Developer Tools param1",
+				"name": "Developer Tools param2",
 				"type": "shortText"
 			}
 		],
 		"integration": [
 			{
-				"category": "Utilities",
-				"commands": [
-					{
-						"description": "Creates incidents from json files provided, and stores it in the instance context.",
-						"name": "create-test-incident-from-file"
-					},
-					{
-						"description": "Creates incidents from json file, and stores it in the instance context.",
-						"name": "create-test-incident-from-raw-json"
-					}
-				],
-				"description": "CreateIncidents fetches custom incidents that are created manually.",
-				"id": "CreateIncidents",
-				"name": "Create Test Incidents (Community Contribution)"
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [],
+				"description": "Mock Feed",
+				"id": "Create-Mock-Feed-Relationships",
+				"name": "Create-Mock-Feed-Relationships (Community Contribution)"
 			},
 			{
 				"category": "Utilities",
 				"commands": [
 					{
+						"description": "Test Scenario One - All 10 Pass on first try",
+						"name": "test-scenario-one"
+					},
+					{
+						"description": "Test Scenario Six - 10 items are in 1 call. 1 fail.",
+						"name": "test-scenario-six"
+					},
+					{
+						"description": "Test Scenario Two - 5 Pass on first try, 5 error on quota and are scheduled",
+						"name": "test-scenario-two"
+					},
+					{
+						"description": "Test Scenario Four - 2 Succeed, 3 Fail on retry",
+						"name": "test-scenario-four"
+					},
+					{
 						"description": "This command is executed five times in the PB",
 						"name": "test-scenario-ten"
+					},
+					{
+						"description": "Test Scenario Seven - 10 items are in 1 call. 1 fail. No metrics are returned.",
+						"name": "test-scenario-seven"
 					},
 					{
 						"description": "This is the test PB scenario",
 						"name": "test-scenario-nine"
 					},
 					{
-						"description": "Test Scenario Two - 5 Pass on first try, 5 error on quota and are scheduled",
-						"name": "test-scenario-two"
+						"description": "Test Scenario Eight - 10 items are in 1 call. 1 fail. No metrics returned. Timeout.",
+						"name": "test-scenario-eight"
 					},
 					{
 						"description": "Test Scenario Five - 10 IPs as a string, 1 success",
@@ -173,62 +191,11 @@
 					{
 						"description": "Test Scenario Three - 5 Fail on second try",
 						"name": "test-scenario-three"
-					},
-					{
-						"description": "Test Scenario Six - 10 items are in 1 call. 1 fail.",
-						"name": "test-scenario-six"
-					},
-					{
-						"description": "Test Scenario One - All 10 Pass on first try",
-						"name": "test-scenario-one"
-					},
-					{
-						"description": "Test Scenario Four - 2 Succeed, 3 Fail on retry",
-						"name": "test-scenario-four"
-					},
-					{
-						"description": "Test Scenario Seven - 10 items are in 1 call. 1 fail. No metrics are returned.",
-						"name": "test-scenario-seven"
-					},
-					{
-						"description": "Test Scenario Eight - 10 items are in 1 call. 1 fail. No metrics returned. Timeout.",
-						"name": "test-scenario-eight"
 					}
 				],
 				"description": "This integration runs through all scenarios as defined in the API Metrics expected results guide.",
 				"id": "APIMetricsValidation",
 				"name": "APIMetricsValidation (Community Contribution)"
-			},
-			{
-				"category": "Utilities",
-				"commands": [
-					{
-						"description": "Set integration versioned context.",
-						"name": "pwsh-test-set-integration-versioned-context"
-					},
-					{
-						"description": "Get integration versioned context.",
-						"name": "pwsh-test-get-integration-versioned-context"
-					},
-					{
-						"description": "Set integration context.",
-						"name": "pwsh-test-set-integration-context"
-					},
-					{
-						"description": "Get integration context.",
-						"name": "pwsh-test-get-integration-context"
-					}
-				],
-				"description": "Powershell Integration for testing that Powershell support is working as expected.",
-				"id": "XsoarPowershellTesting",
-				"name": "XSOAR Powershell Testing (Community Contribution)"
-			},
-			{
-				"category": "Data Enrichment \u0026 Threat Intelligence",
-				"commands": [],
-				"description": "Mock Feed",
-				"id": "Create-Mock-Feed-Relationships",
-				"name": "Create-Mock-Feed-Relationships (Community Contribution)"
 			},
 			{
 				"category": "Vulnerability Management",
@@ -241,6 +208,46 @@
 				"description": "This is a demo integration that demonstrates the usage of the CustomIndicator helper class.",
 				"id": "CustomIndicatorDemo",
 				"name": "CustomIndicatorDemo (Community Contribution)"
+			},
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Creates incidents from json file, and stores it in the instance context.",
+						"name": "create-test-incident-from-raw-json"
+					},
+					{
+						"description": "Creates incidents from json files provided, and stores it in the instance context.",
+						"name": "create-test-incident-from-file"
+					}
+				],
+				"description": "CreateIncidents fetches custom incidents that are created manually.",
+				"id": "CreateIncidents",
+				"name": "Create Test Incidents (Community Contribution)"
+			},
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Get integration versioned context.",
+						"name": "pwsh-test-get-integration-versioned-context"
+					},
+					{
+						"description": "Set integration context.",
+						"name": "pwsh-test-set-integration-context"
+					},
+					{
+						"description": "Set integration versioned context.",
+						"name": "pwsh-test-set-integration-versioned-context"
+					},
+					{
+						"description": "Get integration context.",
+						"name": "pwsh-test-get-integration-context"
+					}
+				],
+				"description": "Powershell Integration for testing that Powershell support is working as expected.",
+				"id": "XsoarPowershellTesting",
+				"name": "XSOAR Powershell Testing (Community Contribution)"
 			}
 		],
 		"layoutscontainer": null,
@@ -257,49 +264,49 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.3.8",
+	"currentVersion": "1.3.15",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.5",
+			"minVersion": "1.34.5",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.13.9",
+			"minVersion": "1.14.48",
 			"name": "Common Scripts"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "3.3.95",
+			"minVersion": "3.5.3",
 			"name": "Common Types"
 		},
 		"DemistoRESTAPI": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.3.42",
+			"minVersion": "1.3.55",
 			"name": "Cortex REST API"
 		},
 		"GenericSQL": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.1.4",
+			"minVersion": "1.3.0",
 			"name": "GenericSQL"
 		}
 	},
 	"deprecated": false,
 	"description": "Basic tools for content development.",
 	"disabledMonthly": false,
-	"downloads": 16497,
+	"downloads": 18243,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -342,7 +349,7 @@
 			"name": "Generic SQL"
 		}
 	],
-	"itemVersion": "1.3.8",
+	"itemVersion": "1.3.15",
 	"keywords": [
 		"tools",
 		"developer"
@@ -373,9 +380,9 @@
 		"TIM"
 	],
 	"toServerVersion": "",
-	"updated": "2023-12-20T10:23:45Z",
+	"updated": "2024-05-21T10:31:23Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "7216131",
+	"versionInfo": "1031157",
 	"videos": []
 }
