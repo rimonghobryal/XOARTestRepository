@@ -46,7 +46,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.4.9
+    itemVersion: 1.4.10
     packID: ML
     packName: Machine Learning
     packPropagationLabels:
@@ -82,7 +82,7 @@ runas: DBotWeakRole
 runonce: true
 script: |
   register_module_line('DBotPredictOutOfTheBoxV2', 'start', __line__())
-  ### pack version: 1.4.9
+  ### pack version: 1.4.10
   # pylint: disable=no-member
   import demisto_ml
 
