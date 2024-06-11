@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.0.14
+    itemVersion: 2.0.20
     packID: Troubleshoot
     packName: Troubleshoot
     packPropagationLabels:
@@ -47,7 +47,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('TroubleshootTestInstance', 'start', __line__())
-  ### pack version: 2.0.14
+  ### pack version: 2.0.20
   """
   Gets an instance configuration and a parameter to modify, to check if is works.
   """
