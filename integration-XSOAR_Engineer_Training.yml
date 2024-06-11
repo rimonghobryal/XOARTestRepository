@@ -20,7 +20,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.9.0
-    itemVersion: 1.0.1
+    itemVersion: 1.0.2
     packID: XSOAR_Engineer_Training
     packName: XSOAR Engineer Training
     packPropagationLabels:
@@ -127,12 +127,12 @@ script:
       required: true
     description: Send an email. (Doesn't actually send an email.)
     name: xet-send-mail
-  dockerimage: demisto/python3:3.10.13.75921
+  dockerimage: demisto/python3:3.10.14.97100
   isfetch: true
   runonce: false
   script: |
     register_module_line('XSOAR Engineer Training', 'start', __line__())
-    ### pack version: 1.0.1
+    ### pack version: 1.0.2
 
 
 
