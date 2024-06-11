@@ -20,7 +20,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.4.46
+    itemVersion: 1.4.61
     packID: MicrosoftTeams
     packName: Microsoft Teams
     packPropagationLabels:
@@ -28,7 +28,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/powershell-teams:1.0.0.22275
+dockerimage: demisto/powershell-teams:1.0.0.80546
 engineinfo: {}
 mainengineinfo: {}
 name: ConfigureAzureApplicationAccessPolicy
@@ -46,7 +46,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |-
-  ### pack version: 1.4.46
+  ### pack version: 1.4.61
   Import-Module MicrosoftTeams
 
   function Main()
