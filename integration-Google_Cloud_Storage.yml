@@ -30,7 +30,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.0.12
+    itemVersion: 1.0.13
     packID: GoogleCloudStorage
     packName: Google Cloud Storage
     packPropagationLabels:
@@ -184,8 +184,8 @@ script:
       description: Object owner ID.
       type: String
     - contextPath: GCS.BucketObject.CRC32c
-      description: CRC32c checksum (as described in RFC 4960, Appendix B https://tools.ietf.org/html/rfc4960#appendix-B),
-        encoded using Base64 in big-endian byte order.
+      description: CRC32c checksum (as described in RFC 4960, Appendix B https://urldefense.proofpoint.com/v2/url?u=https-3A__tools.ietf.org_html_rfc4960-23appendix-2DB&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=MR1rkxIrivnuZMyIZTpFtBdsKt5EkVuLzeEp8_vY-oQ&e=
+        ), encoded using Base64 in big-endian byte order.
       type: String
     - contextPath: GCS.BucketObject.EncryptionAlgorithm
       description: The encryption algorithm.
@@ -258,14 +258,9 @@ script:
         If not specified, operation will be performed on the default bucket parameter.
       name: bucket_name
     - default: true
-      description: |-
-        Entity to add into the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "Entity to add into the Access Control List.\nCommon entity formats
+        are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     - auto: PREDEFINED
@@ -285,14 +280,9 @@ script:
         If not specified, operation will be performed on the default bucket parameter.
       name: bucket_name
     - default: true
-      description: |-
-        The entity to update in the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "The entity to update in the Access Control List.\nCommon entity
+        formats are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     - auto: PREDEFINED
@@ -312,14 +302,9 @@ script:
         If not specified, operation will be performed on the default bucket parameter.
       name: bucket_name
     - default: true
-      description: |-
-        Entity to remove from the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "Entity to remove from the Access Control List.\nCommon entity
+        formats are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     description: Removes an entity from a bucket's Access Control List.
@@ -361,14 +346,9 @@ script:
       name: object_name
       required: true
     - default: true
-      description: |-
-        Entity to add into the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "Entity to add into the Access Control List.\nCommon entity formats
+        are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     - auto: PREDEFINED
@@ -390,14 +370,9 @@ script:
       name: object_name
       required: true
     - default: true
-      description: |-
-        The entity to update in the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "The entity to update in the Access Control List.\nCommon entity
+        formats are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     - auto: PREDEFINED
@@ -419,24 +394,33 @@ script:
       name: object_name
       required: true
     - default: true
-      description: |-
-        Entity to remove from the Access Control List.
-        Common entity formats are:
-        * user-<userId or email>
-        * group-<groupId or email>
-        * allUsers
-        * allAuthenticatedUsers
-        For more options and details, see: https://cloud.google.com/storage/docs/json_api/v1/bucketAccessControls#resource
+      description: "Entity to remove from the Access Control List.\nCommon entity
+        formats are:\n* user-<userId or email>\n* group-<groupId or email>\n* allUsers\n*
+        allAuthenticatedUsers\nFor more options and details, see: https://urldefense.proofpoint.com/v2/url?u=https-3A__cloud.google.com_storage_docs_json-5Fapi_v1_bucketAccessControls-23resource&d=DwIGAg&c=V9IgWpI5PvzTw83UyHGVSoW3Uc1MFWe5J8PTfkrzVSo&r=b9Fq_yWX5bK6LtJv3NzERfzrKVHG5CUxWT-Z_zrN7_0&m=23UgUuCAGIb_tk2KjPQ7flkf3KxEH2uNP5shu6agImd-DtM0WdvP9g6W20UUx7XU&s=1GCdJlrnmwfjQl_Y784dvhpe-evnWU4_QIdNVfl9xJw&e= "
       name: entity
       required: true
     description: Removes an entity from an object's Access Control List.
     name: gcs-delete-bucket-object-policy
-  dockerimage: demisto/google-cloud-storage:1.0.0.83364
+  - arguments:
+    - description: Name of the Bucket to copy the object from. If not specified, operation
+        will be performed on the default bucket parameter.
+      name: source_bucket_name
+    - description: Name of the Bucket to copy the object to.
+      name: destination_bucket_name
+      required: true
+    - description: Name of the object to copy.
+      name: source_object_name
+      required: true
+    - description: Name of the object in the destination bucket. If not specified,
+        operation will be performed with the source_object_name parameter.
+      name: destination_object_name
+    description: Copies a file (object) from one bucket to another.
+    name: gcs-copy-file
+  dockerimage: demisto/google-cloud-storage:1.0.0.89308
   runonce: false
   script: |
     register_module_line('Google Cloud Storage', 'start', __line__())
-    ### pack version: 1.0.12
-
+    ### pack version: 1.0.13
 
 
 
@@ -702,6 +686,17 @@ script:
         return blob
 
 
+    def copy_blob(client, source_bucket_name, destination_bucket_name, source_object_name, destination_object_name):
+        source_bucket = client.get_bucket(source_bucket_name)
+        destination_bucket = client.get_bucket(destination_bucket_name)
+        source_blob = source_bucket.blob(source_object_name)
+        destination_blob_name = destination_object_name
+
+        blob_copy = source_bucket.copy_blob(source_blob, destination_bucket, destination_blob_name)
+
+        return blob_copy
+
+
     def gcs_list_bucket_objects(client, default_bucket, args):
         bucket_name = get_bucket_name(args, default_bucket)
         prefix = args.get('prefix', None)
@@ -746,6 +741,21 @@ script:
             'Type': entryTypes['note'],
             'ContentsFormat': formats['text'],
             'Contents': f'File {file_name} was successfully uploaded to bucket {bucket_name} as {object_name}'
+        })
+
+
+    def gcs_copy_file(client, default_bucket, args):
+        source_object_name = args['source_object_name']
+        source_bucket_name = args.get('source_bucket_name', default_bucket)
+        destination_bucket_name = args['destination_bucket_name']
+        destination_object_name = args.get('destination_object_name', source_object_name)
+
+        copy_blob(client, source_bucket_name, destination_bucket_name, source_object_name, destination_object_name)
+
+        demisto.results({
+            'Type': entryTypes['note'],
+            'ContentsFormat': formats['text'],
+            'Contents': f'File was successfully copied to bucket {destination_bucket_name} as {destination_object_name}'
         })
 
 
@@ -989,6 +999,9 @@ script:
 
             elif command == 'gcs-upload-file':
                 gcs_upload_file(client, default_bucket, args)
+
+            elif command == 'gcs-copy-file':
+                gcs_copy_file(client, default_bucket, args)
 
             #
             # Bucket policy (ACL)
