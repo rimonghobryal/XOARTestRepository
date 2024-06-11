@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -605,7 +605,7 @@ tasks:
       id: 22124bae-451b-432b-88e6-1a9affb9ee16
       iscommand: false
       name: Detonate URL - JoeSecurity
-      playbookId: detonate_url_-_joesecurity
+      playbookName: Detonate URL - JoeSecurity
       type: playbook
       version: -1
     taskid: 22124bae-451b-432b-88e6-1a9affb9ee16
