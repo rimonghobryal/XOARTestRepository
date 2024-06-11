@@ -1,6 +1,6 @@
 args:
 - default: true
-  description: Text to analyse for language detection
+  description: Text to analyse for language detection.
   name: text
   required: true
 comment: Language detection based on Google's language-detection.
@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,22 +19,22 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.49703
+dockerimage: demisto/py3-tools:1.0.0.96102
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: LanguageDetect
 outputs:
 - contextPath: langDetect.lang
-  description: Language detection
+  description: Language detection.
 - contextPath: langDetect.probability
-  description: Probability of language detection
+  description: Probability of language detection.
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('LanguageDetect', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   from langdetect import detect_langs
