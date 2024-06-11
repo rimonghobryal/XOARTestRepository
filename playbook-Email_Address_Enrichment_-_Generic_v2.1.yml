@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -14,7 +14,7 @@ description: |-
   Enrich email addresses.
   - Get information from Active Directory for internal addresses
   - Get the domain-squatting reputation for external addresses
-  - Email address reputation using !email command
+  - Email address reputation using !email command.
 id: Email Address Enrichment - Generic v2.1
 inputs:
 - description: A CSV list of internal domains. The list will be used to determine
@@ -67,10 +67,10 @@ outputs:
   description: The DBotScore object.
   type: unknown
 - contextPath: Account.Email.Username
-  description: The Email account username
+  description: The Email account username.
   type: string
 - contextPath: Account.Email.Domain
-  description: The Email account domain
+  description: The Email account domain.
   type: string
 - contextPath: ActiveDirectory.Users.dn
   description: The user distinguished name.
@@ -162,7 +162,7 @@ outputs:
 - contextPath: ActiveDirectory.Users.mail
   description: The user email address.
 - contextPath: Account.Email.Address
-  description: The Email account full address
+  description: The Email account full address.
   type: string
 - contextPath: Account.Email.Distance
   description: The email address distance compare to the domains in query.
@@ -191,6 +191,17 @@ outputs:
   description: The type of the source of the relationship.
 - contextPath: Email.Relationships.EntityBType
   description: The type of the destination of the relationship.
+- contextPath: EWS.ResolvedNames
+  description: EWS resolved name primary key output.
+  type: unknown
+- contextPath: EWS.ResolvedNames.email_address
+  description: The primary SMTP address of a mailbox user.
+- contextPath: EWS.ResolvedNames.mailbox_type
+  description: The type of mailbox that is represented by the email address.
+- contextPath: EWS.ResolvedNames.name
+  description: The name of a mailbox user.
+- contextPath: EWS.ResolvedNames.routing_type
+  description: The address type for the mailbox.
 starttaskid: "0"
 system: true
 tasks:
@@ -358,6 +369,7 @@ tasks:
     nexttasks:
       '#none#':
       - "17"
+      - "23"
     note: false
     quietmode: 0
     separatecontext: false
@@ -375,7 +387,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 102.5,
+          "x": 22.5,
           "y": 790
         }
       }
@@ -406,7 +418,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 910,
+          "x": 950,
           "y": 790
         }
       }
@@ -457,7 +469,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 102.5,
+          "x": 222.5,
           "y": 1135
         }
       }
@@ -509,7 +521,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 910,
+          "x": 710.5,
           "y": 620
         }
       }
@@ -561,7 +573,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 102.5,
+          "x": 292.5,
           "y": 620
         }
       }
@@ -633,7 +645,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 710.5,
+          "x": 750.5,
           "y": 1135
         }
       }
@@ -692,7 +704,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 102.5,
+          "x": 222.5,
           "y": 930
         }
       }
@@ -738,7 +750,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 710.5,
+          "x": 750.5,
           "y": 930
         }
       }
@@ -768,7 +780,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -220,
+          "x": -400,
           "y": 465
         }
       }
@@ -814,7 +826,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1110,
+          "x": 1150,
           "y": 930
         }
       }
@@ -863,7 +875,103 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1120,
+          "x": 1160,
+          "y": 1135
+        }
+      }
+  "23":
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "4"
+      "yes":
+      - "24"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      brandname:
+        simple: EWS v2
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Returns 'yes' if integration brand is available. Otherwise returns
+        'no'.
+      id: 766c0f6c-feff-49af-8bfd-62574133e61c
+      iscommand: false
+      name: Is EWS v2 enabled?
+      script: IsIntegrationAvailable
+      type: condition
+      version: -1
+    taskid: 766c0f6c-feff-49af-8bfd-62574133e61c
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": -180,
+          "y": 930
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    fieldMapping:
+    - incidentfield: Additional Email Addresses
+      output:
+        simple: ${EWS.ResolvedNames.email_address}
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "4"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      full-contact-data:
+        simple: "False"
+      identifier:
+        complex:
+          accessor: Address
+          filters:
+          - - ignorecase: true
+              left:
+                iscontext: true
+                value:
+                  simple: Account.Email.NetworkType
+              operator: isEqualString
+              right:
+                value:
+                  simple: Internal
+          root: Account.Email
+          transformers:
+          - operator: uniq
+    separatecontext: false
+    skipunavailable: true
+    task:
+      brand: ""
+      description: This operation verifies aliases and matches display names to the
+        correct mailbox user. It handles one ambiguous name at a time. If there are
+        multiple potential matches, all will be returned, but limited to a maximum
+        of 100 candidates.
+      id: d10b47f1-37e1-4354-870b-0ac7b022d7d3
+      iscommand: true
+      name: Get full contact info
+      script: '|||ews-resolve-name'
+      type: regular
+      version: -1
+    taskid: d10b47f1-37e1-4354-870b-0ac7b022d7d3
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -180,
           "y": 1135
         }
       }
@@ -883,8 +991,8 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 1255,
-        "width": 1720,
-        "x": -220,
+        "width": 1940,
+        "x": -400,
         "y": 120
       }
     }
