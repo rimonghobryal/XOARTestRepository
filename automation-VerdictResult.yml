@@ -7,7 +7,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.10.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -15,7 +15,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.14.95956
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -25,11 +25,13 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('VerdictResult', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
+
 
 
   RED_HTML_STYLE = "color:#FF1744;text-align:center;font-size:300%;padding-top:1em>"
   GREEN_HTML_STYLE = "color:#00CD33;text-align:center;font-size:300%;padding-top:1em>"
+  ORANGE_HTML_STYLE = "color:#FF9000;text-align:center;font-size:300%;padding-top:1em>"
   GREY_HTML_STYLE = "color:#808080;text-align:center;font-size:300%;padding-top:1em>"
 
 
@@ -38,6 +40,9 @@ script: |
 
       if investigationverdict == 'Malicious':
           html = f"<h1 style={RED_HTML_STYLE}Malicious</h1>"
+
+      elif investigationverdict == 'Suspicious':
+          html = f"<h1 style={ORANGE_HTML_STYLE}Suspicious</h1>"
 
       elif investigationverdict == 'Non-Malicious':
           html = f"<h1 style={GREEN_HTML_STYLE}Non-Malicious</h1>"
