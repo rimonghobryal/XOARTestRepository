@@ -20,7 +20,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.0.29
+    itemVersion: 2.0.31
     packID: PhishTank
     packName: PhishTank
     packPropagationLabels:
@@ -72,7 +72,7 @@ script:
     name: phishtank-status
   runonce: false
   script: |
-    // pack version: 2.0.29
+    // pack version: 2.0.31
     var listSource = 'http://data.phishtank.com/data/online-valid.csv';
     var listUpdateIntervalHours = 1;
 
