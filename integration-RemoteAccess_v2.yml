@@ -48,7 +48,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.0.32
+    itemVersion: 1.0.33
     packID: RemoteAccess
     packName: Remote Access
     packPropagationLabels:
@@ -198,11 +198,11 @@ script:
       description: The file type, as determined by libmagic (same as displayed in
         file entries).
       type: String
-  dockerimage: demisto/netmiko:1.0.0.83817
+  dockerimage: demisto/netmiko:1.0.0.87750
   runonce: false
   script: |
     register_module_line('RemoteAccess v2', 'start', __line__())
-    ### pack version: 1.0.32
+    ### pack version: 1.0.33
     import tempfile
     from concurrent.futures import ThreadPoolExecutor, as_completed
     from io import StringIO
