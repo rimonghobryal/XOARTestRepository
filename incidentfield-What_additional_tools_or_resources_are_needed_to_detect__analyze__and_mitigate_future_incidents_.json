@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_whatadditionaltoolsorresourcesareneededtodetectanalyzeandmitigatefutureincidents",
 	"isReadOnly": false,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "What additional tools or resources are needed to detect, analyze, and mitigate future incidents?",
