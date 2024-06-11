@@ -1,8 +1,8 @@
 args:
-- description: The URL(s) or Email(s) to process
+- description: The URL(s) or Email(s) to process.
   isArray: true
   name: input
-comment: Extract Domain(s) from URL(s) and/or Email(s)
+comment: Extract Domain(s) from URL(s) and/or Email(s).
 commonfields:
   id: ExtractDomainFromUrlAndEmail
   version: -1
@@ -10,7 +10,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -18,7 +18,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.49703
+dockerimage: demisto/py3-tools:1.0.0.96102
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -28,7 +28,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ExtractDomainFromUrlAndEmail', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   from tld import get_fld
@@ -112,7 +112,7 @@ script: |
           domain = get_fld(full_domain, fail_silently=True)
 
       # convert None to empty string if needed
-      domain = '' if not domain else domain
+      domain = domain if domain else ''
       return domain
 
 
