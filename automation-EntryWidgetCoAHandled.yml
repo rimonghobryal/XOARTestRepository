@@ -7,7 +7,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.0.4
+    itemVersion: 1.0.5
     packID: MITRECoA
     packName: MITRE ATT&CK - Courses of Action
     packPropagationLabels:
@@ -15,7 +15,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.8.37233
+dockerimage: demisto/python3:3.10.14.91134
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -25,7 +25,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('EntryWidgetCoAHandled', 'start', __line__())
-  ### pack version: 1.0.4
+  ### pack version: 1.0.5
 
 
 
