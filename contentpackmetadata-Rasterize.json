@@ -24,23 +24,23 @@
 				"category": "Utilities",
 				"commands": [
 					{
-						"description": "Converts the contents of a URL to an image file or a PDF file.",
-						"name": "rasterize"
-					},
-					{
 						"description": "Converts the body of an email to an image file or a PDF file.",
 						"name": "rasterize-email"
-					},
-					{
-						"description": "Converts an image file to a PDF file.",
-						"name": "rasterize-image"
 					},
 					{
 						"description": "Converts a PDF file to an image file.",
 						"name": "rasterize-pdf"
 					},
 					{
-						"description": "Converts an html file to an image file or a PDF file.",
+						"description": "Converts the contents of a URL to an image file or a PDF file.",
+						"name": "rasterize"
+					},
+					{
+						"description": "Converts an image file to a PDF file.",
+						"name": "rasterize-image"
+					},
+					{
+						"description": "Converts an HTML file to an image file or a PDF file.",
 						"name": "rasterize-html"
 					}
 				],
@@ -57,21 +57,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.2.28",
+	"currentVersion": "2.0.14",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.40",
+			"minVersion": "1.34.11",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "Converts URLs, PDF files, and emails to an image file or PDF file.",
 	"disabledMonthly": false,
-	"downloads": 47650,
+	"downloads": 58444,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -88,7 +88,7 @@
 			"name": "Rasterize"
 		}
 	],
-	"itemVersion": "1.2.28",
+	"itemVersion": "2.0.14",
 	"keywords": [],
 	"legacy": true,
 	"name": "Rasterize",
@@ -114,9 +114,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2023-10-25T19:21:22Z",
+	"updated": "2024-06-10T09:25:50Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6704012",
+	"versionInfo": "1082615",
 	"videos": []
 }
