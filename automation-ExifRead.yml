@@ -1,9 +1,9 @@
 args:
 - default: true
-  description: Entry ID of image file
+  description: Entry ID of image file.
   name: EntryID
   required: true
-comment: Read image files metadata and provide Exif tags
+comment: Read image files metadata and provide Exif tags.
 commonfields:
   id: ExifRead
   version: -1
@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,24 +19,24 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.49703
+dockerimage: demisto/py3-tools:1.0.0.96102
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: ExifRead
 outputs:
 - contextPath: Exif.tag
-  description: Exif tag name
+  description: Exif tag name.
   type: string
 - contextPath: Exif.value
-  description: Exif tag value
+  description: Exif tag value.
   type: string
 pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ExifRead', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
   import exifread
 
@@ -48,7 +48,7 @@ script: |
 
       tags = exifread.process_file(f)
       arr = []
-      for tag in tags.keys():
+      for tag in tags:
           arr.append({'tag': str(tag), 'value': str(tags[tag])})
 
       md = tableToMarkdown('Exif Tags', arr)
