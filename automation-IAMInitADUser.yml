@@ -69,7 +69,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.6.27
+    itemVersion: 1.6.35
     packID: Active_Directory_Query
     packName: Active Directory Query
     packPropagationLabels:
@@ -77,7 +77,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.81101
+dockerimage: demisto/py3-tools:1.0.0.95440
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -103,12 +103,12 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('IAMInitADUser', 'start', __line__())
-  ### pack version: 1.6.27
+  ### pack version: 1.6.35
 
 
 
   import uuid
-  import pyminizip
+  from pyzipper import AESZipFile, ZIP_DEFLATED, WZ_AES
 
   DEFAULT_PWD_GENERATION_SCRIPT = "GeneratePassword"
   TEXT_FILE_NAME = "AD_Password"  # File name for the text file (within the zip file) to use
@@ -320,7 +320,10 @@ script: |
           with open(text_file_name, 'w') as text_file:
               text_file.write(generated_password)
 
-          pyminizip.compress(text_file_name, '', zip_file_name, zip_password, 1)
+          demisto.debug(f'zipping {text_file_name=}')
+          with AESZipFile(zip_file_name, mode='w', compression=ZIP_DEFLATED, encryption=WZ_AES) as zf:
+              zf.pwd = bytes(zip_password, 'utf-8')
+              zf.write(text_file_name)
 
           with open(zip_file_name, 'rb') as zip_file:
               zip_content = zip_file.read()
