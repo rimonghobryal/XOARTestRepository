@@ -1,0 +1,597 @@
+category: Utilities
+commonfields:
+  id: EmailRepIO
+  version: -1
+configuration:
+- defaultvalue: https://emailrep.io
+  display: Server URL (e.g., https://emailrep.io)
+  name: url
+  required: true
+  type: 0
+- additionalinfo: Mandatory for the emailrepio-email-address-report command
+  display: API Key
+  hidden: true
+  name: apikey
+  required: false
+  type: 4
+- additionalinfo: Mandatory for the emailrepio-email-address-report command
+  display: ""
+  displaypassword: API Key
+  hiddenusername: true
+  name: credentials
+  required: false
+  type: 9
+- display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  type: 8
+- display: Use system proxy settings
+  name: proxy
+  required: false
+  type: 8
+- additionalinfo: Reliability of the source providing the intelligence data.
+  defaultvalue: B - Usually reliable
+  display: Source Reliability
+  name: integration_reliability
+  options:
+  - A+ - 3rd party enrichment
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: false
+  type: 15
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.0.26
+    packID: EmailRepIO
+    packName: EmailRepIO
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Provides email address reputation and reports.
+detaileddescription: |-
+  #### EmailRep.io Integration
+
+  To obtain an API key and perform requests and create reports using emailrep.io, visit https://emailrep.io/key. If you want to create reports using the ***emailrepio-email-address-report*** command, specify this in your request for the API key.
+
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/email-rep-io)
+display: EmailRep.io
+image: data:image/png;base64,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
+name: EmailRepIO
+script:
+  commands:
+  - arguments:
+    - description: The email address to get the reputation for.
+      name: email_address
+      required: true
+    description: Gets the EmailRepIO reputation for the given email address.
+    name: emailrepio-email-reputation-get
+    outputs:
+    - contextPath: EmailRepIO.Email.email
+      description: The email address that was queried.
+      type: String
+    - contextPath: EmailRepIO.Email.reputation
+      description: 'The reputation of the email. Possible values are: "high", "medium",
+        "low", and "none".'
+      type: String
+    - contextPath: EmailRepIO.Email.suspicious
+      description: Whether the email address should be treated as suspicious or risky.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.references
+      description: The total number of positive and negative sources of the reputation.
+        Note that these may not all be direct references to the email address, but
+        can include reputation sources for the domain or other related information.
+      type: Number
+    - contextPath: EmailRepIO.Email.details.blacklisted
+      description: Whether the email is believed to be malicious or spam.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.malicious_activity
+      description: Whether the email exhibited malicious behavior (e.g., phishing
+        or fraud).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.malicious_activity_recent
+      description: Whether the email exhibited malicious behavior in the last 90 days
+        (e.g., in the case of temporal account takeovers).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.credentials_leaked
+      description: Whether the email credentials were ever leaked (e.g., a data breach,
+        pastebin, dark web, etc.).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.credentials_leaked_recent
+      description: Whether the email credentials were leaked in the last 90 days.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.data_breach
+      description: Whether the email was ever in a data breach.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.first_seen
+      description: The first date the email was observed in a breach, credential leak,
+        or exhibiting malicious or spammy behavior. Displays "never" if the email
+        was never observed in a breach, credential leak, or exhibiting malicious or
+        spammy behavior.
+      type: Date
+    - contextPath: EmailRepIO.Email.details.last_seen
+      description: The last date the email was observed in a breach, credential leak,
+        or exhibiting malicious or spammy behavior. Displays "never" if the email
+        was never observed in a breach, credential leak, or exhibiting malicious or
+        spammy behavior.
+      type: Date
+    - contextPath: EmailRepIO.Email.details.domain_exists
+      description: Whether the domain is a valid domain.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.domain_reputation
+      description: 'The reputation of the domain. Possible values are: "high", "medium",
+        "low", and "n/a". Displays "n/a" if the domain is a free_provider, disposable,
+        or doesn’t exist.'
+      type: String
+    - contextPath: EmailRepIO.Email.details.new_domain
+      description: Whether the domain was created within the last year.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.days_since_domain_creation
+      description: The number of days since the domain was created.
+      type: Number
+    - contextPath: EmailRepIO.Email.details.suspicious_tld
+      description: Whether the email has a suspicious top level domain (tld).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spam
+      description: Whether the email has exhibited spammy behavior (e.g., spam traps,
+        login form abuse).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.free_provider
+      description: Whether the email uses a free email provider.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.disposable
+      description: Whether the email uses a temporary or disposable service.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.deliverable
+      description: Whether the email is deliverable.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.accept_all
+      description: Whether the mail server has a default accept all policy. Some mail
+        servers return inconsistent responses, so the default may be an accept all
+        policy.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.valid_mx
+      description: Whether the email has a mail exchanger (MX) record.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spoofable
+      description: Whether the email address can be spoofed (e.g., not a strict Sender
+        Policy Framework (SPF) policy or Domain-based Message Authentication, Reporting
+        & Conformance (DMARC) is not enforced).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spf_strict
+      description: Whether there is a sufficiently strict SPF record to prevent spoofing.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.dmarc_enforced
+      description: Whether DMARC is configured correctly and enforced.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.profiles
+      description: The online profiles used by the email.
+      type: String
+  - arguments:
+    - default: true
+      description: The email address to get the reputation for.
+      isArray: true
+      name: email
+      required: true
+    description: Gets the DBot score for the given email address using the EmailRepIO
+      reputation.
+    name: email
+    outputs:
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: DBotScore.Reliability
+      description: Reliability of the source providing the intelligence data.
+      type: String
+    - contextPath: EmailRepIO.Email.email
+      description: The email address that was queried.
+      type: String
+    - contextPath: EmailRepIO.Email.reputation
+      description: 'The reputation of the email. Possible values are: "high", "medium",
+        "low", and "none".'
+      type: String
+    - contextPath: EmailRepIO.Email.suspicious
+      description: Whether the email address should be treated as suspicious or risky.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.references
+      description: The total number of positive and negative sources of the reputation.
+        Note that these may not all be direct references to the email address, but
+        can include reputation sources for the domain or other related information.
+      type: Number
+    - contextPath: EmailRepIO.Email.details.blacklisted
+      description: Whether the email is believed to be malicious or spam.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.malicious_activity
+      description: Whether the email exhibited malicious behavior (e.g., phishing
+        or fraud).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.malicious_activity_recent
+      description: Whether the email exhibited malicious behavior in the last 90 days
+        (e.g., in the case of temporal account takeovers).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.credentials_leaked
+      description: Whether the email credentials were ever leaked (e.g., a data breach,
+        pastebin, dark web, etc.).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.credentials_leaked_recent
+      description: Whether the email credentials were leaked in the last 90 days.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.data_breach
+      description: Whether the email was ever in a data breach.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.first_seen
+      description: The first date the email was observed in a breach, credential leak,
+        or exhibiting malicious or spammy behavior. Displays "never" if the email
+        was never observed in a breach, credential leak, or exhibiting malicious or
+        spammy behavior.
+      type: Date
+    - contextPath: EmailRepIO.Email.details.last_seen
+      description: The last date the email was observed in a breach, credential leak,
+        or exhibiting malicious or spammy behavior. Displays "never" if the email
+        was never observed in a breach, credential leak, or exhibiting malicious or
+        spammy behavior.
+      type: Date
+    - contextPath: EmailRepIO.Email.details.domain_exists
+      description: Whether the domain is a valid domain.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.domain_reputation
+      description: 'The reputation of the domain. Possible values are: "high", "medium",
+        "low", and "n/a". Displays "n/a" if the domain is a free_provider, disposable,
+        or doesn’t exist.'
+      type: String
+    - contextPath: EmailRepIO.Email.details.new_domain
+      description: Whether the domain was created within the last year.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.days_since_domain_creation
+      description: The number of days since the domain was created.
+      type: Number
+    - contextPath: EmailRepIO.Email.details.suspicious_tld
+      description: Whether the email has a suspicious top level domain (tld).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spam
+      description: Whether the email exhibited spammy behavior (e.g., spam traps,
+        login form abuse).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.free_provider
+      description: Whether the email uses a free email provider.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.disposable
+      description: Whether the email uses a temporary or disposable service.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.deliverable
+      description: Whether the email is deliverable.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.accept_all
+      description: Whether the mail server has a default accept all policy. Some mail
+        servers return inconsistent responses, so the default may be an accept all
+        policy.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.valid_mx
+      description: Whether the email has a mail exchanger (MX) record.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spoofable
+      description: Whether the email address can be spoofed (e.g., not a strict Sender
+        Policy Framework (SPF) policy or Domain-based Message Authentication, Reporting
+        & Conformance (DMARC) is not enforced).
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.spf_strict
+      description: Whether there is a sufficiently strict SPF record to prevent spoofing.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.dmarc_enforced
+      description: Whether DMARC is configured correctly and enforced.
+      type: Boolean
+    - contextPath: EmailRepIO.Email.details.profiles
+      description: The online profiles used by the email.
+      type: String
+  - arguments:
+    - description: The email address to report.
+      name: email_address
+      required: true
+    - auto: PREDEFINED
+      description: The tags to apply to the email. See detailed descriptions in the
+        EmailRepIO documentation for more information.
+      isArray: true
+      name: tags
+      predefined:
+      - account_takeover
+      - bec
+      - brand_impersonation
+      - browser_exploit
+      - credential_phishing
+      - generic_phishing
+      - malware
+      - scam
+      - spam
+      - spoofed
+      - task_request
+      - threat_actor
+      required: true
+    - description: Additional information and context.
+      name: description
+    - description: The time the activity occurred in UTC time format. Defaults to
+        now().
+      name: timestamp
+    - description: The number of hours the email should be considered risky (suspicious=true
+        and blacklisted=true in the QueryResponse). Defaults to no expiration unless
+        the "account_takeover" tag is specified, in which case the default is 14 days.
+      name: expires
+    description: Reports a malicious email address to EmailRepIO.  You tag the type
+      of malicious activity associated with the email address. The date of the malicious
+      activity defaults to the current time unless otherwise specified.
+    name: emailrepio-email-address-report
+  dockerimage: demisto/python3:3.10.13.84405
+  runonce: false
+  script: |
+    register_module_line('EmailRepIO', 'start', __line__())
+    ### pack version: 1.0.26
+
+
+    """EmailRepIO Integration for Cortex XSOAR"""
+
+
+    import urllib3
+    from typing import Any
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+
+    ''' CONSTANTS '''
+
+
+    ACCEPTED_TAGS = ['account_takeover', 'bec', 'brand_impersonation', 'browser_exploit', 'credential_phishing',
+                     'generic_phishing', 'malware', 'scam', 'spam', 'spoofed', 'task_request', 'threat_actor']
+    APP_NAME = 'Cortex-XSOAR'
+    INTEGRATION_NAME = 'EmailRepIO'
+
+    ''' CLIENT CLASS '''
+
+
+    class Client(BaseClient):
+        """Client class to interact with the EmailRepIO service API"""
+
+        def get_email_address_reputation(self, email: str) -> dict[str, Any]:
+            """Get email reputation using the '/{email}' API endpoint"""
+
+            return self._http_request(
+                method='GET',
+                url_suffix=f"/{email}"
+            )
+
+        def post_email_address_report(self, email: str, tags: list[str], description: str | None,
+                                      timestamp: int | None, expires: int | None) -> dict[str, Any]:
+            """Report email reputation using the '/report' API endpoint"""
+            request_params: dict[str, Any] = {}
+            request_params["email"] = email
+            request_params["tags"] = tags
+
+            if description:
+                request_params["description"] = description
+
+            if timestamp:
+                request_params["timestamp"] = timestamp
+
+            if expires:
+                request_params["expires"] = expires
+
+            return self._http_request(
+                method='POST',
+                url_suffix='/report',
+                json_data=request_params
+            )
+
+
+    ''' COMMAND FUNCTIONS '''
+
+
+    def test_module(client: Client) -> str:
+        """Test API connectivity and authentication."""
+        try:
+            client.get_email_address_reputation(email="test@example.com")
+        except DemistoException as e:
+            if 'invalid api key' in str(e):
+                return 'Authorization Error: make sure API Key is correctly set'
+            else:
+                raise e
+        return 'ok'
+
+
+    def email_command(client: Client, args: dict[str, Any], reliability: str) -> list[CommandResults]:
+        """Get email address reputation from EmailRepIO and calculate DBotScore.
+
+        DBot score:
+        Good: Suspicious = false
+        Malicious: Suspicious = true + (malicious_activity_recent = true or credentials_leaked_recent = true)
+        Suspicious: Suspicious = true and not malicious
+        """
+        emails = argToList(args.get('email'))
+        if len(emails) == 0 or emails is None:
+            raise ValueError('Email(s) not specified')
+
+        emails_results = []
+
+        for email in emails:
+            email_data = client.get_email_address_reputation(email)
+            description = f'{INTEGRATION_NAME} returned'
+            suspicious = email_data.get('suspicious')
+            malicious_activity_recent = email_data.get('details.malicious_activity_recent')
+            credentials_leaked_recent = email_data.get('details.credentials_leaked_recent')
+
+            if not suspicious:
+                score = Common.DBotScore.GOOD
+                description = ''
+            elif malicious_activity_recent or credentials_leaked_recent:
+                if malicious_activity_recent:
+                    description += ' malicious_activity_recent'
+                if credentials_leaked_recent:
+                    description += ' credentials_leaked_recent'
+                score = Common.DBotScore.BAD
+            else:
+                score = Common.DBotScore.SUSPICIOUS
+                description = ''
+
+            dbot_score = Common.DBotScore(
+                indicator=email,
+                indicator_type=DBotScoreType.ACCOUNT,
+                integration_name=INTEGRATION_NAME,
+                score=score,
+                malicious_description=description,
+                reliability=DBotScoreReliability.get_dbot_score_reliability_from_str(reliability)
+            )
+
+            account_context = Common.Account(
+                id=email,
+                email_address=email,
+                dbot_score=dbot_score
+            )
+
+            readable_output = tableToMarkdown('Email', email_data)
+
+            result = CommandResults(
+                readable_output=readable_output,
+                outputs_prefix=f'{INTEGRATION_NAME}.Email',
+                outputs_key_field='id',
+                outputs=email_data,
+                indicator=account_context
+            )
+            emails_results.append(result)
+
+        return emails_results
+
+
+    def email_reputation_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        """Get email address reputation from EmailRepIO"""
+
+        emails = argToList(args.get('email_address'))
+        if len(emails) == 0 or emails is None:
+            raise ValueError('Email(s) not specified')
+
+        email = emails[0]
+        email_data = client.get_email_address_reputation(email)
+
+        readable_output = tableToMarkdown('Email', email_data)
+
+        return CommandResults(
+            readable_output=readable_output,
+            outputs_prefix=f'{INTEGRATION_NAME}.Email',
+            outputs_key_field='email',
+            outputs=email_data
+        )
+
+
+    def report_email_address_command(client: Client, args: dict[str, Any]) -> CommandResults:
+        """Report email address to EmailRepIO"""
+
+        email_address = args.get('email_address')
+        if email_address is None:
+            raise ValueError('Email(s) not specified')
+        tags = argToList(args.get('tags'))
+        if len(tags) == 0:
+            raise ValueError('Tag(s) not specified')
+        for tag in tags:
+            if tag not in ACCEPTED_TAGS:
+                raise ValueError(f'Tag \'{tag}\' not in accepted tag list: {ACCEPTED_TAGS}')
+
+        description = args.get('description')
+        timestamp = args.get('timestamp')
+        if timestamp is not None:
+            timestamp = int(args.get('timestamp'))  # type: ignore
+
+        expires = args.get('expires')
+        if expires is not None:
+            expires = int(args.get('expires'))  # type: ignore
+
+        result = client.post_email_address_report(
+            email=email_address,
+            tags=tags,
+            description=description,
+            timestamp=timestamp,
+            expires=expires
+        )
+
+        readable_output = tableToMarkdown('Email Report Response', result)
+
+        return CommandResults(
+            readable_output=readable_output,
+            outputs_prefix=f'{INTEGRATION_NAME}.Report',
+            outputs_key_field='status',
+            outputs=result
+        )
+
+
+    ''' MAIN FUNCTION '''
+
+
+    def main() -> None:  # pragma: no cover
+        """main function, parses params and runs command functions"""
+        demisto_params = demisto.params()
+        api_key = demisto_params.get('credentials', {}).get('password') or demisto_params.get('apikey')
+
+        # get the service API url
+        base_url = demisto_params.get('url', '')
+        verify_certificate = not demisto_params.get('insecure', False)
+        proxy = demisto_params.get('proxy', False)
+        reliability = demisto_params.get('integration_reliability', '')
+
+        demisto.debug(f'Command being called is {demisto.command()}')
+        try:
+            headers = {
+                'Key': f'{api_key}',
+                'User-Agent': APP_NAME
+            }
+            client = Client(
+                base_url=base_url,
+                verify=verify_certificate,
+                headers=headers,
+                proxy=proxy)
+
+            if demisto.command() == 'emailrepio-email-reputation-get':
+                return_results(email_reputation_command(client, demisto.args()))
+
+            elif demisto.command() == 'email':
+                return_results(email_command(client, demisto.args(), reliability))
+
+            elif demisto.command() == 'emailrepio-email-address-report':
+                return_results(report_email_address_command(client, demisto.args()))
+
+            elif demisto.command() == 'test-module':
+                # This is the call made when pressing the integration Test button.
+                return_results(test_module(client))
+
+            else:
+                raise NotImplementedError(f"Command {demisto.command()} was not found in {INTEGRATION_NAME} commands")
+
+        # Log exceptions and return errors
+        except Exception as e:
+            return_error(f'Failed to execute {demisto.command()} command.\nError:\n{str(e)}')
+
+
+    ''' ENTRY POINT '''
+
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):  # pragma: no cover
+        main()
+
+    register_module_line('EmailRepIO', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
