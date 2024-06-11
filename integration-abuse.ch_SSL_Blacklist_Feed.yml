@@ -102,7 +102,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.1.25
+    itemVersion: 1.1.26
     packID: Feedsslabusech
     packName: Abuse.ch SSL Blacklist Feed
     packPropagationLabels:
@@ -134,12 +134,12 @@ script:
       name: indicator_type
     description: Gets the feed indicators.
     name: sslbl-get-indicators
-  dockerimage: demisto/python3:3.10.12.63474
+  dockerimage: demisto/python3:3.10.13.86272
   feed: true
   runonce: false
   script: |
     register_module_line('abuse.ch SSL Blacklist Feed', 'start', __line__())
-    ### pack version: 1.1.25
+    ### pack version: 1.1.26
 
 
 
