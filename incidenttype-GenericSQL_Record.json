@@ -17,7 +17,7 @@
 	"hours": 0,
 	"hoursR": 0,
 	"id": "GenericSQL Record",
-	"itemVersion": "1.1.5",
+	"itemVersion": "1.3.0",
 	"layout": "",
 	"locked": false,
 	"name": "GenericSQL Record",
