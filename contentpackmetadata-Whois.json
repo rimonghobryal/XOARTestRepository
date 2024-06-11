@@ -25,16 +25,16 @@
 				"category": "Data Enrichment \u0026 Threat Intelligence",
 				"commands": [
 					{
-						"description": "Provides data enrichment for domains using free resources. Availability of those services may be limited.",
-						"name": "whois"
+						"description": "Provides data enrichment for domains.",
+						"name": "domain"
 					},
 					{
 						"description": "Provides data enrichment for ips.",
 						"name": "ip"
 					},
 					{
-						"description": "Provides data enrichment for domains.",
-						"name": "domain"
+						"description": "Provides data enrichment for domains using free resources. Availability of those services may be limited.",
+						"name": "whois"
 					}
 				],
 				"description": "Provides data enrichment for domains.",
@@ -63,21 +63,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.5.7",
+	"currentVersion": "1.5.14",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.13",
+			"minVersion": "1.34.11",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.13.19",
+			"minVersion": "1.15.7",
 			"name": "Common Scripts"
 		},
 		"DomainTools": {
@@ -87,18 +87,25 @@
 			"minVersion": "1.1.5",
 			"name": "DomainTools Enterprise"
 		},
+		"DomainTools_Iris": {
+			"author": "DomainTools",
+			"certification": "certified",
+			"mandatory": false,
+			"minVersion": "2.0.2",
+			"name": "DomainTools Iris Investigate"
+		},
 		"JsonWhoIs": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.0.21",
+			"minVersion": "1.0.22",
 			"name": "JsonWhoIs"
 		}
 	},
 	"deprecated": false,
 	"description": "This Content Pack helps you run Whois commands as playbook tasks or real-time actions within Cortex XSOAR to obtain valuable domain metadata.",
 	"disabledMonthly": false,
-	"downloads": 30861,
+	"downloads": 35250,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -121,9 +128,13 @@
 		{
 			"imagePath": "content/packs/DomainTools/DomainTools_image.png",
 			"name": "DomainTools"
+		},
+		{
+			"imagePath": "content/packs/DomainTools_Iris/DomainToolsIris_image.png",
+			"name": "DomainTools Iris"
 		}
 	],
-	"itemVersion": "1.5.7",
+	"itemVersion": "1.5.14",
 	"keywords": [],
 	"legacy": true,
 	"name": "Whois",
@@ -149,14 +160,14 @@
 	},
 	"tags": [
 		"Plug \u0026 Enrich",
-		"Getting Started",
 		"Free Enricher",
-		"TIM"
+		"TIM",
+		"Getting Started"
 	],
 	"toServerVersion": "",
-	"updated": "2024-01-04T20:20:15Z",
+	"updated": "2024-06-10T09:23:10Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "743135",
+	"versionInfo": "1082615",
 	"videos": []
 }
