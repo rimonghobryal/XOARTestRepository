@@ -1,0 +1,113 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "Reports a malicious email address to EmailRepIO.  You tag the type of malicious activity associated with the email address. The date of the malicious activity defaults to the current time unless otherwise specified.",
+						"name": "emailrepio-email-address-report"
+					},
+					{
+						"description": "Gets the DBot score for the given email address using the EmailRepIO reputation.",
+						"name": "email"
+					},
+					{
+						"description": "Gets the EmailRepIO reputation for the given email address.",
+						"name": "emailrepio-email-reputation-get"
+					}
+				],
+				"description": "Provides email address reputation and reports.",
+				"id": "EmailRepIO",
+				"name": "EmailRep.io"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.26",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.18",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "Provide email address reputation and reports from EmailRep.io.",
+	"disabledMonthly": false,
+	"downloads": 2475,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "EmailRepIO",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/EmailRepIO/EmailRepIO_image.png",
+			"name": "EmailRep.io"
+		}
+	],
+	"itemVersion": "1.0.26",
+	"keywords": [],
+	"legacy": true,
+	"name": "EmailRepIO",
+	"packID": "EmailRepIO",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://emailrep.io"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-01-16T10:29:00Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "765039",
+	"videos": []
+}
