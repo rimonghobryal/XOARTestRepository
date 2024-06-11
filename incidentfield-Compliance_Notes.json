@@ -3,7 +3,8 @@
 	"aliases": null,
 	"associatedToAll": false,
 	"associatedTypes": [
-		"Qradar Generic"
+		"Qradar Generic",
+		"Prisma Cloud Compute Compliance v2"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -23,7 +24,7 @@
 	"hidden": false,
 	"id": "incident_compliancenotes",
 	"isReadOnly": false,
-	"itemVersion": "3.3.98",
+	"itemVersion": "3.5.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Compliance Notes",
@@ -46,7 +47,10 @@
 	"selectValues": [],
 	"sla": 0,
 	"system": false,
-	"systemAssociatedTypes": null,
+	"systemAssociatedTypes": [
+		"Qradar Generic",
+		"Prisma Cloud Compute Compliance v2"
+	],
 	"template": "",
 	"threshold": 72,
 	"toServerVersion": "",
