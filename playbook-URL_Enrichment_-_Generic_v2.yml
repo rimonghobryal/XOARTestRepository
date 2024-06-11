@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -151,7 +151,7 @@ tasks:
             iscontext: true
             value:
               simple: inputs.URL
-          operator: isExists
+          operator: isNotEmpty
           right:
             value: {}
       label: "yes"
