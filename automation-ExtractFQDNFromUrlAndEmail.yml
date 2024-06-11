@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,7 +19,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/py3-tools:1.0.0.49703
+dockerimage: demisto/py3-tools:1.0.0.96102
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -29,7 +29,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ExtractFQDNFromUrlAndEmail', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   from tld import get_tld
@@ -93,7 +93,7 @@ script: |
           # get the subdomain using tld.subdomain
           subdomain = domain.subdomain
           if (subdomain):
-              fqdn = "{}.{}".format(subdomain, domain.fld)
+              fqdn = f"{subdomain}.{domain.fld}"
 
       return fqdn
 
@@ -127,7 +127,7 @@ script: |
           fqdn = get_fqdn(full_domain)
 
       # convert None to empty string if needed
-      fqdn = '' if not fqdn else fqdn
+      fqdn = fqdn if fqdn else ''
       return fqdn
 
 
