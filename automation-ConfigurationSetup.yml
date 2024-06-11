@@ -9,7 +9,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.2.16
+    itemVersion: 1.2.19
     packID: ContentManagement
     packName: XSOAR CI/CD
     packPropagationLabels:
@@ -48,7 +48,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ConfigurationSetup', 'start', __line__())
-  ### pack version: 1.2.16
+  ### pack version: 1.2.19
 
 
 
