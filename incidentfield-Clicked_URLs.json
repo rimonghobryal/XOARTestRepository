@@ -3,7 +3,8 @@
 	"aliases": null,
 	"associatedToAll": false,
 	"associatedTypes": [
-		"Phishing"
+		"Phishing",
+		"PhishingTest"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -106,7 +107,7 @@
 	"hidden": false,
 	"id": "incident_clickedurls",
 	"isReadOnly": false,
-	"itemVersion": "3.6.4",
+	"itemVersion": "3.6.19",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Clicked URLs",
