@@ -24,6 +24,14 @@
 				"category": "Utilities",
 				"commands": [
 					{
+						"description": "Rename a file. Warning: use this only if necessary, it's HEAVY to run, this will delete and recreate the file with another name.",
+						"name": "file-management-rename-file"
+					},
+					{
+						"description": "Delete the attachment from the incident and from the XSOAR server.",
+						"name": "file-management-delete-attachment"
+					},
+					{
 						"description": "Copies a file from this incident to the specified incident. Usefull if you want to manipule file in the preprocessing.",
 						"name": "file-management-upload-file-to-incident"
 					},
@@ -36,12 +44,12 @@
 						"name": "file-management-check-file"
 					},
 					{
-						"description": "Delete the attachment from the incident and from the XSOAR server.",
-						"name": "file-management-delete-attachment"
+						"description": "Get file hash from URI.",
+						"name": "file-management-get-file-hash"
 					},
 					{
-						"description": "Rename a file. Warning: use this only if necessary, it's HEAVY to run, this will delete and recreate the file with another name.",
-						"name": "file-management-rename-file"
+						"description": "Download files from server.",
+						"name": "file-management-download-file"
 					}
 				],
 				"description": "This integration uses the XSOAR API to perform basic but essentials actions on files.",
@@ -57,21 +65,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.2",
+	"currentVersion": "1.1.2",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.41",
+			"minVersion": "1.33.45",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "This pack let user manipulate file inside XSOAR more easily than with the builtin functions.",
 	"disabledMonthly": false,
-	"downloads": 57,
+	"downloads": 135,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.0.0",
 	"general": [
@@ -85,7 +93,7 @@
 			"name": "XSOAR File Management"
 		}
 	],
-	"itemVersion": "1.0.2",
+	"itemVersion": "1.1.2",
 	"keywords": [
 		"File"
 	],
@@ -112,9 +120,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2023-11-03T10:24:32Z",
+	"updated": "2024-03-31T19:23:55Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6785115",
+	"versionInfo": "924992",
 	"videos": []
 }
