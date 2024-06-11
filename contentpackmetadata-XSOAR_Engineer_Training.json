@@ -24,28 +24,28 @@
 				"category": "Utilities",
 				"commands": [
 					{
-						"description": "Fetches events from the XSOAR Engineer Training (XET) integration.",
-						"name": "xet-get-events"
-					},
-					{
-						"description": "Retrieves detailed information about a user account. The user can be specified by username, email address, or as an Active Directory Distinguished Name (DN).",
-						"name": "xet-ad-get-user"
+						"description": "Send an email. (Doesn't actually send an email.)",
+						"name": "xet-send-mail"
 					},
 					{
 						"description": "Expires the password of an Active Directory user.",
 						"name": "xet-ad-expire-password"
 					},
 					{
-						"description": "Sets a new password for an Active Directory user.",
-						"name": "xet-ad-set-new-password"
+						"description": "Retrieves detailed information about a user account. The user can be specified by username, email address, or as an Active Directory Distinguished Name (DN).",
+						"name": "xet-ad-get-user"
 					},
 					{
 						"description": "Searches the simulated SIEM for events.",
 						"name": "xet-siem-search"
 					},
 					{
-						"description": "Send an email. (Doesn't actually send an email.)",
-						"name": "xet-send-mail"
+						"description": "Fetches events from the XSOAR Engineer Training (XET) integration.",
+						"name": "xet-get-events"
+					},
+					{
+						"description": "Sets a new password for an Active Directory user.",
+						"name": "xet-ad-set-new-password"
 					}
 				],
 				"description": "The XSOAR Engineer Training (XET) integration provides sample data to fetch events into Cortex XSOAR, and commands to build playbooks around.\n\nUse for training purposes only.",
@@ -61,21 +61,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.1",
+	"currentVersion": "1.0.2",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.45",
+			"minVersion": "1.34.10",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "XSOAR Engineer Training (XET) Pack, this pack contains content utilized to train you on how to be an XSOAR Engineer.",
 	"disabledMonthly": false,
-	"downloads": 47,
+	"downloads": 144,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.9.0",
 	"general": [
@@ -89,7 +89,7 @@
 			"name": "XSOAR Engineer Training"
 		}
 	],
-	"itemVersion": "1.0.1",
+	"itemVersion": "1.0.2",
 	"keywords": [],
 	"legacy": true,
 	"name": "XSOAR Engineer Training",
@@ -113,13 +113,11 @@
 		"email": "",
 		"url": ""
 	},
-	"tags": [
-		"Trending"
-	],
+	"tags": [],
 	"toServerVersion": "",
-	"updated": "2023-11-16T10:26:52Z",
+	"updated": "2024-06-06T19:16:49Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6906425",
+	"versionInfo": "1076296",
 	"videos": []
 }
