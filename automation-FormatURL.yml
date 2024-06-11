@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -21,7 +21,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.80593
+dockerimage: demisto/python3:3.10.14.92207
 engineinfo: {}
 mainengineinfo: {}
 name: FormatURL
@@ -34,7 +34,14 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('FormatURL', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
+
+
+
+
+  ### GENERATED CODE ###: from FormatURLApiModule import *  # noqa: E402
+  # This code was inserted in place of an API module.
+  register_module_line('FormatURLApiModule', 'start', __line__(), wrapper=-3)
   import ipaddress
   import tldextract
   import urllib.parse
@@ -126,15 +133,18 @@ script: |
               # The URL seems to have a scheme indicated by presence of "//" or "%3A"
               self.scheme_check()
 
-          try:
-              # First slash after the scheme (if exists)
-              first_slash = self.modified_url[self.base:].index("/")
+          host_end_position = -1
+          special_chars = ("/", "?", "#")  # Any one of these states the end of the host / authority part in a URL
 
-          except ValueError:
-              first_slash = -1
+          for char in special_chars:
+              try:
+                  host_end_position = self.modified_url[self.base:].index(char)
+                  break  # index for the end of the part found, breaking loop
+              except ValueError:
+                  continue  # no reserved char found, URL has no path, query or fragment parts.
 
           try:
-              if "@" in self.modified_url[:first_slash]:
+              if "@" in self.modified_url[:host_end_position]:
                   # Checks if url has '@' sign in its authority part
 
                   self.user_info_check()
@@ -157,8 +167,12 @@ script: |
           if not self.done and self.fragment:
               self.fragment_check()
 
-          if self.quoted:
-              self.output = urllib.parse.unquote(self.output)
+          while '%' in self.output:
+              unquoted = urllib.parse.unquote(self.output)
+              if unquoted != self.output:
+                  self.output = unquoted
+              else:
+                  break
 
       def __str__(self):
           return f"{self.output}"
@@ -632,7 +646,7 @@ script: |
   class URLFormatter:
 
       # URL Security Wrappers
-      ATP_regex = re.compile('.*?\.safelinks\.protection\.outlook\.com/\?url=(.*?)&', re.I)
+      ATP_regex = re.compile('.*?[.]safelinks[.]protection[.](?:outlook|office365)[.](?:com|us)/.*?[?]url=(.*?)&', re.I)
       fireeye_regex = re.compile('.*?fireeye[.]com.*?&u=(.*)', re.I)
       proofpoint_regex = re.compile('(?i)(?:proofpoint.com/v[1-2]/(?:url\?u=)?(.+?)(?:&amp|&d|$)|'
                                     'https?(?::|%3A)//urldefense[.]\w{2,3}/v3/__(.+?)(?:__;|$))')
@@ -765,6 +779,9 @@ script: |
           True if inout is a valid CIDR
 
       """
+      if not cidr[-1].isdigit():  # precaution incase the regex caught an extra char by mistake
+          cidr = cidr[:-1]
+
       try:
           ipaddress.ip_network(cidr)
           return True
@@ -772,34 +789,38 @@ script: |
           return False
 
 
-  def main():
-      raw_urls = demisto.args().get('input')
-
-      raw_urls = argToList(raw_urls, separator='|')
-
+  def format_urls(raw_urls: list[str]) -> list[str]:
       formatted_urls: List[str] = []
 
+      for url in raw_urls:
+          formatted_url = ''
+
+          if _is_valid_cidr(url):
+              # If input is a valid CIDR formatter will ignore it to let it become a CIDR
+              formatted_urls.append('')
+              continue
+
+          try:
+              formatted_url = URLFormatter(url).output
+
+          except URLError:
+              demisto.debug(traceback.format_exc())
+
+          except Exception:
+              demisto.debug(traceback.format_exc())
+
+          finally:
+              formatted_urls.append(formatted_url)
+      return formatted_urls
+
+  register_module_line('FormatURLApiModule', 'end', __line__(), wrapper=1)
+  ### END GENERATED CODE ###
+
+
+  def main():
+      raw_urls = argToList(demisto.args().get('input'), separator='|')
       try:
-          for url in raw_urls:
-              formatted_url = ''
-
-              if _is_valid_cidr(url):
-                  # If input is a valid CIDR formatter will ignore it to let it become a CIDR
-                  formatted_urls.append('')
-                  continue
-
-              try:
-                  formatted_url = URLFormatter(url).output
-
-              except URLError:
-                  demisto.debug(traceback.format_exc())
-
-              except Exception:
-                  demisto.debug(traceback.format_exc())
-
-              finally:
-                  formatted_urls.append(formatted_url)
-
+          formatted_urls = format_urls(raw_urls)
           output = [{
               'Type': entryTypes['note'],
               'ContentsFormat': formats['json'],
@@ -816,7 +837,7 @@ script: |
           )
 
 
-  if __name__ in ('__main__', '__builtin__', 'builtins'):
+  if __name__ in ('__main__', '__builtin__', 'builtins'):  # pragma: no-cover
       main()
 
   register_module_line('FormatURL', 'end', __line__())
