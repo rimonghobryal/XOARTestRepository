@@ -35,7 +35,7 @@ configuration:
   - eu-west-3
   - us-gov-east-1
   - us-gov-west-1
-  required: false
+  required: true
   section: Connect
   type: 15
 - advanced: true
@@ -96,6 +96,17 @@ configuration:
   required: false
   section: Connect
   type: 0
+- additionalinfo: Sets the AWS_STS_REGIONAL_ENDPOINTS environment variable to specify
+    the AWS STS endpoint resolution logic. By default, this option is set to “legacy”
+    in AWS. Leave empty if the environment variable is already set using server configuration.
+  display: AWS STS Regional Endpoints
+  name: sts_regional_endpoint
+  options:
+  - legacy
+  - regional
+  required: false
+  section: Connect
+  type: 15
 - advanced: true
   display: Trust any certificate (not secure)
   name: insecure
@@ -112,7 +123,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.19
+    itemVersion: 1.2.24
     packID: AWS-S3
     packName: AWS - S3
     packPropagationLabels:
@@ -120,7 +131,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-description: Amazon Web Services Simple Storage Service (S3)
+description: Amazon Web Services Simple Storage Service (S3).
 detaileddescription: "Before you can use AWS S3, you need to perform several configuration
   steps in your AWS environment.\n\n### Prerequisites\n- Attach an instance profile
   with the required permissions to the Cortex XSOAR server or engine that is running
@@ -209,7 +220,7 @@ script:
         from 900 seconds (15 minutes) up to the maximum session duration setting for
         the role.
       name: roleSessionDuration
-    description: List all S3 buckets in AWS account
+    description: List all S3 buckets in AWS account.
     name: aws-s3-list-buckets
     outputs:
     - contextPath: AWS.S3.Buckets.BucketName
@@ -232,7 +243,7 @@ script:
         from 900 seconds (15 minutes) up to the maximum session duration setting for
         the role.
       name: roleSessionDuration
-    description: Get AWS S3 Bucket Policy
+    description: Get AWS S3 Bucket Policy.
     name: aws-s3-get-bucket-policy
     outputs:
     - contextPath: AWS.S3.Buckets.Policy.Version
@@ -369,7 +380,7 @@ script:
         from 900 seconds (15 minutes) up to the maximum session duration setting for
         the role.
       name: roleSessionDuration
-    description: Get AWS S3 Bucket Encryption
+    description: Get AWS S3 Bucket Encryption.
     name: aws-s3-get-bucket-encryption
     outputs:
     - contextPath: AWS.S3.Buckets.BucketName.ServerSideEncryptionConfiguration.Rules.ApplyServerSideEncryptionByDefault.SSEAlgorithm
@@ -382,13 +393,13 @@ script:
       description: S3 Bucket Encryption Key Enabled.
       type: boolean
   - arguments:
-    - description: Entry ID of the file to upload
+    - description: Entry ID of the file to upload.
       name: entryID
       required: true
-    - description: The name of the bucket to upload to
+    - description: The name of the bucket to upload to.
       name: bucket
       required: true
-    - description: The name of the key to upload to
+    - description: The name of the key to upload to.
       name: key
       required: true
     - description: The AWS Region, if not specified the default region will be used.
@@ -401,7 +412,7 @@ script:
         from 900 seconds (15 minutes) up to the maximum session duration setting for
         the role.
       name: roleSessionDuration
-    description: Upload file to S3 bucket
+    description: Upload file to S3 bucket.
     name: aws-s3-upload-file
   - arguments:
     - description: The name of the Amazon S3 bucket whose PublicAccessBlock configuration
@@ -451,11 +462,11 @@ script:
     description: Creates or modifies the PublicAccessBlock configuration for an Amazon
       S3 bucket.
     name: aws-s3-put-public-access-block
-  dockerimage: demisto/boto3py3:1.0.0.52713
+  dockerimage: demisto/boto3py3:1.0.0.87582
   runonce: false
   script: |
     register_module_line('AWS - S3', 'start', __line__())
-    ### pack version: 1.2.19
+    ### pack version: 1.2.24
 
 
     import io
@@ -515,6 +526,11 @@ script:
             self.aws_secret_access_key, self.aws_session_token = extract_session_from_secret(aws_secret_access_key, aws_session_token)
             self.verify_certificate = verify_certificate
 
+            sts_regional_endpoint = demisto.params().get("sts_regional_endpoint") or None
+            if sts_regional_endpoint:
+                demisto.debug(f"Sets the environment variable AWS_STS_REGIONAL_ENDPOINTS={sts_regional_endpoint}")
+                os.environ["AWS_STS_REGIONAL_ENDPOINTS"] = sts_regional_endpoint.lower()
+
             proxies = handle_proxy(proxy_param_name='proxy', checkbox_default_value=False)
             (read_timeout, connect_timeout) = AWSClient.get_timeout(timeout)
             if int(retries) > 10:
@@ -540,7 +556,7 @@ script:
                 command_config['connect_timeout'] = connect_timeout
             if retries or timeout:
                 demisto.debug('Merging client config settings: {}'.format(command_config))
-                self.config = self.config.merge(Config(**command_config))
+                self.config = self.config.merge(Config(**command_config))  # type: ignore[arg-type]
 
         def aws_session(self, service, region=None, role_arn=None, role_session_name=None, role_session_duration=None,
                         role_policy=None):
