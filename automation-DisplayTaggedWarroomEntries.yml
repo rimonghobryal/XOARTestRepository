@@ -10,7 +10,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.1.4
+    itemVersion: 1.2.1
     packID: CommunityCommonScripts
     packName: Community Common Scripts
     packPropagationLabels:
@@ -28,7 +28,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DisplayTaggedWarroomEntries', 'start', __line__())
-  ### pack version: 1.1.4
+  ### pack version: 1.2.1
 
 
   import json
