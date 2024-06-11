@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_commandandcontrolremediationproducts",
 	"isReadOnly": false,
-	"itemVersion": "1.0.4",
+	"itemVersion": "1.0.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Command and Control Remediation Products",
