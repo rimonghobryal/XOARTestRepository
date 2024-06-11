@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.0.9
+    itemVersion: 1.0.10
     packID: NIST
     packName: NIST
     packPropagationLabels:
