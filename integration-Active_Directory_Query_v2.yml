@@ -104,7 +104,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.6.27
+    itemVersion: 1.6.35
     packID: Active_Directory_Query
     packName: Active Directory Query
     packPropagationLabels:
@@ -894,13 +894,13 @@ script:
     outputs:
     - contextPath: ActiveDirectory.ValidCredentials
       description: List of usernames that successfully logged in.
-  dockerimage: demisto/ldap:2.9.1.75534
+  dockerimage: demisto/ldap:2.9.1.89223
   ismappable: true
   isremotesyncout: true
   runonce: false
   script: |
     register_module_line('Active Directory Query v2', 'start', __line__())
-    ### pack version: 1.6.27
+    ### pack version: 1.6.35
 
 
 
@@ -1189,7 +1189,7 @@ script:
         # search AD with a simple query to test base DN is configured correctly
         try:
             search(
-                "(objectClass=user)",
+                "(objectClass=*)",
                 base_dn,
                 size_limit=1
             )
@@ -1302,7 +1302,11 @@ script:
 
     def modify_user_ou(dn, new_ou):
         assert connection is not None
-        cn = dn.split(',', 1)[0]
+        cn = dn.split(',OU=', 1)[0]
+        cn = cn.split(',DC=', 1)[0]
+        # removing // to fix customers bug
+        cn = cn.replace('\\', '')
+        dn = dn.replace('\\', '')
 
         success = connection.modify_dn(dn, cn, new_superior=new_ou)
         return success
@@ -2496,7 +2500,7 @@ script:
         if not success:
             raise Exception("Failed to add {} to group {}".format(
                 args.get('username') or args.get('computer-name'),
-                args.get('group_name')
+                args.get('group-cn')
             ))
 
         demisto_entry = {
@@ -2533,7 +2537,7 @@ script:
         if not success:
             raise Exception("Failed to remove {} from group {}".format(
                 args.get('username') or args.get('computer-name'),
-                args.get('group_name')
+                args.get('group-cn')
             ))
 
         demisto_entry = {
