@@ -1,0 +1,223 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Endpoint"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"playbook"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Endpoint",
+				"commands": [
+					{
+						"description": "Request zone information for a specific zone in your organization.",
+						"name": "cylance-protect-get-zone"
+					},
+					{
+						"description": "Updates a zone in your organization.",
+						"name": "cylance-protect-update-zone"
+					},
+					{
+						"description": "Allows the caller to get a list of tenant policies.",
+						"name": "cylance-protect-get-policies"
+					},
+					{
+						"description": "Get a cylance InstaQuery search result.",
+						"name": "cylance-optics-get-instaquery-result"
+					},
+					{
+						"description": "Returns details for a single policy.",
+						"name": "cylance-protect-get-policy-details"
+					},
+					{
+						"description": "Get a list of all current InstaQueries.",
+						"name": "cylance-optics-list-instaquery"
+					},
+					{
+						"description": "Allows a caller to request a specific device resource belonging to a Tenant by hostname.",
+						"name": "cylance-protect-get-device-by-hostname"
+					},
+					{
+						"description": "Delete one or more devices from an organization.",
+						"name": "cylance-protect-delete-devices"
+					},
+					{
+						"description": "Requests threat details for a specific threat.",
+						"name": "cylance-protect-get-threat"
+					},
+					{
+						"description": "Allows a caller to request a page with a list of Console device resources that belongings to a tenant, sorted by registration (created) date in descending order (most recent device registered listed first).",
+						"name": "cylance-protect-get-devices"
+					},
+					{
+						"description": "Removes a convicted threat for a particular tenant from either the Global Quarantine list or the Global Safe list.",
+						"name": "cylance-protect-delete-hash-from-lists"
+					},
+					{
+						"description": "Allows a caller to request a page with a list of threats found on a specific device.",
+						"name": "cylance-protect-get-device-threats"
+					},
+					{
+						"description": "Produces a CSV threat data report of the indicators.",
+						"name": "cylance-protect-get-indicators-report"
+					},
+					{
+						"description": "Returns a list of global list resources for a tenant.",
+						"name": "cylance-protect-get-list"
+					},
+					{
+						"description": "Downloads the threat (file) attached to a specific SHA256 hash.",
+						"name": "cylance-protect-download-threat"
+					},
+					{
+						"description": "Allows a caller to request  a list of devices on a specific threat.",
+						"name": "cylance-protect-get-threat-devices"
+					},
+					{
+						"description": "Allows a caller to request a specific device resource belonging to a Tenant.",
+						"name": "cylance-protect-get-device"
+					},
+					{
+						"description": "Adds a convicted threat for a particular tenant to either the Global Quarantine list or the Global Safe list.",
+						"name": "cylance-protect-add-hash-to-list"
+					},
+					{
+						"description": "Create a cylance InstaQuery to search for artifacts in one or multiple zones.",
+						"name": "cylance-optics-create-instaquery"
+					},
+					{
+						"description": "Creates (adds) a zone to your Console.",
+						"name": "cylance-protect-create-zone"
+					},
+					{
+						"description": "Request zone information for your organization. This will return the top 100 records.",
+						"name": "cylance-protect-get-zones"
+					},
+					{
+						"description": "Returns information about Cylance Protect threats.",
+						"name": "cylance-protect-get-threats"
+					},
+					{
+						"description": "Updates the status of a convicted threat. Can be \"Quarantine\" or \"Waive\".",
+						"name": "cylance-protect-update-device-threats"
+					},
+					{
+						"description": "Allows a caller to update a specific Console device resource belonging to a Tenant.",
+						"name": "cylance-protect-update-device"
+					}
+				],
+				"description": "Manage Endpoints using Cylance protect.",
+				"id": "Cylance Protect v2",
+				"name": "Cylance Protect v2"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": [
+			{
+				"description": "This playbook returns a file sample to the War Room given the file's SHA256 hash, using Cylance Protect v2 integration.",
+				"name": "Get File Sample By Hash - Cylance Protect v2"
+			},
+			{
+				"description": "Deprecated. Use \"Get File Sample By Hash - Cylance Protect v2\" playbook instead.",
+				"name": "Get File Sample By Hash - Cylance Protect"
+			},
+			{
+				"description": "Enriches endpoints using the Cylance Protect v2 integration.",
+				"name": "Endpoint Enrichment - Cylance Protect v2"
+			},
+			{
+				"description": "This playbook accepts a SHA256 hash and adds the hash to the Global Quarantine list using the Cylance Protect v2 integration.",
+				"name": "Block File - Cylance Protect v2"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.35",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.33.45",
+			"name": "Base"
+		},
+		"CommonScripts": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.14.24",
+			"name": "Common Scripts"
+		}
+	},
+	"deprecated": false,
+	"description": "Manage Endpoints using Cylance protect",
+	"disabledMonthly": false,
+	"downloads": 5898,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "5.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "Cylance_Protect",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/Cylance_Protect/CylanceProtectv2_image.png",
+			"name": "Cylance Protect v2"
+		}
+	],
+	"itemVersion": "1.1.35",
+	"keywords": [],
+	"legacy": true,
+	"name": "Cylance Protect",
+	"packID": "Cylance_Protect",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "CylancePROTECT is an integrated threat prevention solution that combines the\npower of artificial intelligence (AI) to block malware infections.",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "5.0.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-04-01T09:25:28Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "925751",
+	"videos": []
+}
