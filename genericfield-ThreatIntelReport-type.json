@@ -31,6 +31,9 @@
 	"ownerOnly": false,
 	"packID": "ThreatIntelReports",
 	"packName": "",
+	"packPropagationLabels": [
+		"all"
+	],
 	"placeholder": "",
 	"propagationLabels": [
 		"all"
