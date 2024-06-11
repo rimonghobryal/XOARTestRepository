@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -16,9 +16,9 @@ description: "This playbook takes a command line from the alert and performs the
   \n\nAt the end of the playbook, it sets a possible verdict for the command line,
   based on the finding:\n1. Indicators found in the command line\n2. Found AMSI techniques\n3.
   Found suspicious parameters\n4. Usage of malicious tools\n5. Indication of network
-  activity\n6. Indication of suspicious LOLBIN execution\n\nNote: In case you are
-  wishing to run this playbook with a list of command lines, set this playbook to
-  be running in a loop. To do so, navigate to the 'Loop'  and check \"For Each Input\"."
+  activity\n6. Indication of suspicious LOLBIN execution\n\nNote: To run this playbook
+  with a list of command lines, set this playbook to run in a loop. To do so, navigate
+  to 'Loop'  and check \"For Each Input\"."
 id: Command-Line Analysis
 inputs:
 - description: The command line.
@@ -1182,11 +1182,11 @@ tasks:
           root: commandline
           transformers:
           - args:
-              item:
-                iscontext: true
+              empty_values: {}
+              remove_keys:
                 value:
-                  simple: inputs.Commandline
-            operator: append
+                  simple: "true"
+            operator: RemoveEmpty
     separatecontext: false
     skipunavailable: false
     task:
@@ -1525,6 +1525,13 @@ tasks:
       value:
         complex:
           root: inputs.Commandline
+          transformers:
+          - args:
+              empty_values: {}
+              remove_keys:
+                value:
+                  simple: "true"
+            operator: RemoveEmpty
     separatecontext: false
     skipunavailable: false
     task:
@@ -1768,6 +1775,7 @@ tasks:
     skipunavailable: false
     task:
       brand: ""
+      description: Found suspicious LOLBIN execution?
       id: 3212780f-1634-43cd-8a59-39af8883e672
       iscommand: false
       name: Found suspicious LOLBIN execution?
