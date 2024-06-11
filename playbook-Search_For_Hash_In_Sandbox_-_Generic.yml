@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -215,6 +215,8 @@ tasks:
           root: inputs.FileSha256
           transformers:
           - operator: uniq
+      limit:
+        simple: "1"
     separatecontext: false
     skipunavailable: false
     task:
@@ -326,10 +328,10 @@ tasks:
         simple: "true"
       ids:
         complex:
-          accessor: reportIds
-          root: csfalconx.resource.FindReport
+          accessor: resources
+          root: csfalconx.resource
           transformers:
-          - operator: FirstArrayElement
+          - operator: uniq
     separatecontext: false
     skipunavailable: false
     task:
