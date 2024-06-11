@@ -1,5 +1,5 @@
 args:
-- defaultValue: "10000"
+- defaultValue: "1000"
   description: Maximum number of indicators for malicious ratio calculation.
   name: maxNumberOfIndicators
 - defaultValue: "3"
@@ -18,7 +18,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -26,7 +26,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
+dockerimage: demisto/python3:3.10.13.86272
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -36,10 +36,9 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('TopMaliciousRatioIndicators', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
-  from typing import Tuple
 
 
   def select_indicator_columns(indicator: dict) -> Dict:
@@ -63,10 +62,10 @@ script: |
       return result
 
 
-  def find_indicators_with_mal_ratio(
-          max_indicators: int, min_number_of_invs: int, max_results: int, from_date: str) -> Tuple[str, list]:
-      indicators = execute_command("findIndicators", {'query': f'lastSeen:>={from_date}', 'size': max_indicators})
-      indicators = [i for i in indicators if len(i.get('investigationIDs') or []) >= min_number_of_invs]
+  def find_indicators_with_mal_ratio(max_indicators: int, min_number_of_invs: int, max_results: int, from_date: str)\
+          -> tuple[str, list]:
+      indicators = execute_command(
+          "findIndicators", {'query': f'lastSeen:>={from_date} investigationsCount:>={min_number_of_invs}', 'size': max_indicators})
 
       if not indicators:
           return json.dumps({"total": 0, "data": []}), []
