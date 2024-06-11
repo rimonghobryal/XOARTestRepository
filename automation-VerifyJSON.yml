@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -21,7 +21,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/powershell:7.1.3.22028
+dockerimage: demisto/powershell:7.4.0.80528
 engineinfo: {}
 mainengineinfo: {}
 name: VerifyJSON
@@ -33,7 +33,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   function Main() {
