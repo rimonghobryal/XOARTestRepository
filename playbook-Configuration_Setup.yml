@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.2.16
+    itemVersion: 1.2.19
     packID: ContentManagement
     packName: XSOAR CI/CD
     packPropagationLabels:
@@ -15,6 +15,11 @@ id: Configuration Setup
 inputs:
 - description: Core REST API instance name to use.
   key: InstanceName
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: Gitlab instance name to use.
+  key: GitlabInstanceName
   playbookInputQuery: null
   required: false
   value: {}
@@ -96,7 +101,7 @@ tasks:
       {
         "position": {
           "x": 275,
-          "y": 545
+          "y": 555
         }
       }
   "3":
@@ -416,6 +421,8 @@ tasks:
     note: false
     quietmode: 0
     scriptarguments:
+      execution-timeout:
+        simple: "1000"
       install_dependencies:
         simple: "true"
       pack_id_key:
@@ -666,6 +673,16 @@ tasks:
             value:
               simple: AzureDevOps
       label: AzureDevOps
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: incident.configurationfilesource
+          operator: isEqualString
+          right:
+            value:
+              simple: GoogleCloudStorage
+      label: GOOGLE CLOUD STORAGE
     continueonerrortype: ""
     id: "23"
     ignoreworker: false
@@ -676,6 +693,8 @@ tasks:
       - "2"
       AzureDevOps:
       - "37"
+      GOOGLE CLOUD STORAGE:
+      - "39"
       GitHub:
       - "22"
       Gitlab:
@@ -1088,7 +1107,8 @@ tasks:
       ref:
         simple: ${incident.branchname}
       using:
-        simple: Gitlab Gold
+        complex:
+          root: inputs.GitlabInstanceName
     separatecontext: false
     skipunavailable: false
     task:
@@ -1231,6 +1251,43 @@ tasks:
         "position": {
           "x": 2230,
           "y": 1680
+        }
+      }
+  "39":
+    continueonerrortype: ""
+    id: "39"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      bucket_name:
+        simple: ${incident.cicds3bucketname}
+      object_name:
+        simple: ${incident.configfilepath}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Google Cloud Storage
+      description: Retrieves object data into a file.
+      id: 06f49ef0-a41e-4dc4-8b97-1cc696df593f
+      iscommand: true
+      name: Get Configuration File from Google cloud storage
+      script: Google Cloud Storage|||gcs-download-file
+      type: regular
+      version: -1
+    taskid: 06f49ef0-a41e-4dc4-8b97-1cc696df593f
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 190,
+          "y": 380
         }
       }
 version: -1
