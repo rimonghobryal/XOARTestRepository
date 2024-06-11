@@ -24,16 +24,16 @@
 				"category": "Utilities",
 				"commands": [
 					{
+						"description": "Copies the given file from the remote machine to Cortex XSOAR.",
+						"name": "copy-from"
+					},
+					{
 						"description": "Run the specified command on the remote system with SSH.",
 						"name": "ssh"
 					},
 					{
 						"description": "Copies the given file from Cortex XSOAR to the remote machine.",
 						"name": "copy-to"
-					},
-					{
-						"description": "Copies the given file from the remote machine to Cortex XSOAR.",
-						"name": "copy-from"
 					}
 				],
 				"description": "This integration transfers files between Cortex XSOAR and a remote machine and executes commands on the remote machine.",
@@ -49,21 +49,21 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.32",
+	"currentVersion": "1.0.33",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.16",
+			"minVersion": "1.33.28",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "Transfer files and execute commands via SSH on remote machines.",
 	"disabledMonthly": false,
-	"downloads": 9910,
+	"downloads": 10309,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.0.0",
 	"general": [
@@ -80,7 +80,7 @@
 			"name": "RemoteAccess v2"
 		}
 	],
-	"itemVersion": "1.0.32",
+	"itemVersion": "1.0.33",
 	"keywords": [],
 	"legacy": true,
 	"name": "Remote Access",
@@ -106,9 +106,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-01-09T20:22:10Z",
+	"updated": "2024-02-14T10:27:10Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "752611",
+	"versionInfo": "827009",
 	"videos": []
 }
