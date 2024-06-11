@@ -21,8 +21,8 @@
 		"generictype": null,
 		"incidentfield": [
 			{
-				"description": "How could information sharing with other organizations have been improved?",
-				"name": "How could information sharing with other organizations have been improved?",
+				"description": "What corrective actions can prevent similar incidents in the future?",
+				"name": "What corrective actions can prevent similar incidents in the future?",
 				"type": "shortText"
 			},
 			{
@@ -31,18 +31,23 @@
 				"type": "shortText"
 			},
 			{
-				"description": "What corrective actions can prevent similar incidents in the future?",
-				"name": "What corrective actions can prevent similar incidents in the future?",
-				"type": "shortText"
-			},
-			{
 				"description": "Exactly what happened, and at what times?",
 				"name": "Exactly what happened, and at what times?",
 				"type": "shortText"
 			},
 			{
+				"description": "Were any steps or actions taken that might have inhibited the recovery?",
+				"name": "Were any steps or actions taken that might have inhibited the recovery?",
+				"type": "shortText"
+			},
+			{
 				"description": "What precursors or indicators should be watched for in the future to detect similar incidents?",
 				"name": "What precursors or indicators should be watched for in the future to detect similar incidents?",
+				"type": "shortText"
+			},
+			{
+				"description": "The NIST stage the investigation is currently at.",
+				"name": "NIST Stage",
 				"type": "shortText"
 			},
 			{
@@ -56,18 +61,13 @@
 				"type": "shortText"
 			},
 			{
-				"description": "The NIST stage the investigation is currently at.",
-				"name": "NIST Stage",
-				"type": "shortText"
-			},
-			{
 				"description": "What additional tools or resources are needed to detect, analyze, and mitigate future incidents?",
 				"name": "What additional tools or resources are needed to detect, analyze, and mitigate future incidents?",
 				"type": "shortText"
 			},
 			{
-				"description": "Were any steps or actions taken that might have inhibited the recovery?",
-				"name": "Were any steps or actions taken that might have inhibited the recovery?",
+				"description": "How could information sharing with other organizations have been improved?",
+				"name": "How could information sharing with other organizations have been improved?",
 				"type": "shortText"
 			}
 		],
@@ -92,16 +92,16 @@
 		"list": null,
 		"playbook": [
 			{
-				"description": "This playbook contains the phases to handling an incident as described in the 'Handling an Incident' section of NIST - Computer Security Incident Handling Guide.\n\nHandling an incident - Computer Security Incident Handling Guide\nhttps://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf",
-				"name": "NIST - Handling an Incident Template"
-			},
-			{
 				"description": "This playbook assists in processing an incident after it occurs and facilitates the lessons learned stage.",
 				"name": "NIST - Lessons Learned"
 			},
 			{
 				"description": "This playbook investigates an access incident by gathering user and IP information, and handling the incident based on the stages in \"Handling an incident - Computer Security Incident Handling Guide\" by NIST.\nhttps://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf\n\nUsed Sub-playbooks:\n- IP Enrichment - Generic v2\n- Account Enrichment - Generic v2.1\n- Block IP - Generic v3\n- NIST - Lessons Learned",
 				"name": "Access Investigation - Generic - NIST"
+			},
+			{
+				"description": "This playbook contains the phases to handling an incident as described in the 'Handling an Incident' section of NIST - Computer Security Incident Handling Guide.\n\nHandling an incident - Computer Security Incident Handling Guide\nhttps://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-61r2.pdf",
+				"name": "NIST - Handling an Incident Template"
 			}
 		],
 		"report": null,
@@ -109,70 +109,70 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.9",
+	"currentVersion": "1.0.10",
 	"definitionId": "",
 	"dependencies": {
 		"Active_Directory_Query": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.6.22",
+			"minVersion": "1.6.32",
 			"name": "Active Directory Query"
 		},
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.33.41",
 			"name": "Base"
 		},
 		"CommonPlaybooks": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "2.4.3",
+			"minVersion": "2.6.23",
 			"name": "Common Playbooks"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.12.23",
+			"minVersion": "1.14.17",
 			"name": "Common Scripts"
 		},
 		"Gmail": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.3.13",
+			"minVersion": "1.3.17",
 			"name": "Gmail"
 		},
 		"GmailSingleUser": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.3.11",
+			"minVersion": "1.3.13",
 			"name": "Gmail Single User"
 		},
 		"MailSenderNew": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.0.21",
+			"minVersion": "1.0.25",
 			"name": "Mail Sender (New)"
 		},
 		"MicrosoftGraphMail": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.5.14",
+			"minVersion": "1.6.5",
 			"name": "Microsoft Graph Mail"
 		}
 	},
 	"deprecated": false,
 	"description": "This Content Pack helps you follow the phases in handling an incident according to the NIST computer security incident handling guidelines.",
 	"disabledMonthly": false,
-	"downloads": 4876,
+	"downloads": 5081,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -209,7 +209,7 @@
 			"name": "Gmail Single User"
 		}
 	],
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"keywords": [],
 	"legacy": true,
 	"name": "NIST",
@@ -237,11 +237,11 @@
 		"Use Case"
 	],
 	"toServerVersion": "",
-	"updated": "2023-09-14T09:37:52Z",
+	"updated": "2024-03-18T10:27:28Z",
 	"useCases": [
 		"Compliance"
 	],
 	"version": -1,
-	"versionInfo": "6319909",
+	"versionInfo": "897231",
 	"videos": []
 }
