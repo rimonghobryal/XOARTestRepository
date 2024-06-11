@@ -9,7 +9,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.4.9
+    itemVersion: 1.4.10
     packID: ML
     packName: Machine Learning
     packPropagationLabels:
@@ -27,7 +27,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ExportMLModel', 'start', __line__())
-  ### pack version: 1.4.9
+  ### pack version: 1.4.10
 
 
 
