@@ -3,7 +3,8 @@
 	"aliases": null,
 	"associatedToAll": false,
 	"associatedTypes": [
-		"NetWitness Incident"
+		"NetWitness Incident",
+		"NetWitness Incident_testing"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -67,7 +68,7 @@
 	"hidden": false,
 	"id": "incident_rsaalerts",
 	"isReadOnly": false,
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "RSA Alerts",
