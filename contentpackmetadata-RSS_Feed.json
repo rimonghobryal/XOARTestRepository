@@ -58,35 +58,35 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.0.8",
+	"currentVersion": "1.0.9",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.33.43",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.12.23",
+			"minVersion": "1.14.22",
 			"name": "Common Scripts"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.87",
+			"minVersion": "3.4.7",
 			"name": "Common Types"
 		}
 	},
 	"deprecated": false,
 	"description": "RSS Feed reader, imports new articles as Report indicator.  All rss fields (e.g. author, published, tags) are available.",
 	"disabledMonthly": false,
-	"downloads": 758,
+	"downloads": 833,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.2.0",
 	"general": [
@@ -103,7 +103,7 @@
 			"name": "RSS Feed"
 		}
 	],
-	"itemVersion": "1.0.8",
+	"itemVersion": "1.0.9",
 	"keywords": [],
 	"legacy": true,
 	"name": "RSS Feed",
@@ -128,15 +128,15 @@
 		"url": "https://www.paloaltonetworks.com/cortex"
 	},
 	"tags": [
-		"TIM",
-		"Generic Feed",
 		"Threat Intelligence Management",
-		"Getting Started"
+		"Generic Feed",
+		"Getting Started",
+		"TIM"
 	],
 	"toServerVersion": "",
-	"updated": "2023-09-14T09:47:31Z",
+	"updated": "2024-03-26T20:22:29Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6319909",
+	"versionInfo": "916317",
 	"videos": []
 }
