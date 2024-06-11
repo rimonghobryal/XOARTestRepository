@@ -1,6 +1,6 @@
 {
-	"author": "Cortex XSOAR",
-	"authorImage": "content/packs/Base/Author_image.png",
+	"author": "Netwitness",
+	"authorImage": "content/packs/RSANetWitness_v11_1/Author_image.png",
 	"beta": false,
 	"cacheVersn": 0,
 	"categories": [
@@ -25,17 +25,17 @@
 				]
 			},
 			{
-				"description": "Use this script to get RAW log.",
-				"name": "RSA_GetRawLog",
-				"tags": [
-					"field-change-triggered"
-				]
-			},
-			{
 				"description": "This automation takes several alert fields from the RSA NetWitness alerts context and displays them as markdown in the layout.",
 				"name": "SetRSANetWitnessAlertsMD",
 				"tags": [
 					"dynamic-section"
+				]
+			},
+			{
+				"description": "Use this script to get RAW log.",
+				"name": "RSA_GetRawLog",
+				"tags": [
+					"field-change-triggered"
 				]
 			}
 		],
@@ -52,27 +52,22 @@
 		"incidentfield": [
 			{
 				"description": "",
-				"name": "RSA Event Count",
-				"type": "shortText"
-			},
-			{
-				"description": "",
 				"name": "RSA Alerts",
 				"type": "grid"
 			},
 			{
 				"description": "",
-				"name": "RSA Raw Logs List",
-				"type": "grid"
-			},
-			{
-				"description": "",
-				"name": "RSA Id",
+				"name": "RSA Rule Id",
 				"type": "shortText"
 			},
 			{
 				"description": "",
-				"name": "RSA Alert Count",
+				"name": "RSA Event Count",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "RSA Id",
 				"type": "shortText"
 			},
 			{
@@ -82,7 +77,12 @@
 			},
 			{
 				"description": "",
-				"name": "RSA Rule Id",
+				"name": "RSA Raw Logs List",
+				"type": "grid"
+			},
+			{
+				"description": "",
+				"name": "RSA Alert Count",
 				"type": "shortText"
 			}
 		],
@@ -102,141 +102,141 @@
 				"category": "Analytics \u0026 SIEM",
 				"commands": [
 					{
-						"description": "Isolates the host with the specified agent ID from the network.",
-						"name": "rsa-nw-endpoint-isolate-from-network"
+						"description": "Delete a specific incident, by its id.",
+						"name": "netwitness-delete-incident"
 					},
 					{
-						"description": "Retrieves host information for a specific endpoint. To use this command, service ID must be set in the integration configuration.",
-						"name": "endpoint"
-					},
-					{
-						"description": "Updates the remote incident with local incident changes. This method is only used for debugging purposes and will not update the current incident.",
-						"name": "update-remote-system"
-					},
-					{
-						"description": "Gets the list of incidents and detections that were modified since the last update time. This method is used for debugging purposes.",
-						"name": "get-modified-remote-data"
-					},
-					{
-						"description": "Restores the network connection and removes IP addresses added to the exclusion list for the host with the specified agent ID.",
-						"name": "rsa-nw-endpoint-isolation-remove"
-					},
-					{
-						"description": "Initiate file download for a single file or multiple files to the endpoint server.",
-						"name": "rsa-nw-file-download"
-					},
-					{
-						"description": "Gets all alerts triggered for a given file.",
-						"name": "rsa-nw-file-alerts-list"
-					},
-					{
-						"description": "Initiates the download of the process dump to the endpoint server. You can find the process details by using the 'rsa-nw-snapshot-details-get' and filter by category=PROCESSES, or use the RSA NW UI.",
-						"name": "rsa-nw-process-dump-download-request"
-					},
-					{
-						"description": "Gets data from a remote incident. This method does not update the current incident, and should be used for debugging purposes only.",
-						"name": "get-remote-data"
-					},
-					{
-						"description": "Stop a scan for the host with the specified agent ID.",
-						"name": "rsa-nw-scan-stop-request"
-					},
-					{
-						"description": "Remove a single incident using the incident's unique identifier.",
-						"name": "rsa-nw-remove-incident"
-					},
-					{
-						"description": "Add a journal entry to an existing incident.",
-						"name": "rsa-nw-incident-add-journal-entry"
-					},
-					{
-						"description": "Initiates the download of the system dump to the endpoint server.",
-						"name": "rsa-nw-system-dump-download-request"
-					},
-					{
-						"description": "Initiates the MFT download to the endpoint server.",
-						"name": "rsa-nw-mft-download-request"
-					},
-					{
-						"description": "Updates the network isolation exclusion list for the host with the specified agent ID.",
-						"name": "rsa-nw-endpoint-update-exclusions"
-					},
-					{
-						"description": "Starts a scan for the host with the specified agent ID. Each scan produces a snapshot, the full details can be seen using the 'rsa-nw-snapshot-details-get' command.",
-						"name": "rsa-nw-scan-request"
-					},
-					{
-						"description": "Lists all host information from a specific endpoint server. Filter the results using the supplied arguments (can be a list) or use the 'filter' argument. You can limit the results using the limit argument or the page size argument.",
-						"name": "rsa-nw-hosts-list"
-					},
-					{
-						"description": "Lists all related file information from a specific endpoint server. You can limit the results using the limit argument or the page size argument.",
-						"name": "rsa-nw-files-list"
-					},
-					{
-						"description": "Retrieves a single incident by ID or multiple incidents by the date and time they were created using the start time ('since') or end time ('until'). You can limit the results using the limit argument or the page size argument. If no arguments are entered the last 50 results are returned.",
-						"name": "rsa-nw-list-incidents"
-					},
-					{
-						"description": "Retrieves all the alerts that are associated with an incident based on the incident ID. you can limit the results using the limit argument or the page size argument.",
-						"name": "rsa-nw-incident-list-alerts"
-					},
-					{
-						"description": "Gets all alerts triggered for a given host.",
-						"name": "rsa-nw-host-alerts-list"
-					},
-					{
-						"description": "Provides snapshot details of the given host for the specified snapshot time. It is recommended to use categories to filter the results since this command returns a large amount of data.",
-						"name": "rsa-nw-snapshot-details-get"
-					},
-					{
-						"description": "Returns the list of fields to map in outgoing mirroring. This command is only used for debugging purposes.",
-						"name": "get-mapping-fields"
-					},
-					{
-						"description": "Updates incident status and assignee.",
-						"name": "rsa-nw-update-incident"
-					},
-					{
-						"description": "Retrieves a list of all services, or filter by name.",
-						"name": "rsa-nw-services-list"
-					},
-					{
-						"description": "Retrieve a list os snapshot IDs for a given host.",
-						"name": "rsa-nw-snapshots-list-for-host"
-					}
-				],
-				"description": "The RSA NetWitness integration provides system log, network, and endpoint visibility for real-time collection, detection, and automated response with the Cortex XSOAR Enterprise platform. Using full session analysis, customers can extract critical data and effectively run security operations automated playbooks.",
-				"id": "RSANetWitnessv115",
-				"name": "RSANetWitness v11.5"
-			},
-			{
-				"category": "Analytics \u0026 SIEM",
-				"commands": [
-					{
-						"description": "Get all the alerts related to a specific incident.",
-						"name": "netwitness-get-alerts"
+						"description": "Update a specific incident.  Currently, an incident's status and assignee may be modified",
+						"name": "netwitness-update-incident"
 					},
 					{
 						"description": "Get details of a specific incident, including all alerts related with the incident.",
 						"name": "netwitness-get-incident"
 					},
 					{
-						"description": "Delete a specific incident, by its id.",
-						"name": "netwitness-delete-incident"
-					},
-					{
 						"description": "Get a list of incidents in a specific time frame. One of the followings must be specified:  since, until, lastDays",
 						"name": "netwitness-get-incidents"
 					},
 					{
-						"description": "Update a specific incident.  Currently, an incident's status and assignee may be modified",
-						"name": "netwitness-update-incident"
+						"description": "Get all the alerts related to a specific incident.",
+						"name": "netwitness-get-alerts"
 					}
 				],
 				"description": "Deprecated. Use RSA NetWitness v11.5 instead",
 				"id": "RSA NetWitness v11.1",
-				"name": "RSA NetWitness v11.1 (Deprecated)"
+				"name": "RSA NetWitness v11.1 (Deprecated) (Partner Contribution)"
+			},
+			{
+				"category": "Analytics \u0026 SIEM",
+				"commands": [
+					{
+						"description": "Gets all alerts triggered for a given host.",
+						"name": "rsa-nw-host-alerts-list"
+					},
+					{
+						"description": "Gets data from a remote incident. This method does not update the current incident, and should be used for debugging purposes only.",
+						"name": "get-remote-data"
+					},
+					{
+						"description": "Initiate file download for a single file or multiple files to the endpoint server.",
+						"name": "rsa-nw-file-download"
+					},
+					{
+						"description": "Retrieves all the alerts that are associated with an incident based on the incident ID. you can limit the results using the limit argument or the page size argument.",
+						"name": "rsa-nw-incident-list-alerts"
+					},
+					{
+						"description": "Provides snapshot details of the given host for the specified snapshot time. It is recommended to use categories to filter the results since this command returns a large amount of data.",
+						"name": "rsa-nw-snapshot-details-get"
+					},
+					{
+						"description": "Updates the remote incident with local incident changes. This method is only used for debugging purposes and will not update the current incident.",
+						"name": "update-remote-system"
+					},
+					{
+						"description": "Starts a scan for the host with the specified agent ID. Each scan produces a snapshot, the full details can be seen using the 'rsa-nw-snapshot-details-get' command.",
+						"name": "rsa-nw-scan-request"
+					},
+					{
+						"description": "Lists all related file information from a specific endpoint server. You can limit the results using the limit argument or the page size argument.",
+						"name": "rsa-nw-files-list"
+					},
+					{
+						"description": "Retrieves a list of all services, or filter by name.",
+						"name": "rsa-nw-services-list"
+					},
+					{
+						"description": "Remove a single incident using the incident's unique identifier.",
+						"name": "rsa-nw-remove-incident"
+					},
+					{
+						"description": "Initiates the download of the process dump to the endpoint server. You can find the process details by using the 'rsa-nw-snapshot-details-get' and filter by category=PROCESSES, or use the RSA NW UI.",
+						"name": "rsa-nw-process-dump-download-request"
+					},
+					{
+						"description": "Gets all alerts triggered for a given file.",
+						"name": "rsa-nw-file-alerts-list"
+					},
+					{
+						"description": "Returns the list of fields to map in outgoing mirroring. This command is only used for debugging purposes.",
+						"name": "get-mapping-fields"
+					},
+					{
+						"description": "Retrieve a list os snapshot IDs for a given host.",
+						"name": "rsa-nw-snapshots-list-for-host"
+					},
+					{
+						"description": "Restores the network connection and removes IP addresses added to the exclusion list for the host with the specified agent ID.",
+						"name": "rsa-nw-endpoint-isolation-remove"
+					},
+					{
+						"description": "Stop a scan for the host with the specified agent ID.",
+						"name": "rsa-nw-scan-stop-request"
+					},
+					{
+						"description": "Updates incident status and assignee.",
+						"name": "rsa-nw-update-incident"
+					},
+					{
+						"description": "Lists all host information from a specific endpoint server. Filter the results using the supplied arguments (can be a list) or use the 'filter' argument. You can limit the results using the limit argument or the page size argument.",
+						"name": "rsa-nw-hosts-list"
+					},
+					{
+						"description": "Retrieves a single incident by ID or multiple incidents by the date and time they were created using the start time ('since') or end time ('until'). You can limit the results using the limit argument or the page size argument. If no arguments are entered the last 50 results are returned.",
+						"name": "rsa-nw-list-incidents"
+					},
+					{
+						"description": "Retrieves host information for a specific endpoint. To use this command, service ID must be set in the integration configuration.",
+						"name": "endpoint"
+					},
+					{
+						"description": "Initiates the download of the system dump to the endpoint server.",
+						"name": "rsa-nw-system-dump-download-request"
+					},
+					{
+						"description": "Gets the list of incidents and detections that were modified since the last update time. This method is used for debugging purposes.",
+						"name": "get-modified-remote-data"
+					},
+					{
+						"description": "Updates the network isolation exclusion list for the host with the specified agent ID.",
+						"name": "rsa-nw-endpoint-update-exclusions"
+					},
+					{
+						"description": "Initiates the MFT download to the endpoint server.",
+						"name": "rsa-nw-mft-download-request"
+					},
+					{
+						"description": "Isolates the host with the specified agent ID from the network.",
+						"name": "rsa-nw-endpoint-isolate-from-network"
+					},
+					{
+						"description": "Add a journal entry to an existing incident.",
+						"name": "rsa-nw-incident-add-journal-entry"
+					}
+				],
+				"description": "The RSA NetWitness integration provides system log, network, and endpoint visibility for real-time collection, detection, and automated response with the Cortex XSOAR Enterprise platform. Using full session analysis, customers can extract critical data and effectively run security operations automated playbooks.",
+				"id": "RSANetWitnessv115",
+				"name": "RSANetWitness v11.5 (Partner Contribution)"
 			}
 		],
 		"layoutscontainer": [
@@ -252,47 +252,47 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "3.2.1",
+	"currentVersion": "3.2.4",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.13",
+			"minVersion": "1.33.53",
 			"name": "Base"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.98",
+			"minVersion": "3.5.2",
 			"name": "Common Types"
 		},
 		"Phishing": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.6.4",
+			"minVersion": "3.6.19",
 			"name": "Phishing"
 		},
 		"RsaNetWitnessPacketsAndLogs": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "1.0.6",
+			"minVersion": "1.0.7",
 			"name": "RSA NetWitness Packets and Logs"
 		}
 	},
 	"deprecated": false,
 	"description": "RSA NetWitness Platform provides systems Logs, Network, and endpoint visibility for real-time collection, detection, and automated response with the Demisto Enterprise platform. Providing full session analysis, customers can extract critical data and effectively operate security operations automated playbook.",
 	"disabledMonthly": false,
-	"downloads": 2057,
+	"downloads": 2252,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
 		"generalFieldCertified",
-		"generalFieldByCortexXSOAR",
+		"generalFieldByPartner",
 		"generalFieldFree",
 		"generalFieldSupportIncluded"
 	],
@@ -312,7 +312,7 @@
 			"name": "RSA NetWitness Packets and Logs"
 		}
 	],
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"keywords": [],
 	"legacy": true,
 	"name": "RSA NetWitness",
@@ -327,20 +327,20 @@
 	"rawKeywords": null,
 	"rawTags": null,
 	"rawUseCases": null,
-	"readme": "RSA NetWitness provides your security team with the visibility it needs to detect sophisticated threats to your system. It collects and analyzes data across all capture points and computing platforms enriching data with threat intelligence and business context.\n\n## What does this pack do?\n- Isolate/unisolate infected endpoints.\n- Get alerts triggered for a given host.\n- Retrieve the alerts that are associated with an incident.\n- List, update, remove incidents.\n- Get snapshots for a given host.\n- List all related file information from a specific endpoint server and downloading files.\n- Scan a host.\n\n### Pack Contributors:\n\n---\n - Pierre Soler\n - Sébastien Guisnet\n\nContributions are welcome and appreciated. For more info, visit our [Contribution Guide](https://xsoar.pan.dev/docs/contributing/contributing).",
+	"readme": "RSA NetWitness provides your security team with the visibility it needs to detect sophisticated threats to your system. It collects and analyzes data across all capture points and computing platforms enriching data with threat intelligence and business context.\n\n## What does this pack do?\n- Isolate/unisolate infected endpoints.\n- Get alerts triggered for a given host.\n- Retrieve the alerts that are associated with an incident.\n- List, update, remove incidents.\n- Get snapshots for a given host.\n- List all related file information from a specific endpoint server and downloading files.\n- Scan a host.\n\nNote: Support for this Pack moved to the partner on 04, 17, 2024.\n\nPlease contact the partner directly via the support link on the right.\n\n### Pack Contributors:\n\n---\n - Pierre Soler\n - Sébastien Guisnet\n\nContributions are welcome and appreciated. For more info, visit our [Contribution Guide](https://xsoar.pan.dev/docs/contributing/contributing).",
 	"searchRank": 10,
 	"serverMaxVersion": "",
 	"serverMinVersion": "5.0.0",
-	"support": "xsoar",
+	"support": "partner",
 	"supportDetails": {
-		"email": "",
-		"url": "https://www.paloaltonetworks.com/cortex"
+		"email": "nw.paloalto.support@netwitness.com",
+		"url": "https://www.netwitness.com/services/technical-support/"
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-01-04T20:19:30Z",
+	"updated": "2024-05-06T19:26:33Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "743135",
+	"versionInfo": "998827",
 	"videos": []
 }
