@@ -3,7 +3,9 @@ commonfields:
   id: Core REST API
   version: -1
 configuration:
-- defaultvalue: https://127.0.0.1
+- additionalinfo: For Cortex XSOAR 8 or Cortex XSIAM, use the Copy API URL button
+    on the API Keys page. For Cortex XSOAR 6, use the server URL.
+  defaultvalue: https://127.0.0.1
   display: Core Server URL
   name: url
   required: true
@@ -48,7 +50,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.3.43
+    itemVersion: 1.3.56
     packID: DemistoRESTAPI
     packName: Cortex REST API
     packPropagationLabels:
@@ -63,24 +65,24 @@ detaileddescription: |-
 
 
 
-  In version 8.0.0 and above:
-  1. Go to Settings -> API Keys.
-  2. Click the **+New Key** button in the top right corner.
-  3. Generate a key of type **Advanced**.
-  4. Copy and paste the key.
-  5. From the ID column, copy the Key ID.
 
-  In version 6.x.x:
   1. Go to Settings -> Integrations -> API Keys.
   2. Click the **Get your key** button in the top left corner.
   3. Generate a key.
   4. Copy and paste the key.
-
   ### URL
-  In Cortex XSOAR 8.0.0 and above
-  1. Go to Settings -> API Keys.
+
+
+
+  1. Go to **Settings & Info** > **Settings** > **Integrations** > **API Keys**.
   2. Click the **Copy URL** button in the top right corner.
-  Provide API Key ID when using Cortex XSOAR 8.0.0 and above. If the version is 6.x.x, you can leave it empty .
+
+
+
+  Enter the server URL.
+
+  ### NOTE
+  You do not need to provide an API Key ID.
 
   ---
   [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/core-rest-api)
@@ -324,15 +326,15 @@ script:
     - description: The War Room entry ID of the file.
       name: entry_id
       required: true
-    description: Check if the file exists in Cortex XSOAR by entry_id.
+    description: Check if the file exists in Cortex XSOAR (Context) by entry_id.
     name: core-api-file-check
     outputs:
     - contextPath: IsFileExists
       description: Dictionary with EntryID as the key and boolean if the file exists
-        as a value.
+        as a value in Context.
   runonce: false
   script: |
-    // pack version: 1.3.43
+    // pack version: 1.3.56
 
     const MIN_HOSTED_XSOAR_VERSION = '8.0.0';
 
@@ -438,18 +440,26 @@ script:
         else if (params.auth_method == 'Advanced') {
             headers = getAdvancedAuthMethodHeaders(key, auth_id, 'multipart/form-data')
         }
-        var res = httpMultipart(
-            requestUrl,
-            entryID,
-            {
-                Headers: headers,
-            },
-            body,
-            params.insecure,
-            params.proxy,
-            undefined,
-            'file'
-        );
+
+        var res;
+        var tries = 0;
+        do {
+            res = httpMultipart(
+                requestUrl,
+                entryID,
+                {
+                    Headers: headers,
+                },
+                body,
+                params.insecure,
+                params.proxy,
+                undefined,
+                'file'
+            );
+            tries++;
+        } while (tries < 3 && res.Status.startsWith('timeout while waiting for answer'));
+        logDebug("Ran httpMultipart() " + tries + " time(s)")
+
         if (res.StatusCode < 200 || res.StatusCode >= 300) {
             throw 'Core REST APIs - Request Failed.\nStatus code: ' + res.StatusCode + '.\nBody: ' + JSON.stringify(res) + '.';
         }
@@ -644,8 +654,11 @@ script:
                 logDebug(pack_id + ' pack installed successfully')
                 installed_packs.push(pack_id)
             }
-
-            return 'The following packs installed successfully: ' + installed_packs.join(", ")
+            if (installed_packs.length === 0) {
+                return 'No pack has been installed, please check that the pack name and version are correct.'
+            } else {
+                return 'The following packs installed successfully: ' + installed_packs.join(", ")
+            }
         }
     };
 
@@ -815,10 +828,9 @@ script:
         }
         deleteFileRequest(EntryID);
         return  {Type: entryTypes.note,
-                Contents: '',
-                ContentsType: formats.json,
-                EntryContext: invContext,
-                HumanReadable: `File ${EntryID} was deleted successfully.`};
+            Contents: '',
+            ContentsType: formats.json,
+            HumanReadable: `File ${EntryID} was deleted successfully.`}
     }
 
 
@@ -832,7 +844,7 @@ script:
     function coreApiFileCheckCommand(EntryID) {
         files =  invContext['File']instanceof Array? invContext['File']:[invContext['File']];
         var file_found = false;
-        var human_readable = `File ${EntryID} isn't exists`;
+        var human_readable = `File ${EntryID} does not exist`;
         if (typeof files['0'] !== 'undefined') {
             for (var i = 0 ;i <=Object.keys(files).length - 1;  i++) {
                 if (files[i]['EntryID'] == EntryID) {
