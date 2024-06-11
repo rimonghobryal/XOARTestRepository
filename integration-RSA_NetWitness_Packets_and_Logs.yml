@@ -46,7 +46,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.0.6
+    itemVersion: 1.0.8
     packID: RsaNetWitnessPacketsAndLogs
     packName: RSA NetWitness Packets and Logs
     packPropagationLabels:
@@ -549,7 +549,7 @@ script:
     name: nw-database-dump
   runonce: false
   script: |
-    // pack version: 1.0.6
+    // pack version: 1.0.8
     var RESPONSE_TYPES = {
         'json': 'application/json',
         'html': 'text/html',
