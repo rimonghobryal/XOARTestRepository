@@ -37,7 +37,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -45,7 +45,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/nltk:2.0.0.19143
+dockerimage: demisto/nltk:2.0.0.86396
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -59,7 +59,7 @@ runas: DBotWeakRole
 runonce: true
 script: |
   register_module_line('WordTokenizer', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   import nltk
