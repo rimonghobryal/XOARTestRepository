@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 1.1.4
+    itemVersion: 1.2.1
     packID: CommunityCommonScripts
     packName: Community Common Scripts
     packPropagationLabels:
@@ -31,7 +31,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('CompareList', 'start', __line__())
-  ### pack version: 1.1.4
+  ### pack version: 1.2.1
 
 
   list1_name = demisto.args().get("list1_name")
