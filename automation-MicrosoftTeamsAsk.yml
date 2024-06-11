@@ -47,7 +47,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.4.46
+    itemVersion: 1.4.61
     packID: MicrosoftTeams
     packName: Microsoft Teams
     packPropagationLabels:
@@ -67,7 +67,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('MicrosoftTeamsAsk', 'start', __line__())
-  ### pack version: 1.4.46
+  ### pack version: 1.4.61
   from enum import Enum
 
 
