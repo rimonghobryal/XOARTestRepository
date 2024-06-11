@@ -7,7 +7,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 3.3.11
+    itemVersion: 3.4.4
     packID: Campaign
     packName: Phishing Campaign
     packPropagationLabels:
@@ -15,7 +15,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.13.84405
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -25,12 +25,12 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ShowCampaignSimilarityRange', 'start', __line__())
-  ### pack version: 3.3.11
+  ### pack version: 3.4.4
 
 
 
 
-  def get_campaign_incident_similarities() -> list:
+  def get_campaign_incident_similarities() -> list | None:
       """
       Gets all the campaign incident similarities.
 
@@ -38,10 +38,10 @@ script: |
           List of all the similarities.
       """
       incidents = demisto.get(demisto.context(), "EmailCampaign.incidents")
-      return [incident["similarity"] for incident in incidents]
+      return [incident["similarity"] for incident in incidents if incident["similarity"]] if incidents else None
 
 
-  def calculate_similarity_range(incident_similarities) -> str:
+  def calculate_similarity_range(incident_similarities: list) -> str:
       """
       Gets the campaign incidents similarity range.
 
@@ -54,12 +54,10 @@ script: |
       max_similarity, min_similarity = max(incident_similarities), min(incident_similarities)
 
       if max_similarity > min_similarity + 10 ** -3:
-          similarity_range = f"{min_similarity * 100:.1f}%-{max_similarity * 100:.1f}%"
+          return f"{min_similarity * 100:.1f}%-{max_similarity * 100:.1f}%"
 
       else:
-          similarity_range = f"{max_similarity * 100:.1f}%"
-
-      return similarity_range
+          return f"{max_similarity * 100:.1f}%"
 
 
   def main():
@@ -79,11 +77,10 @@ script: |
               html_readable_output = "<div style='text-align:center; font-size:17px; padding: 15px;'>Similarity" \
                                      "</br> <div style='font-size:20px;'> No incident similarities were found. </div></div>"
 
-          demisto.results({
-              'ContentsFormat': formats['html'],
-              'Type': entryTypes['note'],
-              'Contents': html_readable_output
-          })
+          return_results(CommandResults(
+              content_format='html',
+              raw_response=html_readable_output
+          ))
 
       except Exception as err:
           return_error(str(err))
