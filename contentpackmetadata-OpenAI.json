@@ -1,12 +1,12 @@
 {
-	"author": "NVISO \u0026 Sameh El-Hakim",
+	"author": "Cortex XSOAR",
 	"authorImage": "content/packs/OpenAI/Author_image.png",
 	"beta": false,
 	"cacheVersn": 0,
 	"categories": [
 		"Utilities"
 	],
-	"certification": "",
+	"certification": "certified",
 	"contentItemTypes": [
 		"integration"
 	],
@@ -28,21 +28,33 @@
 						"name": "openai-completions"
 					}
 				],
-				"description": "The OpenAI API can be applied to virtually any task that involves understanding or generating natural language or code. We offer a spectrum of models with different levels of power suitable for different tasks, as well as the ability to fine-tune your own custom models. These models can be used for everything from content generation to semantic search and classification.",
+				"description": "Deprecated. Use `OpenAI GPT` instead.",
 				"id": "OpenAI",
-				"name": "OpenAI (Community Contribution)"
+				"name": "OpenAI (Deprecated)"
 			},
 			{
 				"category": "Messaging and Conferencing",
 				"commands": [
 					{
-						"description": "Send Text Message as a prompt to ChatGPT",
-						"name": "chatgpt-send-prompt"
+						"description": "Check email body for possible security issues. It is possible to keep asking questions on the provided info using 'gpt-send-message'. Resets conversation context by default.",
+						"name": "gpt-check-email-body"
+					},
+					{
+						"description": "Send a plain message to the selected GPT model and receive the generated response.",
+						"name": "gpt-send-message"
+					},
+					{
+						"description": "Checking email header for possible security issues. It is possible to keep asking questions on the provided info using 'gpt-send-message'. Resets conversation context by default.",
+						"name": "gpt-check-email-header"
+					},
+					{
+						"description": "Create an email template out of the conversation context to be sent from the SOC.",
+						"name": "gpt-create-soc-email-template"
 					}
 				],
-				"description": "This integration provides access to the OpenAI ChatGPT API, which generates human-like responses to text prompts.\n\nOpenAI ChatGPT is a revolutionary conversational AI system that is designed to interact with humans just like real people, this cutting-edge system is capable of understanding human language, responding to complex queries, and even mimicking human personality traits. Using advanced natural language processing techniques, OpenAI ChatGPT can simulate human conversation to an unprecedented degree of accuracy and effectiveness, making it an ideal tool for a wide range of applications, including customer service, virtual assistance, and more.",
+				"description": "Designed to assist security professionals with security investigations, threat hunting, and anomaly detection, leveraging OpenAI GPT models' natural language conversational capabilities.",
 				"id": "OpenAi ChatGPT v3",
-				"name": "OpenAi ChatGPT v3 (Community Contribution)"
+				"name": "OpenAI GPT"
 			}
 		],
 		"layoutscontainer": null,
@@ -53,40 +65,47 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.1.2",
+	"currentVersion": "2.0.0",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.32.33",
+			"minVersion": "1.34.1",
 			"name": "Base"
 		}
 	},
 	"deprecated": false,
 	"description": "The OpenAI API can be applied to virtually any task that involves understanding or generating natural language or code.",
 	"disabledMonthly": false,
-	"downloads": 382,
+	"downloads": 570,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "6.0.0",
 	"general": [
-		"generalFieldFree"
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
 	],
 	"id": "OpenAI",
 	"installMessage": "",
 	"integrations": [
 		{
 			"imagePath": "content/packs/OpenAI/OpenAI_image.png",
-			"name": "OpenAI"
+			"name": "OpenAI (Deprecated)"
 		},
 		{
 			"imagePath": "content/packs/OpenAI/OpenAiChatGPTv3_image.png",
-			"name": "OpenAi ChatGPT v3"
+			"name": "OpenAI GPT"
 		}
 	],
-	"itemVersion": "1.1.2",
-	"keywords": [],
+	"itemVersion": "2.0.0",
+	"keywords": [
+		"ai",
+		"openai",
+		"gpt"
+	],
 	"legacy": true,
 	"name": "OpenAI",
 	"packID": "OpenAI",
@@ -100,19 +119,20 @@
 	"rawKeywords": null,
 	"rawTags": null,
 	"rawUseCases": null,
-	"searchRank": 0,
+	"readme": "\n### Pack Contributors:\n\n---\n - Sameh El-Hakim\n - NVISO\n\nContributions are welcome and appreciated. For more info, visit our [Contribution Guide](https://xsoar.pan.dev/docs/contributing/contributing).",
+	"searchRank": 10,
 	"serverMaxVersion": "",
 	"serverMinVersion": "6.0.0",
-	"support": "community",
+	"support": "xsoar",
 	"supportDetails": {
 		"email": "",
-		"url": "https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions"
+		"url": "https://www.paloaltonetworks.com/cortex"
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2023-09-14T09:40:10Z",
+	"updated": "2024-05-12T19:20:07Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "6319909",
+	"versionInfo": "1012872",
 	"videos": []
 }
