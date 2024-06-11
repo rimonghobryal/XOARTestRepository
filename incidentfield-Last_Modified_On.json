@@ -9,7 +9,8 @@
 		"AWS IAM Policy Misconfiguration",
 		"AWS EC2 Instance Misconfiguration",
 		"Netwitness Incident",
-		"Prisma Cloud - VM Alert Prioritization"
+		"Prisma Cloud - VM Alert Prioritization",
+		"NetWitness Incident_testing"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -29,7 +30,7 @@
 	"hidden": false,
 	"id": "incident_lastmodifiedon",
 	"isReadOnly": false,
-	"itemVersion": "3.3.98",
+	"itemVersion": "3.5.5",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Last Modified On",
