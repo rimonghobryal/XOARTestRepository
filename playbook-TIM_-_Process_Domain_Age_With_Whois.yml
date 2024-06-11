@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 1.5.7
+    itemVersion: 1.5.14
     packID: Whois
     packName: Whois
     packPropagationLabels:
