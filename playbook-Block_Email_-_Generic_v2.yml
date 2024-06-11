@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -55,8 +55,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 750,
-          "y": -230
+          "x": 960,
+          "y": -220
         }
       }
   "2":
@@ -82,8 +82,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 750,
-          "y": 680
+          "x": 960,
+          "y": 710
         }
       }
   "3":
@@ -123,67 +123,6 @@ tasks:
       {
         "position": {
           "x": 750,
-          "y": 260
-        }
-      }
-  "4":
-    conditions:
-    - condition:
-      - - left:
-            iscontext: true
-            value:
-              complex:
-                accessor: brand
-                filters:
-                - - left:
-                      iscontext: true
-                      value:
-                        simple: modules.brand
-                    operator: isEqualString
-                    right:
-                      value:
-                        simple: CiscoEmailSecurity
-                - - left:
-                      iscontext: true
-                      value:
-                        simple: modules.state
-                    operator: isEqualString
-                    right:
-                      value:
-                        simple: active
-                root: modules
-          operator: isExists
-      label: "yes"
-    continueonerrortype: ""
-    id: "4"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#default#':
-      - "2"
-      "yes":
-      - "8"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Returns 'yes' if integration brand is available. Otherwise returns
-        'no'
-      id: 0f8c5d9f-3217-4e43-8956-560aabf63ea5
-      iscommand: false
-      name: Is Cisco Email Security Available?
-      type: condition
-      version: -1
-    taskid: 0f8c5d9f-3217-4e43-8956-560aabf63ea5
-    timertriggers: []
-    type: condition
-    view: |-
-      {
-        "position": {
-          "x": -70,
           "y": 260
         }
       }
@@ -265,48 +204,6 @@ tasks:
         "position": {
           "x": 1570,
           "y": 260
-        }
-      }
-  "8":
-    continueonerrortype: ""
-    id: "8"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "2"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      action:
-        simple: append
-      list_type:
-        simple: blocklist
-      sender_addresses:
-        complex:
-          root: inputs.EmailToBlock
-      view_by:
-        simple: sender
-    separatecontext: false
-    skipunavailable: true
-    task:
-      brand: ""
-      description: Performs actions on list entries. Supports add, edit, and append.
-      id: e16965eb-49c2-4d54-87ca-6861f04b7170
-      iscommand: true
-      name: Cisco Email Security (Deprecated)
-      script: '|||cisco-email-security-list-entry-add'
-      type: regular
-      version: -1
-    taskid: e16965eb-49c2-4d54-87ca-6861f04b7170
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": -70,
-          "y": 490
         }
       }
   "9":
@@ -448,36 +345,6 @@ tasks:
       {
         "position": {
           "x": 1170,
-          "y": 130
-        }
-      }
-  "13":
-    continueonerrortype: ""
-    id: "13"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "4"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      id: 042406d1-8d98-483a-86a3-fba433057d27
-      iscommand: false
-      name: Cisco Email Security
-      type: title
-      version: -1
-    taskid: 042406d1-8d98-483a-86a3-fba433057d27
-    timertriggers: []
-    type: title
-    view: |-
-      {
-        "position": {
-          "x": -70,
           "y": 130
         }
       }
@@ -663,7 +530,6 @@ tasks:
       '#default#':
       - "2"
       "yes":
-      - "13"
       - "15"
       - "12"
       - "11"
@@ -685,8 +551,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 750,
-          "y": -90
+          "x": 960,
+          "y": -80
         }
       }
 version: -1
@@ -694,21 +560,19 @@ view: |-
   {
     "linkLabelsPosition": {
       "16_17_yes": 0.62,
-      "16_2_#default#": 0.32,
-      "18_2_#default#": 0.67,
-      "4_2_#default#": 0.21,
-      "4_8_yes": 0.62,
-      "5_2_#default#": 0.27,
+      "16_2_#default#": 0.24,
+      "18_2_#default#": 0.12,
+      "5_2_#default#": 0.16,
       "5_9_yes": 0.62,
       "6_10_yes": 0.62,
       "6_2_#default#": 0.18
     },
     "paper": {
       "dimensions": {
-        "height": 975,
-        "width": 2020,
-        "x": -70,
-        "y": -230
+        "height": 995,
+        "width": 1620,
+        "x": 330,
+        "y": -220
       }
     }
   }
