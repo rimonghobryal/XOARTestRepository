@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -14,7 +14,7 @@ description: |-
   Enrich a file using one or more integrations.
 
   - Provide threat information
-  - File Reputation using !file command
+  - Determine file reputation using the !file command
 id: File Enrichment - Generic v2
 inputs:
 - description: File MD5 hash to enrich.
