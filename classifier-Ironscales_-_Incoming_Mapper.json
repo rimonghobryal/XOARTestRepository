@@ -1,0 +1,112 @@
+{
+	"brands": null,
+	"cacheVersn": 0,
+	"defaultIncidentType": "",
+	"definitionId": "",
+	"description": "Maps incoming Ironscales incident fields.",
+	"feed": false,
+	"fromServerVersion": "6.0.0",
+	"id": "Ironscales - Incoming Mapper",
+	"incidentSamples": null,
+	"indicatorSamples": null,
+	"instanceIds": null,
+	"itemVersion": "1.1.12",
+	"keyTypeMap": null,
+	"locked": false,
+	"logicalVersion": 0,
+	"mapping": {
+		"Ironscales": {
+			"dontMapEventToLabels": false,
+			"internalMapping": {
+				"Ironscales-Classification": {
+					"simple": "classification"
+				},
+				"Ironscales-ID": {
+					"simple": "incident_id"
+				},
+				"Ironscales-Links": {
+					"simple": "links"
+				},
+				"Ironscales-affected_mailbox_count": {
+					"simple": "affected_mailbox_count"
+				},
+				"Ironscales-attachments": {
+					"simple": "attachments"
+				},
+				"Ironscales-banner_displayed": {
+					"simple": "banner_displayed"
+				},
+				"Ironscales-company_id": {
+					"simple": "company_id"
+				},
+				"Ironscales-company_name": {
+					"simple": "company_name"
+				},
+				"Ironscales-federation": {
+					"simple": "federation"
+				},
+				"Ironscales-first_reported_by": {
+					"simple": "first_reported_by"
+				},
+				"Ironscales-first_reported_date": {
+					"simple": "first_reported_date"
+				},
+				"Ironscales-mail_server": {
+					"simple": "mail_server"
+				},
+				"Ironscales-reply_to": {
+					"simple": "reply_to"
+				},
+				"Ironscales-reports": {
+					"simple": "reports"
+				},
+				"Ironscales-sender_email": {
+					"simple": "sender_email"
+				},
+				"Ironscales-sender_is_internal": {
+					"simple": "sender_is_internal"
+				},
+				"Ironscales-sender_reputation": {
+					"simple": "sender_reputation"
+				},
+				"Ironscales-spf_Result": {
+					"simple": "spf_result"
+				},
+				"Ironscales-themis_proba": {
+					"simple": "themis_proba"
+				},
+				"Ironscales-themis_verdict": {
+					"simple": "themis_verdict"
+				},
+				"Ironscales_incident_id": {
+					"simple": "incident_id"
+				}
+			}
+		},
+		"dbot_classification_incident_type_all": {
+			"dontMapEventToLabels": true,
+			"internalMapping": {
+				"Ironscales-Classification": {
+					"simple": "classification"
+				},
+				"Ironscales-ID": {
+					"simple": "incident_id"
+				}
+			}
+		}
+	},
+	"name": "Ironscales - Incoming Mapper",
+	"nameRaw": "Ironscales - Incoming Mapper",
+	"packID": "Ironscales",
+	"packName": "Ironscales",
+	"packPropagationLabels": [
+		"all"
+	],
+	"sourceClassifierId": "",
+	"system": true,
+	"toServerVersion": "",
+	"transformer": {},
+	"type": "mapping-incoming",
+	"unclassifiedCases": null,
+	"version": -1
+}
