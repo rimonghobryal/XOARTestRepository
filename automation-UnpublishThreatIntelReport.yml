@@ -10,7 +10,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.0.11
+    itemVersion: 1.0.15
     packID: ThreatIntelReports
     packName: Threat Intel Reports (BETA)
     packPropagationLabels:
@@ -18,7 +18,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
+dockerimage: demisto/python3:3.10.13.86272
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -28,7 +28,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('UnpublishThreatIntelReport', 'start', __line__())
-  ### pack version: 1.0.11
+  ### pack version: 1.0.15
 
 
 
