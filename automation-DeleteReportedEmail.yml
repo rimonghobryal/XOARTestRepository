@@ -30,7 +30,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.1.0
-    itemVersion: 3.6.4
+    itemVersion: 3.6.19
     packID: Phishing
     packName: Phishing
     packPropagationLabels:
@@ -38,7 +38,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.11.58677
+dockerimage: demisto/python3:3.10.13.87159
 engineinfo: {}
 mainengineinfo: {}
 name: DeleteReportedEmail
@@ -68,7 +68,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('DeleteReportedEmail', 'start', __line__())
-  ### pack version: 3.6.4
+  ### pack version: 3.6.19
 
 
 
