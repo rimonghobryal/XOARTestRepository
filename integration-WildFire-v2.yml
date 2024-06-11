@@ -84,7 +84,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.1.39
+    itemVersion: 2.1.47
     packID: Palo_Alto_Networks_WildFire
     packName: WildFire by Palo Alto Networks
     packPropagationLabels:
@@ -1322,11 +1322,11 @@ script:
     - contextPath: InfoFile.Type
       description: The web artifacts file type.
       type: string
-  dockerimage: demisto/python3:3.10.13.83255
+  dockerimage: demisto/python3:3.10.14.92207
   runonce: false
   script: |
     register_module_line('WildFire-v2', 'start', __line__())
-    ### pack version: 2.1.39
+    ### pack version: 2.1.47
     import contextlib
 
 
@@ -2545,6 +2545,9 @@ script:
         if file_info["malware"] == 'yes':
             dbot_score = 3
             tags = ['malware']
+        elif file_info["malware"] == 'grayware':
+            dbot_score = 2
+            tags = []
         else:
             dbot_score = 1
             tags = []
@@ -2892,11 +2895,8 @@ script:
             # get the source of the credentials to ensure the correct agent is set for all API calls
             # other = ngfw or wf api based keys that are 32 chars long and require no agent
             # pcc and prismaaccessapi are 64 char long and require the correct agent= value in the api call
-            if not token and platform == 'x2':
-                # Note: We don't want to get the token from the license if we're on the standard XSOAR platform.
-                # The main reason is it has a strict API limit.
-                # Therefore, we only get the token from in X2 (from the config), even though it is
-                # available in the license from version 6.5 of XSOAR
+            if not token:
+                # Added support for all platforms from version 2.1.42.
                 with contextlib.suppress(Exception):
                     token = demisto.getLicenseCustomField("WildFire-Reports.token")
 
