@@ -21,7 +21,7 @@
 	"fromServerVersion": "5.5.0",
 	"id": "mean-time-to-remediation-sla",
 	"isPredefined": true,
-	"itemVersion": "1.4.6",
+	"itemVersion": "1.4.7",
 	"name": "Mean Time to Remediation (Remediation SLA)",
 	"packID": "CaseManagement-Generic",
 	"packName": "CaseManagement-Generic",
