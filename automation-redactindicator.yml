@@ -1,13 +1,15 @@
 args:
-- description: Indicator to be redacted
+- description: Indicator to be redacted.
+  name: value
+- description: Indicator to be redacted (can be used instead of 'value' for backwards
+    compatibility).
   name: indicator
-  required: true
-- description: 'string which should be REDACTED '
+- description: string which should be REDACTED.
   name: searchkey
 comment: Redactindicator can help you to defang/redact any kind of indicator (IPv4,
   url, domain and email), IP addresses will be in the dotted representation like 8.8.8[.].8,
   all domains will be example[.]com. Optional you can define a "searchkey" which does
-  not to be case sensitive, which will be replaced as <REDACTED>
+  not to be case sensitive, which will be replaced as <REDACTED>.
 commonfields:
   id: redactindicator
   version: -1
@@ -15,7 +17,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.1.4
+    itemVersion: 1.2.1
     packID: CommunityCommonScripts
     packName: Community Common Scripts
     packPropagationLabels:
@@ -23,7 +25,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
+dockerimage: demisto/python3:3.10.13.86272
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -33,7 +35,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('redactindicator', 'start', __line__())
-  ### pack version: 1.1.4
+  ### pack version: 1.2.1
 
 
 
@@ -1350,9 +1352,6 @@ script: |
                        ".zuerich": "[.]zuerich",
                        ".zw": "[.]zw"}
 
-  text = demisto.args()['indicator']
-  searchkey = demisto.args().get('searchkey')
-
 
   def redactIP(ip):
       iplist = ip.split(".")
@@ -1368,42 +1367,58 @@ script: |
       return newemail
 
 
-  ip = re.compile(r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b")
+  def main():
+      try:
+          args = demisto.args()
+          if not args.get('value') and not args.get('indicator'):
+              return_error('Must provide either arg "value" or arg "indicator".')
+          text = args.get('value', args.get('indicator'))
+          searchkey = demisto.args().get('searchkey')
+          ip = re.compile(r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b")
+          redactDictBASIC = {"http": "hxxp", "meow": "hxxp", "HTTP": "hxxp"}
 
-  redactDictBASIC = {"http": "hxxp", "meow": "hxxp", "HTTP": "hxxp"}
+          redactDict = {}
+          searchkeyDict = {}
+          if searchkey is not None:
+              if len(searchkey) > 1:
+                  Redact_String = "<REDACTED>"
+                  for item in searchkey.split(","):
+                      if (item.startswith("$#=")):
+                          Redact_String = item.split("=")[1]
+                      else:
+                          searchkeyDict.update({item.strip(): Redact_String})
+                  for key, value in searchkeyDict.items():
+                      text = text.replace(str(key).strip(), str(value).strip())
 
-  redactDict = {}
-  searchkeyDict = {}
-  if searchkey is not None:
-      if len(searchkey) > 1:
-          Redact_String = "<REDACTED>"
-          for item in searchkey.split(","):
-              if (item.startswith("$#=")):
-                  Redact_String = item.split("=")[1]
-              else:
-                  searchkeyDict.update({item.strip(): Redact_String})
-          for key, value in searchkeyDict.items():
+          for item in ip.findall(text):
+              redactDict.update({item: redactIP(item)})
+
+          email = re.compile(r'[\w\.-]+@[\w\.-]+')
+          for item in email.findall(text):
+              redactDict.update({item: redactemail(item)})
+          for key, value in redactDict.items():
               text = text.replace(str(key).strip(), str(value).strip())
+          for key, value in redactDictBASIC.items():
+              text = text.replace(str(key).strip(), str(value).strip())
+          for key, value in ROOOT_Domain_List.items():
+              text = text.replace(str(key).strip(), str(value).strip())
+          output = CommandResults(
+              outputs_prefix="Redacted_inicator",
+              outputs=text
+          )
+          return_results(output)
+      except Exception as ex:
+          demisto.error(traceback.format_exc())  # print the traceback
+          return_error(f'Failed to execute redactindicator. Error: {str(ex)}')
 
-  for item in ip.findall(text):
-      redactDict.update({item: redactIP(item)})
 
-  email = re.compile(r'[\w\.-]+@[\w\.-]+')
-  for item in email.findall(text):
-      redactDict.update({item: redactemail(item)})
-  for key, value in redactDict.items():
-      text = text.replace(str(key).strip(), str(value).strip())
-  for key, value in redactDictBASIC.items():
-      text = text.replace(str(key).strip(), str(value).strip())
-  for key, value in ROOOT_Domain_List.items():
-      text = text.replace(str(key).strip(), str(value).strip())
-  context = demisto.context()
-  demisto.executeCommand('Set', {'key': "Redacted_inicator", 'value': text})
-  return_results(text)
+  if __name__ in ('__main__', '__builtin__', 'builtins'):
+      main()
 
   register_module_line('redactindicator', 'end', __line__())
 scripttarget: 0
 subtype: python3
 system: true
-tags: []
+tags:
+- transformer
 type: python
