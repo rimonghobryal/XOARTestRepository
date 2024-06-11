@@ -12,7 +12,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -28,7 +28,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.13.19
+  // pack version: 1.15.8
   //check if value is provided, otherwise return false
   //needed for custom fields which if not set initially will be null
   return (args.value) ? args.value : false;
