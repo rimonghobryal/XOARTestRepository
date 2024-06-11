@@ -1,16 +1,16 @@
 args:
-- description: The IPv4/IPv6 address (or comma-delimited addresses) to check.
+- description: A comma-separated list of IPv4 or IPv6 addresses to search for.
   isArray: true
   name: left
   required: true
-- description: A comma-delimited list of IPv4/IPv6 ranges in CIDR notation against
+- description: A comma-separated list of IPv4 or IPv6 ranges in CIDR notation against
     which to match.
   isArray: true
   name: right
   required: true
 comment: Determines whether an IPv4 or IPv6 address is contained in at least one of
   the comma-delimited CIDR ranges. Multiple IPv4/IPv6 addresses can be passed comma-delimited
-  and each will be tested.
+  and each will be tested. A mix of IPv4 and IPv6 addresses will always return false.
 commonfields:
   id: IsInCidrRanges
   version: -1
@@ -18,7 +18,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -34,7 +34,9 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |-
-  // pack version: 1.2.37
+  // pack version: 1.2.73
+  // NOTE: A copy of the code below is in IsNotInCidrRanges script, they should be kept identical
+
   function isIPv6(ip) {
     return ip.indexOf(':') !== -1;
   }
@@ -107,24 +109,31 @@ script: |-
     return true; // CIDR range is well-formed
   }
 
+  function getCIDRNetworkAddress(cidrRange) {
+    return cidrRange.split('/')[0]
+  }
+
+  function getCIDRSubnetMask(cidrRange) {
+    return cidrRange.split('/')[1]
+  }
+
   function isIPInCIDR(ipAddress, cidrRange) {
     if (!validateCIDR(cidrRange)) {
         return false;
     }
 
-    var parts = cidrRange.split('/');
-    var networkAddress = parts[0];
-    var subnetMask = parts[1];
+    var networkAddress = getCIDRNetworkAddress(cidrRange);
+    var cidrSubnetMask = getCIDRSubnetMask(cidrRange);
 
     // Convert IP address and network address to binary
     var ipBinary = ipToBinary(ipAddress);
     var networkBinary = ipToBinary(networkAddress);
 
     // Get the network part of the IP address based on the subnet mask
-    var networkPart = ipBinary.slice(0, parseInt(subnetMask, 10));
+    var networkPart = ipBinary.slice(0, parseInt(cidrSubnetMask, 10));
 
     // Check if the network parts match
-    return networkPart === networkBinary.slice(0, parseInt(subnetMask, 10));
+    return networkPart === networkBinary.slice(0, parseInt(cidrSubnetMask, 10));
   }
 
   function isIPInAnyCIDR(ipAddresses, cidrRanges) {
@@ -134,7 +143,12 @@ script: |-
     isInRange = false;
 
     for (let j = 0; j < cidrRanges.length; j++) {
-      if (isIPInCIDR(ipAddresses[i], cidrRanges[j])) {
+
+      // Mismatches are always false
+      if ((!isIPv6(ipAddresses[i]) &&  isIPv6(getCIDRNetworkAddress(cidrRanges[j])))
+       || ( isIPv6(ipAddresses[i]) && !isIPv6(getCIDRNetworkAddress(cidrRanges[j])))) {
+        results[i] = 'False';
+      } else if (isIPInCIDR(ipAddresses[i], cidrRanges[j])) {
         isInRange = true;
         results[i] = 'True';
         break;
@@ -152,6 +166,7 @@ script: |-
   ipAddresses = argToList(args.left)
   cidrRanges = argToList(args.right)
 
+  // NOTE: A copy of the code above is in IsNotInCidrRanges script, they should be kept identical
   return isIPInAnyCIDR(ipAddresses, cidrRanges);
 scripttarget: 0
 system: true
