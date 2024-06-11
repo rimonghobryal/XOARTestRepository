@@ -24,7 +24,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.0.6
+    itemVersion: 1.0.8
     packID: RsaNetWitnessPacketsAndLogs
     packName: RSA NetWitness Packets and Logs
     packPropagationLabels:
