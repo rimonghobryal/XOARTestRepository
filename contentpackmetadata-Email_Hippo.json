@@ -1,0 +1,118 @@
+{
+	"author": "Cortex XSOAR",
+	"authorImage": "content/packs/Base/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Data Enrichment \u0026 Threat Intelligence"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Data Enrichment \u0026 Threat Intelligence",
+				"commands": [
+					{
+						"description": "Returns domain information and reputation.",
+						"name": "domain"
+					},
+					{
+						"description": "Get the email quota from the API.",
+						"name": "email-hippo-email-quota-get"
+					},
+					{
+						"description": "Return email information and reputation.",
+						"name": "email"
+					}
+				],
+				"description": "This is the Email Hippo integration used to verify email sources as fake emails that were used as part of phishing attacks.",
+				"id": "Email Hippo",
+				"name": "Email Hippo"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.6",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.34.10",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "Use this tool to verify email sources as fake emails that were used as part of phishing attacks.",
+	"disabledMonthly": false,
+	"downloads": 42,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.9.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByCortexXSOAR",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "EmailHippo",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/EmailHippo/EmailHippo_image.png",
+			"name": "Email Hippo"
+		}
+	],
+	"itemVersion": "1.0.6",
+	"keywords": [],
+	"legacy": true,
+	"name": "Email Hippo",
+	"packID": "EmailHippo",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "Email Hippo is an email intelligence and data services provider that delivers accurate cloud-based email validation and domain profiling. \n \n\n## What does this pack do?\n- Checks the reputation of a given domain name or email address.\n- Returns enrichment data for a domain or email address for available indicators (observables).",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.9.0",
+	"support": "xsoar",
+	"supportDetails": {
+		"email": "",
+		"url": "https://www.paloaltonetworks.com/cortex"
+	},
+	"tags": [
+		"Use Case"
+	],
+	"toServerVersion": "",
+	"updated": "2024-06-05T09:20:56Z",
+	"useCases": [
+		"Phishing"
+	],
+	"version": -1,
+	"versionInfo": "1070867",
+	"videos": []
+}
