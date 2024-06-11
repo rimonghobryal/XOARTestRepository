@@ -22,7 +22,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.0.14
+    itemVersion: 2.0.20
     packID: Troubleshoot
     packName: Troubleshoot
     packPropagationLabels:
@@ -30,7 +30,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
+dockerimage: demisto/python3:3.10.13.86272
 engineinfo: {}
 mainengineinfo: {}
 name: TroubleshootAggregateResults
@@ -46,7 +46,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('TroubleshootAggregateResults', 'start', __line__())
-  ### pack version: 2.0.14
+  ### pack version: 2.0.20
   """
   Aggregating results into a single file
   """
