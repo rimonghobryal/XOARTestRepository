@@ -61,7 +61,7 @@
 	"hidden": false,
 	"id": "incident_rsarawlogslist",
 	"isReadOnly": true,
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "RSA Raw Logs List",
