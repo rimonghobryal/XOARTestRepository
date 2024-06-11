@@ -16,7 +16,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -24,7 +24,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.14.91134
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -47,7 +47,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('BetweenHours', 'start', __line__())
-  ### pack version: 1.2.52
+  ### pack version: 1.2.73
 
 
   import dateparser
@@ -58,7 +58,8 @@ script: |
       input_time = dateparser.parse(value, settings={'TIMEZONE': 'UTC'}).time()  # type: ignore
       start_time = dateparser.parse(begin_time, settings={'TIMEZONE': 'UTC'}).time()  # type: ignore
       end_time = dateparser.parse(end_time, settings={'TIMEZONE': 'UTC'}).time()  # type: ignore
-
+      if start_time >= end_time:  # if the time range crosses midnight.
+          return start_time <= input_time or input_time <= end_time
       return start_time <= input_time <= end_time
 
 
