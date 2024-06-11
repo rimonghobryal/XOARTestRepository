@@ -7,7 +7,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.1.0
-    itemVersion: 1.2.44
+    itemVersion: 1.2.51
     packID: CommonWidgets
     packName: Common Widgets
     packPropagationLabels:
@@ -24,7 +24,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('FeedIntegrationErrorWidget', 'start', __line__())
-  ### pack version: 1.2.44
+  ### pack version: 1.2.51
 
 
   from dateparser import parse
