@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_healthchecknumberofinvestigationsinputoutputbiggerthan1mb",
 	"isReadOnly": false,
-	"itemVersion": "2.0.14",
+	"itemVersion": "2.0.15",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Health Check Number of investigations input / output bigger than 1MB",
