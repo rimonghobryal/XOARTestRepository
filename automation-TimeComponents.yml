@@ -96,7 +96,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -104,7 +104,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.14.95956
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -114,7 +114,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('TimeComponents', 'start', __line__())
-  ### pack version: 1.2.52
+  ### pack version: 1.2.73
 
 
   import re
