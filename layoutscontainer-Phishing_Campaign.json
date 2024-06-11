@@ -776,7 +776,7 @@
 	"id": "Phishing Campaign",
 	"indicatorsDetails": null,
 	"indicatorsQuickView": null,
-	"itemVersion": "3.3.11",
+	"itemVersion": "3.4.4",
 	"locked": false,
 	"mobile": null,
 	"name": "Phishing Campaign",
