@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -276,7 +276,7 @@ tasks:
       id: a887370c-f94a-42f9-866f-2d80b7707f41
       iscommand: false
       name: Block File - Cylance Protect v2
-      playbookName: Block File - Cylance Protect v2
+      playbookId: Block File - Cylance Protect v2
       type: playbook
       version: -1
     taskid: a887370c-f94a-42f9-866f-2d80b7707f41
