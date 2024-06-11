@@ -1,16 +1,16 @@
 args:
-- description: Value to split
+- description: Value to split.
   name: value
   required: true
 - description: Delimiter to cut the string by. Pass '' to set delimiter to be empty
-    string
+    string.
   name: delimiter
   required: true
-- description: 'Comma separated field numbers (e.g.: 1,5,7)'
+- description: 'Comma separated field numbers (e.g.: 1,5,7).'
   isArray: true
   name: fields
   required: true
-comment: |
+comment: |-
   Cut a string by delimiter and return specific fields.
   Example
   =================
@@ -18,7 +18,7 @@ comment: |
   delimiter: "-"
   fields: "1,5"
 
-  return: "A-E"
+  return: "A-E".
 commonfields:
   id: Cut
   version: -1
@@ -26,7 +26,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -34,7 +34,6 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3:3.10.12.63474
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -43,46 +42,53 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  register_module_line('Cut', 'start', __line__())
-  ### pack version: 1.2.52
+  // pack version: 1.2.73
+  function parseValue(value) {
+      /* This function is a workaround for an issue where passing a date field from the context
+         to the "value" argument, in JS it is accepted as an object, while in python it is a string.
+         To solve this discrapancy, we ensure the value is stringified correctly before running
+         the cut() function. */
+      if (typeof value === "string") {
+          return value;
+      } else if (typeof value === "number") {
+          return "" + value;
+      }
+      value = JSON.stringify(value);
+      if (value.startsWith('"') && value.endsWith('"')) {
+          // potentially a date object, wrapped with quotes
+          value = value.slice(1, -1);
+          try {
+              Date(value);
+              return value;
+          } catch(e) {
+              // unexpected value - will throw the error below
+          }
+      }
+      // value type isn't supported for Cut (either a boolean or a dict)
+      throw "Unsupported value for Cut: " + value;
+  }
 
+  function cut(value, fields, delim) {
+      value = parseValue(value);
+      if (delim === "''") {
+          delim = "";
+      }
 
+      const data = value.split(delim);
+      fields = fields.split(",").map(num => parseInt(num, 10));
 
+      const maxIndex = Math.max(...fields);
+      if (data.length < maxIndex) {
+          throw new Error(`Invalid field index ${maxIndex}, should be between 1 to ${data.length}.`);
+      }
 
-  def cut(value, fields, delim):
+      return fields.map(i => data[i - 1]).join(delim);
+  }
 
-      if delim == "''":
-          delim = ""
-
-      data = value.split(delim)
-      fields = [int(_) for _ in fields.split(",")]
-
-      max_index = max(fields)
-      if len(data) < max_index:
-          raise Exception("Invalid field index {}, should be between 1 to {}.".format(max_index, len(data)))
-
-      return delim.join([str(data[i - 1]) for i in fields])
-
-
-  def main():
-      try:
-          args = demisto.args()
-          value = args.get("value")
-          fields = args.get("fields")
-          delim = args.get("delimiter")
-          return_results(cut(value, fields, delim))
-      except Exception as e:
-          return_error(f'Failed to execute Cut. Error: {str(e)}', e)
-
-
-  if __name__ in ('__main__', '__builtin__', 'builtins'):
-      main()
-
-  register_module_line('Cut', 'end', __line__())
+  return cut(args.value, args.fields, args.delimiter);
 scripttarget: 0
-subtype: python3
 system: true
 tags:
 - transformer
 - string
-type: python
+type: javascript
