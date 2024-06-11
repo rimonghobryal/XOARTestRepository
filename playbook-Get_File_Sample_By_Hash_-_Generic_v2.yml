@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -161,7 +161,7 @@ tasks:
       id: 3a3ab19d-7b69-4631-847b-27eb7f7f80ee
       iscommand: false
       name: Get File Sample By Hash - Cylance Protect v2
-      playbookName: Get File Sample By Hash - Cylance Protect v2
+      playbookId: Get File Sample By Hash - Cylance Protect v2
       type: playbook
       version: -1
     taskid: 3a3ab19d-7b69-4631-847b-27eb7f7f80ee
