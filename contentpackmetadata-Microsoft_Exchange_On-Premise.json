@@ -46,116 +46,88 @@
 				"category": "Email",
 				"commands": [
 					{
-						"description": "Replies to an email using EWS.",
-						"name": "reply-mail"
-					},
-					{
-						"description": "Sends an email using EWS.",
-						"name": "send-mail"
-					}
-				],
-				"description": "Exchange Web Services mail sender. Note: this integration supports Office 365 basic authentication only. If you are using Office 365, we recommend using the EWS O365 Integration instead, which supports modern authentication (oauth2). Deprecated. Use EWS v2 instead",
-				"id": "EWS Mail Sender",
-				"name": "EWS Mail Sender (Deprecated)"
-			},
-			{
-				"category": "Email",
-				"commands": [
-					{
-						"description": "Delete items from mailbox.",
-						"name": "ews-delete-items"
-					},
-					{
-						"description": "Returns the auto-discovery information. Can be used to manually configure the Exchange Server.",
-						"name": "ews-get-autodiscovery-config"
-					},
-					{
-						"description": "Retrieves the out-of-office status for a specified mailbox.",
-						"name": "ews-get-out-of-office"
-					},
-					{
 						"description": "Retrieves items from a specified folder in a mailbox. The items are order by the item created time, most recent is first.",
 						"name": "ews-get-items-from-folder"
 					},
 					{
-						"description": "Retrieves items by item ID and uploads it's content as eml file.",
-						"name": "ews-get-items-as-eml"
-					},
-					{
-						"description": "Retrieves items by item ID.",
-						"name": "ews-get-items"
-					},
-					{
-						"description": "Retrieves information for folders for a specified mailbox. Only folders with read permissions will be returned. Your visual folders on the mailbox, such as \"Inbox\", are under the folder \"Top of Information Store\".",
-						"name": "ews-find-folders"
-					},
-					{
-						"description": "This command is deprecated. Use the o365-sc-get-search-action command from Security And Compliance V2 instead .Checks the status of the purge operation on the compliance search.",
-						"name": "ews-o365-get-compliance-search-purge-status"
-					},
-					{
-						"description": "Marks an item as junk. This is commonly used to block an email address. For more information, see the Microsoft documentation: https://msdn.microsoft.com/en-us/library/office/dn481311(v=exchg.150).aspx.",
-						"name": "ews-mark-item-as-junk"
-					},
-					{
-						"description": "Searches over multiple mailboxes or all Exchange mailboxes. Use either the mailbox-search-scope command or the email-addresses command to search specific mailboxes. This command requires eDiscovery permissions to the Exchange Server. For more information, see the EWS v2 integration documentation.",
-						"name": "ews-search-mailboxes"
-					},
-					{
-						"description": "Expands a distribution list to display all members. By default, expands only first layer of the distribution list. If recursive-expansion is \"True\", the command expands nested distribution lists and returns all members.",
-						"name": "ews-expand-group"
-					},
-					{
-						"description": "Retrieves contacts for a specified mailbox.",
-						"name": "ews-get-contacts"
-					},
-					{
-						"description": "Sends an email using EWS.",
-						"name": "send-mail"
-					},
-					{
-						"description": "Moves an item from one mailbox to different mailbox.",
-						"name": "ews-move-item-between-mailboxes"
-					},
-					{
-						"description": "This command is deprecated. Use the o365-sc-get-search command Security And Compliance V2 instead. Returns the status and results of a compliance search.",
-						"name": "ews-o365-get-compliance-search"
-					},
-					{
-						"description": "Searches for items in the specified mailbox. Specific permissions are needed for this operation to search in a target mailbox other than the default.",
-						"name": "ews-search-mailbox"
+						"description": "This operation verifies aliases and matches display names to the correct mailbox user. It handles one ambiguous name at a time. If there are multiple potential matches, all will be returned, but limited to a maximum of 100 candidates.",
+						"name": "ews-resolve-name"
 					},
 					{
 						"description": "This command is deprecated. Use the o365-sc-remove-search command from Security And Compliance V2. Removes the compliance search.",
 						"name": "ews-o365-remove-compliance-search"
 					},
 					{
+						"description": "Retrieves the actual attachments from an item (email message). To get all attachments for a message, only specify the item-id argument.",
+						"name": "ews-get-attachment"
+					},
+					{
+						"description": "Retrieves a single folder.",
+						"name": "ews-get-folder"
+					},
+					{
+						"description": "Delete items from mailbox.",
+						"name": "ews-delete-items"
+					},
+					{
+						"description": "Deletes the attachments of an item (email message).",
+						"name": "ews-delete-attachment"
+					},
+					{
+						"description": "This command is deprecated. Use the o365-sc-get-search-action command from Security And Compliance V2 instead .Checks the status of the purge operation on the compliance search.",
+						"name": "ews-o365-get-compliance-search-purge-status"
+					},
+					{
+						"description": "Retrieves contacts for a specified mailbox.",
+						"name": "ews-get-contacts"
+					},
+					{
+						"description": "This command is deprecated. Use the o365-sc-get-search command Security And Compliance V2 instead. Returns the status and results of a compliance search.",
+						"name": "ews-o365-get-compliance-search"
+					},
+					{
+						"description": "Moves an item from one mailbox to different mailbox.",
+						"name": "ews-move-item-between-mailboxes"
+					},
+					{
+						"description": "Expands a distribution list to display all members. By default, expands only first layer of the distribution list. If recursive-expansion is \"True\", the command expands nested distribution lists and returns all members.",
+						"name": "ews-expand-group"
+					},
+					{
+						"description": "Searches for items in the specified mailbox. Specific permissions are needed for this operation to search in a target mailbox other than the default.",
+						"name": "ews-search-mailbox"
+					},
+					{
+						"description": "Retrieves information for folders for a specified mailbox. Only folders with read permissions will be returned. Your visual folders on the mailbox, such as \"Inbox\", are under the folder \"Top of Information Store\".",
+						"name": "ews-find-folders"
+					},
+					{
 						"description": "Creates a new folder in a specified mailbox.",
 						"name": "ews-create-folder"
 					},
 					{
-						"description": "Move an item to different folder in the mailbox.",
-						"name": "ews-move-item"
-					},
-					{
-						"description": "Marks items as read or unread.",
-						"name": "ews-mark-items-as-read"
+						"description": "Marks an item as junk. This is commonly used to block an email address. For more information, see the Microsoft documentation: https://msdn.microsoft.com/en-us/library/office/dn481311(v=exchg.150).aspx.",
+						"name": "ews-mark-item-as-junk"
 					},
 					{
 						"description": "Recovers messages that were soft-deleted.",
 						"name": "ews-recover-messages"
 					},
 					{
-						"description": "Retrieves the actual attachments from an item (email message). To get all attachments for a message, only specify the item-id argument.",
-						"name": "ews-get-attachment"
+						"description": "This command is deprecated. Use the o365-sc-new-search-action command from Security And Compliance V2. Purges the results found in the compliance search.",
+						"name": "ews-o365-purge-compliance-search-results"
 					},
 					{
-						"description": "Replies to an email using EWS.",
-						"name": "reply-mail"
+						"description": "Marks items as read or unread.",
+						"name": "ews-mark-items-as-read"
 					},
 					{
-						"description": "Deletes the attachments of an item (email message).",
-						"name": "ews-delete-attachment"
+						"description": "Returns the auto-discovery information. Can be used to manually configure the Exchange Server.",
+						"name": "ews-get-autodiscovery-config"
+					},
+					{
+						"description": "Sends an email using EWS.",
+						"name": "send-mail"
 					},
 					{
 						"description": "Returns a list of searchable mailboxes. This command requires eDiscovery permissions to the Exchange Server. For more information, see the EWSv2 integration documentation.",
@@ -166,17 +138,49 @@
 						"name": "ews-o365-start-compliance-search"
 					},
 					{
-						"description": "This command is deprecated. Use the o365-sc-new-search-action command from Security And Compliance V2. Purges the results found in the compliance search.",
-						"name": "ews-o365-purge-compliance-search-results"
+						"description": "Retrieves items by item ID.",
+						"name": "ews-get-items"
 					},
 					{
-						"description": "Retrieves a single folder.",
-						"name": "ews-get-folder"
+						"description": "Retrieves the out-of-office status for a specified mailbox.",
+						"name": "ews-get-out-of-office"
+					},
+					{
+						"description": "Move an item to different folder in the mailbox.",
+						"name": "ews-move-item"
+					},
+					{
+						"description": "Retrieves items by item ID and uploads it's content as eml file.",
+						"name": "ews-get-items-as-eml"
+					},
+					{
+						"description": "Searches over multiple mailboxes or all Exchange mailboxes. Use either the mailbox-search-scope command or the email-addresses command to search specific mailboxes. This command requires eDiscovery permissions to the Exchange Server. For more information, see the EWS v2 integration documentation.",
+						"name": "ews-search-mailboxes"
+					},
+					{
+						"description": "Replies to an email using EWS.",
+						"name": "reply-mail"
 					}
 				],
 				"description": "Exchange Web Services and Office 365 (mail).",
 				"id": "EWS v2",
 				"name": "EWS v2"
+			},
+			{
+				"category": "Email",
+				"commands": [
+					{
+						"description": "Sends an email using EWS.",
+						"name": "send-mail"
+					},
+					{
+						"description": "Replies to an email using EWS.",
+						"name": "reply-mail"
+					}
+				],
+				"description": "Exchange Web Services mail sender. Note: this integration supports Office 365 basic authentication only. If you are using Office 365, we recommend using the EWS O365 Integration instead, which supports modern authentication (oauth2). Deprecated. Use EWS v2 instead",
+				"id": "EWS Mail Sender",
+				"name": "EWS Mail Sender (Deprecated)"
 			}
 		],
 		"layoutscontainer": null,
@@ -200,56 +204,56 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "2.0.14",
+	"currentVersion": "2.1.6",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.16",
+			"minVersion": "1.34.8",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.13.19",
+			"minVersion": "1.15.4",
 			"name": "Common Scripts"
 		},
 		"CommonTypes": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": false,
-			"minVersion": "3.3.98",
+			"minVersion": "3.5.4",
 			"name": "Common Types"
 		},
 		"FiltersAndTransformers": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.2.52",
+			"minVersion": "1.2.72",
 			"name": "Filters And Transformers"
 		},
 		"MicrosoftExchangeOnline": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.2.36",
+			"minVersion": "1.3.9",
 			"name": "Microsoft Exchange Online"
 		},
 		"Phishing": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "3.6.4",
+			"minVersion": "3.6.19",
 			"name": "Phishing"
 		}
 	},
 	"deprecated": false,
 	"description": "Exchange Web Services",
 	"disabledMonthly": false,
-	"downloads": 13190,
+	"downloads": 17236,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -271,6 +275,10 @@
 		},
 		{
 			"imagePath": "content/packs/MicrosoftExchangeOnline/EWSExtensionOnlinePowershellv2_image.png",
+			"name": "EWS Extension Online Powershell v2"
+		},
+		{
+			"imagePath": "content/packs/MicrosoftExchangeOnline/EWSExtensionOnlinePowershellv2_image.png",
 			"name": "EWS Extension Online Powershell v2 (Deprecated)"
 		},
 		{
@@ -283,7 +291,15 @@
 		},
 		{
 			"imagePath": "content/packs/MicrosoftExchangeOnline/EwsExtension_image.png",
+			"name": "O365 - EWS - Extension"
+		},
+		{
+			"imagePath": "content/packs/MicrosoftExchangeOnline/EwsExtension_image.png",
 			"name": "O365 - EWS - Extension (Deprecated)"
+		},
+		{
+			"imagePath": "content/packs/MicrosoftExchangeOnline/SecurityAndCompliance_image.png",
+			"name": "O365 - Security And Compliance - Content Search"
 		},
 		{
 			"imagePath": "content/packs/MicrosoftExchangeOnline/SecurityAndCompliance_image.png",
@@ -294,7 +310,7 @@
 			"name": "O365 - Security And Compliance - Content Search v2"
 		}
 	],
-	"itemVersion": "2.0.14",
+	"itemVersion": "2.1.6",
 	"keywords": [],
 	"legacy": true,
 	"name": "Microsoft Exchange On-Premise",
@@ -320,9 +336,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-01-09T20:25:09Z",
+	"updated": "2024-06-02T19:27:14Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "752611",
+	"versionInfo": "1063016",
 	"videos": []
 }
