@@ -11,7 +11,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -19,7 +19,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/btfl-soup:1.0.1.6233
+dockerimage: demisto/btfl-soup:1.0.1.86352
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -36,7 +36,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('HTMLtoMD', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   from markdownify import markdownify as md
