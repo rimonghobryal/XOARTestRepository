@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_wereanystepsoractionstakenthatmighthaveinhibitedtherecovery",
 	"isReadOnly": false,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Were any steps or actions taken that might have inhibited the recovery?",
