@@ -21,7 +21,7 @@
 	"hidden": false,
 	"id": "incident_actionsoncampaignincidents",
 	"isReadOnly": false,
-	"itemVersion": "3.3.11",
+	"itemVersion": "3.4.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "Actions On Campaign Incidents",
@@ -41,10 +41,10 @@
 	"script": "",
 	"selectValues": [
 		"Close",
-		"Link",
-		"Link \u0026 Close",
 		"Reopen",
-		"Unlink",
+		"Add To Campaign",
+		"Add To Campaign \u0026 Close",
+		"Remove From Campaign",
 		"Take Ownership"
 	],
 	"sla": 0,
