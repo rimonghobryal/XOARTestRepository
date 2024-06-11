@@ -3,7 +3,8 @@
 	"aliases": null,
 	"associatedToAll": false,
 	"associatedTypes": [
-		"Netwitness Incident"
+		"Netwitness Incident",
+		"NetWitness Incident_testing"
 	],
 	"autoCompleteTags": null,
 	"breachScript": "",
@@ -23,7 +24,7 @@
 	"hidden": false,
 	"id": "incident_rsaeventcount",
 	"isReadOnly": false,
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "RSA Event Count",
