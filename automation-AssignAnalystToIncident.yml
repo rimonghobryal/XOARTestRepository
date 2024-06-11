@@ -18,7 +18,7 @@ args:
     owner (optional).
   name: username
 - description: When specified, the user of provided email will be assigned as the
-    incident owner (optional)
+    incident owner (optional).
   name: email
 - auto: PREDEFINED
   defaultValue: "false"
@@ -36,7 +36,7 @@ comment: |-
   top-user: The user that is most commonly owns this type of incident
   less-busy-user: The less busy analyst will be picked to be the incident owner.
   online: The analyst is picked randomly from all online analysts, according to the provided roles (if no roles provided, will fetch all users).
-  current: The user that executed the command
+  current: The user that executed the command.
 commonfields:
   id: AssignAnalystToIncident
   version: -1
@@ -44,7 +44,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -60,7 +60,25 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.13.19
+  // pack version: 1.15.8
+  // returns true if the current platform is XSIAM.
+  isXsiam = function () {
+      res = getDemistoVersion();
+      platform = res.platform;
+      if  (platform === "x2") {
+          return true
+      }
+      return false
+  }
+
+  if (isXsiam()){
+      incidentObject = JSON.parse(incObj);
+      if (incidentObject.length > 0 && incidentObject[0].id.startsWith("INCIDENT")) {
+          throw "AssignAnalystToIncident script can only be used within an alert and not from an incident."
+      }
+  }
+
+
   if (args.email && args.username) {
       throw 'Please provide either username or email';
   }
