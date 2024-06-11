@@ -6,7 +6,7 @@ args:
 - description: 'Comma separated list of states. Possible values: New, InProgress,
     Completed, Waiting, Error, Skipped, Blocked (leave empty to get all tasks).'
   name: states
-comment: Get all tasks for specific incident by the given state.
+comment: Deprecated. Use the GetIncidentTasks script instead.
 commonfields:
   id: GetIncidentTasksByState
   version: -1
@@ -14,7 +14,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.3.43
+    itemVersion: 1.3.56
     packID: DemistoRESTAPI
     packName: Cortex REST API
     packPropagationLabels:
@@ -22,6 +22,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
+deprecated: true
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -67,7 +68,7 @@ pswd: ""
 runas: DBotWeakRole
 runonce: false
 script: |
-  // pack version: 1.3.43
+  // pack version: 1.3.56
   var taskStates = {
       new: '',
       inprogress: 'inprogress',
