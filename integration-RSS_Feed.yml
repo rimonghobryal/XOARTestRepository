@@ -107,7 +107,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.2.0
-    itemVersion: 1.0.8
+    itemVersion: 1.0.9
     packID: FeedRSS
     packName: RSS Feed
     packPropagationLabels:
@@ -132,12 +132,12 @@ script:
       name: limit
     description: Gets the reports from the RSS feed.
     name: rss-get-indicators
-  dockerimage: demisto/py3-tools:1.0.0.31193
+  dockerimage: demisto/py3-tools:1.0.0.90842
   feed: true
   runonce: false
   script: |
     register_module_line('RSS Feed', 'start', __line__())
-    ### pack version: 1.0.8
+    ### pack version: 1.0.9
     import feedparser
 
 
