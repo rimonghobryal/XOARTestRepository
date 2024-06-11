@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.8.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -10,27 +10,12 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-description: |-
-  Detonate URL through one or more active integrations that support URL detonation.
-  Supported integrations:
-  - SecneurX Analysis
-  - ANY.RUN
-  - McAfee Advanced Threat Defense
-  - WildFire
-  - Lastline
-  - Cuckoo Sandbox
-  - Cisco Secure Malware Analytics (ThreatGrid)
-  - JoeSecurity
-  - CrowdStrike Falcon Sandbox
-  - FireEye AX
-  - VMRay Analyzer
-  - Polygon
-  - CrowdStrike Falcon Intelligence Sandbox
-  - OPSWAT Filescan
-  - ANYRUN
-  -  VirusTotal
-  - Anomali ThreatStream
-  - Hatching Triage.
+description: "Detonate URL through one or more active integrations that support URL
+  detonation.\nSupported integrations:\n- SecneurX Analysis\n- ANY.RUN\n- McAfee Advanced
+  Threat Defense\n- WildFire\n- Lastline\n- Cuckoo Sandbox\n- Cisco Secure Malware
+  Analytics (ThreatGrid)\n- JoeSecurity\n- CrowdStrike Falcon Sandbox\n- FireEye AX\n-
+  VMRay Analyzer\n- Polygon\n- CrowdStrike Falcon Intelligence Sandbox\n- OPSWAT Filescan\n-
+  ANYRUN\n- VirusTotal\n- Anomali ThreatStream\n- Hatching Triage\n- ThreatGrid "
 id: Detonate URL - Generic v1.5
 inputs:
 - description: The URL object of the URL to be detonated.
@@ -1418,7 +1403,7 @@ tasks:
       {
         "position": {
           "x": 450,
-          "y": 50
+          "y": 170
         }
       }
   "1":
@@ -1440,19 +1425,33 @@ tasks:
       '#default#':
       - "20"
       "yes":
-      - "2"
+      - "22"
+      - "12"
+      - "13"
+      - "14"
+      - "15"
+      - "16"
+      - "17"
+      - "21"
+      - "19"
+      - "9"
+      - "8"
+      - "7"
+      - "6"
+      - "4"
+      - "23"
+      - "24"
     note: false
     quietmode: 0
     separatecontext: false
     skipunavailable: true
     task:
       brand: ""
-      description: Detonate one or more URLs using the ThreatGrid integration.
+      description: Checks if there is a URL to detonate.
       id: 7631e811-c7ae-4c2b-895b-793922894b45
       iscommand: false
-      name: Detonate URL - ThreatGrid v2
-      playbookName: Detonate URL - ThreatGrid v2
-      type: playbook
+      name: Check if URL exists
+      type: condition
       version: -1
     taskid: 7631e811-c7ae-4c2b-895b-793922894b45
     timertriggers: []
@@ -1461,101 +1460,7 @@ tasks:
       {
         "position": {
           "x": 450,
-          "y": 180
-        }
-      }
-  "2":
-    continueonerrortype: ""
-    id: "2"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "3"
-      - "4"
-      - "5"
-      - "6"
-      - "7"
-      - "8"
-      - "9"
-      - "11"
-      - "12"
-      - "13"
-      - "14"
-      - "15"
-      - "16"
-      - "17"
-      - "19"
-      - "21"
-    note: false
-    quietmode: 0
-    separatecontext: false
-    skipunavailable: false
-    task:
-      brand: ""
-      description: Detonate URL through VirusTotal (API v3) integration.
-      id: 3868d472-e5f4-4714-8c58-5c8f95d6b626
-      iscommand: false
-      name: Detonate URL - VirusTotal (API v3)
-      playbookId: Detonate URL - VirusTotal (API v3)
-      type: playbook
-      version: -1
-    taskid: 3868d472-e5f4-4714-8c58-5c8f95d6b626
-    timertriggers: []
-    type: title
-    view: |-
-      {
-        "position": {
-          "x": 450,
-          "y": 370
-        }
-      }
-  "3":
-    continueonerrortype: ""
-    id: "3"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    loop:
-      exitCondition: ""
-      iscommand: false
-      max: 100
-      wait: 1
-    nexttasks:
-      '#none#':
-      - "20"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      URL:
-        complex:
-          root: inputs.URL
-          transformers:
-          - operator: uniq
-      interval:
-        simple: "10"
-      timeout:
-        simple: "60"
-    separatecontext: true
-    skipunavailable: true
-    task:
-      brand: ""
-      description: Detonate one or more URLs using the ThreatGrid integration.
-      id: 7631e811-c7ae-4c2b-895b-793922894b45
-      iscommand: false
-      name: Detonate URL - ThreatGrid v2
-      playbookName: Detonate URL - ThreatGrid v2
-      type: playbook
-      version: -1
-    taskid: 7631e811-c7ae-4c2b-895b-793922894b45
-    timertriggers: []
-    type: playbook
-    view: |-
-      {
-        "position": {
-          "x": -2500,
-          "y": 510
+          "y": 320
         }
       }
   "4":
@@ -1588,11 +1493,12 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Detonating URL with Hatching Triage.
+      description: Detonates a URL using the McAfee Advanced Threat Defense sandbox
+        integration.
       id: f880c851-c874-4f45-8e30-a31dcd6bd034
       iscommand: false
-      name: Detonate URL - Hatching Triage
-      playbookName: Detonate URL - Hatching Triage
+      name: Detonate URL - McAfee ATD
+      playbookName: Detonate URL - McAfee ATD
       type: playbook
       version: -1
     taskid: f880c851-c874-4f45-8e30-a31dcd6bd034
@@ -1601,47 +1507,7 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -2090,
-          "y": 510
-        }
-      }
-  "5":
-    continueonerrortype: ""
-    id: "5"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "20"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      timeout:
-        simple: "60"
-      url:
-        complex:
-          root: inputs.URL
-          transformers:
-          - operator: uniq
-    separatecontext: false
-    skipunavailable: true
-    task:
-      brand: ""
-      description: Submit an URL for sandbox analysis.
-      id: f2828581-9807-4f24-883e-130c0ca7fec6
-      iscommand: true
-      name: Detonate URL - JoeSecurity
-      script: '|||joe-submit-url'
-      type: regular
-      version: -1
-    taskid: f2828581-9807-4f24-883e-130c0ca7fec6
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": -1670,
+          "x": -1650,
           "y": 510
         }
       }
@@ -1722,12 +1588,12 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Scan URL resource.
+      description: Detonate a URL with Cuckoo.
       id: 36274297-5bc4-4f17-8f71-eace307e6ffd
-      iscommand: true
-      name: Detonate URL - OPSWAT
-      script: '|||opswat-filescan-scan-url'
-      type: regular
+      iscommand: false
+      name: Detonate URL - Cuckoo
+      playbookName: Detonate URL - Cuckoo
+      type: playbook
       version: -1
     taskid: 36274297-5bc4-4f17-8f71-eace307e6ffd
     timertriggers: []
@@ -1769,11 +1635,14 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Checks if there is a URL to detonate.
+      description: |-
+        Detonates one or more URLs using the ANYRUN sandbox integration.
+        Returns relevant reports to the War Room and URL reputations to the context data.
       id: 48e0c334-003e-4e26-80df-808e542ad988
       iscommand: false
-      name: Check if URL exists
-      type: condition
+      name: Detonate URL - ANYRUN
+      playbookName: Detonate URL - ANYRUN
+      type: playbook
       version: -1
     taskid: 48e0c334-003e-4e26-80df-808e542ad988
     timertriggers: []
@@ -1815,12 +1684,11 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Detonates a URL using the McAfee Advanced Threat Defense sandbox
-        integration.
+      description: Detonate URL using Group-IB THF Polygon integration.
       id: e96e1ea1-83b9-45e7-8838-4417978b24d5
       iscommand: false
-      name: Detonate URL - McAfee ATD
-      playbookName: Detonate URL - McAfee ATD
+      name: Detonate URL - Group-IB TDS Polygon
+      playbookName: Detonate URL - Group-IB TDS Polygon
       type: playbook
       version: -1
     taskid: e96e1ea1-83b9-45e7-8838-4417978b24d5
@@ -1830,48 +1698,6 @@ tasks:
       {
         "position": {
           "x": 10,
-          "y": 510
-        }
-      }
-  "11":
-    continueonerrortype: ""
-    id: "11"
-    ignoreworker: false
-    isautoswitchedtoquietmode: false
-    isoversize: false
-    nexttasks:
-      '#none#':
-      - "20"
-    note: false
-    quietmode: 0
-    scriptarguments:
-      polling:
-        simple: "true"
-      upload:
-        complex:
-          root: inputs.URL
-          transformers:
-          - operator: uniq
-      verbose:
-        simple: "true"
-    separatecontext: false
-    skipunavailable: true
-    task:
-      brand: ""
-      description: Submit an URL for sandbox analysis.
-      id: f2828581-9807-4f24-883e-130c0ca7fec6
-      iscommand: true
-      name: Detonate URL - JoeSecurity
-      script: '|||joe-submit-url'
-      type: regular
-      version: -1
-    taskid: f2828581-9807-4f24-883e-130c0ca7fec6
-    timertriggers: []
-    type: regular
-    view: |-
-      {
-        "position": {
-          "x": 450,
           "y": 510
         }
       }
@@ -1948,11 +1774,11 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Detonating URL with Cuckoo
+      description: Detonates a URL using the VMRay sandbox integration.
       id: bf8eaa1a-576f-4ab3-89b7-e383180a536c
       iscommand: false
-      name: Detonate URL - Cuckoo
-      playbookName: Detonate URL - Cuckoo
+      name: Detonate URL - VMRay
+      playbookName: Detonate URL - VMRay
       type: playbook
       version: -1
     taskid: bf8eaa1a-576f-4ab3-89b7-e383180a536c
@@ -1996,12 +1822,12 @@ tasks:
     task:
       brand: ""
       description: |-
-        Detonates one or more URLs using the ANYRUN sandbox integration.
-        Returns relevant reports to the War Room and url reputations to the context data.
+        Detonates one or more URLs using the Anomali ThreatStream v2 sandbox integration.
+        Returns relevant reports to the War Room and URL reputations to the context data.
       id: d1eb756a-f615-40b1-80fe-88179b28a4ac
       iscommand: false
-      name: Detonate URL - ANYRUN
-      playbookName: Detonate URL - ANYRUN
+      name: Detonate URL - ThreatStream
+      playbookName: Detonate URL - ThreatStream
       type: playbook
       version: -1
     taskid: d1eb756a-f615-40b1-80fe-88179b28a4ac
@@ -2044,11 +1870,11 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Detonate URL using Group-IB THF Polygon integration.
+      description: Detonates a URL with FireEye AX.
       id: aaaae5ac-95e9-4542-81c2-a3f634f13437
       iscommand: false
-      name: Detonate URL - Group-IB TDS Polygon
-      playbookName: Detonate URL - Group-IB TDS Polygon
+      name: Detonate URL - FireEye AX
+      playbookName: Detonate URL - FireEye AX
       type: playbook
       version: -1
     taskid: aaaae5ac-95e9-4542-81c2-a3f634f13437
@@ -2091,12 +1917,12 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Submits a URL for analysis.
+      description: Detonates a URL with Hatching Triage.
       id: bd03837d-6714-4e64-8afb-99aa81aeb6b5
-      iscommand: true
-      name: Detonate URL - CrowdStrike Falcon Intelligence Sandbox
-      script: '|||cs-falcon-sandbox-submit-url'
-      type: regular
+      iscommand: false
+      name: Detonate URL - Hatching Triage
+      playbookName: Detonate URL - Hatching Triage
+      type: playbook
       version: -1
     taskid: bd03837d-6714-4e64-8afb-99aa81aeb6b5
     timertriggers: []
@@ -2146,11 +1972,12 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: Detonates a URL using the VMRay sandbox integration.
+      description: Detonates a URL using the SecneurX Analysis integration. Returns
+        relevant reports to the War Room and file reputations to the context data.
       id: 8139a6d0-05e9-4633-8c60-b840a51c7e11
       iscommand: false
-      name: Detonate URL - VMRay
-      playbookName: Detonate URL - VMRay
+      name: Detonate URL - SecneurX Analysis
+      playbookName: Detonate URL - SecneurX Analysis
       type: playbook
       version: -1
     taskid: 8139a6d0-05e9-4633-8c60-b840a51c7e11
@@ -2184,14 +2011,12 @@ tasks:
     skipunavailable: true
     task:
       brand: ""
-      description: |-
-        Detonates one or more URLs using the Anomali ThreatStream v2 sandbox integration.
-        Returns relevant reports to the War Room and URL reputations to the context data.
+      description: Scan URL resource.
       id: c54ae675-b7ba-48fb-8669-1a220aeacbed
-      iscommand: false
-      name: Detonate URL - ThreatStream
-      playbookName: Detonate URL - ThreatStream
-      type: playbook
+      iscommand: true
+      name: Detonate URL - OPSWAT
+      script: '|||opswat-filescan-scan-url'
+      type: regular
       version: -1
     taskid: c54ae675-b7ba-48fb-8669-1a220aeacbed
     timertriggers: []
@@ -2281,18 +2106,150 @@ tasks:
           "y": 510
         }
       }
+  "22":
+    continueonerrortype: ""
+    id: "22"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    loop:
+      exitCondition: ""
+      iscommand: false
+      max: 100
+      wait: 1
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      Interval:
+        simple: "60"
+      Timeout:
+        simple: "600"
+      URL:
+        complex:
+          root: inputs.URL
+          transformers:
+          - operator: uniq
+    separatecontext: true
+    skipunavailable: true
+    task:
+      brand: ""
+      description: |-
+        Detonate a webpage or remote file using the WildFire v2 integration. This playbook returns relevant reports to the War Room and file reputations to the context data.
+        The detonation supports the following file types:
+        APK, JAR, DOC, DOCX, RTF, OOXLS, XLSX, PPT, PPTX, XML, PE32, PDF, DMG, PKG, RAR, 7Z, JS.
+      id: d2b682c2-7df5-4ebd-855a-8949333649fb
+      iscommand: false
+      name: Detonate URL - WildFire v2.2
+      playbookId: Detonate URL - WildFire v2.2
+      type: playbook
+      version: -1
+    taskid: d2b682c2-7df5-4ebd-855a-8949333649fb
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 510
+        }
+      }
+  "23":
+    continueonerrortype: ""
+    id: "23"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      url:
+        complex:
+          root: inputs.URL
+          transformers:
+          - operator: uniq
+    separatecontext: false
+    skipunavailable: true
+    task:
+      brand: ""
+      description: Submit a URL for sandbox analysis.
+      id: 156ee7d3-6235-4011-85fe-32e8d2154de1
+      iscommand: true
+      name: Detonate URL - JoeSecurity
+      script: '|||joe-submit-url'
+      type: regular
+      version: -1
+    taskid: 156ee7d3-6235-4011-85fe-32e8d2154de1
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -2060,
+          "y": 510
+        }
+      }
+  "24":
+    continueonerrortype: ""
+    id: "24"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "20"
+    note: false
+    quietmode: 0
+    separatecontext: true
+    skipunavailable: true
+    task:
+      brand: ""
+      id: 79a510af-3640-415e-85bd-b9cf42ace798
+      iscommand: false
+      name: Detonate URL - ThreatGrid v2
+      playbookName: Detonate URL - ThreatGrid v2
+      type: playbook
+      version: -1
+    taskid: 79a510af-3640-415e-85bd-b9cf42ace798
+    timertriggers: []
+    type: playbook
+    view: |-
+      {
+        "position": {
+          "x": -2470,
+          "y": 510
+        }
+      }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "1_2_yes": 0.47
+      "1_12_yes": 0.51,
+      "1_13_yes": 0.71,
+      "1_14_yes": 0.82,
+      "1_15_yes": 0.86,
+      "1_16_yes": 0.88,
+      "1_17_yes": 0.9,
+      "1_19_yes": 0.9,
+      "1_21_yes": 0.9,
+      "1_23_yes": 0.9,
+      "1_24_yes": 0.9,
+      "1_4_yes": 0.89,
+      "1_6_yes": 0.84,
+      "1_7_yes": 0.83,
+      "1_9_yes": 0.57
     },
     "paper": {
       "dimensions": {
-        "height": 705,
-        "width": 6690,
-        "x": -2500,
-        "y": 50
+        "height": 585,
+        "width": 6660,
+        "x": -2470,
+        "y": 170
       }
     }
   }
