@@ -1,0 +1,633 @@
+category: Data Enrichment & Threat Intelligence
+commonfields:
+  id: Email Hippo
+  version: -1
+configuration:
+- defaultvalue: https://api.hippoapi.com
+  display: MORE Server URL (e.g., https://api.hippoapi.com)
+  name: more_server_url
+  required: true
+  section: Connect
+  type: 0
+- defaultvalue: https://api.whoishippo.com
+  display: Email Hippo WHOIS Server URL (e.g., https://api.whoishippo.com)
+  name: whois_server_url
+  required: true
+  section: Connect
+  type: 0
+- display: ""
+  displaypassword: MORE API Key
+  hiddenusername: true
+  name: more_credentials
+  required: true
+  section: Connect
+  type: 9
+- display: ""
+  displaypassword: WHOIS API Key
+  hiddenusername: true
+  name: whois_credentials
+  required: true
+  section: Connect
+  type: 9
+- additionalinfo: Reliability of the source providing the intelligence data.
+  defaultvalue: C - Fairly reliable
+  display: Source Reliability
+  name: integrationReliability
+  options:
+  - A+ - 3rd party enrichment
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: false
+  section: Collect
+  type: 15
+- additionalinfo: Create relationships between indicators as part of enrichment.
+  defaultvalue: "true"
+  display: Create relationships
+  name: create_relationships
+  required: false
+  section: Collect
+  type: 8
+- advanced: true
+  display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  section: Connect
+  type: 8
+- advanced: true
+  display: Use system proxy settings
+  name: proxy
+  required: false
+  section: Connect
+  type: 8
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.9.0
+    itemVersion: 1.0.6
+    packID: EmailHippo
+    packName: Email Hippo
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: This is the Email Hippo integration used to verify email sources as fake
+  emails that were used as part of phishing attacks.
+detaileddescription: |-
+  ## Email Hippo
+  - You can obtain your MORE API key by signing in to the [Email Hippo portal](https://app.emailhippo.com/).
+    - MORE API Key: MORE -> API Keys.
+    - WHOIS API Key: WHOIS -> API Keys.
+
+  ### Limitation
+  - Allowed throughput is 220 MORE email validation requests per second. Throughput exceeding these limits will receive HTTP response code 429 (too many requests) for subsequent requests for a duration of one minute.
+  - There is a quota for both MORE and WHOIS:
+    - MORE - 100 Free Trial for 1 month.
+    - WHOIS - 15 Free Trial for 1 month.
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/email-hippo)
+display: Email Hippo
+image: data:image/png;base64,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
+name: Email Hippo
+script:
+  commands:
+  - arguments: []
+    description: Get the email quota from the API.
+    name: email-hippo-email-quota-get
+    outputs:
+    - contextPath: EmailHippo.Quota.quotaUsed
+      description: Total quota used.
+      type: String
+    - contextPath: EmailHippo.Quota.quotaRemaining
+      description: The remaining quota.
+      type: String
+  - arguments:
+    - default: true
+      description: A comma-separated list of email addresses to validate.
+      isArray: true
+      name: email
+      required: true
+    description: Return email information and reputation.
+    name: email
+    outputs:
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Reliability
+      description: Reliability of the source providing the intelligence data.
+      type: String
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: Email.Address
+      description: The email address of the indicator.
+      type: String
+    - contextPath: Email.Domain
+      description: The email domain.
+      type: string
+    - contextPath: EmailHippo.Email.Address
+      description: The email address of the indicator.
+      type: String
+  - arguments:
+    - description: The domain to query (CSV).
+      isArray: true
+      name: domain
+      required: true
+    description: Returns domain information and reputation.
+    name: domain
+    outputs:
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Reliability
+      description: The reliability score of the vendor.
+      type: String
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: Domain.Name
+      description: The name of the domain that was checked.
+      type: String
+    - contextPath: Domain.NameServers
+      description: Name of the servers of the domain.
+      type: String
+    - contextPath: Domain.UpdatedDate
+      description: The date that the domain was last updated.
+      type: Date
+    - contextPath: Domain.CreationDate
+      description: The creation date of the domain. Format is ISO8601 (i.e., '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.Registrar.Name
+      description: The name of the registrar.
+      type: String
+    - contextPath: Domain.Registrar.AbuseEmail
+      description: The email address of the contact for reporting abuse.
+      type: String
+    - contextPath: Domain.Registrar.AbusePhone
+      description: The phone number of the contact for reporting abuse.
+      type: String
+    - contextPath: Domain.Admin.Country
+      description: The country of the domain administrator.
+      type: String
+    - contextPath: Domain.Admin.Email
+      description: The email address of the domain administrator.
+      type: String
+    - contextPath: Domain.Admin.Name
+      description: The name of the domain administrator.
+      type: String
+    - contextPath: Domain.Admin.Phone
+      description: The phone number of the domain administrator.
+      type: String
+    - contextPath: Domain.Tech.Country
+      description: The country of the tech administrator.
+      type: String
+    - contextPath: Domain.Tech.Name
+      description: The name of the tech administrator.
+      type: String
+    - contextPath: Domain.Tech.Email
+      description: The email of the tech administrator.
+      type: String
+    - contextPath: Domain.Tech.Organization
+      description: The organization of the tech administrator.
+      type: String
+    - contextPath: Domain.WHOIS.NameServers
+      description: A CSV string of name servers, for example 'ns1.bla.com, ns2.bla.com'.
+      type: String
+    - contextPath: Domain.WHOIS.CreationDate
+      description: The creation date of the domain. Format is ISO8601 (i.e., '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.WHOIS.UpdatedDate
+      description: The date when the domain was last updated. Format is ISO8601 (i.e.,
+        '2020-04-30T10:35:00.000Z').
+      type: Date
+    - contextPath: Domain.WHOIS.ExpirationDate
+      description: The expiration date of the domain.
+      type: Date
+  dockerimage: demisto/python3:3.10.14.91134
+  runonce: false
+  script: |
+    register_module_line('Email Hippo', 'start', __line__())
+    ### pack version: 1.0.6
+
+
+
+    import urllib3
+    import dateparser
+    from requests import Response
+    from functools import partial
+    from typing import Any
+
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+    DATE_FORMAT = '%Y-%m-%dT%H:%M:%SZ'
+    TRUST_LEVEL_TO_DBOT_SCORE_MAPPING = {
+        'None': Common.DBotScore.NONE,
+        'High': Common.DBotScore.GOOD,
+        'Medium': Common.DBotScore.SUSPICIOUS,
+        'Low': Common.DBotScore.BAD
+    }
+
+
+    class Client(BaseClient):
+        """Client class to interact with the service API
+
+        This Client implements API calls, and does not contain any Demisto logic.
+        Should only do requests and return data.
+        It inherits from BaseClient defined in CommonServer Python.
+        Most calls use _http_request() that handles proxy, SSL verification, etc.
+        """
+
+        def __init__(self, more_api_key, whois_api_key, more_server_url, whois_server_url, **kwargs):
+            self._more_api_key = more_api_key
+            self._whois_api_key = whois_api_key
+            self._more_server_url = more_server_url.rstrip("/")
+            self._whois_server_url = f'{whois_server_url.rstrip("/")}/v1/{whois_api_key}'
+
+            super().__init__(base_url='', **kwargs)
+
+        def get_email_reputation(self, email: str) -> dict[str, Any]:
+            """Gets the Email reputation using the hippoapi '/email' API endpoint
+
+            Args:
+                email (str): Email address to get the reputation for.
+
+            Returns:
+                dict: dict containing the Email reputation as returned from the API
+            """
+
+            return self._http_request(
+                method='GET',
+                full_url=f'{self._more_server_url}/v3/more/json/{self._more_api_key}/{email}',
+                with_metrics=True,
+            )
+
+        def get_domain_reputation(self, domain: str) -> dict[str, Any]:
+            """
+            Gets the Domain reputation using the whoishippo '/domain' API endpoint.
+
+            Args:
+                domain (str): Domain name to get the reputation for.
+
+            Returns:
+                dict: dict containing the domain reputation as returned from the API.
+            """
+
+            return self._http_request(
+                method='GET',
+                full_url=f'{self._whois_server_url}/{domain}',
+                with_metrics=True,
+            )
+
+        def get_email_quota(self) -> dict[str, Any]:
+            """
+            Get the email quota remaining for the API key
+            """
+            return self._http_request(
+                method='GET',
+                full_url=f'{self._more_server_url}/customer/reports/v3/quota/{self._more_api_key}',
+                with_metrics=True,
+            )
+
+        def determine_error_type(self, res: Response):
+            """ Determines the error type based on response.
+
+            Args:
+                res (Response): The response object from the http request.
+
+            Returns:
+                (ErrorTypes): The error type determined.
+            """
+            if 'Insufficient quota' in res.text:
+                return ErrorTypes.QUOTA_ERROR
+            return super().determine_error_type(res)
+
+
+    def parse_domain_date(domain_date: list[str] | str, date_format: str = '%Y-%m-%dT%H:%M:%S.000Z') -> str | None:
+        """
+        Converts whois date format to an ISO8601 string.
+        Converts the domain WHOIS date (YYYY-mm-dd HH:MM:SS) format
+        in a datetime. If a list is returned with multiple elements, takes only
+        the first one.
+
+        Args:
+            domain_date (str/list): a string or list of strings with the format 'YYYY-mm-DD HH:MM:SS'
+            date_format (int): The format date to which the function will convert the given date.
+
+        Returns:
+            str: Parsed time, default in ISO8601 format.
+        """
+
+        if isinstance(domain_date, str):
+            # if str parse the value
+            domain_date_dt = dateparser.parse(domain_date)
+            if domain_date_dt:
+                return domain_date_dt.strftime(date_format)
+        elif isinstance(domain_date, list) and len(domain_date) > 0 and isinstance(domain_date[0], str):
+            # if list with at least one element, parse the first element
+            domain_date_dt = dateparser.parse(domain_date[0])
+            if domain_date_dt:
+                return domain_date_dt.strftime(date_format)
+        # in any other case return nothing
+        return None
+
+
+    ''' COMMAND FUNCTIONS '''
+
+
+    def test_module(client: Client) -> str:
+        """
+        Tests API connectivity and authentication for both, EmailHippo and WHOIS.
+        When 'ok' is returned it indicates the integration works like it is supposed to and connection to the service is
+        successful.
+        Raises exceptions if something goes wrong.
+
+        Args:
+            client (Client): EmailHippo client to use.
+
+        Returns:
+            str: 'ok' if test passed, anything else will raise an exception and will fail the test.
+        """
+        test_methods: dict[str, Any] = {
+            'MORE': partial(client.get_email_reputation, 'test@test.com'),
+            'WHOIS': partial(client.get_domain_reputation, 'google.com')
+        }
+
+        for key_vendor in test_methods:
+            try:
+                test_methods[key_vendor]()
+            except DemistoException as e:
+                if 'Unauthorized' in str(e):
+                    return f'Authorization Error: make sure {key_vendor} API Key is correctly set'
+                else:
+                    raise e
+        return 'ok'
+
+
+    def get_email_quota_command(client: Client) -> CommandResults:
+        """
+        email-hippo-email-quota-get command: Returns the email quota.
+
+        Args:
+            client (Client): EmailHippo client to use.
+
+        Returns:
+            CommandResults: A ``CommandResults`` object that is then passed to ``return_results``.
+        """
+
+        quota = client.get_email_quota()
+        quota.pop('licenseKey', None)  # delete the licenseKey as this are secret
+
+        readable_output = tableToMarkdown('Email quota',
+                                          {
+                                              'Email Quota used': quota.get('quotaUsed'),
+                                              'Email Quota remaining': quota.get('quotaRemaining')
+                                          })
+        return CommandResults(
+            readable_output=readable_output,
+            outputs_prefix='EmailHippo.Quota',
+            outputs_key_field='accountId',
+            outputs=quota
+        )
+
+
+    def email_reputation_command(client: Client, args: dict[str, Any],
+                                 reliability: DBotScoreReliability, create_relationships: bool = False) -> list[CommandResults]:
+        """
+        email command: Returns Email reputation for a list of Emails
+
+        Args:
+            client (Client): EmailHippo client to use.
+            args (dict): all command arguments, usually passed from ``demisto.args()``.
+            reliability (DBotScoreReliability): reliability of the source providing the intelligence data.
+            create_relationships (bool): whether to create relationships between the email and domain.
+
+        Returns:
+            CommandResults: A ``CommandResults`` object that is then passed to ``return_results``, that contains Emails.
+        """
+
+        emails = argToList(args.get('email'))
+        if len(emails) == 0:
+            raise ValueError('Email(s) not specified')
+
+        command_results: list[CommandResults] = []
+
+        for email in emails:
+            email_data = client.get_email_reputation(email)
+            email_data['Address'] = email
+
+            domain = demisto.get(email_data, 'meta.domain')
+            level = demisto.get(email_data, 'hippoTrust.level')
+            reputation = TRUST_LEVEL_TO_DBOT_SCORE_MAPPING.get(level, Common.DBotScore.NONE)
+
+            dbot_score = Common.DBotScore(
+                indicator=email,
+                indicator_type=DBotScoreType.EMAIL,
+                integration_name='Email Hippo',
+                score=reputation,
+                malicious_description=f'Email Hippo returned reputation {reputation}',
+                reliability=reliability
+            )
+            relationships = []
+            if create_relationships:
+                relationships.append(
+                    EntityRelationship(
+                        entity_a=email,
+                        entity_a_type=FeedIndicatorType.Email,
+                        name='related-to',
+                        entity_b=domain,
+                        entity_b_type=FeedIndicatorType.Domain,
+                        brand='Email Hippo'
+                    )
+                )
+
+            email_indicator = Common.EMAIL(
+                address=email,
+                dbot_score=dbot_score,
+                domain=domain,
+                relationships=relationships
+            )
+
+            email_readable = {
+                'Result': demisto.get(email_data, 'emailVerification.mailboxVerification'),
+                'Hippo Trust Score': demisto.get(email_data, 'hippoTrust.level'),
+                'Inbox quality score': demisto.get(email_data, 'sendAssess.sendRecommendation'),
+                'Spam risk score': demisto.get(email_data, 'spamAssess.actionRecomendation'),
+            }
+            readable_output = tableToMarkdown(f'Email {email}', email_readable)
+
+            command_results.append(CommandResults(
+                readable_output=readable_output,
+                outputs_prefix='EmailHippo.Email',
+                outputs_key_field='Address',
+                outputs=email_data,
+                indicator=email_indicator,
+                relationships=relationships
+            ))
+        return command_results
+
+
+    def domain_reputation_command(client: Client, args: dict[str, Any],
+                                  reliability: DBotScoreReliability) -> list[CommandResults]:
+        """
+        domain command: Returns domain reputation for a list of domains.
+
+        Args:
+            client (Client): EmailHippo client to use.
+            args (dict): all command arguments, usually passed from ``demisto.args()``.
+            reliability (DBotScoreReliability): reliability of the source providing the intelligence data.
+
+        Returns:
+            CommandResults: A ``CommandResults`` object that is then passed to ``return_results``, that contains Domains.
+        """
+
+        domains = argToList(args.get('domain'))
+        if len(domains) == 0:
+            raise ValueError('domain(s) not specified')
+
+        command_results: list[CommandResults] = []
+
+        for domain in domains:
+            domain_data = client.get_domain_reputation(domain)
+            domain_data['domain'] = domain
+
+            # convert the dates to ISO8601 as Cortex XSOAR customers use this format by default
+            if creation_date := demisto.get(domain_data, 'meta.recordCreatedDate'):
+                domain_data['creation_date'] = parse_domain_date(creation_date)
+            if updated_date := demisto.get(domain_data, 'meta.recordUpdatedDate'):
+                domain_data['updated_date'] = parse_domain_date(updated_date)
+
+            dbot_score = Common.DBotScore(
+                indicator=domain,
+                integration_name='Email Hippo',
+                indicator_type=DBotScoreType.DOMAIN,
+                score=Common.DBotScore.NONE,
+                reliability=reliability
+            )
+
+            domain_indicator = Common.Domain(
+                domain=domain,
+                creation_date=domain_data.get('creation_date', None),
+                updated_date=domain_data.get('updated_date', None),
+                # organization=domain_data.get('org', None),
+                name_servers=demisto.get(domain_data, 'whoisServerRecord.nameServers'),
+                registrar_name=demisto.get(domain_data, 'whoisServerRecord.registrar.name'),
+                registrar_abuse_phone=demisto.get(domain_data, 'whoisServerRecord.registrar.abusePhone'),
+                registrar_abuse_email=demisto.get(domain_data, 'whoisServerRecord.registrar.abuseEmail'),
+                admin_name=demisto.get(domain_data, 'whoisServerRecord.adminContact.name'),
+                admin_country=demisto.get(domain_data, 'whoisServerRecord.adminContact.country'),
+                admin_email=demisto.get(domain_data, 'whoisServerRecord.adminContact.email'),
+                admin_phone=demisto.get(domain_data, 'whoisServerRecord.adminContact.phoneNumber'),
+                tech_country=demisto.get(domain_data, 'whoisServerRecord.techContact.country'),
+                tech_name=demisto.get(domain_data, 'whoisServerRecord.techContact.name'),
+                tech_organization=demisto.get(domain_data, 'whoisServerRecord.techContact.organization'),
+                tech_email=demisto.get(domain_data, 'whoisServerRecord.techContact.email'),
+                dbot_score=dbot_score
+            )
+
+            domain_readable = {
+                'Registrar': demisto.get(domain_data, 'whoisServerRecord.registrar.name'),
+                'Registered On': demisto.get(domain_data, 'whoisServerRecord.created'),
+                'Domain Age': demisto.get(domain_data, 'meta.domainAge'),
+                'Expires On': demisto.get(domain_data, 'whoisServerRecord.expiry'),
+                'Time To Expiry': demisto.get(domain_data, 'meta.timeToExpiry'),
+                'Updated On': demisto.get(domain_data, 'whoisServerRecord.changed'),
+                'Status': demisto.get(domain_data, 'whoisServerRecord.domainStati'),
+                'Name servers': demisto.get(domain_data, 'whoisServerRecord.nameServers')
+            }
+            readable_output = tableToMarkdown(f'Domain {domain}', domain_readable)
+            # delete the rawResponse key from the output
+            domain_data.get('whoisServerRecord', {}).pop('rawResponse', None)
+            command_results.append(CommandResults(
+                readable_output=readable_output,
+                outputs_prefix='EmailHippo.Domain',
+                outputs_key_field='domain',
+                outputs=domain_data,
+                indicator=domain_indicator
+            ))
+        return command_results
+
+
+    ''' MAIN FUNCTION '''
+
+
+    def main() -> None:  # pragma: no cover
+        """
+        main function, parses params and runs command functions
+        """
+
+        params = demisto.params()
+        args = demisto.args()
+        command = demisto.command()
+
+        more_api_key = params.get('more_credentials', {}).get('password')
+        whois_api_key = params.get('whois_credentials', {}).get('password')
+        more_server_url = params.get('more_server_url', 'https://api.hippoapi.com')
+        whois_server_url = params.get('whois_server_url', 'https://api.whoishippo.com')
+
+        reliability = params.get('integrationReliability', DBotScoreReliability.C)
+
+        verify_certificate = not params.get('insecure', False)
+        proxy = params.get('proxy', False)
+
+        demisto.debug(f'Command being called is {command}')
+        res: list[CommandResults] = []
+        client = None
+        try:
+            client = Client(
+                more_api_key=more_api_key,
+                whois_api_key=whois_api_key,
+                more_server_url=more_server_url,
+                whois_server_url=whois_server_url,
+                verify=verify_certificate,
+                proxy=proxy)
+
+            if command == 'test-module':
+                return_results(test_module(client))
+
+            elif command == 'email':
+                res = email_reputation_command(client, args, reliability)
+
+            elif command == 'domain':
+                res = domain_reputation_command(client, args, reliability)
+
+            elif command == 'email-hippo-email-quota-get':
+                res = [get_email_quota_command(client)]
+
+            else:
+                raise NotImplementedError(f'Command {command} is not implemented')
+            if res:
+                return_results(res)
+
+        # Log exceptions and return errors
+        except Exception as e:
+            return_error(f'Failed to execute {command} command.\nError:\n{str(e)}')
+
+
+    ''' ENTRY POINT '''
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):
+        main()
+
+    register_module_line('Email Hippo', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
