@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_xsoarnumberofdbpartitions",
 	"isReadOnly": false,
-	"itemVersion": "2.0.14",
+	"itemVersion": "2.0.15",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "XSOAR Number Of DB Partitions",
