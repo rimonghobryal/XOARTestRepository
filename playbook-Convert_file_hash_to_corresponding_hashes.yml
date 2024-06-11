@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -51,6 +51,8 @@ outputs:
 - contextPath: File.MD5
   description: Output for detected MD5 hash.
   type: string
+- contextPath: Indicators.Value
+  description: Output for detected hashes.
 starttaskid: "0"
 system: true
 tasks:
@@ -110,8 +112,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 520,
-          "y": 970
+          "x": 530,
+          "y": 950
         }
       }
   "4":
@@ -133,7 +135,7 @@ tasks:
       '#default#':
       - "2"
       "yes":
-      - "18"
+      - "44"
     note: false
     quietmode: 0
     separatecontext: false
@@ -152,8 +154,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 970,
-          "y": 240
+          "x": 1080,
+          "y": 200
         }
       }
   "9":
@@ -175,7 +177,7 @@ tasks:
       '#default#':
       - "2"
       "yes":
-      - "16"
+      - "46"
     note: false
     quietmode: 0
     separatecontext: false
@@ -194,8 +196,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -250,
-          "y": 240
+          "x": -40,
+          "y": 190
         }
       }
   "10":
@@ -207,6 +209,8 @@ tasks:
               complex:
                 root: inputs.SHA1
           operator: isNotEmpty
+          right:
+            value: {}
       label: "yes"
     continueonerrortype: ""
     id: "10"
@@ -217,7 +221,7 @@ tasks:
       '#default#':
       - "2"
       "yes":
-      - "15"
+      - "45"
     note: false
     quietmode: 0
     separatecontext: false
@@ -237,7 +241,7 @@ tasks:
       {
         "position": {
           "x": 520,
-          "y": 230
+          "y": 190
         }
       }
   "15":
@@ -275,8 +279,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 310,
-          "y": 410
+          "x": 300,
+          "y": 750
         }
       }
   "16":
@@ -314,8 +318,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -490,
-          "y": 410
+          "x": -550,
+          "y": 750
         }
       }
   "18":
@@ -353,8 +357,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 1230,
-          "y": 410
+          "x": 1180,
+          "y": 750
         }
       }
   "35":
@@ -384,8 +388,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -250,
-          "y": 115
+          "x": -40,
+          "y": 60
         }
       }
   "36":
@@ -416,7 +420,7 @@ tasks:
       {
         "position": {
           "x": 520,
-          "y": 115
+          "y": 60
         }
       }
   "37":
@@ -446,22 +450,416 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 970,
-          "y": 110
+          "x": 1080,
+          "y": 60
+        }
+      }
+  "39":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: foundIndicators.value
+          operator: isNotEmpty
+          right:
+            value: {}
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: value
+                root: foundIndicators
+          operator: stringHasLength
+          right:
+            value:
+              simple: "64"
+      label: "yes"
+    continueonerrortype: ""
+    id: "39"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "18"
+      "yes":
+      - "40"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 336d7e69-334b-490c-81c4-4b48788a56be
+      iscommand: false
+      name: Have the hashes been retrieved?
+      type: condition
+      version: -1
+    taskid: 336d7e69-334b-490c-81c4-4b48788a56be
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 1350,
+          "y": 540
+        }
+      }
+  "40":
+    continueonerrortype: ""
+    id: "40"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      indicatorsValues:
+        complex:
+          accessor: value
+          root: foundIndicators
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.enrich.indicators
+      id: 4cbe3c2a-dc3d-46fc-8b6a-b589accfdba3
+      iscommand: true
+      name: Enrich indicators
+      script: Builtin|||enrichIndicators
+      type: regular
+      version: -1
+    taskid: 4cbe3c2a-dc3d-46fc-8b6a-b589accfdba3
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1600,
+          "y": 750
+        }
+      }
+  "44":
+    continueonerrortype: ""
+    id: "44"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "39"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      query:
+        simple: value:${inputs.SHA256}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Searches Cortex XSOAR indicators.
+
+        Searches for Cortex XSOAR indicators and returns the id, indicator_type, value, and score/verdict.
+
+        You can add additional fields from the indicators using the add_field_to_context argument.
+      id: b27dc11a-1b9f-4056-8288-776eaa57bd63
+      iscommand: false
+      name: Search indicators
+      script: SearchIndicator
+      type: regular
+      version: -1
+    taskid: b27dc11a-1b9f-4056-8288-776eaa57bd63
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 1350,
+          "y": 370
+        }
+      }
+  "45":
+    continueonerrortype: ""
+    id: "45"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "47"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      query:
+        simple: value:${inputs.SHA1}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Searches Cortex XSOAR indicators.
+
+        Searches for Cortex XSOAR Indicators and returns the id, indicator_type, value, and score/verdict.
+
+        You can add additional fields from the indicators using the add_field_to_context argument.
+      id: 1b49a035-86f4-4e1d-81ac-add593725d88
+      iscommand: false
+      name: Search indicators
+      script: SearchIndicator
+      type: regular
+      version: -1
+    taskid: 1b49a035-86f4-4e1d-81ac-add593725d88
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 520,
+          "y": 370
+        }
+      }
+  "46":
+    continueonerrortype: ""
+    id: "46"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "48"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      query:
+        simple: value:${inputs.MD5}
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: |-
+        Searches Cortex XSOAR indicators.
+
+        Searches for Cortex XSOAR Indicators and returns the id, indicator_type, value, and score/verdict.
+
+        You can add additional fields from the indicators using the add_field_to_context argument.
+      id: f9974076-074f-4bf4-82a5-0c804fb7875b
+      iscommand: false
+      name: Search indicators
+      script: SearchIndicator
+      type: regular
+      version: -1
+    taskid: f9974076-074f-4bf4-82a5-0c804fb7875b
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -330,
+          "y": 370
+        }
+      }
+  "47":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: foundIndicators.value
+          operator: isNotEmpty
+          right:
+            value: {}
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: value
+                root: foundIndicators
+          operator: stringHasLength
+          right:
+            value:
+              simple: "40"
+      label: "yes"
+    continueonerrortype: ""
+    id: "47"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "15"
+      "yes":
+      - "49"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 0161e3d5-ca7c-4e0e-86d4-f767f1c7b64c
+      iscommand: false
+      name: Have the hashes been retrieved?
+      type: condition
+      version: -1
+    taskid: 0161e3d5-ca7c-4e0e-86d4-f767f1c7b64c
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 520,
+          "y": 540
+        }
+      }
+  "48":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              simple: foundIndicators.value
+          operator: isNotEmpty
+          right:
+            value: {}
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: value
+                root: foundIndicators
+          operator: stringHasLength
+          right:
+            value:
+              simple: "32"
+      label: "yes"
+    continueonerrortype: ""
+    id: "48"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "16"
+      "yes":
+      - "50"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: 9fb9988f-d614-4a30-8eb9-09c8a05ad461
+      iscommand: false
+      name: Have the hashes been retrieved?
+      type: condition
+      version: -1
+    taskid: 9fb9988f-d614-4a30-8eb9-09c8a05ad461
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": -330,
+          "y": 540
+        }
+      }
+  "49":
+    continueonerrortype: ""
+    id: "49"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      indicatorsValues:
+        complex:
+          accessor: value
+          root: foundIndicators
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.enrich.indicators
+      id: 620476dc-83d3-40fe-8d2f-8f978fcdfa23
+      iscommand: true
+      name: Enrich indicators
+      script: Builtin|||enrichIndicators
+      type: regular
+      version: -1
+    taskid: 620476dc-83d3-40fe-8d2f-8f978fcdfa23
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 750,
+          "y": 750
+        }
+      }
+  "50":
+    continueonerrortype: ""
+    id: "50"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      indicatorsValues:
+        complex:
+          accessor: value
+          root: foundIndicators
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: Builtin
+      description: commands.local.cmd.enrich.indicators
+      id: e4213b2e-29ba-40d3-8ae3-6deec5436549
+      iscommand: true
+      name: Enrich indicators
+      script: Builtin|||enrichIndicators
+      type: regular
+      version: -1
+    taskid: e4213b2e-29ba-40d3-8ae3-6deec5436549
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": -120,
+          "y": 750
         }
       }
 version: -1
 view: |-
   {
     "linkLabelsPosition": {
-      "10_15_yes": 0.55,
-      "9_16_yes": 0.48
+      "10_2_#default#": 0.39,
+      "10_45_yes": 0.46,
+      "47_15_#default#": 0.44,
+      "47_49_yes": 0.41,
+      "48_16_#default#": 0.57,
+      "48_50_yes": 0.61,
+      "4_2_#default#": 0.15,
+      "9_2_#default#": 0.19,
+      "9_46_yes": 0.51
     },
     "paper": {
       "dimensions": {
-        "height": 1135,
-        "width": 2100,
-        "x": -490,
+        "height": 1115,
+        "width": 2530,
+        "x": -550,
         "y": -100
       }
     }
