@@ -35,7 +35,7 @@
 	"hidden": false,
 	"id": "incident_rsametasevents",
 	"isReadOnly": true,
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "RSA Metas Events",
