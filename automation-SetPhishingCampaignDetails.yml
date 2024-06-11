@@ -22,7 +22,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 3.3.11
+    itemVersion: 3.4.4
     packID: Campaign
     packName: Phishing Campaign
     packPropagationLabels:
@@ -40,7 +40,7 @@ runas: DBotRole
 runonce: false
 script: |
   register_module_line('SetPhishingCampaignDetails', 'start', __line__())
-  ### pack version: 3.3.11
+  ### pack version: 3.4.4
 
 
   import dateparser
