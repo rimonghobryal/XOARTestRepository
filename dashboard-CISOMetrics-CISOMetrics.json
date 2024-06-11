@@ -8,7 +8,7 @@
 	"hideSearch": false,
 	"id": "CISOMetrics",
 	"isCommon": true,
-	"itemVersion": "1.0.0",
+	"itemVersion": "2.0.2",
 	"layout": [
 		{
 			"forceRange": false,
