@@ -1,0 +1,263 @@
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 5.0.0
+    itemVersion: 1.1.35
+    packID: Cylance_Protect
+    packName: Cylance Protect
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: This playbook returns a file sample to the War Room given the file's
+  SHA256 hash, using Cylance Protect v2 integration.
+id: Get File Sample By Hash - Cylance Protect v2
+inputs:
+- description: SHA256 hash of the file.
+  key: SHA256
+  playbookInputQuery: null
+  required: false
+  value:
+    complex:
+      accessor: SHA256
+      root: File
+- description: |-
+    Specifies whether the downloaded file will be unzipped. The command default is 'no'.
+    Yes - unzip automatically
+    No - will not unzip
+  key: unzip
+  playbookInputQuery: null
+  required: false
+  value: {}
+name: Get File Sample By Hash - Cylance Protect v2
+outputs:
+- contextPath: File.SHA256
+  description: SHA256 hash of the file.
+- contextPath: File.Name
+  description: File name.
+- contextPath: File.Size
+  description: File size.
+- contextPath: File.Safelisted
+  description: Whether the file is on the safe list.
+- contextPath: File.Timestamp
+  description: Timestamp.
+- contextPath: File.MD5
+  description: MD5 hash of the file.
+starttaskid: "0"
+system: true
+tasks:
+  "0":
+    continueonerrortype: ""
+    id: "0"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "1"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: cfa6c853-3dae-449f-810e-8a0303dda6b0
+      iscommand: false
+      name: ""
+      version: -1
+    taskid: cfa6c853-3dae-449f-810e-8a0303dda6b0
+    timertriggers: []
+    type: start
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 50
+        }
+      }
+  "1":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                accessor: brand
+                filters:
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.brand
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: Cylance Protect v2
+                - - left:
+                      iscontext: true
+                      value:
+                        simple: modules.state
+                    operator: isEqualString
+                    right:
+                      value:
+                        simple: active
+                root: modules
+          operator: isExists
+      label: "yes"
+    continueonerrortype: ""
+    id: "1"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "2"
+      "yes":
+      - "3"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: a23dc210-7967-4632-81a5-ca345c80f56b
+      iscommand: false
+      name: Is Cylance Protect v2 enabled?
+      type: condition
+      version: -1
+    taskid: a23dc210-7967-4632-81a5-ca345c80f56b
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 195
+        }
+      }
+  "2":
+    continueonerrortype: ""
+    id: "2"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d346aafe-2acb-49f6-81ae-dc461600d941
+      iscommand: false
+      name: Done
+      type: title
+      version: -1
+    taskid: d346aafe-2acb-49f6-81ae-dc461600d941
+    timertriggers: []
+    type: title
+    view: |-
+      {
+        "position": {
+          "x": 50,
+          "y": 710
+        }
+      }
+  "3":
+    conditions:
+    - condition:
+      - - left:
+            iscontext: true
+            value:
+              complex:
+                root: inputs.SHA256
+          operator: isNotEmpty
+      label: "yes"
+    continueonerrortype: ""
+    id: "3"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#default#':
+      - "2"
+      "yes":
+      - "4"
+    note: false
+    quietmode: 0
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      id: d3cb43ee-f52d-4112-8a87-4202337b4d29
+      iscommand: false
+      name: Is there a file to download?
+      type: condition
+      version: -1
+    taskid: d3cb43ee-f52d-4112-8a87-4202337b4d29
+    timertriggers: []
+    type: condition
+    view: |-
+      {
+        "position": {
+          "x": 320,
+          "y": 370
+        }
+      }
+  "4":
+    continueonerrortype: ""
+    id: "4"
+    ignoreworker: false
+    isautoswitchedtoquietmode: false
+    isoversize: false
+    nexttasks:
+      '#none#':
+      - "2"
+    note: false
+    quietmode: 0
+    scriptarguments:
+      sha256:
+        complex:
+          root: inputs.SHA256
+      unzip:
+        complex:
+          root: inputs.unzip
+          transformers:
+          - operator: toLowerCase
+    separatecontext: false
+    skipunavailable: false
+    task:
+      brand: ""
+      description: Downloads the threat (file) attached to a specific SHA256 hash.
+      id: 6184269d-ba29-45f7-8c03-21613d4979d2
+      iscommand: true
+      name: Cylance Protect - download threat
+      script: '|||cylance-protect-download-threat'
+      type: regular
+      version: -1
+    taskid: 6184269d-ba29-45f7-8c03-21613d4979d2
+    timertriggers: []
+    type: regular
+    view: |-
+      {
+        "position": {
+          "x": 700,
+          "y": 540
+        }
+      }
+version: -1
+view: |-
+  {
+    "linkLabelsPosition": {
+      "1_2_#default#": 0.28,
+      "3_2_#default#": 0.35,
+      "3_4_yes": 0.55
+    },
+    "paper": {
+      "dimensions": {
+        "height": 725,
+        "width": 1030,
+        "x": 50,
+        "y": 50
+      }
+    }
+  }
