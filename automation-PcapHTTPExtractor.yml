@@ -1,8 +1,8 @@
 args:
-- description: get file entry from file name
+- description: get file entry from file name.
   name: pcapFileName
 - default: true
-  description: File entry from the WarRoom
+  description: File entry from the WarRoom.
   name: entryID
 - defaultValue: "50"
   description: Limit the output of the capture file output's flows (starts from 0).
@@ -11,7 +11,7 @@ args:
   description: Index of where to output flows (starts from 0).
   name: start
 - defaultValue: "512"
-  description: "Limit the HttpFileData field (in bytes)\t\t"
+  description: Limit the HttpFileData field (in bytes).
   name: limitData
 - description: The allowed content types to display, separated with comma, uses startswith
     to find a match (ie text,image will display text\html, and image\png).
@@ -25,7 +25,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -33,7 +33,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/pcap-http-extractor:1.0.0.32113
+dockerimage: demisto/pcap-http-extractor:1.0.0.93351
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -52,28 +52,28 @@ outputs:
   description: Http version used in the response.
   type: String
 - contextPath: PcapHttpFlows.HttpResponseCode
-  description: Http response code from the server
+  description: Http response code from the server.
   type: String
 - contextPath: PcapHttpFlows.HttpDate
-  description: Http date returned from the sever
+  description: Http date returned from the sever.
   type: String
 - contextPath: PcapHttpFlows.HttpRequestMethod
   description: Http request method used.
   type: String
 - contextPath: PcapHttpFlows.HttpRequestUri
-  description: Http request URI (path)
+  description: Http request URI (path).
   type: String
 - contextPath: PcapHttpFlows.HttpFileData
-  description: Http content of the response
+  description: Http content of the response.
   type: String
 - contextPath: PcapHttpFlows.HttpServer
-  description: The server signature in the response
+  description: The server signature in the response.
   type: String
 - contextPath: PcapHttpFlows.HttpUserAgent
-  description: Http user agent sent in the request
+  description: Http user agent sent in the request.
   type: String
 - contextPath: PcapHttpFlows.HttpAccept
-  description: Http request accept type
+  description: Http request accept type.
   type: String
 - contextPath: PcapHttpFlows.MetaSniffTimeStamp
   description: Time the packet was sniffed (unixtime).
@@ -83,7 +83,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('PcapHTTPExtractor', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   import zlib
@@ -147,11 +147,7 @@ script: |
       :param extensions: extensions to test if exists in file_name.
       :return: True if one of the extensions is in the file_name
       """
-      for ext in extensions:
-          if file_name.endswith(ext):
-              return True
-
-      return False
+      return any(file_name.endswith(ext) for ext in extensions)
 
 
   def _find_entry_id_by_name(file_name, extensions=None):
@@ -207,7 +203,7 @@ script: |
       res = demisto.executeCommand('getFilePath', {'id': entry_id})
 
       if len(res) > 0 and res[0]['Type'] == entryTypes['error']:
-          return_error('Failed to get the file path for entry: {}'.format(entry_id))
+          return_error(f'Failed to get the file path for entry: {entry_id}')
 
       return res, entry_id
 
@@ -451,11 +447,11 @@ script: |
 
       for i, flow in enumerate(http_flows):
           row = result_template.format(
-              req=tableToMarkdown("HTTPRequest #{}".format(i + 1),
+              req=tableToMarkdown(f"HTTPRequest #{i + 1}",
                                   flow["Request"],
                                   flow["Request"].keys()
                                   ),
-              res=tableToMarkdown("HTTPResponse #{}".format(i + 1),
+              res=tableToMarkdown(f"HTTPResponse #{i + 1}",
                                   flow["Response"],
                                   flow["Response"].keys()
                                   )
@@ -505,7 +501,7 @@ script: |
                            "EntryContext": {"PcapHTTPFlows": context_output}})
       except Exception as e:
           demisto.error(traceback.format_exc())  # print the traceback
-          return_error('Failed to execute PcapHTTPExtractor Script. Error: {}'.format(str(e)))
+          return_error(f'Failed to execute PcapHTTPExtractor Script. Error: {str(e)}')
       finally:
           sys.stderr = serr
 
