@@ -1,0 +1,970 @@
+category: Data Enrichment & Threat Intelligence
+commonfields:
+  id: RESIA - McAfee Threat Intelligence Exchange V2
+  version: -1
+configuration:
+- additionalinfo: From `brokercerts.crt` file.
+  display: Broker CA certificates
+  name: broker_ca_bundle
+  required: true
+  type: 12
+- additionalinfo: From `client.crt` file.
+  display: Client certificates
+  name: cert_file
+  required: true
+  type: 12
+- additionalinfo: From `client.key` file. Make sure that the type of the field is
+    not `encrypted` when filling it out.
+  display: Client private key
+  name: private_key
+  required: true
+  type: 14
+- additionalinfo: 'The format should be: [ssl://]<hostname>[:port]. Get the hostname
+    and port from the `brokerlist.properties` file. The broker should be reachable
+    from the Cortex XSOAR server.'
+  display: Broker URLs
+  name: broker_urls
+  required: true
+  type: 0
+- additionalinfo: Reliability of the source providing the intelligence data.
+  defaultvalue: C - Fairly reliable
+  display: Source Reliability
+  name: integrationReliability
+  options:
+  - A+ - 3rd party enrichment
+  - A - Completely reliable
+  - B - Usually reliable
+  - C - Fairly reliable
+  - D - Not usually reliable
+  - E - Unreliable
+  - F - Reliability cannot be judged
+  required: false
+  type: 15
+- defaultvalue: indicatorType
+  display: ""
+  name: feedExpirationPolicy
+  options:
+  - never
+  - interval
+  - indicatorType
+  - suddenDeath
+  required: false
+  type: 17
+- defaultvalue: "20160"
+  display: ""
+  name: feedExpirationInterval
+  required: false
+  type: 1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+description: Connect to McAfee TIE using the McAfee DXL client.
+detaileddescription: "## Prerequisite - Connect to McAfee Threat Intelligence Exchange
+  (TIE) using the DXL TIE Client\nTo connect the McAfee TIE using the DXL TIE client,
+  you need to create certificates and configure DXL. For more information, see the
+  [documentation](https://xsoar.pan.dev/docs/reference/integrations/mc-afee-dxl#how-to-create-the-rsa-key-pair).
+  After you complete this configuration, you will have the following files.\n   *
+  Broker CA certificates ('brokercerts.crt' file)\n   * Client certificate ('client.crt'
+  file)\n   * Client private key ('client.key' file)\n   * Broker list properties
+  file ('brokerlist.properties' file)\n   \n**Important**: These are the actual certificates,
+  not request certificates.\n\nTo use the `tie-set-file-reputation` command, you need
+  to authorize the client (Cortex XSOAR) to run the command. Follow the [instructions](https://opendxl.github.io/opendxl-client-python/pydoc/marsendauth.html)
+  to do so. In step 4, instead of selecting **Active Response Server API**, select
+  **TIE Server Set Enterprise Reputation**.\n\n## Dependencies (Python packages)\nYou
+  don't need to install the packages, they are included in the Docker image.\n  -
+  DXL Client [documentation](https://opendxl.github.io/opendxl-client-python/pydoc/dxlclient.client.html)\n
+  \ - DXL TIE Client [documentation](https://opendxl.github.io/opendxl-tie-client-python/pydoc/dxltieclient.client.html)\n\n\n---\n[View
+  Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/mc-afee-threat-intelligence-exchange-v2)"
+display: RESIA - McAfee Threat Intelligence Exchange V2
+image: data:image/png;base64,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
+name: RESIA - McAfee Threat Intelligence Exchange V2
+script:
+  commands:
+  - arguments:
+    - default: true
+      description: Hashes of the files to query. Supports "MD5", "SHA1", and "SHA256"
+      isArray: true
+      name: file
+      required: true
+    description: Retrieves the reputations for the specified hashes. Can be "MD5",
+      "SHA1", or "SHA256".
+    name: file
+    outputs:
+    - contextPath: File.Hashes.type
+      description: The type of the hash.
+      type: String
+    - contextPath: File.Hashes.value
+      description: The value of the hash.
+      type: String
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: File.Malicious.Vendor
+      description: The vendor that reported the file as malicious.
+      type: String
+    - contextPath: File.Malicious.Description
+      description: A description of why this file was found malicious.
+      type: Number
+    - contextPath: DBotScore.Score
+      description: The actual score.
+      type: Number
+    - contextPath: DBotScore.Vendor
+      description: The vendor used to calculate the score.
+      type: String
+    - contextPath: DBotScore.Type
+      description: The indicator type.
+      type: String
+    - contextPath: DBotScore.Indicator
+      description: The indicator that was tested.
+      type: String
+    - contextPath: DBotScore.Reliability
+      description: How reliable the score is (for example, "C - fairly reliable").
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Hash
+      description: The value of the hash.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Provider_ID
+      description: The identifier of the particular provider that provided the reputation.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Trust_Level
+      description: The trust level for the reputation subject.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Create_Date
+      description: The time this reputation was created (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Provider
+      description: The name of the particular provider that provided the reputation.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Original_Response
+      description: The raw response as returned by the Global Threat Intelligence
+        (GTI) reputation provider.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.First_Contact
+      description: The time the file was first seen (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.GTI.Prevalence
+      description: The number of times the file has been requested.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Provider_ID
+      description: The identifier of the particular provider that provided the reputation.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Trust_Level
+      description: The trust level for the reputation subject.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Create_Date
+      description: The time this reputation was created (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Provider
+      description: The name of the particular provider that provided the reputation.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.GAM_Score
+      description: The trust score reported by the Gateway Anti-Malware (GAM).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.AV_Engine_Score
+      description: The trust score reported by the Anti-Virus engine.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Sandbox_Score
+      description: The trust score as a result of the sandbox evaluation.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Verdict
+      description: The overall verdict (taking into consideration all available information).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.ATD.Behaviors
+      description: An encoded structure that contains observed behaviors of the file.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Provider_ID
+      description: The identifier of the particular provider that provided the reputation.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Trust_Level
+      description: The trust level for the reputation subject.
+      type: Number
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Create_Date
+      description: The time this reputation was created (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Provider
+      description: The name of the particular provider that provided the reputation.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Server_Version
+      description: The version of the TIE server that returned the reputations (encoded
+        version string).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.First_Contact
+      description: The time the file was first seen (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Prevalence
+      description: The count of unique systems that have executed the file.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Enterprise_Size
+      description: The count of systems within the local enterprise.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Min_Local_Rep
+      description: The lowest reputation found locally on a system.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Max_Local_Rep
+      description: The highest reputation found locally on a system.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Avg_Local_Rep
+      description: The average reputation found locally on systems.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Parent_Min_Local_Rep
+      description: The lowest reputation for the parent found locally on a system.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Parent_Max_Local_Rep
+      description: The highest reputation for the parent found locally on a system.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Parent_Avg_Local_Rep
+      description: The average reputation for the parent found locally on systems.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.File_Name_Count
+      description: The number of unique file names for the file.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Detection_Count
+      description: The number of detections for the file or certificate.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Last_Detection_Time
+      description: The last time a detection occurred (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Is_Prevalent
+      description: Whether the file is considered to be prevalent within the enterprise.
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Child_File_Reps
+      description: 'The child file reputations (aggregate string) according to the
+        following format: - The number of files. - The maximum trust level found across
+        the files. - The minimum trust level found across the files. - The trust level
+        for the last file. - The average trust level across the files.'
+      type: String
+    - contextPath: McAfee.TIE.FilesReputations.Reputations.Enterprise.Parent_File_Reps
+      description: 'The parent file reputations (aggregate string) according to the
+        following format: - The number of files. - The maximum trust level found across
+        the files. - The minimum trust level found across the files. - The trust level
+        for the last file. - The average trust level across the files.'
+      type: String
+  - arguments:
+    - default: true
+      description: Hashes of the files for which to set the reputation. Can be "MD5",
+        "SHA1", or "SHA256".
+      name: file
+      required: true
+    - auto: PREDEFINED
+      description: The new trust level for the files.
+      name: trust_level
+      predefined:
+      - NOT_SET
+      - KNOWN_MALICIOUS
+      - MOST_LIKELY_MALICIOUS
+      - MIGHT_BE_MALICIOUS
+      - UNKNOWN
+      - MIGHT_BE_TRUSTED
+      - MOST_LIKELY_TRUSTED
+      - KNOWN_TRUSTED
+      - KNOWN_TRUSTED_INSTALLER
+      required: true
+    - description: A file name to associate with the specified files.
+      name: filename
+    - description: A comment to associate with the specified files.
+      name: comment
+    description: Sets the “Enterprise” reputation (trust level, filename, and comment)
+      of the specified hashes. Hashes that represent the same file can have a different
+      "Enterprise" reputation if they are given different reputations. Permissions
+      are required to invoke this method. See the 'How-to' in the instance instruction.
+    name: tie-set-file-reputation
+  - arguments:
+    - default: true
+      description: Hashes of the files for which to search. Can be "MD5", "SHA1",
+        or "SHA256".
+      name: file
+      required: true
+    - description: The maximum number of results to return. The default and maximum
+        number is 500 results.
+      name: query_limit
+    description: Retrieves the set of systems which have referenced (typically executed)
+      the specified hashes.
+    name: tie-file-references
+    outputs:
+    - contextPath: File.Hashes.type
+      description: The type of the hash.
+      type: String
+    - contextPath: File.Hashes.value
+      description: The value of the hash.
+      type: String
+    - contextPath: File.MD5
+      description: The MD5 hash of the file.
+      type: String
+    - contextPath: File.SHA1
+      description: The SHA1 hash of the file.
+      type: String
+    - contextPath: File.SHA256
+      description: The SHA256 hash of the file.
+      type: String
+    - contextPath: McAfee.TIE.FilesReferences.References.AgentGuid
+      description: The GUID of the system that referenced the file.
+      type: String
+    - contextPath: McAfee.TIE.FilesReferences.References.Date
+      description: The time the system first referenced the file (UTC timezone).
+      type: String
+    - contextPath: McAfee.TIE.FilesReferences.Hash
+      description: The value of the hash.
+      type: String
+  dockerimage: demisto/dxl:1.0.0.35274
+  runonce: false
+  script: |
+    register_module_line('McAfee Threat Intelligence Exchange V2', 'start', __line__())
+    import abc
+    import contextlib
+    import tempfile
+
+    from dxlclient.client_config import DxlClientConfig
+    from dxlclient.client import DxlClient
+    from dxlclient.broker import Broker
+    from dxltieclient import TieClient
+    from typing import NamedTuple
+    from dxltieclient.constants import FileReputationProp, FileGtiAttrib, FileEnterpriseAttrib, AtdAttrib, TrustLevel,\
+        HashType, EnterpriseAttrib, FileProvider, FirstRefProp, AtdTrustLevel
+
+    VENDOR_NAME = 'McAfee Threat Intelligence Exchange'
+    OUTPUT_PREFIX = 'McAfee.TIE'
+    LOWEST_TRUST_LEVEL_KEY = 'lowest_trust_level_key'
+    LOWEST_SCORE_KEY = 'lowest_score_key'
+    MAX_QUERY_LIMIT = 500
+
+    DXLConfigFiles = NamedTuple('DXLConfigFiles', [('broker_ca_bundle_file', str),
+                                                   ('client_cert_file', str),
+                                                   ('private_key_file', str),
+                                                   ('broker_urls', list[str]),
+                                                   ])
+
+    InstanceCertificates = NamedTuple('InstanceCertificates', [('broker_ca_bundle', str),
+                                                               ('client_cert', str),
+                                                               ('private_key', str),
+                                                               ('broker_urls', list[str]),
+                                                               ])
+
+    ProviderInfo = NamedTuple('ProviderInfo', [('name', str),
+                                               ('abbreviation', str)
+                                               ])
+
+
+    PROVIDER_INFO = {
+        FileProvider.GTI: ProviderInfo(name='Global Threat Intelligence (GTI)', abbreviation='GTI'),
+        FileProvider.ENTERPRISE: ProviderInfo(name='Enterprise reputation', abbreviation='Enterprise'),
+        FileProvider.ATD: ProviderInfo(name='Advanced Threat Defense (ATD)', abbreviation='ATD'),
+        FileProvider.MWG: ProviderInfo(name='Web Gateway (MWG)', abbreviation='MWG'),
+    }
+
+
+    TRUST_LEVELS = {
+        TrustLevel.KNOWN_TRUSTED_INSTALLER: 'KNOWN_TRUSTED_INSTALLER',
+        TrustLevel.KNOWN_TRUSTED: 'KNOWN_TRUSTED',
+        TrustLevel.MOST_LIKELY_TRUSTED: 'MOST_LIKELY_TRUSTED',
+        TrustLevel.MIGHT_BE_TRUSTED: 'MIGHT_BE_TRUSTED',
+        TrustLevel.UNKNOWN: 'UNKNOWN',
+        TrustLevel.MIGHT_BE_MALICIOUS: 'MIGHT_BE_MALICIOUS',
+        TrustLevel.MOST_LIKELY_MALICIOUS: 'MOST_LIKELY_MALICIOUS',
+        TrustLevel.KNOWN_MALICIOUS: 'KNOWN_MALICIOUS',
+        TrustLevel.NOT_SET: 'NOT_SET',
+    }
+
+    HASH_TYPE_KEYS = {
+        'md5': HashType.MD5,
+        'sha1': HashType.SHA1,
+        'sha256': HashType.SHA256
+    }
+
+
+    class GeneralFileReputationParser(abc.ABC):
+        """
+        This abstract class is in charge of parsing the reputations' data returned from the following API call:
+        https://opendxl.github.io/opendxl-tie-client-python/pydoc/dxltieclient.client.html#dxltieclient.client.TieClient.get_file_reputation
+        Since all reputations have two sections, one that it is unique to each vendor, and the second that it is mutual to all,
+        this class provides a method to parse the mutual section, and an abstract method that each child class
+        (representing a specific vendor) must implement to parse the unique section of each vendor.
+        """
+        GENERAL_REPUTATION_KEYS = {
+            FileReputationProp.PROVIDER_ID: "Provider",
+            FileReputationProp.TRUST_LEVEL: "Trust_Level",
+            FileReputationProp.CREATE_DATE: "Create_Date",
+        }
+
+        @staticmethod
+        def init(provider: int):
+            if(provider == FileProvider.GTI):
+                return GtiFileReputationParser()
+
+            elif(provider == FileProvider.ENTERPRISE):
+                return EnterpriseFileReputationParser()
+
+            elif(provider == FileProvider.ATD):
+                return AtdFileReputationParser()
+
+            else:
+                demisto.debug(f'Unexpected provider ID returned - {provider}')
+                return UnknownReputationHandler()
+
+        @abstractmethod
+        def parse_attributes(self, attributes: Dict[str, Any]):
+            """
+            The abstract method that is in charge of parsing the vendor's unique attributes.
+            Each child class implementing this abstract method holds a dictionary that maps the data returned
+            from the API (which are in numeric form) to humand readable data in order for the user to understand the
+            returned results.
+            """
+            pass
+
+        def parse_reputation_key(self, reputation_key: str, val: Union[str, int]):
+            """
+            This method is in charge of parsing the mutual section of the reputations by using the dictionary
+            that is defined in the parent class (GeneralFileReputationParser).
+            """
+            if(reputation_key == FileReputationProp.PROVIDER_ID):
+                return {self.GENERAL_REPUTATION_KEYS[reputation_key]: get_provider_name(provider_id=val)}
+
+            elif(reputation_key == FileReputationProp.CREATE_DATE):
+                return {self.GENERAL_REPUTATION_KEYS[reputation_key]: epoch_to_localtime(int(val))}
+
+            elif(reputation_key in self.GENERAL_REPUTATION_KEYS):
+                return {self.GENERAL_REPUTATION_KEYS[reputation_key]: val}
+
+            else:
+                return {reputation_key: val}
+
+        def parse_data(self, reputation_data: Dict[str, Any]):
+            """
+            This method is in charge of parsing the full reputation, it does so by parsing the vendror's unique
+            attributes, and the mutual attributes of all vendors.
+            """
+            parsed_res: Dict[str, Any] = {}
+            for key, val in reputation_data.items():
+                if(key == FileReputationProp.ATTRIBUTES):
+                    parsed_res |= self.parse_attributes(attributes=val)
+
+                else:
+                    parsed_res |= self.parse_reputation_key(reputation_key=key,
+                                                            val=val)
+            return parsed_res
+
+
+    class GtiFileReputationParser(GeneralFileReputationParser):
+        ATTRIBUTES_KEYS = {
+            FileGtiAttrib.FIRST_CONTACT: "First_Contact",
+            FileGtiAttrib.PREVALENCE: "Prevalence",
+            FileGtiAttrib.ORIGINAL_RESPONSE: "Original_Response",
+        }
+
+        def parse_attributes(self, attributes: Dict[str, Any]) -> Dict[str, Any]:
+            parsed_res: Dict[str, Any] = {}
+            for key, val in attributes.items():
+                if(key == FileGtiAttrib.FIRST_CONTACT):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = epoch_to_localtime(int(val))
+
+                elif(key in self.ATTRIBUTES_KEYS):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = val
+
+                else:
+                    parsed_res[key] = val
+
+            return parsed_res
+
+
+    class EnterpriseFileReputationParser(GeneralFileReputationParser):
+        ATTRIBUTES_KEYS = {
+            FileEnterpriseAttrib.SERVER_VERSION: "Server_Version",
+            FileEnterpriseAttrib.FIRST_CONTACT: "First_Contact",
+            FileEnterpriseAttrib.PREVALENCE: "Prevalence",
+            FileEnterpriseAttrib.ENTERPRISE_SIZE: "Enterprise_Size",
+            FileEnterpriseAttrib.MIN_LOCAL_REP: "Min_Local_Rep",
+            FileEnterpriseAttrib.MAX_LOCAL_REP: "Max_Local_Rep",
+            FileEnterpriseAttrib.AVG_LOCAL_REP: "Avg_Local_Rep",
+            FileEnterpriseAttrib.PARENT_MIN_LOCAL_REP: "Parent_Min_Local_Rep",
+            FileEnterpriseAttrib.PARENT_MAX_LOCAL_REP: "Parent_Max_Local_Rep",
+            FileEnterpriseAttrib.PARENT_AVG_LOCAL_REP: "Parent_Avg_Local_Rep",
+            FileEnterpriseAttrib.FILE_NAME_COUNT: "File_Name_Count",
+            FileEnterpriseAttrib.DETECTION_COUNT: "Detection_Count",
+            FileEnterpriseAttrib.LAST_DETECTION_TIME: "Last_Detection_Time",
+            FileEnterpriseAttrib.IS_PREVALENT: "Is_Prevalent",
+            FileEnterpriseAttrib.CHILD_FILE_REPS: "Child_File_Reps",
+            FileEnterpriseAttrib.PARENT_FILE_REPS: "Parent_File_Reps",
+        }
+
+        def parse_attributes(self, attributes: Dict[str, Any]) -> Dict[str, Any]:
+            parsed_res: Dict[str, Any] = {}
+            for key, val in attributes.items():
+                if(key == FileEnterpriseAttrib.FIRST_CONTACT or key == FileEnterpriseAttrib.LAST_DETECTION_TIME):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = epoch_to_localtime(int(val))
+
+                elif(key == FileEnterpriseAttrib.SERVER_VERSION):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = EnterpriseAttrib.to_version_string(val)
+
+                elif(key == FileEnterpriseAttrib.CHILD_FILE_REPS or key == FileEnterpriseAttrib.PARENT_FILE_REPS):
+
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = val
+                elif(key in self.ATTRIBUTES_KEYS):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = val
+
+                else:
+                    parsed_res[key] = val
+
+            return parsed_res
+
+
+    class AtdFileReputationParser(GeneralFileReputationParser):
+        ATTRIBUTES_KEYS = {
+            AtdAttrib.GAM_SCORE: "GAM_Score",
+            AtdAttrib.AV_ENGINE_SCORE: "AV_Engine_Score",
+            AtdAttrib.SANDBOX_SCORE: "Sandbox_Score",
+            AtdAttrib.VERDICT: "Verdict",
+            AtdAttrib.BEHAVIORS: "Behaviors",
+        }
+        ATD_TRUST_LEVELS = {
+            AtdTrustLevel.KNOWN_TRUSTED: "KNOWN_TRUSTED",
+            AtdTrustLevel.MOST_LIKELY_TRUSTED: "MOST_LIKELY_TRUSTED",
+            AtdTrustLevel.MIGHT_BE_TRUSTED: "MIGHT_BE_TRUSTED",
+            AtdTrustLevel.UNKNOWN: "UNKNOWN",
+            AtdTrustLevel.MIGHT_BE_MALICIOUS: "MIGHT_BE_MALICIOUS",
+            AtdTrustLevel.MOST_LIKELY_MALICIOUS: "MOST_LIKELY_MALICIOUS",
+            AtdTrustLevel.KNOWN_MALICIOUS: "KNOWN_MALICIOUS",
+            AtdTrustLevel.NOT_SET: "NOT_SET",
+        }
+
+        def parse_attributes(self, attributes: Dict[str, Any]) -> Dict[str, Any]:
+            parsed_res: Dict[str, Any] = {}
+            for key, val in attributes.items():
+                if(key in self.ATTRIBUTES_KEYS):
+                    parsed_res[self.ATTRIBUTES_KEYS[key]] = val
+
+                else:
+                    parsed_res[key] = val
+
+            return parsed_res
+
+
+    class UnknownReputationHandler(GeneralFileReputationParser):
+
+        def parse_attributes(self, attributes: Dict[str, Any]) -> Dict[str, Any]:
+            return attributes
+
+
+    def get_client_config(dxl_config_files: DXLConfigFiles) -> DxlClientConfig:
+        config = DxlClientConfig(
+            broker_ca_bundle=dxl_config_files.broker_ca_bundle_file,
+            cert_file=dxl_config_files.client_cert_file,
+            private_key=dxl_config_files.private_key_file,
+            brokers=[Broker.parse(url) for url in dxl_config_files.broker_urls]
+        )
+
+        config.connect_retries = 1
+        config.reconnect_delay = 1
+        config.reconnect_delay_max = 10
+
+        return config
+
+
+    def get_provider_name(provider_id: Union[int, str]) -> str:
+        provider_id_int = arg_to_number(provider_id)
+        provider_info = PROVIDER_INFO.get(provider_id_int, None)
+        if provider_info:
+            return provider_info.name
+        else:
+            return str(provider_id)
+
+
+    def get_provider_abbr(provider_id: Union[int, str]) -> str:
+        provider_id_int = arg_to_number(provider_id)
+        provider_info = PROVIDER_INFO.get(provider_id_int, None)
+        if provider_info:
+            return provider_info.abbreviation
+        else:
+            return str(provider_id)
+
+
+    def epoch_to_localtime(epoch_time: int) -> str:
+        try:
+            date = datetime.fromtimestamp(epoch_time, tz=timezone.utc)
+        except ValueError:
+            date = datetime.fromtimestamp(epoch_time / 1000, tz=timezone.utc)
+
+        return date.strftime("%Y-%m-%d %H:%M:%S")
+
+
+    def parse_reputation_human_readable(reputation):
+        trust_level = reputation.get(FileReputationProp.TRUST_LEVEL)
+        verbose_trust_level = TRUST_LEVELS.get(trust_level, trust_level)
+
+        provider_id = reputation.get(FileReputationProp.PROVIDER_ID)
+        provider = get_provider_name(provider_id)
+
+        create_date = reputation.get(FileReputationProp.CREATE_DATE)
+        create_date_str = epoch_to_localtime(int(create_date))
+
+        res = {
+            'Trust level': trust_level,
+            'Trust level (verbose)': verbose_trust_level,
+            'Provider ID': provider_id,
+            'Provider (verbose)': provider,
+            'Created date': create_date_str
+        }
+
+        return res
+
+
+    def parse_reference_human_readable(reference):
+        agent_guid = reference.get(FirstRefProp.SYSTEM_GUID)
+        date = reference.get(FirstRefProp.DATE)
+
+        return {
+            'Date': epoch_to_localtime(date),
+            'AgentGuid': agent_guid.replace('{', '').replace('}', '')  # Remove brackets if exist
+        }
+
+
+    def reputations_to_human_readable(reputations):
+        return [parse_reputation_human_readable(rep) for rep in reputations]
+
+
+    def references_to_human_readable(references):
+        return [parse_reference_human_readable(ref) for ref in references]
+
+
+    def trust_level_to_score(trust_level):
+        if (trust_level >= TrustLevel.MIGHT_BE_TRUSTED):
+            return Common.DBotScore.GOOD
+
+        elif (trust_level == TrustLevel.MIGHT_BE_MALICIOUS):
+            return Common.DBotScore.SUSPICIOUS
+
+        elif (trust_level == TrustLevel.NOT_SET or trust_level == TrustLevel.UNKNOWN):
+            return Common.DBotScore.NONE
+
+        elif (trust_level < TrustLevel.MIGHT_BE_MALICIOUS):
+            return Common.DBotScore.BAD
+
+        else:
+            # Shouldn't reach here, as the API doesn't support 31-69 values except for 50)
+            return Common.DBotScore.NONE
+
+
+    def test_module(dxl_client: DxlClient):
+        """Tests if there is a connection with DxlClient(which is used for connection with McAfee TIE, instead of the Client class)"""
+        dxl_client.connect()
+        return 'ok'
+
+
+    def safe_get_file_reputation(tie_client: TieClient, api_input: Dict[str, str]):
+        try:
+            res = tie_client.get_file_reputation(api_input)
+        except Exception as e:
+            demisto.info(f'McAfee failed to get file reputation with error: {str(e)}')
+            return None
+        return res
+
+
+    def get_hash_type_key(file_hash: str):
+        hash_type = get_hash_type(file_hash)
+        hash_type_key = HASH_TYPE_KEYS.get(hash_type, None)
+        if not hash_type_key:
+            raise DemistoException(f'Invalid value, {file_hash} is not a valid SHA1, SHA256 or MD5 value.')
+        return hash_type_key
+
+
+    def get_file_instance(dbot_score: Union[Common.DBotScore, None], file_hash: str, hash_type_key: str) -> Common.File:
+        return Common.File(dbot_score=dbot_score,
+                           md5=file_hash if hash_type_key == HashType.MD5 else None,
+                           sha1=file_hash if hash_type_key == HashType.SHA1 else None,
+                           sha256=file_hash if hash_type_key == HashType.SHA256 else None)
+
+
+    def parse_reputation(provider_id: int, reputation: Dict):
+        file_reputation_parser = GeneralFileReputationParser.init(provider=provider_id)
+        parsed_reputation = file_reputation_parser.parse_data(reputation_data=reputation)
+        parsed_reputation['Provider_ID'] = provider_id
+        return parsed_reputation
+
+
+    def parse_file_reputation_raw_result(raw_result: Dict, file_hash: str, reliability: str, hash_type_key: str):
+        context_data = {}
+        parsed_reputation_data = {}
+
+        # Since the range of trust levels is [0,1,...,100], we want to get the minimum trust level
+        # that is not 0, therefore we define a variable that is larger than the maximum in the predefined range
+        # and iterate in order to retrieve the minimum, if our minimum was not changed, that means all the trust levels
+        # are zero.
+        max_num = TrustLevel.KNOWN_TRUSTED_INSTALLER + 1  # More than the maximum possible trust level
+        lowest_trust_level = max_num
+        reputations = raw_result.values()
+        for reputation in reputations:
+            # Parse the raw result of each reputation result
+            provider_id = reputation[FileReputationProp.PROVIDER_ID]
+            parsed_reputation_data[get_provider_abbr(provider_id=provider_id)] = parse_reputation(provider_id=provider_id,
+                                                                                                  reputation=reputation)
+            # Get the vendor's data with the lowest score
+            rep_trust_level = reputation.get(FileReputationProp.TRUST_LEVEL, TrustLevel.NOT_SET)
+            if rep_trust_level != TrustLevel.NOT_SET and rep_trust_level < lowest_trust_level:
+                lowest_trust_level = rep_trust_level
+
+        if lowest_trust_level == max_num:
+            lowest_tl_score = {
+                LOWEST_TRUST_LEVEL_KEY: TrustLevel.NOT_SET,
+                LOWEST_SCORE_KEY: Common.DBotScore.NONE
+            }
+        else:
+            lowest_tl_score = {
+                LOWEST_TRUST_LEVEL_KEY: lowest_trust_level,
+                LOWEST_SCORE_KEY: trust_level_to_score(lowest_trust_level)
+            }
+        dbot_score = Common.DBotScore(indicator=file_hash,
+                                      indicator_type=DBotScoreType.FILE,
+                                      reliability=reliability,
+                                      score=lowest_tl_score[LOWEST_SCORE_KEY],
+                                      )
+
+        file_instance = get_file_instance(dbot_score=dbot_score,
+                                          file_hash=file_hash,
+                                          hash_type_key=hash_type_key)
+        if lowest_tl_score[LOWEST_SCORE_KEY] >= Common.DBotScore.SUSPICIOUS:
+            dbot_score.malicious_description = f"Trust level is {str(lowest_tl_score[LOWEST_TRUST_LEVEL_KEY])}"
+
+        context_data = {'Reputations': {'Hash': file_hash}}
+        context_data['Reputations'] |= parsed_reputation_data
+        table = reputations_to_human_readable(reputations)
+        return CommandResults(readable_output=tableToMarkdown(f'McAfee TIE Hash Reputations For {file_hash}:', table),
+                              raw_response=raw_result,
+                              outputs_prefix=f'{OUTPUT_PREFIX}.FilesReputations',
+                              outputs=context_data,
+                              indicator=file_instance,
+                              )
+
+
+    def files_reputations_command(hashes: List[str], tie_client: TieClient, reliability: str) -> List[CommandResults]:
+        command_results: List[CommandResults] = []
+        for file_hash in hashes:
+            hash_type_key = get_hash_type_key(file_hash=file_hash)
+            api_input = {hash_type_key: file_hash}
+            raw_result = safe_get_file_reputation(tie_client, api_input)
+
+            if not raw_result:
+                dbot_score = Common.DBotScore(indicator=file_hash,
+                                              indicator_type=DBotScoreType.FILE,
+                                              reliability=reliability,
+                                              score=Common.DBotScore.NONE,
+                                              )
+
+                file_instance = get_file_instance(dbot_score=dbot_score,
+                                                  file_hash=file_hash,
+                                                  hash_type_key=hash_type_key)
+
+                command_result = CommandResults(readable_output=f'McAfee TIE Hash Reputation For {file_hash} was not found',
+                                                indicator=file_instance,
+                                                )
+            else:
+                command_result = parse_file_reputation_raw_result(raw_result=raw_result,
+                                                                  file_hash=file_hash,
+                                                                  reliability=reliability,
+                                                                  hash_type_key=hash_type_key,
+                                                                  )
+
+            command_results.append(command_result)
+        return command_results
+
+
+    def files_references_command(hashes: List[str], tie_client: TieClient, query_limit: int) -> List[CommandResults]:
+        if(query_limit > MAX_QUERY_LIMIT):
+            raise DemistoException(f'Query limit must not exceed {MAX_QUERY_LIMIT}')
+        elif(query_limit <= 0):
+            raise DemistoException('Query limit must not be zero or negative')
+
+        command_results: List[CommandResults] = []
+        for file_hash in hashes:
+            hash_type_key = get_hash_type_key(file_hash=file_hash)
+
+            api_input = {hash_type_key: file_hash}
+            raw_result = tie_client.get_file_first_references(api_input,
+                                                              query_limit=query_limit)
+
+            table = references_to_human_readable(raw_result)
+
+            file_instance = get_file_instance(dbot_score=None,
+                                              file_hash=file_hash,
+                                              hash_type_key=hash_type_key)
+            if not raw_result:
+                command_result = CommandResults(readable_output=f'McAfee TIE Hash Reference For {file_hash} was not found',
+                                                indicator=file_instance,)
+            else:
+                context_data = {'Hash': file_hash}
+                context_data['References'] = table
+                command_result = CommandResults(readable_output=tableToMarkdown(f'References For Hash {file_hash}:', table),
+                                                raw_response=raw_result,
+                                                outputs_prefix=f'{OUTPUT_PREFIX}.FilesReferences',
+                                                indicator=file_instance,
+                                                outputs=context_data,
+                                                )
+
+            command_results.append(command_result)
+        return command_results
+
+
+    def get_trust_level_key(trust_level: str):
+        trust_level_key = [key for (key, val) in TRUST_LEVELS.items() if val == trust_level]
+        if not trust_level_key:
+            raise DemistoException(f'Illegal argument trust_level {trust_level}. Choose value from predefined values')
+        else:
+            return trust_level_key[0]
+
+
+    def set_files_reputation_command(hashes: List[str], tie_client: TieClient, trust_level: str, filename: str, comment: str):
+        # Find trust_level key
+        trust_level_key = get_trust_level_key(trust_level=trust_level)
+
+        for file_hash in hashes:
+            hash_type_key = get_hash_type_key(file_hash=file_hash)
+            api_input = {hash_type_key: file_hash}
+
+            tie_client.set_file_reputation(trust_level=trust_level_key,
+                                           hashes=api_input,
+                                           filename=filename,
+                                           comment=comment)
+        return CommandResults(readable_output='Successfully set files reputation')
+
+
+    def create_temp_credentials(temp_file: tempfile._TemporaryFileWrapper, data_to_write: str):
+        temp_file.write(data_to_write)
+        temp_file.seek(0)
+
+
+    @contextlib.contextmanager
+    def create_dxl_config(instance_cert: InstanceCertificates) -> DxlClientConfig:
+        with tempfile.NamedTemporaryFile(mode='w+', dir='./', suffix='.crt') as broker_certs_file,\
+                tempfile.NamedTemporaryFile(mode='w+', dir='./', suffix='.crt') as client_cert_file,\
+                tempfile.NamedTemporaryFile(mode='w+', dir='./', suffix='.key') as private_key_file:
+            broker_certs_file.delete
+            create_temp_credentials(broker_certs_file, instance_cert.broker_ca_bundle)
+            create_temp_credentials(client_cert_file, instance_cert.client_cert)
+            create_temp_credentials(private_key_file, instance_cert.private_key)
+            dxl_config_files = DXLConfigFiles(broker_ca_bundle_file=broker_certs_file.name,
+                                              client_cert_file=client_cert_file.name,
+                                              private_key_file=private_key_file.name,
+                                              broker_urls=instance_cert.broker_urls)
+            yield get_client_config(dxl_config_files=dxl_config_files)
+
+
+    @contextlib.contextmanager
+    def create_dxl_client(instance_cert: InstanceCertificates):
+        with create_dxl_config(instance_cert=instance_cert) as dxl_client_config:
+            dxl_client_cm = DxlClient(dxl_client_config)
+
+        with dxl_client_cm as dxl_client:
+            yield dxl_client
+
+
+    def get_tie_client(dxl_client: DxlClient):
+        dxl_client.connect()  # We need to connect to the DXL fabric in order to create a TIE Client instance
+        return TieClient(dxl_client)
+
+
+    def get_instance_certificates(params: Dict[str, str]) -> InstanceCertificates:
+        return InstanceCertificates(broker_ca_bundle=params['broker_ca_bundle'],
+                                    client_cert=params['cert_file'],
+                                    private_key=params['private_key'],
+                                    broker_urls=params['broker_urls'].split(','))
+
+
+    def files_reputations(dxl_client: DxlClient, hashes: List[str], reliability: str) -> List[CommandResults]:
+        tie_client = get_tie_client(dxl_client)
+        return files_reputations_command(hashes=hashes,
+                                         tie_client=tie_client,
+                                         reliability=reliability
+                                         )
+
+
+    def files_references(dxl_client: DxlClient, hashes: List[str], args_query_limit: Union[int, None]) -> List[CommandResults]:
+        tie_client = get_tie_client(dxl_client)
+        query_limit = args_query_limit if args_query_limit else MAX_QUERY_LIMIT
+        return files_references_command(hashes=hashes,
+                                        tie_client=tie_client,
+                                        query_limit=query_limit,
+                                        )
+
+
+    def set_files_reputation(dxl_client: DxlClient, hashes: List[str], trust_level: str,
+                             filename: str, comment: str) -> CommandResults:
+        tie_client = get_tie_client(dxl_client)
+        return set_files_reputation_command(hashes=hashes,
+                                            tie_client=tie_client,
+                                            trust_level=trust_level,
+                                            filename=filename,
+                                            comment=comment,
+                                            )
+
+
+    def main():  # pragma: no cover
+        try:
+            command = demisto.command()
+            args = demisto.args()
+            params = demisto.params()
+            instance_cert = get_instance_certificates(params=params)
+            reliability = DBotScoreReliability.get_dbot_score_reliability_from_str(
+                demisto.params().get('integrationReliability', 'C - Fairly reliable'))
+            hashes = argToList(args.get('file'))
+            demisto.debug(f'Command being called is {command}')
+            with create_dxl_client(instance_cert=instance_cert) as dxl_client:
+                # We must configure the DxlClient before trying to connect, which is why
+                # we wrapped the following code with a "with" statement according to the DxlClient Docs.
+                # Only after successfully configuring, can we try to connect using dxl_client.connect
+                # If a configuration error is returned from the configuration phase, it will be caught before trying to connect.
+                if command == 'test-module':
+                    # This is the call made when clicking the integration Test button.
+                    return_results(test_module(dxl_client=dxl_client))
+
+                elif command == 'file':
+                    return_results(files_reputations(dxl_client=dxl_client,
+                                                     hashes=hashes,
+                                                     reliability=reliability))
+
+                elif command == 'tie-file-references':
+                    return_results(files_references(dxl_client=dxl_client,
+                                                    hashes=hashes,
+                                                    args_query_limit=arg_to_number(args.get('query_limit', None))))
+
+                elif command == 'tie-set-file-reputation':
+                    return_results(set_files_reputation(dxl_client=dxl_client,
+                                                        hashes=hashes,
+                                                        trust_level=args.get('trust_level'),
+                                                        filename=args.get('filename', ''),
+                                                        comment=args.get('comment', ''),
+                                                        ))
+                else:
+                    raise NotImplementedError(f'Command {command} is not supported.')
+
+        except Exception as e:
+            demisto.error(traceback.format_exc())  # print the traceback
+            exception_des = str(e)
+            if('4044' in exception_des):
+                return_error('Invalid value - Client certificates')
+            elif('4293' in exception_des):
+                return_error('Invalid value - Broker CA certificates')
+            elif('4065' in exception_des):
+                return_error('Invalid value - Client private key')
+            else:
+                return_error(f'Failed to execute {command} command.'
+                             f'\nError:\n{str(e)}')
+
+
+    if __name__ in ['__main__', '__builtin__', 'builtins']:
+        main()
+
+    register_module_line('McAfee Threat Intelligence Exchange V2', 'end', __line__())
+  subtype: python3
+  type: python
+sourcemoduleid: McAfee Threat Intelligence Exchange V2
