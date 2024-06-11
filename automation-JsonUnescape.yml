@@ -9,7 +9,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -17,7 +17,7 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/python3-deb:3.10.10.49238
+dockerimage: demisto/python3-deb:3.10.13.85666
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -30,7 +30,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('JsonUnescape', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   import json
