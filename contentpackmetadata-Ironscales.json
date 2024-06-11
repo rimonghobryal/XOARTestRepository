@@ -1,0 +1,274 @@
+{
+	"author": "Ironscales",
+	"authorImage": "content/packs/Ironscales/Author_image.png",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Email"
+	],
+	"certification": "certified",
+	"contentItemTypes": [
+		"integration",
+		"automation",
+		"incidentfield",
+		"incidenttype",
+		"playbook",
+		"classifier",
+		"layoutscontainer"
+	],
+	"contentItems": {
+		"automation": [
+			{
+				"description": "Automatically changes email field when choosing classification.",
+				"name": "IronscalesEmailFieldTrigger",
+				"tags": [
+					"field-change-triggered"
+				]
+			}
+		],
+		"classifier": [
+			{
+				"description": "Maps incoming Ironscales incident fields.",
+				"id": "Ironscales - Incoming Mapper",
+				"name": "Ironscales - Incoming Mapper"
+			}
+		],
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": [
+			{
+				"description": "",
+				"name": "Ironscales-first_reported_by",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-sender_reputation",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-ID",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-federation",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-Links",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-affected_mailbox_count",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-sender_email",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-mail_server",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-first_reported_date",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-Resolver-email-address",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-themis_verdict",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-banner_displayed",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-reports",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-attachments",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-themis_proba",
+				"type": "number"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-company_name",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-Classification",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-company_id",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-Details",
+				"type": "grid"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-spf_Result",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-sender_is_internal",
+				"type": "boolean"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-reply_to",
+				"type": "longText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales_incident_id",
+				"type": "shortText"
+			},
+			{
+				"description": "",
+				"name": "Ironscales-Choose-Classification",
+				"type": "singleSelect"
+			}
+		],
+		"incidenttype": [
+			{
+				"closureScript": "",
+				"days": 0,
+				"hours": 0,
+				"name": "Ironscales",
+				"playbook": "Ironscales-Classify-Incident",
+				"weeks": 0
+			}
+		],
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Email",
+				"commands": [
+					{
+						"description": "Get open incident ids.",
+						"name": "ironscales-get-open-incidents"
+					},
+					{
+						"description": "Get incident data by ID.",
+						"name": "ironscales-get-incident"
+					},
+					{
+						"description": "Classify incident by ID.",
+						"name": "ironscales-classify-incident"
+					}
+				],
+				"description": "IRONSCALES, a self-learning email security platform integration",
+				"id": "Ironscales",
+				"name": "Ironscales (Partner Contribution)"
+			}
+		],
+		"layoutscontainer": [
+			{
+				"description": "",
+				"name": "Ironscales"
+			}
+		],
+		"list": null,
+		"playbook": [
+			{
+				"description": "Classify an Ironscales incident",
+				"name": "Ironscales-Classify-Incident"
+			}
+		],
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.1.12",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.34.8",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "IRONSCALES is a self-learning email security platform, automatically responding to malicious emails.",
+	"disabledMonthly": false,
+	"downloads": 321,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldCertified",
+		"generalFieldByPartner",
+		"generalFieldFree",
+		"generalFieldSupportIncluded"
+	],
+	"id": "Ironscales",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/Ironscales/Ironscales_image.png",
+			"name": "Ironscales"
+		}
+	],
+	"itemVersion": "1.1.12",
+	"keywords": [],
+	"legacy": true,
+	"name": "Ironscales",
+	"packID": "Ironscales",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"readme": "IRONSCALES is an email security company focused on fighting back against today’s modern phishing attacks.\n\nOur self-learning, AI-driven platform continuously detects and remediates advanced threats like Business Email Compromise (BEC), credential harvesting, Account Takeover (ATO) and more.\n\n",
+	"searchRank": 10,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "partner",
+	"supportDetails": {
+		"email": "support@ironscales.com",
+		"url": ""
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2024-06-02T09:38:08Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "1061293",
+	"videos": []
+}
