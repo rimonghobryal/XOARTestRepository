@@ -10,10 +10,10 @@
 	"incidentSamples": null,
 	"indicatorSamples": null,
 	"instanceIds": null,
-	"itemVersion": "3.2.1",
+	"itemVersion": "3.2.4",
 	"keyTypeMap": null,
 	"locked": false,
-	"logicalVersion": 1,
+	"logicalVersion": 0,
 	"mapping": {
 		"NetWitness Incident": {
 			"dontMapEventToLabels": true,
