@@ -49,7 +49,7 @@
 					"isPredefined": false,
 					"itemVersion": "",
 					"modified": "2018-01-24T08:53:22.141025642Z",
-					"name": "dailyIncidentRepor Headline",
+					"name": "dailyIncidentReport Headline",
 					"packID": "",
 					"packName": "",
 					"params": {
@@ -101,7 +101,7 @@
 					"isPredefined": false,
 					"itemVersion": "",
 					"modified": "2018-01-24T08:57:30.006506045Z",
-					"name": "dailyIncidentRepor Headline2",
+					"name": "dailyIncidentReport Headline2",
 					"packID": "",
 					"packName": "",
 					"params": {
@@ -234,11 +234,11 @@
 						"fromDateLicense": "0001-01-01T00:00:00Z",
 						"period": {
 							"by": "",
-							"byFrom": "days",
-							"byTo": "",
+							"byFrom": "hours",
+							"byTo": "days",
 							"field": "",
-							"fromValue": null,
-							"toValue": null
+							"fromValue": 24,
+							"toValue": 0
 						},
 						"toDate": "0001-01-01T00:00:00Z"
 					},
@@ -248,14 +248,14 @@
 					"isPredefined": false,
 					"itemVersion": "",
 					"modified": "2018-01-25T10:00:07.077147676Z",
-					"name": "dailyIncidentReport Severity",
+					"name": "dailyIncidentReport Total Open Incidents",
 					"packID": "",
 					"packName": "",
 					"params": {
-						"text": "# **Total incidents: {0}**"
+						"text": "# **Total open incidents: {0}**"
 					},
 					"prevName": "",
-					"query": "",
+					"query": "-status:closed",
 					"shouldCommit": false,
 					"sizeInBytes": 0,
 					"toServerVersion": "",
@@ -268,7 +268,7 @@
 				"y": 1
 			},
 			{
-				"forceRange": false,
+				"forceRange": true,
 				"h": 2,
 				"i": "5ae462c0-01b7-11e8-9918-2d303bb12520",
 				"id": "5ae462c0-01b7-11e8-9918-2d303bb12520",
@@ -286,11 +286,11 @@
 						"fromDateLicense": "0001-01-01T00:00:00Z",
 						"period": {
 							"by": "",
-							"byFrom": "days",
-							"byTo": "",
+							"byFrom": "hours",
+							"byTo": "days",
 							"field": "",
-							"fromValue": null,
-							"toValue": null
+							"fromValue": 24,
+							"toValue": 0
 						},
 						"toDate": "0001-01-01T00:00:00Z"
 					},
@@ -322,7 +322,7 @@
 				"y": 2
 			},
 			{
-				"forceRange": false,
+				"forceRange": true,
 				"h": 2,
 				"i": "5ba40940-01b7-11e8-9918-2d303bb12520",
 				"id": "5ba40940-01b7-11e8-9918-2d303bb12520",
@@ -340,11 +340,11 @@
 						"fromDateLicense": "0001-01-01T00:00:00Z",
 						"period": {
 							"by": "",
-							"byFrom": "days",
-							"byTo": "",
+							"byFrom": "hours",
+							"byTo": "days",
 							"field": "",
-							"fromValue": null,
-							"toValue": null
+							"fromValue": 24,
+							"toValue": 0
 						},
 						"toDate": "0001-01-01T00:00:00Z"
 					},
@@ -376,7 +376,7 @@
 				"y": 2
 			},
 			{
-				"forceRange": false,
+				"forceRange": true,
 				"h": 2,
 				"i": "665f6190-01b7-11e8-9918-2d303bb12520",
 				"id": "665f6190-01b7-11e8-9918-2d303bb12520",
@@ -394,11 +394,11 @@
 						"fromDateLicense": "0001-01-01T00:00:00Z",
 						"period": {
 							"by": "",
-							"byFrom": "days",
-							"byTo": "",
+							"byFrom": "hours",
+							"byTo": "days",
 							"field": "",
-							"fromValue": null,
-							"toValue": null
+							"fromValue": 24,
+							"toValue": 0
 						},
 						"toDate": "0001-01-01T00:00:00Z"
 					},
@@ -430,7 +430,7 @@
 				"y": 4
 			},
 			{
-				"forceRange": false,
+				"forceRange": true,
 				"h": 2,
 				"i": "66e840a0-01b7-11e8-9918-2d303bb12520",
 				"id": "66e840a0-01b7-11e8-9918-2d303bb12520",
@@ -448,11 +448,11 @@
 						"fromDateLicense": "0001-01-01T00:00:00Z",
 						"period": {
 							"by": "",
-							"byFrom": "days",
-							"byTo": "",
+							"byFrom": "hours",
+							"byTo": "days",
 							"field": "",
-							"fromValue": null,
-							"toValue": null
+							"fromValue": 24,
+							"toValue": 0
 						},
 						"toDate": "0001-01-01T00:00:00Z"
 					},
@@ -649,7 +649,7 @@
 	"endingDate": "0001-01-01T00:00:00Z",
 	"fromServerVersion": "5.0.0",
 	"id": "dailyIncidentReport",
-	"itemVersion": "1.0.4",
+	"itemVersion": "1.0.9",
 	"latestReportName": "",
 	"latestReportTime": "0001-01-01T00:00:00Z",
 	"latestReportUsername": "",
@@ -702,7 +702,7 @@
 				},
 				"type": "incident"
 			},
-			"title": "dailyIncidentRepor Headline",
+			"title": "dailyIncidentReport Headline",
 			"titleStyle": null,
 			"type": "placeholder"
 		},
@@ -739,7 +739,7 @@
 				},
 				"type": "incident"
 			},
-			"title": "dailyIncidentRepor Headline2",
+			"title": "dailyIncidentReport Headline2",
 			"titleStyle": null,
 			"type": "placeholder"
 		},
@@ -803,7 +803,7 @@
 				"name": "",
 				"noEvent": false
 			},
-			"data": "# **Total incidents: {0}**",
+			"data": "# **Total open incidents: {0}**",
 			"layout": {
 				"columnPos": 0,
 				"h": 1,
@@ -819,12 +819,12 @@
 						"byFrom": "days",
 						"fromValue": null
 					},
-					"query": "",
+					"query": "-status:closed",
 					"toDate": null
 				},
 				"type": "incident"
 			},
-			"title": "dailyIncidentReport Severity",
+			"title": "dailyIncidentReport Total Open Incidents",
 			"titleStyle": null,
 			"type": "placeholder"
 		},
@@ -868,9 +868,12 @@
 				"filter": {
 					"fromDate": null,
 					"period": {
-						"by": "day",
-						"byFrom": "days",
-						"fromValue": null
+						"by": "hour",
+						"byFrom": "hours",
+						"byTo": "days",
+						"field": "",
+						"fromValue": 24,
+						"toValue": 0
 					},
 					"query": "",
 					"toDate": null
@@ -924,9 +927,12 @@
 				"filter": {
 					"fromDate": null,
 					"period": {
-						"by": "day",
-						"byFrom": "days",
-						"fromValue": null
+						"by": "hour",
+						"byFrom": "hours",
+						"byTo": "days",
+						"field": "",
+						"fromValue": 24,
+						"toValue": 0
 					},
 					"query": "",
 					"toDate": null
@@ -980,9 +986,12 @@
 				"filter": {
 					"fromDate": null,
 					"period": {
-						"by": "day",
-						"byFrom": "days",
-						"fromValue": null
+						"by": "hour",
+						"byFrom": "hours",
+						"byTo": "days",
+						"field": "",
+						"fromValue": 24,
+						"toValue": 0
 					},
 					"query": "",
 					"toDate": null
@@ -1037,9 +1046,12 @@
 				"filter": {
 					"fromDate": null,
 					"period": {
-						"by": "day",
-						"byFrom": "days",
-						"fromValue": null
+						"by": "hour",
+						"byFrom": "hours",
+						"byTo": "days",
+						"field": "",
+						"fromValue": 24,
+						"toValue": 0
 					},
 					"query": "",
 					"toDate": null
