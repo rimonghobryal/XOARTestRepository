@@ -77,7 +77,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 1.1.0
+    itemVersion: 1.1.5
     packID: MicrosoftGraphTeams
     packName: MicrosoftGraphTeams
     packPropagationLabels:
@@ -358,7 +358,7 @@ script:
   runonce: false
   script: |
     register_module_line('MicrosoftGraphTeams', 'start', __line__())
-    ### pack version: 1.1.0
+    ### pack version: 1.1.5
 
 
 
@@ -391,6 +391,7 @@ script:
     class Resources:
         graph = 'https://graph.microsoft.com/'
         security_center = 'https://api.securitycenter.microsoft.com/'
+        security = 'https://api.security.microsoft.com/'
         management_azure = 'https://management.azure.com/'  # resource_manager
         manage_office = 'https://manage.office.com/'
 
@@ -411,7 +412,7 @@ script:
     # Deprecated, prefer using AZURE_CLOUDS
     TOKEN_RETRIEVAL_ENDPOINTS = {
         'com': 'https://login.microsoftonline.com',
-        'gcc': 'https://login.microsoftonline.us',
+        'gcc': 'https://login.microsoftonline.com',
         'gcc-high': 'https://login.microsoftonline.us',
         'dod': 'https://login.microsoftonline.us',
         'de': 'https://login.microsoftonline.de',
@@ -470,7 +471,7 @@ script:
         'geo-us': 'https://login.microsoftonline.com',
         'geo-eu': 'https://login.microsoftonline.com',
         'geo-uk': 'https://login.microsoftonline.com',
-        'gcc': 'https://login.microsoftonline.us',
+        'gcc': 'https://login.microsoftonline.com',
         'gcc-high': 'https://login.microsoftonline.us',
         'dod': 'https://login.microsoftonline.us',
     }
@@ -491,7 +492,7 @@ script:
         'geo-us': 'https://securitycenter.onmicrosoft.com',
         'geo-eu': 'https://securitycenter.onmicrosoft.com',
         'geo-uk': 'https://securitycenter.onmicrosoft.com',
-        'gcc': 'https://securitycenter.onmicrosoft.us',
+        'gcc': 'https://securitycenter.onmicrosoft.com',
         'gcc-high': 'https://securitycenter.onmicrosoft.us',
         'dod': 'https://securitycenter.onmicrosoft.us',
     }
@@ -511,7 +512,7 @@ script:
 
     MICROSOFT_DEFENDER_FOR_APPLICATION_TOKEN_RETRIEVAL_ENDPOINTS = {
         'com': 'https://login.microsoftonline.com',
-        'gcc': 'https://login.microsoftonline.us',
+        'gcc': 'https://login.microsoftonline.com',
         'gcc-high': 'https://login.microsoftonline.us',
     }
 
@@ -700,7 +701,7 @@ script:
             sql_management='https://management.core.usgovcloudapi.net:8443/',
             batch_resource_id='https://batch.core.usgovcloudapi.net/',
             gallery='https://gallery.usgovcloudapi.net/',
-            active_directory='https://login.microsoftonline.us',
+            active_directory='https://login.microsoftonline.com',
             active_directory_resource_id='https://management.core.usgovcloudapi.net/',
             active_directory_graph_resource_id='https://graph.windows.net/',
             microsoft_graph_resource_id='https://graph.microsoft.us/',
@@ -1595,7 +1596,7 @@ script:
         def run_retry_on_rate_limit(args_for_next_run: dict):
             return CommandResults(readable_output="Rate limit reached, rerunning the command in 1 min",
                                   scheduled_command=ScheduledCommand(command=demisto.command(), next_run_in_seconds=60,
-                                                                     args=args_for_next_run))
+                                                                     args=args_for_next_run, timeout_in_seconds=900))
 
         def handle_error_with_metrics(self, res):
             MicrosoftClient.create_api_metrics(res.status_code)
