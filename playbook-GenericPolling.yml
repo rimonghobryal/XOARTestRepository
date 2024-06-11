@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -67,6 +67,13 @@ inputs:
   playbookInputQuery: null
   required: false
   value: {}
+- description: Indicator Extraction mode for the command sequence. (In XSOAR 8 and
+    above, for first run command set manually the RunPollingCommand task in the playbook,
+    Advanced -> Indicator Extraction mode).
+  key: ExtractMode
+  playbookInputQuery: null
+  required: false
+  value: {}
 name: GenericPolling
 outputs: []
 starttaskid: "0"
@@ -121,6 +128,8 @@ tasks:
         simple: ${inputs.AdditionalPollingCommandArgValues}
       dt:
         simple: ${inputs.dt}
+      extractMode:
+        simple: ${inputs.ExtractMode}
       ids:
         simple: ${inputs.Ids}
       interval:
