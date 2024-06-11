@@ -15,7 +15,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -42,7 +42,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('IsUrlPartOfDomain', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   from typing import List, Dict
