@@ -57,7 +57,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 2.0.14
+    itemVersion: 2.1.6
     packID: MicrosoftExchangeOnPremise
     packName: Microsoft Exchange On-Premise
     packPropagationLabels:
@@ -154,7 +154,7 @@ script:
   runonce: false
   script: |
     register_module_line('EWS Mail Sender', 'start', __line__())
-    ### pack version: 2.0.14
+    ### pack version: 2.1.6
 
 
 
