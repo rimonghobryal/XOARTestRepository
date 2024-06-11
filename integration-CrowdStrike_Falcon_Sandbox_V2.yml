@@ -40,7 +40,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.2.0
-    itemVersion: 2.0.19
+    itemVersion: 2.0.20
     packID: CrowdStrikeFalconSandbox
     packName: CrowdStrike Falcon Sandbox
     packPropagationLabels:
@@ -2304,11 +2304,11 @@ script:
     - contextPath: CrowdStrike.State.error
       description: The error description.
       type: String
-  dockerimage: demisto/python3:3.10.13.83255
+  dockerimage: demisto/python3:3.10.13.84405
   runonce: false
   script: |
     register_module_line('CrowdStrike Falcon Sandbox V2', 'start', __line__())
-    ### pack version: 2.0.19
+    ### pack version: 2.0.20
 
 
     from requests import Response
