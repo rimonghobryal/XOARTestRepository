@@ -1,0 +1,110 @@
+{
+	"author": "D Masters",
+	"authorImage": "",
+	"beta": false,
+	"cacheVersn": 0,
+	"categories": [
+		"Utilities"
+	],
+	"certification": "",
+	"contentItemTypes": [
+		"integration"
+	],
+	"contentItems": {
+		"automation": null,
+		"classifier": null,
+		"dashboard": null,
+		"genericfield": null,
+		"generictype": null,
+		"incidentfield": null,
+		"incidenttype": null,
+		"indicatorfield": null,
+		"integration": [
+			{
+				"category": "Utilities",
+				"commands": [
+					{
+						"description": "List the keys available.",
+						"name": "xsoar-store-list"
+					},
+					{
+						"description": "Places data in the store under the provided key.",
+						"name": "xsoar-store-put"
+					},
+					{
+						"description": "Retrieve data stored in the provided key.",
+						"name": "xsoar-store-get"
+					}
+				],
+				"description": "Facilitates the storage and retrieval of key/value pairs within XSOAR.",
+				"id": "XSOAR Storage",
+				"name": "XSOAR Storage (Community Contribution)"
+			}
+		],
+		"layoutscontainer": null,
+		"list": null,
+		"playbook": null,
+		"report": null,
+		"reputation": null,
+		"widget": null,
+		"wizard": null
+	},
+	"currentVersion": "1.0.5",
+	"definitionId": "",
+	"dependencies": {
+		"Base": {
+			"author": "Cortex XSOAR",
+			"certification": "certified",
+			"mandatory": true,
+			"minVersion": "1.32.33",
+			"name": "Base"
+		}
+	},
+	"deprecated": false,
+	"description": "XSOAR Storage provides a server-wide Key/Value store that allows values to be stored and retrieved; it supports namespaces to assist with key collisions.\n",
+	"disabledMonthly": false,
+	"downloads": 576,
+	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
+	"fromServerVersion": "6.0.0",
+	"general": [
+		"generalFieldFree"
+	],
+	"id": "XSOARStorage",
+	"installMessage": "",
+	"integrations": [
+		{
+			"imagePath": "content/packs/XSOARStorage/XSOARStorage_image.png",
+			"name": "XSOAR Storage"
+		}
+	],
+	"itemVersion": "1.0.5",
+	"keywords": [],
+	"legacy": true,
+	"name": "XSOAR Storage",
+	"packID": "XSOARStorage",
+	"packName": "",
+	"premium": false,
+	"previewOnly": false,
+	"price": 0,
+	"propagationLabels": [
+		"all"
+	],
+	"rawKeywords": null,
+	"rawTags": null,
+	"rawUseCases": null,
+	"searchRank": 0,
+	"serverMaxVersion": "",
+	"serverMinVersion": "6.0.0",
+	"support": "community",
+	"supportDetails": {
+		"email": "",
+		"url": ""
+	},
+	"tags": [],
+	"toServerVersion": "",
+	"updated": "2023-09-14T09:38:58Z",
+	"useCases": [],
+	"version": -1,
+	"versionInfo": "6319909",
+	"videos": []
+}
