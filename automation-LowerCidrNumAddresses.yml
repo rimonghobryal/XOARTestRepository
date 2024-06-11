@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.2.52
+    itemVersion: 1.2.73
     packID: FiltersAndTransformers
     packName: Filters And Transformers
     packPropagationLabels:
@@ -31,7 +31,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('LowerCidrNumAddresses', 'start', __line__())
-  ### pack version: 1.2.52
+  ### pack version: 1.2.73
   # STD packages
   import ipaddress
   # Local imports
