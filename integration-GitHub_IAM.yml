@@ -83,7 +83,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.0.0
-    itemVersion: 2.0.27
+    itemVersion: 2.0.30
     packID: GitHub
     packName: GitHub
     packPropagationLabels:
@@ -264,7 +264,7 @@ script:
   runonce: false
   script: |
     register_module_line('GitHub IAM', 'start', __line__())
-    ### pack version: 2.0.27
+    ### pack version: 2.0.30
 
 
     import traceback
