@@ -609,7 +609,7 @@
 	"id": "NIST",
 	"indicatorsDetails": null,
 	"indicatorsQuickView": null,
-	"itemVersion": "1.0.9",
+	"itemVersion": "1.0.10",
 	"locked": false,
 	"mobile": null,
 	"name": "NIST Incident",
