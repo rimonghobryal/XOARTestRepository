@@ -1,6 +1,6 @@
 args:
 - default: true
-  description: domain to discover
+  description: domain to discover.
   name: domain
   required: true
 comment: aquatone-discover will find the targets nameservers and shuffle DNS lookups
@@ -13,7 +13,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -21,20 +21,20 @@ contentitemexportablefields:
     prevname: ""
     propagationLabels: []
     toServerVersion: ""
-dockerimage: demisto/aquatone:2.0.0.36846
+dockerimage: demisto/aquatone:2.0.0.93318
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
 name: AquatoneDiscoverV2
 outputs:
 - contextPath: Aquatone.discover
-  description: find the targets nameservers and shuffle DNS lookups between them
+  description: find the targets nameservers and shuffle DNS lookups between them.
 pswd: ""
 runas: DBotWeakRole
 runonce: true
 script: |
   register_module_line('AquatoneDiscoverV2', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
 
