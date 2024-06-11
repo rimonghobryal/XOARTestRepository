@@ -14,35 +14,6 @@
 	"contentItems": {
 		"automation": [
 			{
-				"description": "Evaluates an ML model in production.",
-				"name": "EvaluateMLModllAtProduction",
-				"tags": [
-					"ml"
-				]
-			},
-			{
-				"description": "Hash fields from the incident list.\nSearch for incidents by arguments with an option to hash some of its fields.",
-				"name": "HashIncidentsFields",
-				"tags": [
-					"incidents",
-					"ml"
-				]
-			},
-			{
-				"description": "Exports an existing ML model to a file. ",
-				"name": "ExportMLModel",
-				"tags": [
-					"ml"
-				]
-			},
-			{
-				"description": "A helper script for the DBot Create Phishing Classifier V2 playbook. This script extends the query based on the phishingLabels argument.",
-				"name": "ExtendQueryBasedOnPhishingLabels",
-				"tags": [
-					"ml"
-				]
-			},
-			{
 				"description": "Imports a file that contains an ML model. ",
 				"name": "ImportMLModel",
 				"tags": [
@@ -62,6 +33,35 @@
 				"name": "DBotPredictOutOfTheBoxV2",
 				"tags": [
 					"phishing",
+					"ml"
+				]
+			},
+			{
+				"description": "Exports an existing ML model to a file. ",
+				"name": "ExportMLModel",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "Hash fields from the incident list.\nSearch for incidents by arguments with an option to hash some of its fields.",
+				"name": "HashIncidentsFields",
+				"tags": [
+					"incidents",
+					"ml"
+				]
+			},
+			{
+				"description": "Evaluates an ML model in production.",
+				"name": "EvaluateMLModllAtProduction",
+				"tags": [
+					"ml"
+				]
+			},
+			{
+				"description": "A helper script for the DBot Create Phishing Classifier V2 playbook. This script extends the query based on the phishingLabels argument.",
+				"name": "ExtendQueryBasedOnPhishingLabels",
+				"tags": [
 					"ml"
 				]
 			},
@@ -86,12 +86,12 @@
 		"list": null,
 		"playbook": [
 			{
-				"description": "Train the phishing machine learning model. This playbook should be used as job, to run repeatedly, for example every week. ",
-				"name": "DBot Create Phishing Classifier V2 Job"
-			},
-			{
 				"description": "Create a phishing classifier using machine learning techniques, based on email content.",
 				"name": "DBot Create Phishing Classifier V2"
+			},
+			{
+				"description": "Train the phishing machine learning model. This playbook should be used as job, to run repeatedly, for example every week. ",
+				"name": "DBot Create Phishing Classifier V2 Job"
 			},
 			{
 				"description": "Create a phishing classifier using machine learning. The classifier is based on incidents files extracted from email content.",
@@ -103,28 +103,28 @@
 		"widget": null,
 		"wizard": null
 	},
-	"currentVersion": "1.4.9",
+	"currentVersion": "1.4.10",
 	"definitionId": "",
 	"dependencies": {
 		"Base": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.33.16",
+			"minVersion": "1.33.31",
 			"name": "Base"
 		},
 		"CommonScripts": {
 			"author": "Cortex XSOAR",
 			"certification": "certified",
 			"mandatory": true,
-			"minVersion": "1.13.19",
+			"minVersion": "1.14.0",
 			"name": "Common Scripts"
 		}
 	},
 	"deprecated": false,
 	"description": "Help to manage machine learning models in Cortex XSOAR",
 	"disabledMonthly": false,
-	"downloads": 5269,
+	"downloads": 5478,
 	"eulaLink": "https://github.com/demisto/content/blob/master/LICENSE",
 	"fromServerVersion": "5.0.0",
 	"general": [
@@ -136,7 +136,7 @@
 	"id": "ML",
 	"installMessage": "",
 	"integrations": [],
-	"itemVersion": "1.4.9",
+	"itemVersion": "1.4.10",
 	"keywords": [
 		"ml",
 		"machine learning"
@@ -165,9 +165,9 @@
 	},
 	"tags": [],
 	"toServerVersion": "",
-	"updated": "2024-01-09T20:21:43Z",
+	"updated": "2024-02-18T20:18:49Z",
 	"useCases": [],
 	"version": -1,
-	"versionInfo": "752611",
+	"versionInfo": "836299",
 	"videos": []
 }
