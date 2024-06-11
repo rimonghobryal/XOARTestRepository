@@ -115,7 +115,7 @@
 	"endingDate": "0001-01-01T00:00:00Z",
 	"fromServerVersion": "5.0.0",
 	"id": "MTTRbyIncidentType2Quar",
-	"itemVersion": "1.0.4",
+	"itemVersion": "1.0.9",
 	"latestReportName": "",
 	"latestReportTime": "0001-01-01T00:00:00Z",
 	"latestReportUsername": "",
@@ -177,7 +177,6 @@
 					"color": "gray",
 					"fontSize": 13,
 					"fontStyle": "italic",
-					"marginBottom:": 12,
 					"textAlign": "left"
 				},
 				"useCurrentTime": true
