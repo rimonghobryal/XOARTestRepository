@@ -1,0 +1,462 @@
+category: Email
+commonfields:
+  id: Ironscales
+  version: -1
+configuration:
+- defaultvalue: https://appapi.ironscales.com
+  display: Server URL (e.g. https://appapi.ironscales.com)
+  name: url
+  required: true
+  section: Connect
+  type: 0
+- display: API Key
+  name: apikey
+  required: true
+  section: Connect
+  type: 4
+- display: Company Id
+  name: company_id
+  required: true
+  section: Connect
+  type: 0
+- display: Scopes (e.g. "company.all")
+  name: scopes
+  required: true
+  section: Connect
+  type: 0
+- defaultvalue: "50"
+  display: Maximum number of incidents per fetch
+  name: max_fetch
+  required: false
+  section: Collect
+  type: 0
+- display: First fetch
+  name: first_fetch
+  required: false
+  section: Collect
+  type: 0
+- advanced: true
+  display: Trust any certificate (not secure)
+  name: insecure
+  required: false
+  section: Connect
+  type: 8
+- advanced: true
+  display: Use system proxy settings
+  name: proxy
+  required: false
+  section: Connect
+  type: 8
+- display: Fetch incidents
+  name: isFetch
+  required: false
+  section: Collect
+  type: 8
+- defaultvalue: Ironscales
+  display: Incident type
+  name: incidentType
+  required: false
+  section: Connect
+  type: 13
+- defaultvalue: "1"
+  display: Incidents Fetch Interval
+  name: incidentFetchInterval
+  required: false
+  type: 19
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.1.12
+    packID: Ironscales
+    packName: Ironscales
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+defaultmapperin: Ironscales - Incoming Mapper
+description: IRONSCALES, a self-learning email security platform integration
+detaileddescription: |-
+  ### Partner Contributed Integration
+  #### Integration Author: Ironscales
+  Support and maintenance for this integration are provided by the author. Please use the following contact details:
+  - **Email**: [support@ironscales.com](mailto:support@ironscales.com)
+  ***
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/ironscales)
+display: Ironscales (Partner Contribution)
+image: data:image/png;base64,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
+name: Ironscales
+script:
+  commands:
+  - arguments:
+    - description: Incident ID.
+      name: incident_id
+      required: true
+    - description: Company Id - If empty, the Company Id from the instance configuration
+        is used.
+      name: company_id
+    description: Get incident data by ID.
+    name: ironscales-get-incident
+    outputs:
+    - contextPath: Ironscales.Incident.incident_id
+      description: Incident id.
+      type: string
+    - contextPath: Ironscales.Incident.attachments
+      description: Email attachments
+      type: string
+    - contextPath: Ironscales.Incident.banner_displayed
+      description: Email banners.
+      type: string
+    - contextPath: Ironscales.Incident.classification
+      description: Current classification(FP,Phishing,Spam,Report).
+      type: string
+    - contextPath: Ironscales.Incident.company_id
+      description: Company ID.
+      type: string
+    - contextPath: Ironscales.Incident.company_name
+      description: Company name.
+      type: string
+    - contextPath: Ironscales.Incident.federation
+      description: Federation data.
+      type: string
+    - contextPath: Ironscales.Incident.first_reported_by
+      description: First reporter.
+      type: string
+    - contextPath: Ironscales.Incident.first_reported_date
+      description: Reported date.
+      type: string
+    - contextPath: Ironscales.Incident.links
+      description: Links.
+      type: string
+    - contextPath: Ironscales.Incident.mail_server
+      description: Mail server.
+      type: string
+    - contextPath: Ironscales.Incident.reply_to
+      description: Reply to.
+      type: string
+    - contextPath: Ironscales.Incident.reports
+      description: Reports data.
+      type: string
+    - contextPath: Ironscales.Incident.sender_email
+      description: Sender email.
+      type: string
+    - contextPath: Ironscales.Incident.sender_is_internal
+      description: True is the email sender is internal, False otherwise.
+      type: boolean
+    - contextPath: Ironscales.Incident.sender_reputation
+      description: Sender reputation.
+      type: string
+    - contextPath: Ironscales.Incident.spf_result
+      description: spf results.
+      type: unknown
+    - contextPath: Ironscales.Incident.themis_proba
+      description: Themis proba.
+      type: number
+    - contextPath: Ironscales.Incident.themis_verdict
+      description: Themis verdict.
+      type: string
+  - arguments:
+    - description: Incident ID
+      name: incident_id
+      required: true
+    - auto: PREDEFINED
+      description: Classification
+      name: classification
+      predefined:
+      - Attack
+      - Spam
+      - False Positive
+      required: true
+    - auto: PREDEFINED
+      description: Current incident classification
+      name: prev_classification
+      predefined:
+      - Attack
+      - Spam
+      - False Positive
+      - Report
+      required: true
+    - description: Your Email Address
+      name: email
+      required: true
+    description: Classify incident by ID.
+    name: ironscales-classify-incident
+    outputs:
+    - contextPath: Ironscales.classifyincident
+      description: Classification succeeded
+      type: boolean
+  - arguments: []
+    description: Get open incident ids.
+    name: ironscales-get-open-incidents
+    outputs:
+    - contextPath: Ironscales.OpenIncidents.incident_ids
+      description: List of open incidents IDs.
+  dockerimage: demisto/python3:3.10.13.72123
+  isFetchSamples: true
+  isfetch: true
+  runonce: false
+  script: |
+    register_module_line('Ironscales', 'start', __line__())
+    ### pack version: 1.1.12
+
+
+
+    from typing import Dict
+
+    import urllib3
+
+    # Disable insecure warnings
+    urllib3.disable_warnings()
+
+
+    class Client(BaseClient):
+        def __init__(self, company_id: str, base_url: str, verify_certificate: bool, proxy: bool, headers: dict = None):
+            self.company_id = company_id
+            self.headers = headers
+            super().__init__(base_url, verify_certificate, proxy)
+
+        def get_jwt_token(self, api_key: str, scopes: list) -> Dict[str, Any]:
+            jwt_key = self._http_request(
+                method="POST",
+                url_suffix="/get-token/",
+                json_data={"key": api_key, "scopes": scopes},
+            )
+            return {"Authorization": f'JWT {jwt_key["jwt"]}'}
+
+        def get_incident(self, incident_id: str, company_id=None) -> Dict[str, Any]:
+            """Gets a specific Incident
+
+            :type incident_id: ``str``
+            :param incident_id: id of the incident to return
+            :param company_id: company ID
+
+            :return: dict containing the incident as returned from the API
+            :rtype: ``Dict[str, Any]``
+            """
+            if not company_id:
+                company_id = self.company_id
+
+            return self._http_request(
+                method="GET",
+                url_suffix=f"/incident/{company_id}/details/{incident_id}",
+                headers=self.headers,
+                json_data={
+                    "company_id": company_id,
+                    "incident_id": incident_id,
+                },
+            )
+
+        def classify_incident(
+                self,
+                incident_id: str,
+                classification: str,
+                prev_classification: str,
+                classifying_user_email: str,
+                company_id=None,
+        ) -> str:
+
+            if not company_id:
+                company_id = self.company_id
+
+            return self._http_request(
+                method="POST",
+                url_suffix=f"/incident/{company_id}/classify/{incident_id}",
+                headers=self.headers,
+                json_data={
+                    "incident_id": incident_id,
+                    "prev_classification": prev_classification,
+                    "classification": classification,
+                    "classifying_user_email": classifying_user_email,
+                },
+            )
+
+        def get_open_incidents(
+                self,
+                company_id=None,
+        ) -> Dict[str, Any]:
+
+            if not company_id:
+                company_id = self.company_id
+
+            return self._http_request(
+                method="GET",
+                url_suffix=f"/incident/{company_id}/open/",
+                headers=self.headers,
+            )
+
+
+    def get_incident_command(client: Client, args: Dict[str, Any]) -> CommandResults:
+        incident_id = args.get("incident_id", None)
+        company_id = args.get("company_id", None)
+
+        incident = client.get_incident(incident_id, company_id)
+
+        # INTEGRATION DEVELOPER TIP
+        # We want to convert the "created" time from timestamp(s) to ISO8601 as
+        # Cortex XSOAR customers and integrations use this format by default
+        # if 'created' in alert:
+        #     created_time_ms = int(alert.get('created', '0')) * 1000
+        #     alert['created'] = timestamp_to_datestring(created_time_ms)
+
+        # tableToMarkdown() is defined is CommonServerPython.py and is used very
+        # often to convert lists and dicts into a human readable format in markdown
+        readable_output = tableToMarkdown(f"Ironscales Alert {incident_id}", incident)
+
+        return CommandResults(
+            readable_output=readable_output,
+            outputs_prefix="Ironscales.Incident",
+            outputs_key_field="incident_id",
+            outputs=incident,
+        )
+
+
+    def classify_incident_command(client: Client, args: Dict[str, Any]) -> str:
+        incident_id = args.get("incident_id", None)
+        company_id = args.get("company_id", None)
+        classification = args.get("classification", None)
+        prev_classification = args.get("prev_classification", None)
+        email = args.get("email", None)
+
+        if not (incident_id or classification or prev_classification or email):
+            raise ValueError("Missing arguments!")
+
+        classify = client.classify_incident(
+            incident_id, classification, prev_classification, email, company_id
+        )
+
+        if classify:
+            return "Classification Succeeded!"
+        else:
+            return "Classification Failed!"
+
+
+    def get_open_incidents_command(client: Client, args: Dict[str, Any]) -> Union[CommandResults, str]:
+        company_id = args.get("company_id", None)
+
+        open_incidents = client.get_open_incidents(company_id)
+        if open_incidents:
+            readable_output = tableToMarkdown("Open Incidents:", open_incidents)
+            return CommandResults(
+                readable_output=readable_output,
+                outputs_prefix="Ironscales.OpenIncidents",
+                outputs_key_field="incident_ids",
+                outputs=open_incidents,
+            )
+        return "No open incidents were found"
+
+
+    def test_module(client: Client, api_key, scopes) -> str:
+        """Tests API connectivity and authentication'
+
+        Returning 'ok' indicates that the integration works like it is supposed to.
+        Connection to the service is successful.
+        Raises exceptions if something goes wrong.
+
+        :type client: ``Client``
+        :param Client: HelloWorld client to use
+
+        :type name: ``str``
+        :param name: name to append to the 'Hello' string
+
+        :return: 'ok' if test passed, anything else will fail the test.
+        :rtype: ``str``
+        """
+
+        try:
+            client.get_jwt_token(api_key, scopes)
+        except DemistoException as e:
+            if "FORBIDDEN" in str(e):
+                return "Authorization Error: make sure API Key is correctly set"
+            else:
+                raise e
+        return "ok"
+
+
+    def fetch_incidents(client: Client, last_run: Dict[str, Any]):
+        last_run = last_run.get("data", None)
+        if last_run is None:
+            last_run = set()
+        else:
+            last_run = set(last_run)
+
+        incidents_to_create = []
+        new_incidents = client.get_open_incidents()["incident_ids"]
+        if not new_incidents:
+            new_incidents = set()
+
+        incidents = set(new_incidents) - last_run
+
+        for incident in incidents:
+            data = client.get_incident(incident)
+            incident_name = f"Ironscales incident: IS-{incident}"
+            incident = {
+                "name": incident_name,
+                "occurred": data.get("first_reported_date"),
+                "rawJSON": json.dumps(data),
+            }
+
+            incidents_to_create.append(incident)
+
+        return list(new_incidents), incidents_to_create
+
+
+    def main():
+        """
+        PARSE AND VALIDATE INTEGRATION PARAMS
+        """
+        # Remove trailing slash to prevent wrong URL path to service
+        api_key = demisto.params().get("apikey")
+        scopes = [demisto.params().get("scopes")]
+        company_id = demisto.params().get("company_id")
+        base_url = urljoin(demisto.params()["url"], "/appapi")
+
+        verify_certificate = not demisto.params().get("insecure", False)
+        proxy = demisto.params().get("proxy", False)
+
+        demisto.debug(f"Command being called is {demisto.command()}")
+
+        try:
+            client = Client(
+                company_id,
+                base_url,
+                verify_certificate,
+                proxy,
+            )
+            if demisto.command() == "test-module":
+                # This is the call made when pressing the integration Test button.
+                result = test_module(client, api_key, scopes)
+                return_results(result)
+            else:
+                headers = client.get_jwt_token(api_key, scopes)
+                client.headers = headers
+
+                if demisto.command() == "ironscales-get-incident":
+                    return_results(get_incident_command(client, demisto.args()))
+
+                elif demisto.command() == "ironscales-classify-incident":
+                    return_results(classify_incident_command(client, demisto.args()))
+
+                elif demisto.command() == "ironscales-get-open-incidents":
+                    return_results(get_open_incidents_command(client, demisto.args()))
+
+                elif demisto.command() == "fetch-incidents":
+                    next_run, incidents = fetch_incidents(
+                        client=client,
+                        last_run=demisto.getLastRun(),
+                    )
+                    demisto.setLastRun({"data": next_run})
+                    demisto.incidents(incidents)
+
+        # Log exceptions
+        except Exception as e:
+            return_error(f"Failed to execute {demisto.command()} command. Error: {str(e)}")
+
+
+    if __name__ in ("__main__", "__builtin__", "builtins"):
+        main()
+
+    register_module_line('Ironscales', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
