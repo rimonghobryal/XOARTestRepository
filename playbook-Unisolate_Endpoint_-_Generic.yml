@@ -2,7 +2,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.5.0
-    itemVersion: 2.5.8
+    itemVersion: 2.6.33
     packID: CommonPlaybooks
     packName: Common Playbooks
     packPropagationLabels:
@@ -14,7 +14,7 @@ contentitemexportablefields:
 description: "This playbook unisolates endpoints according to the endpoint ID or host
   name provided in the playbook.\nIt currently supports the following integrations:\n-
   Carbon Black Response\n- Cortex XDR\n- Crowdstrike Falcon\n- FireEye HX \n- Cybereason\n-
-  Microsoft Defender For Endpoint"
+  Microsoft Defender For Endpoint."
 id: Unisolate Endpoint - Generic
 inputs:
 - description: The endpoint ID/device ID/sensor ID/agent ID that you want to unisolate.
@@ -24,6 +24,11 @@ inputs:
   value: {}
 - description: The host name of the endpoint to unisolate (using Cybereason or FireEyeHX).
   key: Hostname
+  playbookInputQuery: null
+  required: false
+  value: {}
+- description: IP address of the endpoint to unisolate. (using Defender or XDR)
+  key: IP
   playbookInputQuery: null
   required: false
   value: {}
@@ -102,20 +107,23 @@ tasks:
     quietmode: 0
     scriptarguments:
       Endpoint_ID:
-        simple: ${inputs.Endpoint_ID}
+        complex:
+          root: inputs.Endpoint_ID
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
       description: This playbook unisolates sensors according to the sensor ID that
         is provided in the playbook input.
-      id: 9d1f172a-43e5-4280-8512-2f6321eb961a
+      id: c878cab8-cdaa-407d-8b39-6cd26b7361b0
       iscommand: false
       name: Carbon Black Response - Unisolate Endpoint
       playbookName: Carbon Black Response - Unisolate Endpoint
       type: playbook
       version: -1
-    taskid: 9d1f172a-43e5-4280-8512-2f6321eb961a
+    taskid: c878cab8-cdaa-407d-8b39-6cd26b7361b0
     timertriggers: []
     type: playbook
     view: |-
@@ -143,20 +151,33 @@ tasks:
     quietmode: 0
     scriptarguments:
       Endpoint_ID:
-        simple: ${inputs.Endpoint_ID}
+        complex:
+          root: inputs.Endpoint_ID
+          transformers:
+          - operator: uniq
+      Hostname:
+        complex:
+          root: inputs.Hostname
+          transformers:
+          - operator: uniq
+      IP:
+        complex:
+          root: inputs.IP
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
       description: This playbook unisolates endpoints according to the endpoint ID
         that is provided in the playbook input.
-      id: 5e5a85db-5761-4c8f-8c70-6833a2200a04
+      id: 712259a3-c95a-423f-8639-431fb8d514c7
       iscommand: false
       name: Cortex XDR - Unisolate Endpoint
       playbookName: Cortex XDR - Unisolate Endpoint
       type: playbook
       version: -1
-    taskid: 5e5a85db-5761-4c8f-8c70-6833a2200a04
+    taskid: 712259a3-c95a-423f-8639-431fb8d514c7
     timertriggers: []
     type: playbook
     view: |-
@@ -211,20 +232,23 @@ tasks:
     quietmode: 0
     scriptarguments:
       Endpoint_id:
-        simple: ${inputs.Endpoint_ID}
+        complex:
+          root: inputs.Endpoint_ID
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
       description: This playbook unisolates devices according to the device ID that
-        was provided in the playbook input.
-      id: a108aa9f-d9b9-4594-8f9f-7176e0ea21eb
+        is provided in the playbook input.
+      id: c62a1b36-38d0-4069-854c-8c5e6bdae135
       iscommand: false
       name: Crowdstrike Falcon - Unisolate Endpoint
-      playbookId: Crowdstrike Falcon - Unisolate Endpoint
+      playbookName: Crowdstrike Falcon - Unisolate Endpoint
       type: playbook
       version: -1
-    taskid: a108aa9f-d9b9-4594-8f9f-7176e0ea21eb
+    taskid: c62a1b36-38d0-4069-854c-8c5e6bdae135
     timertriggers: []
     type: playbook
     view: |-
@@ -295,20 +319,22 @@ tasks:
     quietmode: 0
     scriptarguments:
       Hostname:
-        simple: ${inputs.Hostname}
+        complex:
+          root: inputs.Hostname
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
-      description: This playbook unisolates endpoints according to the hostname that
-        is provided by the playbook input.
-      id: d075f33e-0924-4fd0-89c8-6dd42358041d
+      description: This playbook unisolates a machine based on the hostname provided.
+      id: b4313ff8-dec2-4f6e-8fc9-31f06e13fbc9
       iscommand: false
       name: Unisolate Endpoint - Cybereason
       playbookName: Unisolate Endpoint - Cybereason
       type: playbook
       version: -1
-    taskid: d075f33e-0924-4fd0-89c8-6dd42358041d
+    taskid: b4313ff8-dec2-4f6e-8fc9-31f06e13fbc9
     timertriggers: []
     type: playbook
     view: |-
@@ -335,21 +361,34 @@ tasks:
     note: false
     quietmode: 0
     scriptarguments:
+      Device_IP:
+        complex:
+          root: inputs.IP
+          transformers:
+          - operator: uniq
       Device_id:
-        simple: ${inputs.Endpoint_ID}
+        complex:
+          root: inputs.Endpoint_ID
+          transformers:
+          - operator: uniq
       Hostname:
-        simple: ${inputs.Hostname}
+        complex:
+          root: inputs.Hostname
+          transformers:
+          - operator: uniq
     separatecontext: true
     skipunavailable: true
     task:
       brand: ""
-      id: 5a7d5a0f-34fe-40fd-8cb8-b3bca5aff19e
+      description: This playbook accepts an endpoint ID, IP, or host name and unisolates
+        it using the Microsoft Defender For Endpoint integration.
+      id: 1ecf253b-6e06-4b5e-8a05-00161e93be16
       iscommand: false
       name: Microsoft Defender For Endpoint - Unisolate Endpoint
-      playbookId: Microsoft Defender For Endpoint - Unisolate Endpoint
+      playbookName: Microsoft Defender For Endpoint - Unisolate Endpoint
       type: playbook
       version: -1
-    taskid: 5a7d5a0f-34fe-40fd-8cb8-b3bca5aff19e
+    taskid: 1ecf253b-6e06-4b5e-8a05-00161e93be16
     timertriggers: []
     type: playbook
     view: |-
