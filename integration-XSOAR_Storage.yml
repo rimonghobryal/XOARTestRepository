@@ -1,0 +1,212 @@
+category: Utilities
+commonfields:
+  id: XSOAR Storage
+  version: -1
+configuration:
+- defaultvalue: "1024"
+  display: Max Size of Store in bytes (Maximum of 1024000)
+  name: maxsize
+  required: true
+  type: 0
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: 6.0.0
+    itemVersion: 1.0.5
+    packID: XSOARStorage
+    packName: XSOAR Storage
+    packPropagationLabels:
+    - all
+    prevname: ""
+    propagationLabels: []
+    toServerVersion: ""
+description: Facilitates the storage and retrieval of key/value pairs within XSOAR.
+detaileddescription: |-
+  ### Community Contributed Integration
+   #### Integration Author: D Masters
+   No support or maintenance is provided by the author. Customers are encouraged to engage with the user community for questions and guidance at the [Cortex XSOAR Live Discussions](https://live.paloaltonetworks.com/t5/cortex-xsoar-discussions/bd-p/Cortex_XSOAR_Discussions).
+  ***
+  ## XSOAR Storage
+  - XSOAR Storage provides a server wide Key/Value store.
+  - Each instance of XSOAR Storage is limited to 1MB by default.
+  - Data can be stored or retrieved from the key value store and separated by the use of a namespace parameter.
+  - Listing of namespaces is not supported.
+
+
+  ---
+  [View Integration Documentation](https://xsoar.pan.dev/docs/reference/integrations/xsoar-storage)
+display: XSOAR Storage (Community Contribution)
+image: data:image/png;base64,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
+name: XSOAR Storage
+script:
+  commands:
+  - arguments:
+    - description: The namespace to retrieve keys from.
+      name: namespace
+    description: List the keys available.
+    name: xsoar-store-list
+    outputs:
+    - contextPath: XSOAR.Store
+      description: The namespace and keys.
+      type: string
+  - arguments:
+    - description: The key to store data under.
+      name: key
+      required: true
+    - description: The data to store.
+      name: data
+      required: true
+    - description: The namespace to store data in.
+      name: namespace
+    description: Places data in the store under the provided key.
+    name: xsoar-store-put
+  - arguments:
+    - description: The Key value.
+      name: key
+      required: true
+    - description: The namespace to retrieve data from.
+      name: namespace
+    description: Retrieve data stored in the provided key.
+    name: xsoar-store-get
+    outputs:
+    - contextPath: XSOAR.Store
+      description: The data retrieved from the key.
+      type: string
+  dockerimage: demisto/python3:3.10.13.72123
+  runonce: false
+  script: |
+    register_module_line('XSOAR Storage', 'start', __line__())
+    ### pack version: 1.0.5
+
+
+    import traceback
+    from typing import Any, Dict
+
+
+    SIZE_LIMIT = 1024000
+
+    MAX_SIZE = int(demisto.params().get('maxsize', SIZE_LIMIT))
+    MAX_SIZE = MAX_SIZE if MAX_SIZE <= SIZE_LIMIT else SIZE_LIMIT
+
+
+    def xsoar_store_list_command(args: Dict[str, Any]) -> CommandResults:
+
+        namespace = args.get('namespace', 'default')
+
+        data = demisto.getIntegrationContext().get(namespace)
+
+        if not data:
+            if namespace == 'default':
+                return_error("Namespace: <default> empty!")
+            else:
+                return_error(f"Namespace: <{namespace}> not found!")
+
+        data = [key for key in demisto.getIntegrationContext().get(namespace, [])]
+
+        number_of_keys = len(data)
+
+        r_data = "\n".join(data)
+
+        return CommandResults(
+            readable_output=f"{number_of_keys} key(s) found: \n {r_data}",
+            outputs_prefix=f"XSOAR.Store.{namespace}",
+            outputs={"keys": data},
+            raw_response=data
+        )
+
+
+    def xsoar_store_put_command(args: Dict[str, Any]) -> CommandResults:
+
+        namespace = args.get('namespace', 'default')
+
+        key = args.get('key')
+        input_data = args.get('data')
+
+        current_data = demisto.getIntegrationContext()
+
+        if (sys.getsizeof(current_data) + sys.getsizeof(input_data)) > MAX_SIZE:
+
+            return_error(f"Store cannot be larger than {MAX_SIZE} bytes")
+
+        if namespace in current_data:
+            current_data[namespace][key] = input_data
+        else:
+            current_data[namespace] = {key: input_data}
+
+        demisto.setIntegrationContext(current_data)
+
+        return CommandResults(
+            readable_output=f"put: <{input_data}> in key: <{key}> for namespace: <{namespace}>"
+        )
+
+
+    def xsoar_store_get_command(args: Dict[str, Any]) -> CommandResults:
+
+        namespace = args.get('namespace', 'default')
+
+        key = args.get('key')
+
+        data = demisto.getIntegrationContext().get(namespace)
+
+        data = data.get(key)
+
+        return CommandResults(
+            readable_output=f"retrieved: <{data}> from key: <{key}> for namespace: <{namespace}>",
+            outputs_prefix=f"XSOAR.Store.{namespace}.{key}",
+            outputs=data
+        )
+
+
+    ''' MAIN FUNCTION '''
+
+
+    def main() -> None:
+        """main function, parses params and runs command functions
+
+        :return:
+        :rtype:
+        """
+
+        demisto.debug(f'Command being called is {demisto.command()}')
+        try:
+
+            if demisto.command() == 'test-module':
+                # This is the call made when pressing the integration Test button.
+
+                return_results('ok')
+
+            elif demisto.command() == 'xsoar-store-list':
+                return_results(xsoar_store_list_command(demisto.args()))
+
+            elif demisto.command() == 'xsoar-store-put':
+                return_results(xsoar_store_put_command(demisto.args()))
+
+            elif demisto.command() == 'xsoar-store-get':
+                return_results(xsoar_store_get_command(demisto.args()))
+
+                # Log exceptions and return errors
+        except Exception as e:
+            demisto.error(traceback.format_exc())  # print the traceback
+            return_error(f'Failed to execute {demisto.command()} command.\nError:\n{str(e)}')
+
+
+    """
+
+
+    Entry Point
+    -----------
+
+    This is the integration code entry point. It checks whether the ``__name__``
+    variable is ``__main__`` , ``__builtin__`` (for Python 2) or ``builtins`` (for
+    Python 3) and then calls the ``main()`` function. Just keep this convention.
+
+    """
+
+
+    if __name__ in ('__main__', '__builtin__', 'builtins'):
+        main()
+
+    register_module_line('XSOAR Storage', 'end', __line__())
+  subtype: python3
+  type: python
+system: true
