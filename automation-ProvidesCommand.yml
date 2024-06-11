@@ -21,7 +21,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 5.0.0
-    itemVersion: 1.13.19
+    itemVersion: 1.15.8
     packID: CommonScripts
     packName: Common Scripts
     packPropagationLabels:
@@ -33,7 +33,7 @@ dependson:
   must:
   - core-api-post
   - core-api-get
-dockerimage: demisto/python3:3.10.13.83255
+dockerimage: demisto/python3:3.10.13.86272
 enabled: true
 engineinfo: {}
 mainengineinfo: {}
@@ -43,7 +43,7 @@ runas: DBotWeakRole
 runonce: false
 script: |
   register_module_line('ProvidesCommand', 'start', __line__())
-  ### pack version: 1.13.19
+  ### pack version: 1.15.8
 
 
   import sys
@@ -96,7 +96,7 @@ script: |
 
       for integration in integration_commands:
 
-          integration_name = integration['display']
+          integration_name = integration['name']
 
           if 'commands' in integration:
               for command in integration['commands']:
