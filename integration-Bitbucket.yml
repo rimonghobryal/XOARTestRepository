@@ -33,7 +33,7 @@ contentitemexportablefields:
   contentitemfields:
     definitionid: ""
     fromServerVersion: 6.5.0
-    itemVersion: 1.0.11
+    itemVersion: 1.0.12
     packID: Bitbucket
     packName: Bitbucket
     packPropagationLabels:
@@ -2407,11 +2407,11 @@ script:
     - contextPath: Bitbucket.WorkspaceMember.workspace.links
       description: Links to information about the workspace.
       type: String
-  dockerimage: demisto/python3:3.10.12.63474
+  dockerimage: demisto/python3:3.10.13.86272
   runonce: false
   script: |
     register_module_line('Bitbucket', 'start', __line__())
-    ### pack version: 1.0.11
+    ### pack version: 1.0.12
     from requests import Response
 
 
