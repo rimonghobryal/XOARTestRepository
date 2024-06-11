@@ -23,7 +23,7 @@
 	"hidden": false,
 	"id": "incident_xsoarcpu",
 	"isReadOnly": false,
-	"itemVersion": "2.0.14",
+	"itemVersion": "2.0.15",
 	"locked": false,
 	"mergeStrategy": "",
 	"name": "XSOAR CPU",
