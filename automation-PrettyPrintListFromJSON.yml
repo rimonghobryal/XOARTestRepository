@@ -1,0 +1,54 @@
+args:
+- isArray: true
+  name: list
+  required: true
+- name: listName
+  required: true
+commonfields:
+  id: 6db59791-d3a4-4367-814f-be7f014cebe7
+  version: -1
+contentitemexportablefields:
+  contentitemfields:
+    definitionid: ""
+    fromServerVersion: ""
+    itemVersion: ""
+    packID: ""
+    packName: ""
+    prevname: ""
+    propagationLabels:
+    - all
+    toServerVersion: ""
+dockerimage: demisto/python3:3.11.10.111526
+enabled: true
+engineinfo: {}
+mainengineinfo: {}
+name: PrettyPrintListFromJSON
+pswd: ""
+runas: DBotWeakRole
+runonce: false
+script: |-
+  import json
+
+  def prettyList(data):
+
+      # Convertiamo la stringa JSON in un oggetto Python (lista di dizionari)
+      data_list = json.loads(data)
+
+      # Creiamo una lista di stringhe formattate
+      formatted_entries = [f"Username: {entry['Username']}, LastMod: {entry['LastMod']}, ResetNumber: {entry['ResetNumber']} " for entry in data_list]
+
+      # Uniamo le stringhe in un'unica stringa separata da newline
+      result = "\n".join(formatted_entries)
+
+      return(result)
+
+  data = demisto.args().get('list')
+  listName = demisto.args().get('listName')
+  result = prettyList(data)
+  demisto.setContext(listName, result)
+
+  print(result)
+scripttarget: 0
+subtype: python3
+tags: []
+type: python
